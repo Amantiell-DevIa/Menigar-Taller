@@ -4,8 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initScheduleStatus();
-  initAudienceSwitcher();
+  initGoogleDynamicIsland();
   initSmartVehicleFinder();
   initDtcSearchEngine();
   initTopRepairFilters();
@@ -16,53 +15,48 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   1. HORARIO DINÁMICO EN TIEMPO REAL (Madrid Timezone)
+   1. NOTIFICACIÓN FLOTANTE DYNAMIC ISLAND (RESEÑAS GOOGLE)
    ========================================================================== */
-function initScheduleStatus() {
-  const indicator = document.getElementById('schedule-indicator');
-  const text = document.getElementById('schedule-text');
-  if (!indicator || !text) return;
+function initGoogleDynamicIsland() {
+  const island = document.getElementById('googleIslandBadge');
+  if (!island) return;
 
-  // Usar hora oficial de Madrid (Alcobendas)
-  const madridFormatter = new Intl.DateTimeFormat('es-ES', {
-    timeZone: 'Europe/Madrid',
-    hour12: false,
-    weekday: 'short',
-    hour: 'numeric',
-    minute: 'numeric'
+  let hasTriggered = false;
+  let hideTimer = null;
+
+  const showIsland = () => {
+    island.classList.add('is-visible');
+    
+    // Limpiar temporizador previo si lo hubiera
+    if (hideTimer) clearTimeout(hideTimer);
+    
+    // Mantener flotante en la pantalla durante 4 segundos y luego ocultar suavemente
+    hideTimer = setTimeout(() => {
+      island.classList.remove('is-visible');
+    }, 4000);
+  };
+
+  const handleScroll = () => {
+    const scrollPos = window.scrollY || document.documentElement.scrollTop;
+
+    // Se activa al hacer un poco de scroll (más de 60px)
+    if (scrollPos > 60 && !hasTriggered) {
+      hasTriggered = true;
+      showIsland();
+    } else if (scrollPos < 20) {
+      // Si el usuario vuelve a la parte superior de la web, reseteamos el trigger
+      // para que al bajar de nuevo vuelva a verse la animación
+      hasTriggered = false;
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // Si el usuario hace clic o pulsa en el pill, navega a opiniones y oculta la isla
+  island.addEventListener('click', () => {
+    if (hideTimer) clearTimeout(hideTimer);
+    island.classList.remove('is-visible');
   });
-
-  const parts = madridFormatter.formatToParts(new Date());
-  const partMap = {};
-  parts.forEach(p => partMap[p.type] = p.value);
-
-  const hour = parseInt(partMap.hour, 10);
-  const minute = parseInt(partMap.minute, 10);
-  const weekday = (partMap.weekday || '').toLowerCase(); // lun., mar., mié., jue., vie., sáb., dom.
-  const currentTime = hour + minute / 60;
-
-  let isOpen = false;
-  // Lunes a Jueves: 8:00 a 16:00
-  const isMonToThu = weekday.startsWith('lu') || weekday.startsWith('ma') || weekday.startsWith('mi') || weekday.startsWith('ju');
-  // Viernes: 8:00 a 14:00
-  const isFri = weekday.startsWith('vi');
-
-  if (isMonToThu && currentTime >= 8.0 && currentTime < 16.0) {
-    isOpen = true;
-  } else if (isFri && currentTime >= 8.0 && currentTime < 14.0) {
-    isOpen = true;
-  }
-
-  if (isOpen) {
-    indicator.classList.add('active');
-    indicator.style.background = '#10b981';
-    text.innerHTML = '<strong>Taller Abierto:</strong> Atendiendo llamadas y recepción en Alcobendas (Madrid)';
-  } else {
-    indicator.classList.remove('active');
-    indicator.style.background = '#f59e0b';
-    indicator.style.boxShadow = '0 0 8px #f59e0b';
-    text.innerHTML = '<strong>Horario Taller:</strong> L-J 8:00 a 16:00 · V 8:00 a 14:00 · <em>Recepción de consultas online 24h</em>';
-  }
 }
 
 /* ==========================================================================
@@ -927,28 +921,6 @@ function initMobileNavigation() {
   });
 }
 
-/* ==========================================================================
-   7. SELECTOR DE AUDIENCIA (Particular vs Taller Mecánico)
-   ========================================================================== */
-function initAudienceSwitcher() {
-  const audBtns = document.querySelectorAll('.top-aud-btn');
-  if (!audBtns.length) return;
-
-  audBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      audBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const aud = btn.getAttribute('data-aud');
-      if (aud === 'particular') {
-        const finder = document.getElementById('buscador-averias');
-        if (finder) finder.scrollIntoView({ behavior: 'smooth' });
-      } else if (aud === 'taller') {
-        const talleres = document.getElementById('talleres');
-        if (talleres) talleres.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  });
-}
 
 /* ==========================================================================
    8. FILTRO CATEGORIZADO DE RESEÑAS DE GOOGLE
