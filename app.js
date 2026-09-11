@@ -649,6 +649,8 @@ window.openFinderWith = function(compKey) {
     compSelect.value = compKey;
     compSelect.dispatchEvent(new Event('change'));
     finderElem.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    window.location.href = 'index.html#buscador-averias';
   }
 };
 

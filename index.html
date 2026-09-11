@@ -57,7 +57,7 @@
         <ul class="nav-list">
           <li><a href="#inicio" class="nav-link active">Inicio</a></li>
           <li class="has-dropdown">
-            <a href="#servicios" class="nav-link" aria-expanded="false" aria-haspopup="true">
+            <a href="servicios.html" class="nav-link" aria-expanded="false" aria-haspopup="true">
               <span>Servicios</span>
               <svg class="chevron" viewBox="0 0 20 20" width="12" height="12" fill="currentColor">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
@@ -798,218 +798,23 @@
     </div>
   </section>
 
-  <!-- ================= SERVICIOS DE REPARACIÓN DE TALLER ================= -->
-  <section class="services-section" id="servicios">
-    <div class="container">
-      <div class="section-heading text-center">
-        <span class="section-tag">SERVICIOS DE TALLER</span>
-        <h2 class="section-title">¿Qué pieza necesitas reparar?</h2>
-        <p class="section-subtitle">
-          Trabajamos a diario tanto para <strong>conductores particulares</strong> como para <strong>talleres mecánicos</strong> de toda España. Reparamos tu pieza original para que no tengas que gastar un dineral en una nueva de concesionario.
-        </p>
+  <!-- ================= ENLACE A PÁGINA COMPLETA DE SERVICIOS ================= -->
+  <div class="container" style="margin-top: 3.5rem; margin-bottom: 3.5rem;">
+    <div style="background: linear-gradient(135deg, var(--neutral-900), #0f172a); border-radius: var(--radius-lg); padding: 2.25rem 2.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; color: white; box-shadow: var(--shadow-lg); border: 1px solid rgba(255,255,255,0.1);">
+      <div style="max-width: 650px;">
+        <span class="section-tag" style="background: rgba(2, 132, 199, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); margin-bottom: 0.5rem; display: inline-block;">CATÁLOGO DE TALLER</span>
+        <h3 style="color: white; font-family: var(--font-display); font-size: 1.5rem; margin: 0.4rem 0 0.5rem; font-weight: 700;">¿Buscas nuestro catálogo completo de servicios?</h3>
+        <p style="color: rgba(255,255,255,0.85); margin: 0; font-size: 0.95rem; line-height: 1.5;">Reparamos cuadros de instrumentos, módulos ABS, pantallas multimedia, mecatrónicas y centralitas ECU en 24/48h con 2 años de garantía.</p>
       </div>
-
-      <div class="services-grid">
-        <!-- Servicio 1: Cuadros -->
-        <div class="service-card" data-service-id="cuadro">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="9"/>
-                <path d="M12 7v5l3 3"/>
-                <path d="M7 16h10"/>
-              </svg>
-            </div>
-            <span class="sc-badge">Avería Típica</span>
-          </div>
-          <h3 class="sc-title">Cuadros de Instrumentos</h3>
-          <p class="sc-desc">
-            Si el cuadro parpadea, las agujas no marcan, se apaga por completo o se queda a oscuras de noche (muy común en Renault Scénic II, Ford Focus, Audi, Seat y VW).
-          </p>
-          <ul class="sc-features">
-            <li>✓ Mantienes los kilómetros reales de tu coche</li>
-            <li>✓ No tienes que reprogramar tus llaves</li>
-            <li>✓ 2 años de garantía por escrito</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('cuadro')">Ver averías de cuadros →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 2: Módulos ABS -->
-        <div class="service-card highlight-card" data-service-id="abs">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="9"/>
-                <circle cx="12" cy="12" r="4"/>
-                <path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
-              </svg>
-            </div>
-            <span class="sc-badge pulse">24h Express</span>
-          </div>
-          <h3 class="sc-title">Módulos y Bombas de ABS / ESP</h3>
-          <p class="sc-desc">
-            Luces de ABS y ESP fijas en el cuadro, bomba que no para de sonar o fallo del sensor de presión interno (ATE MK60, MK61, Bosch, Mercedes SBC). En coches y motos.
-          </p>
-          <ul class="sc-features">
-            <li>✓ Ahorra hasta 1.800€ frente a una bomba nueva</li>
-            <li>✓ Montar y purgar: lista para funcionar</li>
-            <li>✓ Probada y funcionando al 100% antes de enviártela</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('abs')">Ver averías de ABS →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 3: Pantallas Multimedia -->
-        <div class="service-card" data-service-id="multimedia">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="3" width="20" height="14" rx="2"/>
-                <path d="M8 21h8M12 17v4"/>
-              </svg>
-            </div>
-            <span class="sc-badge">Muy Frecuente</span>
-          </div>
-          <h3 class="sc-title">Pantallas Táctiles y Navegadores</h3>
-          <p class="sc-desc">
-            Eliminamos las burbujas y el pegamento derretido en pantallas de Hyundai Tucson y Kia, manchas negras en BMW/Mini y pantallas bloqueadas en Opel o VW.
-          </p>
-          <ul class="sc-features">
-            <li>✓ Cristal táctil nuevo y reforzado</li>
-            <li>✓ Adiós al pegamento derretido y burbujas</li>
-            <li>✓ Conservas todos tus mapas y menús</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('multimedia')">Ver reparaciones de pantallas →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 4: Displays LCD y Odómetros -->
-        <div class="service-card" data-service-id="display">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="4" width="18" height="12" rx="1"/>
-                <path d="M7 8h10M7 12h6"/>
-              </svg>
-            </div>
-          </div>
-          <h3 class="sc-title">Pantallas LCD y Cuentakilómetros</h3>
-          <p class="sc-desc">
-            Píxeles apagados, números ilegibles cuando hace calor en cuadros de Audi/Seat/VW, falso aviso de "OIL" en Nissan y kilómetros parados en 399.999 km (Ducato, Jumper, Boxer).
-          </p>
-          <ul class="sc-features">
-            <li>✓ Solución definitiva para pasar la ITV</li>
-            <li>✓ Pantallas LCD nuevas y con brillo perfecto</li>
-            <li>✓ Ajuste exacto de los datos de tu coche</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('display')">Ver soluciones de pantalla →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 5: Cambio Automático -->
-        <div class="service-card" data-service-id="cambio">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="6" cy="6" r="3"/>
-                <circle cx="18" cy="6" r="3"/>
-                <circle cx="18" cy="18" r="3"/>
-                <path d="M6 9v6h12M12 9v6"/>
-              </svg>
-            </div>
-          </div>
-          <h3 class="sc-title">Cajas de Cambio Automáticas</h3>
-          <p class="sc-desc">
-            Reparación de centralitas y mecatrónicas de cambio automático: tirones, marchas que saltan o palanca bloqueada (DSG Grupo VAG, Easytronic de Opel y Mercedes 7G-Tronic).
-          </p>
-          <ul class="sc-features">
-            <li>✓ Reparación de sensores de presión y posición</li>
-            <li>✓ Copia exacta de datos sin perder configuración</li>
-            <li>✓ Mucho más económico que cambiar la mecatrónica</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('cambio')">Ver cambios automáticos →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 6: Centralitas ECU -->
-        <div class="service-card" data-service-id="ecu">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="4" y="4" width="16" height="16" rx="2"/>
-                <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
-              </svg>
-            </div>
-          </div>
-          <h3 class="sc-title">Centralitas de Motor</h3>
-          <p class="sc-desc">
-            Si el coche no arranca, se para en caliente o falla la inyección. Reparación de centralitas de motor quemadas y módulo de bomba Isuzu 1.7 DTi (Opel Astra, Corsa y Meriva).
-          </p>
-          <ul class="sc-features">
-            <li>✓ Revisión y prueba exhaustiva de todos los circuitos</li>
-            <li>✓ Clonación de datos de tu unidad original</li>
-            <li>✓ Sustitución de componentes reforzados</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('ecu')">Ver centralitas de motor →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 7: BSI y Módulos de Confort -->
-        <div class="service-card" data-service-id="bsi">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-              </svg>
-            </div>
-          </div>
-          <h3 class="sc-title">Módulos de Confort y Cierres (BSI)</h3>
-          <p class="sc-desc">
-            Fallos en módulos de carrocería (BSI Peugeot/Citroën, UCH Renault, SAM Mercedes): limpiaparabrisas que no paran, luces locas, no abre el cierre o el coche se queda sin batería en reposo.
-          </p>
-          <ul class="sc-features">
-            <li>✓ No pierdes la configuración del habitáculo</li>
-            <li>✓ Localización y solución del consumo de batería</li>
-            <li>✓ Reparación de relés y circuitos internos</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('bsi')">Ver módulos de confort →</button>
-          </div>
-        </div>
-
-        <!-- Servicio 8: Inmovilizadores y Blue&Me -->
-        <div class="service-card" data-service-id="inmo">
-          <div class="sc-header">
-            <div class="sc-icon-wrap">
-              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="3" y="11" width="18" height="11" rx="2"/>
-                <path d="M7 11V7a5 5 0 0110 0v4"/>
-              </svg>
-            </div>
-          </div>
-          <h3 class="sc-title">Inmovilizador y Bluetooth Fiat Blue&Me</h3>
-          <p class="sc-desc">
-            Solución al coche que no reconoce la llave para arrancar y arreglo del conocido fallo del módulo Bluetooth Blue&Me de Fiat y Alfa Romeo que deja los kilómetros parpadeando y agota la batería.
-          </p>
-          <ul class="sc-features">
-            <li>✓ Solución definitiva al consumo de batería en Fiat</li>
-            <li>✓ Emparejamiento de llaves y cuadros</li>
-            <li>✓ Listo para montar en el coche</li>
-          </ul>
-          <div class="sc-footer">
-            <button class="btn-link" onclick="openFinderWith('inmo')">Ver inmovilizadores →</button>
-          </div>
-        </div>
-      </div>
+      <a href="servicios.html" class="btn btn-primary btn-lg" style="white-space: nowrap;">
+        <span>Ver Todos los Servicios</span>
+        <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
     </div>
-  </section>
+  </div>
+
 
   <!-- ================= CANAL PARA TALLERES MECÁNICOS ================= -->
   <section class="pro-workshop-section" id="talleres">
@@ -1063,251 +868,7 @@
     </div>
   </section>
 
-  <!-- ================= AVERÍAS MÁS FRECUENTES ================= -->
-  <section class="top-repairs-section" id="top-repairs">
-    <div class="container">
-      <div class="section-heading text-center">
-        <span class="section-tag">CATÁLOGO DE FALLOS FRECUENTES</span>
-        <h2 class="section-title">Averías comunes con solución inmediata en 24h</h2>
-        <p class="section-subtitle">
-          Identifica el fallo habitual de tu vehículo. Disponemos de componentes reforzados en stock y taller propio en Alcobendas para dejarlo listo en 24/48h.
-        </p>
-      </div>
 
-      <!-- Filtros de Averías Frecuentes -->
-      <div class="repair-filters">
-        <button class="filter-btn active" data-filter="all">Todas las averías habituales</button>
-        <button class="filter-btn" data-filter="cuadros">Cuadros y Pantallas</button>
-        <button class="filter-btn" data-filter="abs">Módulos de ABS</button>
-        <button class="filter-btn" data-filter="pantallas">Pantallas Táctiles</button>
-        <button class="filter-btn" data-filter="centralitas">Centralitas de Motor</button>
-      </div>
-
-      <!-- Grid de Averías Frecuentes -->
-      <div class="repairs-grid" id="repairsGrid">
-        
-        <!-- Top Repair 1: Odómetro 399.999 km -->
-        <div class="repair-item" data-category="cuadros">
-          <div class="repair-badge-top">Muy Común</div>
-          <div class="repair-header">
-            <span class="car-brand">CITROËN · FIAT · PEUGEOT</span>
-            <h4>Cuentakilómetros Bloqueado en 399.999 km</h4>
-          </div>
-          <p class="repair-summary">
-            Furgonetas (Citroën Jumper, Fiat Ducato, Peugeot Boxer) cuyo cuentakilómetros se clava en 399.999 km y no cuenta más, con lo que no te dejan pasar la ITV.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Garantía: 2 años
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Fallo Odómetro 399999 km Citroen/Fiat/Peugeot')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 2: Burbujas Pantalla Hyundai Tucson -->
-        <div class="repair-item" data-category="pantallas">
-          <div class="repair-badge-top">Especialidad Menigar</div>
-          <div class="repair-header">
-            <span class="car-brand">HYUNDAI TUCSON</span>
-            <h4>Burbujas y Pegamento en la Pantalla Táctil</h4>
-          </div>
-          <p class="repair-summary">
-            Aparición de burbujas de aire y líquido derramado entre la pantalla y el cristal táctil en Hyundai Tucson y Kia Sportage, perdiendo sensibilidad al pulsar.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Cristal Nuevo Reforzado
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Reparación Burbujas Pantalla Hyundai Tucson')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 3: Fallo Cuadro Renault Scenic 2 -->
-        <div class="repair-item" data-category="cuadros">
-          <div class="repair-badge-top">Top Ventas</div>
-          <div class="repair-header">
-            <span class="car-brand">RENAULT SCÉNIC II / MEGANE</span>
-            <h4>Cuadro Digital Apagado o Parpadeando</h4>
-          </div>
-          <p class="repair-summary">
-            El cuadro parpadea, pierde la hora continuamente, se resetea el kilometraje o se apaga por completo. Sustituimos transistores y transformador reforzados.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Garantía 2 Años
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Cuadro Renault Scenic II Apagado Total')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 4: ABS BMW ATE MK60 / MK61 Error 5DF5 -->
-        <div class="repair-item" data-category="abs">
-          <div class="repair-badge-top">Frenos y Seguridad</div>
-          <div class="repair-header">
-            <span class="car-brand">BMW SERIE 1 / SERIE 3</span>
-            <h4>Módulo ABS con Fallo 5DF5 o Bomba de Freno</h4>
-          </div>
-          <p class="repair-summary">
-            Testigos amarillos de ABS, DSC y freno de mano encendidos en el cuadro. Código de avería 5DF5 o fallo de motor de bomba. Lo dejamos listo sin cambiar la bomba.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
-              </svg>Ahorro hasta 1.500€
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Reparación Módulo ABS BMW ATE MK60 / MK61')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 5: Puntos Negros Pantalla BMW / Mini -->
-        <div class="repair-item" data-category="pantallas">
-          <div class="repair-header">
-            <span class="car-brand">BMW · MINI · CITROËN</span>
-            <h4>Puntos Negros y Manchas en la Pantalla</h4>
-          </div>
-          <p class="repair-summary">
-            Manchas negras circulares que van creciendo en la pantalla central o del navegador y te tapan el mapa o la cámara de marcha atrás.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24/48h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Pantalla Nueva
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Puntos Negros Pantalla BMW Mini')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 6: Mensaje OIL en Display Nissan -->
-        <div class="repair-item" data-category="cuadros">
-          <div class="repair-header">
-            <span class="car-brand">NISSAN VEHÍCULOS INDUSTRIALES</span>
-            <h4>Aviso Falso de "OIL" en Pantalla</h4>
-          </div>
-          <p class="repair-summary">
-            El display muestra fijo el aviso de nivel de aceite en furgonetas Nissan (Atleon, Cabstar) aunque el nivel y el cambio de aceite estén perfectos.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Garantía 2 Años
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Fallo Mensaje OIL Nissan Display')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 7: Iluminación Cuadros Grupo VAG -->
-        <div class="repair-item" data-category="cuadros">
-          <div class="repair-header">
-            <span class="car-brand">AUDI · SEAT · SKODA · VW</span>
-            <h4>Cuadro a Oscuras o Agujas sin Luz</h4>
-          </div>
-          <p class="repair-summary">
-            Las esferas de velocidad y revoluciones se quedan a oscuras de noche o las agujas no se encienden. Cambiamos la iluminación LED y los controladores internos.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Garantía 2 Años
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Fallo Iluminación Cuadro Grupo VAG')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 8: Centralita Opel Isuzu 1.7 DTi -->
-        <div class="repair-item" data-category="centralitas">
-          <div class="repair-header">
-            <span class="car-brand">OPEL ASTRA · CORSA · MERIVA</span>
-            <h4>Centralita de Bomba de Gasoil 1.7 DTi (Isuzu)</h4>
-          </div>
-          <p class="repair-summary">
-            El coche se para en caliente, no arranca o da tirones. Fallo muy habitual de soldaduras por calor en la centralita de la bomba.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Modificación Térmica
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Centralita Bomba Inyección Opel Isuzu 1.7 DTi')">Consultar Precio y Recogida</button>
-        </div>
-
-        <!-- Top Repair 9: Error 01130 / 16352 ABS VAG -->
-        <div class="repair-item" data-category="abs">
-          <div class="repair-header">
-            <span class="car-brand">VOLKSWAGEN · SEAT · SKODA · AUDI</span>
-            <h4>Errores 01130, 16352 y 01276 en ABS ATE MK60</h4>
-          </div>
-          <p class="repair-summary">
-            Fallo del sistema de frenado ABS en Golf, León, Octavia, A3. Reparación electrónica completa con comprobación en taller.
-          </p>
-          <div class="repair-meta">
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-              </svg>Plazo: 24h
-            </span>
-            <span class="meta-badge">
-              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
-                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-              </svg>Garantía 2 Años
-            </span>
-          </div>
-          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Error 01130 / 16352 ABS Grupo VAG')">Consultar Precio y Recogida</button>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ================= CÓMO FUNCIONA EL SERVICIO EN 3 PASOS ================= -->
   <section class="how-it-works-section" id="como-funciona">
@@ -1815,14 +1376,14 @@
         <div class="footer-col">
           <h4 class="f-title">Servicios Principales</h4>
           <ul class="f-links">
-            <li><a href="#servicios" onclick="openFinderWith('cuadro')">Cuadros de Instrumentos</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('abs')">Módulos de ABS / ESP</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('multimedia')">Pantallas Multimedia</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('display')">Displays LCD y Odómetros</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('cambio')">Cambio Automático (DSG)</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('ecu')">Centralitas de Motor ECU</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('bsi')">Unidades BSI / Confort</a></li>
-            <li><a href="#servicios" onclick="openFinderWith('inmo')">Inmovilizadores & Blue&Me</a></li>
+            <li><a href="servicios.html#servicios">Cuadros de Instrumentos</a></li>
+            <li><a href="servicios.html#servicios">Módulos de ABS / ESP</a></li>
+            <li><a href="servicios.html#servicios">Pantallas Multimedia</a></li>
+            <li><a href="servicios.html#servicios">Displays LCD y Odómetros</a></li>
+            <li><a href="servicios.html#servicios">Cambio Automático (DSG)</a></li>
+            <li><a href="servicios.html#servicios">Centralitas de Motor ECU</a></li>
+            <li><a href="servicios.html#servicios">Unidades BSI / Confort</a></li>
+            <li><a href="servicios.html#servicios">Inmovilizadores & Blue&Me</a></li>
           </ul>
         </div>
 
