@@ -1,0 +1,1966 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menigar | Especialistas en Reparación Electrónica del Automóvil desde 1989</title>
+  <meta name="description" content="Taller pionero en España en reparación de electrónica del automóvil: Cuadros de instrumentos, módulos ABS, pantallas multimedia, centralitas ECU y cambio automático. Reparaciones en 24/48h con 2 años de garantía.">
+  
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-light">
+
+  <!-- ================= TOP BAR DE CONTACTO, HORARIOS Y SEGMENTACIÓN ================= -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-left">
+        <span class="status-indicator active" id="schedule-indicator"></span>
+        <span class="top-text" id="schedule-text"><strong>Taller Abierto:</strong> Alcobendas (Madrid) · L-J 8:00 a 16:00 · V 8:00 a 14:00</span>
+        <span class="top-trust-badge">
+          <span class="stars">★★★★★</span>
+          <span>4.8 Google (590 opiniones verificadas)</span>
+        </span>
+      </div>
+      <div class="top-bar-right">
+        <div class="top-audience-switch" role="group" aria-label="Tipo de cliente">
+          <a href="#buscador-averias" class="top-aud-btn active" id="btnAudParticular">Soy Particular</a>
+          <a href="#talleres" class="top-aud-btn" id="btnAudTaller">Soy Taller Mecánico</a>
+        </div>
+        <a href="tel:916622781" class="top-link phone-link" aria-label="Llamar al taller">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+            <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.41 11.41 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.41 11.41 0 00.57 3.58 1 1 0 01-.24 1.02l-2.2 2.19z"/>
+          </svg>
+          <span>91 662 27 81</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= HEADER Y NAVEGACIÓN DESPEJADA ================= -->
+  <header class="main-header" id="header">
+    <div class="container nav-container">
+      <a href="#inicio" class="brand-logo" aria-label="Menigar Portada">
+        <div class="logo-mark">
+          <svg viewBox="0 0 40 40" width="36" height="36" fill="none">
+            <rect width="40" height="40" rx="8" fill="#0056b3"/>
+            <path d="M11 27V13L19 23L27 13V27" stroke="#ffffff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="19" cy="27" r="2.2" fill="#38bdf8"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <div class="logo-title-row">
+            <span class="company-name">MENIGAR</span>
+            <span class="anniversary-tag">+35 AÑOS</span>
+          </div>
+          <span class="company-sub">ELECTRÓNICA DEL AUTOMÓVIL · DESDE 1989</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" id="mainNav" aria-label="Navegación principal">
+        <ul class="nav-list">
+          <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+          <li class="has-dropdown">
+            <a href="#servicios" class="nav-link" aria-expanded="false" aria-haspopup="true">
+              <span>Servicios</span>
+              <svg class="chevron" viewBox="0 0 20 20" width="12" height="12" fill="currentColor">
+                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+            </a>
+            <div class="mega-dropdown">
+              <div class="dropdown-grid">
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('cuadro')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/><path d="M7 16h10"/>
+                  </svg>
+                  <div>
+                    <strong>Cuadros de Instrumentos</strong>
+                    <small>Fallo agujas, apagados, iluminación VAG</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('abs')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/><path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                  </svg>
+                  <div>
+                    <strong>Módulos de ABS y ESP</strong>
+                    <small>Bomba ATE MK60, MK61, MK100, Bosch, SBC</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('multimedia')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+                  </svg>
+                  <div>
+                    <strong>Pantallas Táctiles / Navi</strong>
+                    <small>Burbujas Hyundai, manchas negras BMW/Mini</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('display')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="12" rx="1"/><path d="M7 8h10M7 12h6"/>
+                  </svg>
+                  <div>
+                    <strong>Displays LCD y Odómetros</strong>
+                    <small>Mensaje OIL Nissan, fallo 399.999 km</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('cambio')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v6h12M12 9v6"/>
+                  </svg>
+                  <div>
+                    <strong>Cambio Automático</strong>
+                    <small>DSG Grupo VAG, Easytronic, Mercedes 7G</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('ecu')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
+                  </svg>
+                  <div>
+                    <strong>Centralitas de Motor ECU</strong>
+                    <small>Clonación, etapas inyección, fallo de arranque</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('bsi')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                  </svg>
+                  <div>
+                    <strong>Módulos BSI y Confort</strong>
+                    <small>Cierres, luces, descarga de batería</small>
+                  </div>
+                </a>
+                <a href="#servicios" class="dropdown-item" onclick="openFinderWith('inmo')">
+                  <svg class="d-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+                  </svg>
+                  <div>
+                    <strong>Inmovilizador & Blue&Me</strong>
+                    <small>Fallo transponder y módulo Bluetooth Fiat</small>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </li>
+          <li><a href="#buscador-averias" class="nav-link">Diagnóstico</a></li>
+          <li><a href="#casos-reales" class="nav-link">Casos Reales</a></li>
+          <li><a href="#como-funciona" class="nav-link">Cómo Funciona</a></li>
+          <li><a href="#garantias" class="nav-link">Ahorro y Garantía</a></li>
+          <li><a href="#talleres" class="nav-link">Para Talleres</a></li>
+          <li><a href="#opiniones" class="nav-link">Opiniones</a></li>
+          <li><a href="#contacto" class="nav-link">Contacto</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="btn btn-primary" id="openQuoteModalBtn">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
+          </svg>
+          <span>Pedir Presupuesto</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú de navegación">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO SECTION CON JERARQUÍA DE 5 SEGUNDOS ================= -->
+  <section class="hero-section" id="inicio">
+    <div class="container hero-container">
+      <div class="hero-content">
+        <div class="badge-pill">
+          <span class="pulse-dot"></span>
+          <span>Averías Electrónicas del Automóvil · Alcobendas (Madrid)</span>
+        </div>
+
+        <h1 class="hero-title">
+          Reparamos la avería de tu coche <span class="highlight">sin cambiar la pieza entera.</span>
+        </h1>
+
+        <p class="hero-desc">
+          Reparamos cuadros, ABS, centralitas, pantallas y módulos electrónicos en <strong>24/48 horas</strong>. Conservas tu pieza original, tus kilómetros y tus llaves, con <strong>2 años de garantía por escrito</strong>.
+        </p>
+
+        <div class="hero-ctas">
+          <a href="#buscador-averias" class="btn btn-primary btn-lg">
+            <span>Buscar mi Avería y Precio</span>
+            <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor">
+              <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+            </svg>
+          </a>
+          <a href="tel:916622781" class="btn btn-secondary btn-lg">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+              <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.41 11.41 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.41 11.41 0 00.57 3.58 1 1 0 01-.24 1.02l-2.2 2.19z"/>
+            </svg>
+            <span>Llamar al Taller: 91 662 27 81</span>
+          </a>
+        </div>
+
+        <!-- Tira de Confianza Compacta -->
+        <div class="hero-trust-strip">
+          <div class="trust-item">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>+35 Años de experiencia</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>2 Años de Garantía</span>
+          </div>
+          <div class="trust-item">
+            <span class="stars">★★★★★</span>
+            <span>4.8★ Google</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 20 20" width="16" height="16" fill="currentColor">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+            </svg>
+            <span>Hasta -80% vs Concesionario</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual: Evidencia Real de Taller -->
+      <div class="hero-visual">
+        <div class="lab-frame">
+          <div class="lab-evidence-header">
+            <span>TALLER MENIGAR · ALCOBENDAS (MADRID)</span>
+            <span class="live-tag">
+              <span class="live-dot"></span>
+              <span>PROBADO Y LISTO</span>
+            </span>
+          </div>
+          <img src="assets/hero-lab.jpg" alt="Técnico de Menigar reparando módulo electrónico en el taller de Alcobendas" class="lab-img" loading="eager">
+          <div class="lab-caption">
+            <svg viewBox="0 0 20 20" width="15" height="15" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+            </svg>
+            <span>Taller Menigar en Alcobendas (Madrid) · Reparación y prueba de módulo ABS de BMW</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECCIÓN MARCAS Y COCHES CON LOS QUE TRABAJAMOS (RIEL INFINITO) ================= -->
+  <section class="brands-marquee-section" id="marcas">
+    <div class="container">
+      <div class="brands-header">
+        <span class="brands-badge">COBERTURA MULTIMARCA TOTAL</span>
+        <h2 class="brands-title">Reparamos Electrónica de Todas las Marcas y Vehículos</h2>
+        <p class="brands-subtitle">Turismos, Vehículos Industriales, Motocicletas y Maquinaria Agrícola. Reparación en 24/48h sin cambiar la pieza original.</p>
+      </div>
+    </div>
+
+    <!-- Riel Superior (Izquierda a Derecha) -->
+    <div class="marquee-wrapper">
+      <div class="marquee-track marquee-track-left">
+        <div class="marquee-content">
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/alfaromeo.jpg" alt="Alfa Romeo" loading="lazy"><span>Alfa Romeo</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2020/10/reparacion_alpine.jpg" alt="Alpine" loading="lazy"><span>Alpine</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/02/logo_aprilia.jpg" alt="Aprilia" loading="lazy"><span>Aprilia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_audi.jpg" alt="Audi" loading="lazy"><span>Audi</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/10/reparacion_abs_benelli.jpg" alt="Benelli" loading="lazy"><span>Benelli</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2020/04/reparacion-bentley.jpg" alt="Bentley" loading="lazy"><span>Bentley</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_bmw.jpg" alt="BMW" loading="lazy"><span>BMW</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/03/reparaci%C3%B3n_tractor_case.jpg" alt="Case" loading="lazy"><span>Case</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/08/reparacion_chevrolet.jpg" alt="Chevrolet" loading="lazy"><span>Chevrolet</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/11/reparacion_chrysler.jpg" alt="Chrysler" loading="lazy"><span>Chrysler</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_citroen.jpg" alt="Citroën" loading="lazy"><span>Citroën</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/10/reparacion_dacia.jpg" alt="Dacia" loading="lazy"><span>Dacia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/07/reparacion_daewoo.jpg" alt="Daewoo" loading="lazy"><span>Daewoo</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/03/logo_daf.jpg" alt="DAF" loading="lazy"><span>DAF</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_dodge.jpg" alt="Dodge" loading="lazy"><span>Dodge</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_ducati.jpg" alt="Ducati" loading="lazy"><span>Ducati</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/10/logo_ferrari.jpg" alt="Ferrari" loading="lazy"><span>Ferrari</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_fiat.jpg" alt="Fiat" loading="lazy"><span>Fiat</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_ford.jpg" alt="Ford" loading="lazy"><span>Ford</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2020/12/reparacion_gmc.jpg" alt="GMC" loading="lazy"><span>GMC</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_harley.jpg" alt="Harley-Davidson" loading="lazy"><span>Harley-Davidson</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_honda.jpg" alt="Honda" loading="lazy"><span>Honda</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_honda_moto.jpg" alt="Honda Moto" loading="lazy"><span>Honda Moto</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_hummer.jpg" alt="Hummer" loading="lazy"><span>Hummer</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/12/logo_tractor_Hurlimann.jpg" alt="Hürlimann" loading="lazy"><span>Hürlimann</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_hyundai.jpg" alt="Hyundai" loading="lazy"><span>Hyundai</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/04/logo_reparacion_infiniti.jpg" alt="Infiniti" loading="lazy"><span>Infiniti</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/isuzu.jpg" alt="Isuzu" loading="lazy"><span>Isuzu</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/iveco.jpg" alt="Iveco" loading="lazy"><span>Iveco</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/jaguar.jpg" alt="Jaguar" loading="lazy"><span>Jaguar</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/jeep.jpg" alt="Jeep" loading="lazy"><span>Jeep</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/02/logo_john_deere.jpg" alt="John Deere" loading="lazy"><span>John Deere</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_kawasaki.jpg" alt="Kawasaki" loading="lazy"><span>Kawasaki</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/06/reparacion-kia_nuevo.fw_.png" alt="Kia" loading="lazy"><span>Kia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/03/reparacion_abs_ktm_moto.jpg" alt="KTM" loading="lazy"><span>KTM</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/10/reparacion_abs_kymco.jpg" alt="Kymco" loading="lazy"><span>Kymco</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_lancia.jpg" alt="Lancia" loading="lazy"><span>Lancia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_landrover.jpg" alt="Land Rover" loading="lazy"><span>Land Rover</span></div>
+        </div>
+        <!-- Duplicado idéntico para bucle 100% fluido sin salto -->
+        <div class="marquee-content" aria-hidden="true">
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/alfaromeo.jpg" alt="Alfa Romeo" loading="lazy"><span>Alfa Romeo</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2020/10/reparacion_alpine.jpg" alt="Alpine" loading="lazy"><span>Alpine</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/02/logo_aprilia.jpg" alt="Aprilia" loading="lazy"><span>Aprilia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_audi.jpg" alt="Audi" loading="lazy"><span>Audi</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/10/reparacion_abs_benelli.jpg" alt="Benelli" loading="lazy"><span>Benelli</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2020/04/reparacion-bentley.jpg" alt="Bentley" loading="lazy"><span>Bentley</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_bmw.jpg" alt="BMW" loading="lazy"><span>BMW</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/03/reparaci%C3%B3n_tractor_case.jpg" alt="Case" loading="lazy"><span>Case</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/08/reparacion_chevrolet.jpg" alt="Chevrolet" loading="lazy"><span>Chevrolet</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/11/reparacion_chrysler.jpg" alt="Chrysler" loading="lazy"><span>Chrysler</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_citroen.jpg" alt="Citroën" loading="lazy"><span>Citroën</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/10/reparacion_dacia.jpg" alt="Dacia" loading="lazy"><span>Dacia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/07/reparacion_daewoo.jpg" alt="Daewoo" loading="lazy"><span>Daewoo</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/03/logo_daf.jpg" alt="DAF" loading="lazy"><span>DAF</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_dodge.jpg" alt="Dodge" loading="lazy"><span>Dodge</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_ducati.jpg" alt="Ducati" loading="lazy"><span>Ducati</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/10/logo_ferrari.jpg" alt="Ferrari" loading="lazy"><span>Ferrari</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_fiat.jpg" alt="Fiat" loading="lazy"><span>Fiat</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_ford.jpg" alt="Ford" loading="lazy"><span>Ford</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2020/12/reparacion_gmc.jpg" alt="GMC" loading="lazy"><span>GMC</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_harley.jpg" alt="Harley-Davidson" loading="lazy"><span>Harley-Davidson</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_honda.jpg" alt="Honda" loading="lazy"><span>Honda</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_honda_moto.jpg" alt="Honda Moto" loading="lazy"><span>Honda Moto</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_hummer.jpg" alt="Hummer" loading="lazy"><span>Hummer</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/12/logo_tractor_Hurlimann.jpg" alt="Hürlimann" loading="lazy"><span>Hürlimann</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_hyundai.jpg" alt="Hyundai" loading="lazy"><span>Hyundai</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/04/logo_reparacion_infiniti.jpg" alt="Infiniti" loading="lazy"><span>Infiniti</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/isuzu.jpg" alt="Isuzu" loading="lazy"><span>Isuzu</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/iveco.jpg" alt="Iveco" loading="lazy"><span>Iveco</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/jaguar.jpg" alt="Jaguar" loading="lazy"><span>Jaguar</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/jeep.jpg" alt="Jeep" loading="lazy"><span>Jeep</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/02/logo_john_deere.jpg" alt="John Deere" loading="lazy"><span>John Deere</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_kawasaki.jpg" alt="Kawasaki" loading="lazy"><span>Kawasaki</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/06/reparacion-kia_nuevo.fw_.png" alt="Kia" loading="lazy"><span>Kia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/03/reparacion_abs_ktm_moto.jpg" alt="KTM" loading="lazy"><span>KTM</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/10/reparacion_abs_kymco.jpg" alt="Kymco" loading="lazy"><span>Kymco</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_lancia.jpg" alt="Lancia" loading="lazy"><span>Lancia</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_landrover.jpg" alt="Land Rover" loading="lazy"><span>Land Rover</span></div>
+        </div>
+      </div>
+
+      <!-- Riel Inferior (Derecha a Izquierda) -->
+      <div class="marquee-track marquee-track-right">
+        <div class="marquee-content">
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/02/logo_lamborghini.jpg" alt="Lamborghini" loading="lazy"><span>Lamborghini</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/01/reparacion_ldv.jpg" alt="LDV" loading="lazy"><span>LDV</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/03/reparacion_lexus.jpg" alt="Lexus" loading="lazy"><span>Lexus</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2018/04/reparacion_ligier.jpg" alt="Ligier" loading="lazy"><span>Ligier</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/01/logo_reparacion_maserati.jpg" alt="Maserati" loading="lazy"><span>Maserati</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/02/logo_massey_ferguson.jpg" alt="Massey Ferguson" loading="lazy"><span>Massey Ferguson</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mazda.jpg" alt="Mazda" loading="lazy"><span>Mazda</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2018/02/logo_microcar.jpg" alt="Microcar" loading="lazy"><span>Microcar</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mercedes.jpg" alt="Mercedes-Benz" loading="lazy"><span>Mercedes-Benz</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/07/logo-mg.jpg" alt="MG" loading="lazy"><span>MG</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mini.jpg" alt="Mini" loading="lazy"><span>Mini</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mitsubishi.jpg" alt="Mitsubishi" loading="lazy"><span>Mitsubishi</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/01/reparacion_moto-guzzi.jpg" alt="Moto Guzzi" loading="lazy"><span>Moto Guzzi</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/03/reparacion_new_holland.jpg" alt="New Holland" loading="lazy"><span>New Holland</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/02/reparaci%C3%B3n_nissan_nuevo_logo.jpg" alt="Nissan" loading="lazy"><span>Nissan</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_opel.jpg" alt="Opel" loading="lazy"><span>Opel</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/06/reparacion-peugeot_nuevo.fw_.png" alt="Peugeot" loading="lazy"><span>Peugeot</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_porsche.jpg" alt="Porsche" loading="lazy"><span>Porsche</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/06/reparacion-renault_nuevo.fw_.png" alt="Renault" loading="lazy"><span>Renault</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/rover.jpg" alt="Rover" loading="lazy"><span>Rover</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_saab.jpg" alt="Saab" loading="lazy"><span>Saab</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/12/logo_tractor_same.jpg" alt="Same" loading="lazy"><span>Same</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2024/01/logo-santana.jpg" alt="Santana" loading="lazy"><span>Santana</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_seat.jpg" alt="Seat" loading="lazy"><span>Seat</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_skoda.jpg" alt="Skoda" loading="lazy"><span>Skoda</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_smart.jpg" alt="Smart" loading="lazy"><span>Smart</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_ssangyong.jpg" alt="SsangYong" loading="lazy"><span>SsangYong</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_subaru.jpg" alt="Subaru" loading="lazy"><span>Subaru</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_suzuki.jpg" alt="Suzuki" loading="lazy"><span>Suzuki</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_suzuki_moto.jpg" alt="Suzuki Moto" loading="lazy"><span>Suzuki Moto</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/10/reparacion_tata.jpg" alt="Tata" loading="lazy"><span>Tata</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/02/logo_reparacion_temsa.jpg" alt="Temsa" loading="lazy"><span>Temsa</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_toyota.jpg" alt="Toyota" loading="lazy"><span>Toyota</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_triumph.jpg" alt="Triumph" loading="lazy"><span>Triumph</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/01/logo_reparacion_abs_vespa.jpg" alt="Vespa" loading="lazy"><span>Vespa</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_volvo.jpg" alt="Volvo" loading="lazy"><span>Volvo</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_vw.jpg" alt="Volkswagen" loading="lazy"><span>Volkswagen</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_yamaha.jpg" alt="Yamaha" loading="lazy"><span>Yamaha</span></div>
+        </div>
+        <!-- Duplicado idéntico para bucle 100% fluido sin salto -->
+        <div class="marquee-content" aria-hidden="true">
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/02/logo_lamborghini.jpg" alt="Lamborghini" loading="lazy"><span>Lamborghini</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/01/reparacion_ldv.jpg" alt="LDV" loading="lazy"><span>LDV</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/03/reparacion_lexus.jpg" alt="Lexus" loading="lazy"><span>Lexus</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2018/04/reparacion_ligier.jpg" alt="Ligier" loading="lazy"><span>Ligier</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/01/logo_reparacion_maserati.jpg" alt="Maserati" loading="lazy"><span>Maserati</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/02/logo_massey_ferguson.jpg" alt="Massey Ferguson" loading="lazy"><span>Massey Ferguson</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mazda.jpg" alt="Mazda" loading="lazy"><span>Mazda</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2018/02/logo_microcar.jpg" alt="Microcar" loading="lazy"><span>Microcar</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mercedes.jpg" alt="Mercedes-Benz" loading="lazy"><span>Mercedes-Benz</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/07/logo-mg.jpg" alt="MG" loading="lazy"><span>MG</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mini.jpg" alt="Mini" loading="lazy"><span>Mini</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/06/reparacion_mitsubishi.jpg" alt="Mitsubishi" loading="lazy"><span>Mitsubishi</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/01/reparacion_moto-guzzi.jpg" alt="Moto Guzzi" loading="lazy"><span>Moto Guzzi</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/03/reparacion_new_holland.jpg" alt="New Holland" loading="lazy"><span>New Holland</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/02/reparaci%C3%B3n_nissan_nuevo_logo.jpg" alt="Nissan" loading="lazy"><span>Nissan</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_opel.jpg" alt="Opel" loading="lazy"><span>Opel</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/06/reparacion-peugeot_nuevo.fw_.png" alt="Peugeot" loading="lazy"><span>Peugeot</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_porsche.jpg" alt="Porsche" loading="lazy"><span>Porsche</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2021/06/reparacion-renault_nuevo.fw_.png" alt="Renault" loading="lazy"><span>Renault</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/04/rover.jpg" alt="Rover" loading="lazy"><span>Rover</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_saab.jpg" alt="Saab" loading="lazy"><span>Saab</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/12/logo_tractor_same.jpg" alt="Same" loading="lazy"><span>Same</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2024/01/logo-santana.jpg" alt="Santana" loading="lazy"><span>Santana</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_seat.jpg" alt="Seat" loading="lazy"><span>Seat</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_skoda.jpg" alt="Skoda" loading="lazy"><span>Skoda</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_smart.jpg" alt="Smart" loading="lazy"><span>Smart</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_ssangyong.jpg" alt="SsangYong" loading="lazy"><span>SsangYong</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_subaru.jpg" alt="Subaru" loading="lazy"><span>Subaru</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_suzuki.jpg" alt="Suzuki" loading="lazy"><span>Suzuki</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_suzuki_moto.jpg" alt="Suzuki Moto" loading="lazy"><span>Suzuki Moto</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/10/reparacion_tata.jpg" alt="Tata" loading="lazy"><span>Tata</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2022/02/logo_reparacion_temsa.jpg" alt="Temsa" loading="lazy"><span>Temsa</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_toyota.jpg" alt="Toyota" loading="lazy"><span>Toyota</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_triumph.jpg" alt="Triumph" loading="lazy"><span>Triumph</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2023/01/logo_reparacion_abs_vespa.jpg" alt="Vespa" loading="lazy"><span>Vespa</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_volvo.jpg" alt="Volvo" loading="lazy"><span>Volvo</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2017/07/reparacion_vw.jpg" alt="Volkswagen" loading="lazy"><span>Volkswagen</span></div>
+          <div class="brand-chip"><img src="https://www.menigar.com/wp-content/uploads/2019/12/logo_yamaha.jpg" alt="Yamaha" loading="lazy"><span>Yamaha</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SMART VEHICLE & FAULT FINDER 2.0 (PRODUCTO NUCLEAR) ================= -->
+  <section class="finder-section" id="buscador-averias">
+    <div class="container smart-finder-wrapper">
+      <div class="smart-finder-card">
+        <div class="finder-header">
+          <span class="finder-badge">PRODUCTO NUCLEAR MENIGAR · CERTEZA EN 3 PASOS</span>
+          <h2 class="finder-title">¿Qué le ocurre a tu coche? Encuentra tu solución</h2>
+          <p class="finder-subtitle">Elige cómo prefieres buscar: por lo que notas en el coche, por la pieza o por el código que te ha salido en la diagnosis.</p>
+        </div>
+
+        <!-- Selector de Modos (Pills / Tabs de Entrada) -->
+        <div class="finder-mode-tabs" role="tablist">
+          <button type="button" class="mode-tab active" id="tabModeSymptoms" role="tab" aria-selected="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+            </svg>
+            <span>1. Tengo síntomas (No sé qué pieza es)</span>
+          </button>
+          <button type="button" class="mode-tab" id="tabModeComponent" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/>
+            </svg>
+            <span>2. Sé qué pieza falla</span>
+          </button>
+          <button type="button" class="mode-tab" id="tabModeDtc" role="tab" aria-selected="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            <span>3. Tengo código de máquina (DTC)</span>
+          </button>
+        </div>
+
+        <!-- MODO 1: Por Síntomas Comunes (Problema Humano) -->
+        <div class="symptoms-selector-container" id="symptomsModeContainer">
+          <p class="symptoms-title">Selecciona el problema más parecido a lo que ocurre en tu coche:</p>
+          <div class="symptoms-grid">
+            <button type="button" class="symptom-card" data-comp="abs" data-symptom="abs">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Luces de ABS / ESP encendidas</strong>
+                <small>Testigos de freno fijos o bomba que suena</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" data-comp="cuadro" data-symptom="cuadro">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>
+                </svg>
+              </div>
+              <div>
+                <strong>El cuadro se apaga o parpadea</strong>
+                <small>Agujas caídas o pierde la hora continuamente</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" data-comp="multimedia" data-symptom="pantalla">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Burbujas o fallo táctil</strong>
+                <small>Pegamento derretido o manchas negras</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" data-comp="cambio" data-symptom="cambio">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M6 9v6h12"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Cambio automático / tirones</strong>
+                <small>Parpadea PRNDS o palanca bloqueada</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" data-comp="display" data-symptom="display">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="12" rx="1"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Kilómetros parados en 399.999</strong>
+                <small>Aviso OIL falso o display ilegible en calor</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" data-comp="ecu" data-symptom="ecu">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>No arranca o se para en caliente</strong>
+                <small>Fallo centralita de motor o bomba Isuzu</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" data-comp="bsi" data-symptom="bsi">
+              <div class="symptom-icon">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                </svg>
+              </div>
+              <div>
+                <strong>Luces locas o gasta batería</strong>
+                <small>Limpiaparabrisas solos o cierre centralizado</small>
+              </div>
+            </button>
+
+            <button type="button" class="symptom-card" id="btnHelpUnknown">
+              <div class="symptom-icon" style="color: var(--amber-dark);">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3m0 4h.01"/>
+                </svg>
+              </div>
+              <div>
+                <strong>No sé qué le pasa</strong>
+                <small>Cuéntanos los síntomas y te guiamos</small>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- FORMULARIO GUIADO DE VEHÍCULO (Marca y Modelo) -->
+        <form class="finder-form" id="vehicleFinderForm">
+          <div class="finder-step" id="componentStepWrapper">
+            <label class="step-label" for="componentSelect">
+              <span class="step-num">1</span>
+              <span>¿Qué pieza te falla?</span>
+            </label>
+            <div class="select-wrapper">
+              <select id="componentSelect" required>
+                <option value="">Selecciona la pieza...</option>
+                <option value="abs">Módulo o Bomba de ABS / ESP (Luces de freno o ABS fijas)</option>
+                <option value="cuadro">Cuadro de Instrumentos (Apagado, agujas caídas, sin luz)</option>
+                <option value="multimedia">Pantalla Táctil / Navegador (Burbujas, manchas negras)</option>
+                <option value="display">Pantalla LCD / Cuentakilómetros (Bloqueado 399.999km, OIL)</option>
+                <option value="cambio">Cambio Automático (Módulo DSG, Easytronic, palanca)</option>
+                <option value="ecu">Centralita de Motor (Fallo de inyección, coche no arranca)</option>
+                <option value="bsi">Módulo de Confort / BSI (Fallan luces, limpias o cierres)</option>
+                <option value="inmo">Inmovilizador o Bluetooth Fiat (No arranca o gasta batería)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="finder-step">
+            <label class="step-label" for="brandSelect">
+              <span class="step-num">2</span>
+              <span>Marca de tu coche</span>
+            </label>
+            <div class="select-wrapper">
+              <select id="brandSelect" required disabled>
+                <option value="">Primero elige el síntoma o pieza...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="finder-step">
+            <label class="step-label" for="modelSelect">
+              <span class="step-num">3</span>
+              <span>Modelo y avería común</span>
+            </label>
+            <div class="select-wrapper">
+              <select id="modelSelect" required disabled>
+                <option value="">Primero elige la marca...</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="finder-action">
+            <button type="submit" class="btn btn-primary btn-block" id="findFixBtn" disabled>
+              <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor">
+                <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span>Ver mi Reparación</span>
+            </button>
+          </div>
+        </form>
+
+        <!-- MODO 3: Buscador DTC Integrado (Visible al activar tab 3) -->
+        <div class="dtc-mode-container" id="dtcModeContainer" style="display: none;">
+          <div class="dtc-mode-left">
+            <h3>¿Le han metido la máquina al coche?</h3>
+            <p>Escribe el código de error (DTC) que ha salido en el escáner del taller para comprobar si tiene reparación inmediata:</p>
+          </div>
+          <div class="dtc-mode-right">
+            <div class="search-input-group">
+              <svg class="search-icon" viewBox="0 0 20 20" width="18" height="18" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"/>
+              </svg>
+              <input type="text" id="dtcInput" placeholder="Ej: 5DF5, 01130, C1380, 16352, 399999, OIL..." autocomplete="off">
+              <button type="button" class="btn btn-secondary" id="searchDtcBtn">Comprobar</button>
+            </div>
+            <div class="quick-chips">
+              <span>Códigos frecuentes:</span>
+              <button type="button" class="dtc-chip" data-code="5DF5">5DF5 (BMW ABS)</button>
+              <button type="button" class="dtc-chip" data-code="01130">01130 (VAG ABS)</button>
+              <button type="button" class="dtc-chip" data-code="C1380">C1380 (Citroën MK70)</button>
+              <button type="button" class="dtc-chip" data-code="16352">16352 (Centralita VAG)</button>
+              <button type="button" class="dtc-chip" data-code="399999">399.999 km</button>
+              <button type="button" class="dtc-chip" data-code="OIL">Aviso OIL</button>
+            </div>
+
+            <!-- Caja de Resultado DTC -->
+            <div class="dtc-result-box" id="dtcResultBox" style="display: none;">
+              <div class="dtc-result-content">
+                <div class="dtc-status-icon">✓</div>
+                <div class="dtc-info">
+                  <h4 id="dtcResultTitle">Código 5DF5</h4>
+                  <p id="dtcResultDesc">Descripción del fallo...</p>
+                </div>
+                <div class="dtc-actions">
+                  <button type="button" class="btn btn-primary btn-sm" id="dtcQuoteBtn">Pedir Presupuesto</button>
+                  <button type="button" class="close-dtc" id="closeDtcBtn" aria-label="Cerrar resultado">×</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL DINÁMICO DE RESULTADO: FICHA DE DECISIÓN -->
+        <div class="finder-result" id="finderResult" style="display: none;">
+          <div class="result-header">
+            <div class="result-title-box">
+              <span class="result-tag" id="resTag">✓ REPARACIÓN DISPONIBLE EN MENIGAR</span>
+              <h3 id="resTitle">Reparación Módulo ABS BMW Serie 3</h3>
+            </div>
+            <div class="result-time-badge">
+              <span>
+                <svg viewBox="0 0 20 20" width="15" height="15" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                </svg>Plazo: <strong>24/48h en Taller</strong>
+              </span>
+              <span>
+                <svg viewBox="0 0 20 20" width="15" height="15" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                </svg><strong>2 Años de Garantía por escrito</strong>
+              </span>
+            </div>
+          </div>
+
+          <div class="result-grid">
+            <div class="result-col">
+              <h4>Síntomas y Testigos Comprobados:</h4>
+              <div class="warning-lights-cluster" id="resLights">
+                <!-- Testigos inyectados -->
+              </div>
+              <p id="resDesc" class="result-desc"></p>
+            </div>
+
+            <div class="result-col codes-col">
+              <h4>Códigos de Avería que Solucionamos:</h4>
+              <div class="error-codes-pills" id="resCodes">
+                <!-- Códigos inyectados -->
+              </div>
+              <div class="result-cta-box">
+                <button class="btn btn-primary" id="quoteDirectBtn">
+                  <span>Pedir Presupuesto / Recoger Pieza</span>
+                </button>
+                <a href="https://wa.me/34916622781?text=Hola,%20quisiera%20consultar%20por%20la%20reparación" target="_blank" class="btn btn-whatsapp" id="whatsappDirectBtn">
+                  <span>Consultar por WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CASOS REALES EN VÍDEO (BLOQUE DE MÁXIMA CONFIANZA) ================= -->
+  <section class="real-cases-section" id="casos-reales">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-tag">VÍDEOS REALES DE NUESTRO TALLER</span>
+        <h2 class="section-title">Así reparamos en nuestro taller: Casos reales paso a paso</h2>
+        <p class="section-subtitle">
+          Grabaciones reales en nuestras instalaciones de Alcobendas. Diagnóstico, reparación de microelectrónica y probamos que todo funcione perfectamente antes de devolvértelo.
+        </p>
+      </div>
+
+      <div class="video-trust-grid">
+        <!-- Vídeo 1: VW Pantalla MIB 2.0 -->
+        <div class="video-card">
+          <div class="video-embed-wrapper">
+            <iframe src="https://www.youtube.com/embed/R0hrL_p9y9g?si=s5pylZ6kP_LjQ8Ro" title="Reparación pantalla táctil multimedia VW MIB 2.0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-card-body">
+            <div class="video-card-badge">PANTALLA MULTIMEDIA · VOLKSWAGEN</div>
+            <h3 class="video-card-title">Reparación pantalla táctil multimedia VW MIB 2.0</h3>
+            <p class="video-card-desc">
+              Sustitución de digitalizador óptico y calibración completa. Solución a fallos táctiles, pulsaciones fantasma o pegamento derretido.
+            </p>
+            <div class="video-card-meta">
+              <span class="video-tag-verified">✓ Probado y funcionando al 100%</span>
+              <span class="video-views">+83.000 vistas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 2: Nissan Terrano 2 Cuadro -->
+        <div class="video-card">
+          <div class="video-embed-wrapper">
+            <iframe src="https://www.youtube.com/embed/TpKHyAnSfH4?si=l9vY-meU8sngs3nr" title="Reparación cuadro Nissan Terrano 2 - Test Repair" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-card-body">
+            <div class="video-card-badge">CUADRO DE INSTRUMENTOS · NISSAN</div>
+            <h3 class="video-card-title">Reparación Cuadro Nissan Terrano 2 - Test Repair</h3>
+            <p class="video-card-desc">
+              Diagnóstico, reparación y comprobación completa: agujas de velocidad, cuentarrevoluciones, indicador de combustible y display digital.
+            </p>
+            <div class="video-card-meta">
+              <span class="video-tag-verified">✓ Kilómetros reales conservados</span>
+              <span class="video-views">+41.000 vistas</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Vídeo 3: Jeep Uconnect Pantalla -->
+        <div class="video-card">
+          <div class="video-embed-wrapper">
+            <iframe src="https://www.youtube.com/embed/1DWTQse8ujU?si=UWmVBJItKg7S4BDt" title="Reparación pantalla multimedia Jeep Uconnect" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="video-card-body">
+            <div class="video-card-badge">SISTEMA MULTIMEDIA · JEEP UCONNECT</div>
+            <h3 class="video-card-title">Reparación pantalla multimedia Jeep Uconnect</h3>
+            <p class="video-card-desc">
+              Reparación de panel táctil, eliminación de burbujas internas y cristal laminado nuevo de alta resistencia térmica sin perder navegación ni mapas.
+            </p>
+            <div class="video-card-meta">
+              <span class="video-tag-verified">✓ Sin codificar en concesionario</span>
+              <span class="video-views">+31.000 vistas</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Confianza y Enlace al Canal Oficial -->
+      <div class="video-channel-banner">
+        <div class="vcb-left">
+          <div class="vcb-icon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="#ff0000">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+          <div class="vcb-text">
+            <strong>Canal Oficial de YouTube: Desarrollos Digitales Menigar</strong>
+            <p>Más de 38 vídeos de reparaciones reales explicadas paso a paso, grabados en nuestro propio taller de Alcobendas.</p>
+          </div>
+        </div>
+        <a href="https://www.youtube.com/@desarrollosdigitalesmeniga7231" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          <span>Ver canal oficial en YouTube →</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SERVICIOS DE REPARACIÓN DE TALLER ================= -->
+  <section class="services-section" id="servicios">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-tag">SERVICIOS DE TALLER</span>
+        <h2 class="section-title">¿Qué pieza necesitas reparar?</h2>
+        <p class="section-subtitle">
+          Trabajamos a diario tanto para <strong>conductores particulares</strong> como para <strong>talleres mecánicos</strong> de toda España. Reparamos tu pieza original para que no tengas que gastar un dineral en una nueva de concesionario.
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <!-- Servicio 1: Cuadros -->
+        <div class="service-card" data-service-id="cuadro">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 3"/>
+                <path d="M7 16h10"/>
+              </svg>
+            </div>
+            <span class="sc-badge">Avería Típica</span>
+          </div>
+          <h3 class="sc-title">Cuadros de Instrumentos</h3>
+          <p class="sc-desc">
+            Si el cuadro parpadea, las agujas no marcan, se apaga por completo o se queda a oscuras de noche (muy común en Renault Scénic II, Ford Focus, Audi, Seat y VW).
+          </p>
+          <ul class="sc-features">
+            <li>✓ Mantienes los kilómetros reales de tu coche</li>
+            <li>✓ No tienes que reprogramar tus llaves</li>
+            <li>✓ 2 años de garantía por escrito</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('cuadro')">Ver averías de cuadros →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 2: Módulos ABS -->
+        <div class="service-card highlight-card" data-service-id="abs">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+              </svg>
+            </div>
+            <span class="sc-badge pulse">24h Express</span>
+          </div>
+          <h3 class="sc-title">Módulos y Bombas de ABS / ESP</h3>
+          <p class="sc-desc">
+            Luces de ABS y ESP fijas en el cuadro, bomba que no para de sonar o fallo del sensor de presión interno (ATE MK60, MK61, Bosch, Mercedes SBC). En coches y motos.
+          </p>
+          <ul class="sc-features">
+            <li>✓ Ahorra hasta 1.800€ frente a una bomba nueva</li>
+            <li>✓ Montar y purgar: lista para funcionar</li>
+            <li>✓ Probada y funcionando al 100% antes de enviártela</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('abs')">Ver averías de ABS →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 3: Pantallas Multimedia -->
+        <div class="service-card" data-service-id="multimedia">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="3" width="20" height="14" rx="2"/>
+                <path d="M8 21h8M12 17v4"/>
+              </svg>
+            </div>
+            <span class="sc-badge">Muy Frecuente</span>
+          </div>
+          <h3 class="sc-title">Pantallas Táctiles y Navegadores</h3>
+          <p class="sc-desc">
+            Eliminamos las burbujas y el pegamento derretido en pantallas de Hyundai Tucson y Kia, manchas negras en BMW/Mini y pantallas bloqueadas en Opel o VW.
+          </p>
+          <ul class="sc-features">
+            <li>✓ Cristal táctil nuevo y reforzado</li>
+            <li>✓ Adiós al pegamento derretido y burbujas</li>
+            <li>✓ Conservas todos tus mapas y menús</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('multimedia')">Ver reparaciones de pantallas →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 4: Displays LCD y Odómetros -->
+        <div class="service-card" data-service-id="display">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="12" rx="1"/>
+                <path d="M7 8h10M7 12h6"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="sc-title">Pantallas LCD y Cuentakilómetros</h3>
+          <p class="sc-desc">
+            Píxeles apagados, números ilegibles cuando hace calor en cuadros de Audi/Seat/VW, falso aviso de "OIL" en Nissan y kilómetros parados en 399.999 km (Ducato, Jumper, Boxer).
+          </p>
+          <ul class="sc-features">
+            <li>✓ Solución definitiva para pasar la ITV</li>
+            <li>✓ Pantallas LCD nuevas y con brillo perfecto</li>
+            <li>✓ Ajuste exacto de los datos de tu coche</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('display')">Ver soluciones de pantalla →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 5: Cambio Automático -->
+        <div class="service-card" data-service-id="cambio">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="6" cy="6" r="3"/>
+                <circle cx="18" cy="6" r="3"/>
+                <circle cx="18" cy="18" r="3"/>
+                <path d="M6 9v6h12M12 9v6"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="sc-title">Cajas de Cambio Automáticas</h3>
+          <p class="sc-desc">
+            Reparación de centralitas y mecatrónicas de cambio automático: tirones, marchas que saltan o palanca bloqueada (DSG Grupo VAG, Easytronic de Opel y Mercedes 7G-Tronic).
+          </p>
+          <ul class="sc-features">
+            <li>✓ Reparación de sensores de presión y posición</li>
+            <li>✓ Copia exacta de datos sin perder configuración</li>
+            <li>✓ Mucho más económico que cambiar la mecatrónica</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('cambio')">Ver cambios automáticos →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 6: Centralitas ECU -->
+        <div class="service-card" data-service-id="ecu">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                <path d="M9 9h6v6H9zM9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="sc-title">Centralitas de Motor</h3>
+          <p class="sc-desc">
+            Si el coche no arranca, se para en caliente o falla la inyección. Reparación de centralitas de motor quemadas y módulo de bomba Isuzu 1.7 DTi (Opel Astra, Corsa y Meriva).
+          </p>
+          <ul class="sc-features">
+            <li>✓ Revisión y prueba exhaustiva de todos los circuitos</li>
+            <li>✓ Clonación de datos de tu unidad original</li>
+            <li>✓ Sustitución de componentes reforzados</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('ecu')">Ver centralitas de motor →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 7: BSI y Módulos de Confort -->
+        <div class="service-card" data-service-id="bsi">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="sc-title">Módulos de Confort y Cierres (BSI)</h3>
+          <p class="sc-desc">
+            Fallos en módulos de carrocería (BSI Peugeot/Citroën, UCH Renault, SAM Mercedes): limpiaparabrisas que no paran, luces locas, no abre el cierre o el coche se queda sin batería en reposo.
+          </p>
+          <ul class="sc-features">
+            <li>✓ No pierdes la configuración del habitáculo</li>
+            <li>✓ Localización y solución del consumo de batería</li>
+            <li>✓ Reparación de relés y circuitos internos</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('bsi')">Ver módulos de confort →</button>
+          </div>
+        </div>
+
+        <!-- Servicio 8: Inmovilizadores y Blue&Me -->
+        <div class="service-card" data-service-id="inmo">
+          <div class="sc-header">
+            <div class="sc-icon-wrap">
+              <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                <path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
+            </div>
+          </div>
+          <h3 class="sc-title">Inmovilizador y Bluetooth Fiat Blue&Me</h3>
+          <p class="sc-desc">
+            Solución al coche que no reconoce la llave para arrancar y arreglo del conocido fallo del módulo Bluetooth Blue&Me de Fiat y Alfa Romeo que deja los kilómetros parpadeando y agota la batería.
+          </p>
+          <ul class="sc-features">
+            <li>✓ Solución definitiva al consumo de batería en Fiat</li>
+            <li>✓ Emparejamiento de llaves y cuadros</li>
+            <li>✓ Listo para montar en el coche</li>
+          </ul>
+          <div class="sc-footer">
+            <button class="btn-link" onclick="openFinderWith('inmo')">Ver inmovilizadores →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CANAL PARA TALLERES MECÁNICOS ================= -->
+  <section class="pro-workshop-section" id="talleres">
+    <div class="container">
+      <div class="pro-workshop-banner">
+        <div class="pwb-icon-col">
+          <span class="pwb-icon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </span>
+        </div>
+        <div class="pwb-content">
+          <span class="pwb-tag">CANAL PARA PROFESIONALES DEL MOTOR</span>
+          <h3 class="pwb-title">¿Tienes un taller mecánico? Somos tu especialista en electrónica</h3>
+          <p class="pwb-desc">
+            No pierdas clientes ni te compliques con presupuestos abusivos de concesionario. En Menigar somos el servicio técnico de electrónica para <strong>talleres mecánicos de toda España</strong>. Te recogemos la pieza en tu propio taller, te la devolvemos reparada y probada en 24/48 horas con <strong>descuento para profesionales</strong>, lista para montar en el coche sin reprogramar nada.
+          </p>
+          <div class="pwb-perks">
+            <span class="pwb-perk">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clip-rule="evenodd"/>
+              </svg>Recogida urgente en tu taller
+            </span>
+            <span class="pwb-perk">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>Descuento especial para profesionales
+            </span>
+            <span class="pwb-perk">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>Teléfono directo con nuestros técnicos
+            </span>
+            <span class="pwb-perk">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>2 Años de Garantía en factura
+            </span>
+          </div>
+        </div>
+        <div class="pwb-actions">
+          <a href="#contacto" class="btn btn-amber btn-lg">Dar de alta mi taller</a>
+          <a href="tel:916622781" class="btn btn-secondary">
+            <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+            </svg>91 662 27 81
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= AVERÍAS MÁS FRECUENTES ================= -->
+  <section class="top-repairs-section" id="top-repairs">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-tag">CATÁLOGO DE FALLOS FRECUENTES</span>
+        <h2 class="section-title">Averías comunes con solución inmediata en 24h</h2>
+        <p class="section-subtitle">
+          Identifica el fallo habitual de tu vehículo. Disponemos de componentes reforzados en stock y taller propio en Alcobendas para dejarlo listo en 24/48h.
+        </p>
+      </div>
+
+      <!-- Filtros de Averías Frecuentes -->
+      <div class="repair-filters">
+        <button class="filter-btn active" data-filter="all">Todas las averías habituales</button>
+        <button class="filter-btn" data-filter="cuadros">Cuadros y Pantallas</button>
+        <button class="filter-btn" data-filter="abs">Módulos de ABS</button>
+        <button class="filter-btn" data-filter="pantallas">Pantallas Táctiles</button>
+        <button class="filter-btn" data-filter="centralitas">Centralitas de Motor</button>
+      </div>
+
+      <!-- Grid de Averías Frecuentes -->
+      <div class="repairs-grid" id="repairsGrid">
+        
+        <!-- Top Repair 1: Odómetro 399.999 km -->
+        <div class="repair-item" data-category="cuadros">
+          <div class="repair-badge-top">Muy Común</div>
+          <div class="repair-header">
+            <span class="car-brand">CITROËN · FIAT · PEUGEOT</span>
+            <h4>Cuentakilómetros Bloqueado en 399.999 km</h4>
+          </div>
+          <p class="repair-summary">
+            Furgonetas (Citroën Jumper, Fiat Ducato, Peugeot Boxer) cuyo cuentakilómetros se clava en 399.999 km y no cuenta más, con lo que no te dejan pasar la ITV.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Garantía: 2 años
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Fallo Odómetro 399999 km Citroen/Fiat/Peugeot')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 2: Burbujas Pantalla Hyundai Tucson -->
+        <div class="repair-item" data-category="pantallas">
+          <div class="repair-badge-top">Especialidad Menigar</div>
+          <div class="repair-header">
+            <span class="car-brand">HYUNDAI TUCSON</span>
+            <h4>Burbujas y Pegamento en la Pantalla Táctil</h4>
+          </div>
+          <p class="repair-summary">
+            Aparición de burbujas de aire y líquido derramado entre la pantalla y el cristal táctil en Hyundai Tucson y Kia Sportage, perdiendo sensibilidad al pulsar.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Cristal Nuevo Reforzado
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Reparación Burbujas Pantalla Hyundai Tucson')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 3: Fallo Cuadro Renault Scenic 2 -->
+        <div class="repair-item" data-category="cuadros">
+          <div class="repair-badge-top">Top Ventas</div>
+          <div class="repair-header">
+            <span class="car-brand">RENAULT SCÉNIC II / MEGANE</span>
+            <h4>Cuadro Digital Apagado o Parpadeando</h4>
+          </div>
+          <p class="repair-summary">
+            El cuadro parpadea, pierde la hora continuamente, se resetea el kilometraje o se apaga por completo. Sustituimos transistores y transformador reforzados.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Garantía 2 Años
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Cuadro Renault Scenic II Apagado Total')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 4: ABS BMW ATE MK60 / MK61 Error 5DF5 -->
+        <div class="repair-item" data-category="abs">
+          <div class="repair-badge-top">Frenos y Seguridad</div>
+          <div class="repair-header">
+            <span class="car-brand">BMW SERIE 1 / SERIE 3</span>
+            <h4>Módulo ABS con Fallo 5DF5 o Bomba de Freno</h4>
+          </div>
+          <p class="repair-summary">
+            Testigos amarillos de ABS, DSC y freno de mano encendidos en el cuadro. Código de avería 5DF5 o fallo de motor de bomba. Lo dejamos listo sin cambiar la bomba.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+              </svg>Ahorro hasta 1.500€
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Reparación Módulo ABS BMW ATE MK60 / MK61')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 5: Puntos Negros Pantalla BMW / Mini -->
+        <div class="repair-item" data-category="pantallas">
+          <div class="repair-header">
+            <span class="car-brand">BMW · MINI · CITROËN</span>
+            <h4>Puntos Negros y Manchas en la Pantalla</h4>
+          </div>
+          <p class="repair-summary">
+            Manchas negras circulares que van creciendo en la pantalla central o del navegador y te tapan el mapa o la cámara de marcha atrás.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24/48h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Pantalla Nueva
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Puntos Negros Pantalla BMW Mini')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 6: Mensaje OIL en Display Nissan -->
+        <div class="repair-item" data-category="cuadros">
+          <div class="repair-header">
+            <span class="car-brand">NISSAN VEHÍCULOS INDUSTRIALES</span>
+            <h4>Aviso Falso de "OIL" en Pantalla</h4>
+          </div>
+          <p class="repair-summary">
+            El display muestra fijo el aviso de nivel de aceite en furgonetas Nissan (Atleon, Cabstar) aunque el nivel y el cambio de aceite estén perfectos.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Garantía 2 Años
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Fallo Mensaje OIL Nissan Display')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 7: Iluminación Cuadros Grupo VAG -->
+        <div class="repair-item" data-category="cuadros">
+          <div class="repair-header">
+            <span class="car-brand">AUDI · SEAT · SKODA · VW</span>
+            <h4>Cuadro a Oscuras o Agujas sin Luz</h4>
+          </div>
+          <p class="repair-summary">
+            Las esferas de velocidad y revoluciones se quedan a oscuras de noche o las agujas no se encienden. Cambiamos la iluminación LED y los controladores internos.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Garantía 2 Años
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Fallo Iluminación Cuadro Grupo VAG')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 8: Centralita Opel Isuzu 1.7 DTi -->
+        <div class="repair-item" data-category="centralitas">
+          <div class="repair-header">
+            <span class="car-brand">OPEL ASTRA · CORSA · MERIVA</span>
+            <h4>Centralita de Bomba de Gasoil 1.7 DTi (Isuzu)</h4>
+          </div>
+          <p class="repair-summary">
+            El coche se para en caliente, no arranca o da tirones. Fallo muy habitual de soldaduras por calor en la centralita de la bomba.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Modificación Térmica
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Centralita Bomba Inyección Opel Isuzu 1.7 DTi')">Consultar Precio y Recogida</button>
+        </div>
+
+        <!-- Top Repair 9: Error 01130 / 16352 ABS VAG -->
+        <div class="repair-item" data-category="abs">
+          <div class="repair-header">
+            <span class="car-brand">VOLKSWAGEN · SEAT · SKODA · AUDI</span>
+            <h4>Errores 01130, 16352 y 01276 en ABS ATE MK60</h4>
+          </div>
+          <p class="repair-summary">
+            Fallo del sistema de frenado ABS en Golf, León, Octavia, A3. Reparación electrónica completa con comprobación en taller.
+          </p>
+          <div class="repair-meta">
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+              </svg>Plazo: 24h
+            </span>
+            <span class="meta-badge">
+              <svg viewBox="0 0 20 20" width="13" height="13" fill="currentColor" style="vertical-align: -2px; margin-right: 3px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>Garantía 2 Años
+            </span>
+          </div>
+          <button class="btn btn-outline btn-sm" onclick="requestSpecificRepair('Error 01130 / 16352 ABS Grupo VAG')">Consultar Precio y Recogida</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CÓMO FUNCIONA EL SERVICIO EN 3 PASOS ================= -->
+  <section class="how-it-works-section" id="como-funciona">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-tag">PROCEDIMIENTO PUERTA A PUERTA</span>
+        <h2 class="section-title">Reparar tu pieza en 3 sencillos pasos</h2>
+        <p class="section-subtitle">Servicio cómodo y garantizado para particulares y talleres mecánicos de toda España.</p>
+      </div>
+
+      <div class="steps-container">
+        <div class="step-card">
+          <div class="step-badge">Paso 1</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--brand-500); margin: 0 auto 0.75rem;">
+              <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+            </svg>
+          </div>
+          <h3>1. Nos cuentas qué falla</h3>
+          <p>Llámanos al <strong>91 662 27 81</strong> o completa el formulario con los síntomas del coche. Te damos diagnóstico y presupuesto cerrado sin sorpresas.</p>
+        </div>
+
+        <div class="step-connector">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+          </svg>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">Paso 2</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--brand-500); margin: 0 auto 0.75rem;">
+              <rect x="1" y="3" width="15" height="13" rx="1"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <h3>2. Te recogemos la pieza</h3>
+          <p>Mandamos a la agencia (MRW, SEUR o GLS) a por tu pieza a tu taller o domicilio en cualquier punto de España. Si estás en Madrid, puedes traerla directamente a Alcobendas.</p>
+        </div>
+
+        <div class="step-connector">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+            <path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/>
+          </svg>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge">Paso 3</div>
+          <div class="step-icon">
+            <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--green-success); margin: 0 auto 0.75rem;">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>3. Montar y arrancar</h3>
+          <p>Reparamos tu unidad original, comprobamos que funcione a la perfección y te la devolvemos en <strong>24/48 horas con 2 Años de Garantía</strong>. Conservas tus llaves y tus kilómetros reales.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= EVIDENCIA DE AHORRO: CONCESIONARIO VS MENIGAR ================= -->
+  <section class="savings-evidence-section" id="garantias">
+    <div class="container">
+      <div class="section-heading text-center">
+        <span class="section-tag">EVIDENCIA NUMÉRICA DE AHORRO</span>
+        <h2 class="section-title">¿Por qué reparar en vez de comprar nuevo?</h2>
+        <p class="section-subtitle">
+          Ejemplo real comparativo en una avería habitual de módulo de ABS o cuadro de mandos:
+        </p>
+      </div>
+
+      <div class="savings-card-grid">
+        <!-- Tarjeta Concesionario Oficial -->
+        <div class="evidence-box evidence-dealer">
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--neutral-500); letter-spacing: 0.05em; text-transform: uppercase;">OPCIÓN TRADICIONAL</span>
+          <h3 class="evidence-title">Concesionario Oficial</h3>
+          <p style="font-size: 0.85rem; color: var(--neutral-500);">Sustitución por pieza nueva de fábrica</p>
+          <div class="evidence-price-tag">1.850 €</div>
+          <div class="evidence-list">
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span>Te obligan a comprar la pieza entera aunque solo falle un circuito electrónico</span>
+            </div>
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span>Semanas de espera en piezas importadas o descatalogadas</span>
+            </div>
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span>Coste extra de reprogramación de llaves, cuadro e inmovilizador</span>
+            </div>
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"/>
+              </svg>
+              <span>Garantía estándar de 1 año</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tarjeta Menigar Reparación Inteligente -->
+        <div class="evidence-box evidence-menigar">
+          <div class="evidence-badge-top">REPARACIÓN INTELIGENTE · AHORRO REAL 79%</div>
+          <span style="font-size: 0.75rem; font-weight: 800; color: var(--brand-500); letter-spacing: 0.05em; text-transform: uppercase;">ESPECIALISTAS MENIGAR</span>
+          <h3 class="evidence-title">Reparación de tu Pieza Original</h3>
+          <p style="font-size: 0.85rem; color: var(--neutral-700);">Componentes reforzados y prueba final de funcionamiento</p>
+          <div class="evidence-price-tag">390 € <span style="font-size: 0.95rem; font-weight: 600; color: var(--green-dark);">· Ahorras 1.460 €</span></div>
+          <div class="evidence-list">
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>Reparación en 24/48h</strong> en nuestro taller de Alcobendas</span>
+            </div>
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>Montar y arrancar:</strong> conservas tus llaves originales, inmovilizador y kilómetros reales</span>
+            </div>
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span>Componentes térmicos y pistas reforzadas para evitar que el fallo se repita</span>
+            </div>
+            <div class="evidence-item">
+              <svg viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+              </svg>
+              <span><strong>2 Años de Garantía por escrito en factura</strong></span>
+            </div>
+          </div>
+          <div style="margin-top: 1.5rem;">
+            <a href="#buscador-averias" class="btn btn-primary btn-block">Consultar Precio para mi Coche</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TESTIMONIOS: CONCEPTO RESEÑAS DE GOOGLE (CATEGORIZADAS) ================= -->
+  <section class="testimonials-section" id="opiniones">
+    <div class="container">
+      <div class="google-reviews-header">
+        <div class="google-brand-block">
+          <div class="google-g-logo">
+            <svg viewBox="0 0 48 48" width="40" height="40">
+              <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+              <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+              <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+              <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+            </svg>
+          </div>
+          <div class="google-meta">
+            <div class="google-title-row">
+              <h3>Reseñas en Google</h3>
+              <span class="verified-badge">✓ Verificadas</span>
+            </div>
+            <div class="google-stars-row">
+              <span class="google-score">4.8</span>
+              <div class="google-stars">★★★★★</div>
+              <span class="google-count">(590 opiniones en Google Maps)</span>
+            </div>
+          </div>
+        </div>
+        <a href="https://www.google.com/maps/search/Menigar+Alcobendas" target="_blank" class="btn btn-secondary btn-sm" rel="noopener noreferrer">
+          <span>Ver perfil en Google Maps →</span>
+        </a>
+      </div>
+
+      <!-- Filtro de Categorías de Reseñas -->
+      <div class="reviews-category-tabs">
+        <button type="button" class="rev-tab active" data-rev-filter="all">Todas las opiniones (590)</button>
+        <button type="button" class="rev-tab" data-rev-filter="particular">Particulares</button>
+        <button type="button" class="rev-tab" data-rev-filter="taller">Talleres Mecánicos</button>
+        <button type="button" class="rev-tab" data-rev-filter="abs-cuadro">ABS y Cuadros</button>
+      </div>
+
+      <!-- Tarjetas de Reseñas de Google -->
+      <div class="google-cards-grid" id="reviewsGrid">
+        
+        <!-- Reseña 1: Sergio Martínez Alonso (Particular) -->
+        <div class="google-card" data-category="particular abs-cuadro">
+          <div class="gc-header">
+            <div class="gc-avatar gc-avatar-blue">S</div>
+            <div class="gc-user">
+              <span class="gc-name">Sergio Martínez Alonso</span>
+              <span class="gc-details">Local Guide · 12 reseñas</span>
+            </div>
+            <div class="gc-logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.25 21.37 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.94 0 12c0 2.06.46 3.84 1.26 5.43l4.02-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gc-rating">
+            <span class="stars-gold">★★★★★</span>
+            <span class="gc-time">hace unos meses</span>
+          </div>
+          <p class="gc-text">
+            «Gente seria y comprometida. Llevaba tiempo con el cuadro de mi furgoneta estropeado y gracias a ellos el cuadro funciona perfectamente de nuevo. Ha sido un placer el trabajo que han realizado y también recalcar la atención al cliente más que satisfactoria. Si vuelvo a tener un problema sin duda será el lugar donde acudiré. Muchas gracias por vuestra profesionalidad.»
+          </p>
+          <div class="gc-vehicle-tag">Servicio: Reparación Cuadro Furgoneta</div>
+        </div>
+
+        <!-- Reseña 2: Rafael Núñez-Lagos (Particular ABS) -->
+        <div class="google-card" data-category="particular abs-cuadro">
+          <div class="gc-header">
+            <div class="gc-avatar gc-avatar-green">R</div>
+            <div class="gc-user">
+              <span class="gc-name">Rafael Núñez-Lagos</span>
+              <span class="gc-details">3 reseñas</span>
+            </div>
+            <div class="gc-logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.25 21.37 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.94 0 12c0 2.06.46 3.84 1.26 5.43l4.02-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gc-rating">
+            <span class="stars-gold">★★★★★</span>
+            <span class="gc-time">hace unos meses</span>
+          </div>
+          <p class="gc-text">
+            «Muy buenos profesionales y honrados. Fui a que me repararan el módulo ABS de un E39 y tuve que volver porque se me encendieron otra vez las tres luces en el cuadro, además del módulo (reparado) tenía dos válvulas sucias, se hicieron cargo de la reparación y fueron muy honrados con la factura. Son muy buenos profesionales, si tienes un problema electrónico, habla con ellos!»
+          </p>
+          <div class="gc-vehicle-tag">Vehículo: BMW Serie 5 E39 (ABS)</div>
+        </div>
+
+        <!-- Reseña 3: Talleres Figomez S.L. (Taller Profesional) -->
+        <div class="google-card pro-card" data-category="taller">
+          <div class="gc-header">
+            <div class="gc-avatar gc-avatar-purple">TF</div>
+            <div class="gc-user">
+              <span class="gc-name">Talleres Figomez S.L.</span>
+              <span class="gc-details">Taller Mecánico Profesional</span>
+            </div>
+            <div class="gc-logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.25 21.37 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.94 0 12c0 2.06.46 3.84 1.26 5.43l4.02-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gc-rating">
+            <span class="stars-gold">★★★★★</span>
+            <span class="gc-time">hace unos meses · <em>Actualizada</em></span>
+          </div>
+          <p class="gc-text">
+            «Nos han reparado un cuadro de un Kia y todo ha ido perfecto. Son unos profesionales y fiables. Ha sido rápida la reparación y el envío. Volveremos a trabajar con ellos seguro. (Actualizo.) Ahora solo trabajamos con ellos, son unos profesionales en su materia, dan un servicio rápido y de calidad. Muy recomendables para talleres.»
+          </p>
+          <div class="gc-vehicle-tag">Cliente Colaborador: Taller Multimarca</div>
+        </div>
+
+        <!-- Reseña 4: Theiker 25 (Particular Cuadro) -->
+        <div class="google-card" data-category="particular abs-cuadro">
+          <div class="gc-header">
+            <div class="gc-avatar gc-avatar-orange">T</div>
+            <div class="gc-user">
+              <span class="gc-name">Theiker 25</span>
+              <span class="gc-details">5 reseñas</span>
+            </div>
+            <div class="gc-logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.25 21.37 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.94 0 12c0 2.06.46 3.84 1.26 5.43l4.02-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gc-rating">
+            <span class="stars-gold">★★★★★</span>
+            <span class="gc-time">hace unos meses</span>
+          </div>
+          <p class="gc-text">
+            «Mi experiencia ha sido de 10: rápidos y efectivos. Yo llevé un cuadro de instrumentos de mi Córdoba y lo recomendaría al 100%. Te ahorras una cantidad enorme comparado con comprar uno nuevo en concesionario oficial. Muchas gracias!»
+          </p>
+          <div class="gc-vehicle-tag">Vehículo: Seat Córdoba (Cuadro)</div>
+        </div>
+
+        <!-- Reseña 5: Manuel Florido (Particular ABS) -->
+        <div class="google-card" data-category="particular abs-cuadro">
+          <div class="gc-header">
+            <div class="gc-avatar gc-avatar-blue">M</div>
+            <div class="gc-user">
+              <span class="gc-name">Manuel Florido</span>
+              <span class="gc-details">2 reseñas</span>
+            </div>
+            <div class="gc-logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.25 21.37 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.94 0 12c0 2.06.46 3.84 1.26 5.43l4.02-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gc-rating">
+            <span class="stars-gold">★★★★★</span>
+            <span class="gc-time">hace unos meses</span>
+          </div>
+          <p class="gc-text">
+            «Después de acudir a varios talleres sin aclarar el origen de la avería de mi coche, me aseguraron que el fallo era de la unidad ABS. La han reparado y ahora el coche va perfecto. Reparación rápida y precios correctos. Empresa de garantía. Muy agradecido por su profesionalidad.»
+          </p>
+          <div class="gc-vehicle-tag">Servicio: Unidad ABS Reparada</div>
+        </div>
+
+        <!-- Reseña 6: joseRS2000 (Particular Ford) -->
+        <div class="google-card" data-category="particular abs-cuadro">
+          <div class="gc-header">
+            <div class="gc-avatar gc-avatar-red">J</div>
+            <div class="gc-user">
+              <span class="gc-name">joseRS2000</span>
+              <span class="gc-details">Local Guide · 18 reseñas</span>
+            </div>
+            <div class="gc-logo-icon">
+              <svg viewBox="0 0 24 24" width="20" height="20">
+                <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.03h3.88c2.27-2.09 3.665-5.17 3.665-9.12z"/>
+                <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.03c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.26v3.13C3.25 21.37 7.33 24 12 24z"/>
+                <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.57H1.26C.46 8.16 0 9.94 0 12c0 2.06.46 3.84 1.26 5.43l4.02-3.14z"/>
+                <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.25 2.63 1.26 6.57l4.02 3.14c.95-2.83 3.6-4.96 6.72-4.96z"/>
+              </svg>
+            </div>
+          </div>
+          <div class="gc-rating">
+            <span class="stars-gold">★★★★★</span>
+            <span class="gc-time">hace unos meses</span>
+          </div>
+          <p class="gc-text">
+            «Todo rápido y genial, trato de 10 en todos los aspectos. Dejé un módulo ABS de mi Tourneo Courier el martes y el jueves ya lo tenía disponible y reparado, el precio estupendo teniendo en cuenta lo que vale nuevo el dichoso modulito. No voy a dudar en recomendar esta empresa. Profesionales de 10.»
+          </p>
+          <div class="gc-vehicle-tag">Vehículo: Ford Tourneo Courier (ABS)</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FORMULARIO RÁPIDO DE PRESUPUESTO / RECOGIDA ================= -->
+  <section class="quote-section" id="contacto">
+    <div class="container">
+      <div class="quote-grid">
+        <div class="quote-info">
+          <span class="section-tag">ATENCIÓN INMEDIATA</span>
+          <h2 class="section-title">Solicita Presupuesto o Recogida de tu Pieza</h2>
+          <p class="section-subtitle">
+            Cuéntanos qué vehículo tienes y qué avería presenta. Te responderemos en menos de 2 horas hábiles con el diagnóstico y presupuesto cerrado.
+          </p>
+
+          <div class="contact-details-list">
+            <div class="cd-item">
+              <span class="cd-icon" style="color: var(--brand-500); display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 20 20" width="20" height="20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"/>
+                </svg>
+              </span>
+              <div>
+                <strong>Taller Central Menigar:</strong>
+                <p>Parque Empresarial Casablanca I, C/ José Echegaray 16, Edificio A1 - Planta 2ª - Nave 4, 28100 Alcobendas - Madrid</p>
+              </div>
+            </div>
+
+            <div class="cd-item">
+              <span class="cd-icon" style="color: var(--brand-500); display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.02-.24 11.41 11.41 0 003.58.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1 11.41 11.41 0 00.57 3.58 1 1 0 01-.24 1.02l-2.2 2.19z"/>
+                </svg>
+              </span>
+              <div>
+                <strong>Atención Telefónica Directa:</strong>
+                <p><a href="tel:916622781">91 662 27 81</a> / <a href="tel:916610397">91 661 03 97</a></p>
+              </div>
+            </div>
+
+            <div class="cd-item">
+              <span class="cd-icon" style="color: var(--brand-500); display: flex; align-items: center; justify-content: center;">
+                <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                  <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.2 14.2L11 13V7h1.5v5.2l4.5 2.7-.8 1.3z"/>
+                </svg>
+              </span>
+              <div>
+                <strong>Horario de Taller y Recepción:</strong>
+                <p>Lunes a Jueves de 8:00 a 16:00 · Viernes de 8:00 a 14:00</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote-form-card">
+          <h3 class="form-title">Formulario de Solicitud Rápida</h3>
+          <form id="mainQuoteForm">
+            <div class="form-group-type">
+              <label class="radio-label">
+                <input type="radio" name="clientType" value="particular" checked>
+                <span>Soy Particular</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="clientType" value="taller">
+                <span>Soy Taller / Profesional</span>
+              </label>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="formName">Nombre o Empresa *</label>
+                <input type="text" id="formName" required placeholder="Tu nombre o nombre del taller">
+              </div>
+              <div class="form-group">
+                <label for="formPhone">Teléfono de Contacto *</label>
+                <input type="tel" id="formPhone" required placeholder="Ej: 600 000 000">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="formEmail">Correo Electrónico *</label>
+                <input type="email" id="formEmail" required placeholder="ejemplo@correo.com">
+              </div>
+              <div class="form-group">
+                <label for="formCar">Marca y Modelo de Coche *</label>
+                <input type="text" id="formCar" required placeholder="Ej: BMW Serie 3 E90 (2007)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="formService">Pieza a Reparar *</label>
+              <select id="formService" required>
+                <option value="">Selecciona el servicio...</option>
+                <option value="Módulo ABS / ESP">Módulo ABS / ESP</option>
+                <option value="Cuadro de Instrumentos">Cuadro de Instrumentos</option>
+                <option value="Pantalla Multimedia / Táctil">Pantalla Multimedia / Táctil</option>
+                <option value="Display LCD / Odómetro">Display LCD / Cuentakilómetros</option>
+                <option value="Centralita Motor ECU">Centralita de Motor ECU</option>
+                <option value="Cambio Automático (DSG/Easytronic)">Cambio Automático (DSG/Easytronic)</option>
+                <option value="Unidad BSI / Confort">Unidad BSI / Confort</option>
+                <option value="Inmovilizador / Blue&Me">Inmovilizador / Bluetooth Blue&Me</option>
+                <option value="Otro">Otro componente electrónico</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="formSymptoms">Descripción de los Síntomas o Códigos de Error</label>
+              <textarea id="formSymptoms" rows="3" placeholder="Ej: Se enciende la luz de ABS y ESP en el cuadro al frenar... Código 5DF5"></textarea>
+            </div>
+
+            <div class="form-footer">
+              <label class="checkbox-label">
+                <input type="checkbox" required>
+                <span>Acepto la <a href="#privacidad" class="legal-link">política de privacidad</a> y tratamiento de mis datos para la cotización.</span>
+              </label>
+              <button type="submit" class="btn btn-primary btn-block btn-lg">
+                <span>Enviar Solicitud de Presupuesto</span>
+                <svg viewBox="0 0 20 20" width="18" height="18" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER TÉCNICO Y DEPARTAMENTAL ================= -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-col footer-about">
+          <div class="footer-logo">
+            <span class="f-brand">MENIGAR</span>
+            <span class="f-sub">DESARROLLOS DIGITALES, S.L.</span>
+          </div>
+          <p>
+            Taller especializado en la reparación de electrónica del automóvil desde 1989. Reparamos cuadros de instrumentos, módulos de ABS y centralitas con 2 años de garantía por escrito y servicio para particulares y talleres mecánicos de toda España.
+          </p>
+          <div class="footer-badges">
+            <span class="badge-exp">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1z" clip-rule="evenodd"/>
+              </svg>35 Años en el Sector
+            </span>
+            <span class="badge-exp">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>2 Años de Garantía
+            </span>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="f-title">Servicios Principales</h4>
+          <ul class="f-links">
+            <li><a href="#servicios" onclick="openFinderWith('cuadro')">Cuadros de Instrumentos</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('abs')">Módulos de ABS / ESP</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('multimedia')">Pantallas Multimedia</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('display')">Displays LCD y Odómetros</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('cambio')">Cambio Automático (DSG)</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('ecu')">Centralitas de Motor ECU</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('bsi')">Unidades BSI / Confort</a></li>
+            <li><a href="#servicios" onclick="openFinderWith('inmo')">Inmovilizadores & Blue&Me</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="f-title">Directorio Departamental</h4>
+          <ul class="f-contacts">
+            <li>
+              <strong>Asistencia Técnica & Consultas:</strong>
+              <a href="mailto:informacion@menigar.com">informacion@menigar.com</a>
+            </li>
+            <li>
+              <strong>Administración:</strong>
+              <a href="mailto:admon@menigar.com">admon@menigar.com</a>
+            </li>
+            <li>
+              <strong>Ventas y Presupuestos:</strong>
+              <a href="mailto:ventas@menigar.com">ventas@menigar.com</a>
+            </li>
+            <li>
+              <strong>Canal Talleres y Profesionales:</strong>
+              <a href="mailto:comercial@menigar.com">comercial@menigar.com</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="f-title">Ubicación & Horarios</h4>
+          <p class="f-address">
+            Parque Empresarial Casablanca I<br>
+            C/ José Echegaray 16<br>
+            Edificio A1 - Planta 2ª - Nave 4<br>
+            28100 Alcobendas - Madrid (España)
+          </p>
+          <div class="f-hours">
+            <strong>Horario Taller:</strong>
+            <p>Lunes a Jueves: 8:00 - 16:00<br>Viernes: 8:00 - 14:00</p>
+          </div>
+          <div class="f-phones">
+            <a href="tel:916622781" class="f-phone-btn">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>91 662 27 81
+            </a>
+            <a href="tel:916610397" class="f-phone-btn">
+              <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor" style="vertical-align: -2px; margin-right: 4px;">
+                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+              </svg>91 661 03 97
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 1989 - 2026 Desarrollos Digitales Menigar, S.L. Todos los derechos reservados.</p>
+        <div class="legal-links">
+          <a href="#">Política de Privacidad</a>
+          <a href="#">Avisos Legales</a>
+          <a href="#">Política de Cookies</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= BOTÓN FLOTANTE WHATSAPP (SÓLO ESCRITORIO DISCRETO) ================= -->
+  <a href="https://wa.me/34916622781?text=Hola%20Menigar,%20quisiera%20consultar%20por%20la%20reparación%20de%20una%20pieza" target="_blank" class="floating-wa-bubble" aria-label="Contactar por WhatsApp" title="Consultar avería por WhatsApp">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor">
+      <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0012.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 012.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 01-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m4.52 11.66c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.12-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-2-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.17-.25.25-.41.08-.17.04-.31-.02-.43-.06-.12-.56-1.34-.76-1.84-.2-.49-.4-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.22.25-.86.84-.86 2.05s.88 2.38 1 2.55c.12.17 1.73 2.65 4.2 3.71.59.25 1.05.4 1.41.51.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/>
+    </svg>
+    <span class="floating-wa-tooltip">¿Dudas con tu avería? Escríbenos</span>
+  </a>
+
+  <!-- ================= BARRA INFERIOR MÓVIL STICKY CTA ================= -->
+  <div class="sticky-mobile-cta" id="stickyMobileCta">
+    <div class="smc-text">
+      <strong>¿Avería en tu coche?</strong>
+      <span>Recogida urgente y 24/48h</span>
+    </div>
+    <div class="smc-actions">
+      <a href="tel:916622781" class="btn btn-secondary btn-sm" aria-label="Llamar">
+        <svg viewBox="0 0 20 20" width="14" height="14" fill="currentColor">
+          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"/>
+        </svg>
+        <span>Llamar</span>
+      </a>
+      <a href="#buscador-averias" class="btn btn-primary btn-sm">Buscar Precio</a>
+    </div>
+  </div>
+
+  <!-- ================= MODAL INTERACTIVO DE PRESUPUESTO ================= -->
+  <div class="modal-overlay" id="quoteModal">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeModalBtn">&times;</button>
+      <div class="modal-header">
+        <span class="modal-badge">RESPUESTA EN MENOS DE 2 HORAS HÁBILES</span>
+        <h3>Solicitud de Diagnóstico y Presupuesto</h3>
+        <p>Completa los datos y te confirmaremos precio de reparación y opción de recogida urgente 24h.</p>
+      </div>
+      <form id="modalQuoteForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mName">Nombre / Taller *</label>
+            <input type="text" id="mName" required placeholder="Tu nombre o taller">
+          </div>
+          <div class="form-group">
+            <label for="mPhone">Teléfono *</label>
+            <input type="tel" id="mPhone" required placeholder="Teléfono de contacto">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="mVehicle">Vehículo (Marca, Modelo, Año) *</label>
+            <input type="text" id="mVehicle" required placeholder="Ej: BMW Serie 3 E90 2008">
+          </div>
+          <div class="form-group">
+            <label for="mComponent">Componente a Reparar *</label>
+            <input type="text" id="mComponent" required placeholder="Ej: Módulo ABS ATE MK60">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="mSymptoms">Síntoma o Código de Fallo *</label>
+          <textarea id="mSymptoms" rows="3" required placeholder="¿Qué le ocurre a la pieza?"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">Enviar Solicitud Inmediata</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toastMessage"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
