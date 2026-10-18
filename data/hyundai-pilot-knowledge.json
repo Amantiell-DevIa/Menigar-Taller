@@ -1,0 +1,829 @@
+{
+  "version": "hyundai-pilot-v1",
+  "reviewStatus": "source-extracted; technician approval pending",
+  "constraints": {
+    "catalogueMatchConfirmsDiagnosis": false,
+    "imageAloneConfirmsVariant": false,
+    "crossComponentReferencesAreInterchangeable": false
+  },
+  "records": [
+    {
+      "uid": "main-3915",
+      "sourceUrl": "https://www.menigar.com/reparacion-displays/reparacion-display-hyundai/",
+      "sourceHtmlSha256": "282f0b01c5c5c07f380d908398d38d29553e4dddd4a3176a0e6d98c67c3997bb",
+      "componentKey": "display",
+      "brand": "Hyundai",
+      "models": [
+        "Coupe",
+        "Getz",
+        "Grandeur",
+        "i10",
+        "i20",
+        "i30",
+        "ix35",
+        "Kona",
+        "Santa Fe",
+        "Terracan",
+        "Tucson"
+      ],
+      "modelGroups": [
+        {
+          "model": "Coupe",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-68c17v7jm0g",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Coupe."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/7d9617995d6a-hyundai_coupe.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2019/12/hyundai_coupe.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Coupe"
+                },
+                {
+                  "src": "/assets/hyundai/401479bfb27f-display_hyundai_coupe.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2019/12/display_hyundai_coupe.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Coupe"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "Getz",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-v0hf17pr4i8",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Getz."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/64abb710eb0d-hyundai_getz.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Getz"
+                },
+                {
+                  "src": "/assets/hyundai/4fdbb982e005-display_hyundai_getz.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_hyundai_getz.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Getz"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "Grandeur",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-bvdce080jbg",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Grandeur."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/222d22c18363-hyundai_grandeur.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2021/05/hyundai_grandeur.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Grandeur"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "i10",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-d2g8g5te7v",
+              "paragraphs": [
+                "Reparación del display o pantalla multifunción del Hyundai i10."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/6247d9ffa7a4-hyundai_i10_2.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2023/02/hyundai_i10_2.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i10"
+                },
+                {
+                  "src": "/assets/hyundai/5ffef1e47657-display_hyundai_i10.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2023/02/display_hyundai_i10.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i10"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "i20",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-36smgcqpjdk",
+              "paragraphs": [
+                "Reparación del display o pantalla multifunción del Hyundai i20."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/9b4840a74f01-hyundai_i20_2.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2023/05/hyundai_i20_2.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i20"
+                },
+                {
+                  "src": "/assets/hyundai/d60f0b556911-display_hyundai_i20.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2023/05/display_hyundai_i20.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i20"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "i30",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-rp0jevjdak",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai i30."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/f50a53531063-hyundai-i30_1.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i30"
+                },
+                {
+                  "src": "/assets/hyundai/0f0cd51fc84c-display_hyundai_i30.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_i30.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i30"
+                }
+              ]
+            },
+            {
+              "sourceModuleId": "dslc-module-r29np8c4ovo",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai i30."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/1149d558c54f-hyundai-i30.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i30"
+                },
+                {
+                  "src": "/assets/hyundai/16b13ba692ee-display_hyundai_i30_2.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2024/10/display_hyundai_i30_2.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai i30"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": "main-1604"
+        },
+        {
+          "model": "ix35",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-o8ob7af0hc",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai ix35."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/a672dce8c179-hyundai_ix35.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/06/hyundai_ix35.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai ix35"
+                },
+                {
+                  "src": "/assets/hyundai/8e842698a9ff-display_hyundai_ix35.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/06/display_hyundai_ix35.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai ix35"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "Kona",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-6rqj14jueq4",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Kona."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/b1b2a2491068-hyundai_kona.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2026/03/hyundai_kona.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Kona"
+                },
+                {
+                  "src": "/assets/hyundai/23ad780292eb-display_hyundai_kona.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2026/03/display_hyundai_kona.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Kona"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "Santa Fe",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-dijubgc7sik",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Santa Fe."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/ac145931b702-santa_fe.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/01/santa_fe.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Santa Fe"
+                },
+                {
+                  "src": "/assets/hyundai/0a4c2d30ea9f-display_hyundai_santa_fe.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_santa_fe.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Santa Fe"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "Terracan",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-5prs1u5omqo",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Terracan."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/e0dc72a0ac3a-hyundai_terracan.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/11/hyundai_terracan.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Terracan"
+                },
+                {
+                  "src": "/assets/hyundai/96c959ee236f-display_hyundai_terracan.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2020/11/display_hyundai_terracan.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Terracan"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        },
+        {
+          "model": "Tucson",
+          "blocks": [
+            {
+              "sourceModuleId": "dslc-module-hdfvbuv9opc",
+              "paragraphs": [
+                "Reparación del display o pantalla del cuadro de instrumentos del Hyundai Tucson."
+              ],
+              "images": [
+                {
+                  "src": "/assets/hyundai/a1965fb6dd3b-hyundai_tucson2.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2025/09/hyundai_tucson2.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Tucson"
+                },
+                {
+                  "src": "/assets/hyundai/4ae575539d6c-display_hyundai-tucson.jpg",
+                  "sourceUrl": "https://www.menigar.com/wp-content/uploads/2025/09/display_hyundai-tucson.jpg",
+                  "alt": "Imagen del componente publicada para Hyundai Tucson"
+                }
+              ]
+            }
+          ],
+          "relatedServiceUid": null
+        }
+      ],
+      "relatedServices": [
+        {
+          "uid": "main-1604",
+          "label": "Ver información del cuadro Hyundai i30",
+          "relation": "related-component-information"
+        }
+      ],
+      "price": null,
+      "timing": null,
+      "warranty": null
+    },
+    {
+      "uid": "main-1604",
+      "sourceUrl": "https://www.menigar.com/reparacion-cuadro-instrumentos/hyundai/i30/",
+      "sourceHtmlSha256": "30fe617804f4bc9c716c2df7cc13a3c3d75b3a66c67efca9fb9f4a6bf4bc0932",
+      "componentKey": "cuadro",
+      "brand": "Hyundai",
+      "model": "i30",
+      "symptoms": [
+        "Fallo del display del cuadro de instrumentos.",
+        "Fallo de vibración y parpadeos en la iluminación del cuadro de instrumentos.",
+        "Fallo en las agujas de los indicadores analógicos del cuadro de instrumentos."
+      ],
+      "referenceGroups": [
+        {
+          "normalized": "940032l410",
+          "display": "94003-2L410",
+          "spellings": [
+            "94003-2L410",
+            "940032L410"
+          ]
+        },
+        {
+          "normalized": "940032l570",
+          "display": "94003-2L570",
+          "spellings": [
+            "94003-2L570",
+            "940032L570"
+          ]
+        },
+        {
+          "normalized": "940062r140",
+          "display": "94006-2R140",
+          "spellings": [
+            "94006-2R140",
+            "940062R140"
+          ]
+        },
+        {
+          "normalized": "940332r200",
+          "display": "94033-2R200",
+          "spellings": [
+            "94033-2R200",
+            "940332R200"
+          ]
+        },
+        {
+          "normalized": "940032l425",
+          "display": "94003-2L425",
+          "spellings": [
+            "94003-2L425",
+            "940032L425"
+          ]
+        },
+        {
+          "normalized": "940032r030",
+          "display": "94003-2R030",
+          "spellings": [
+            "94003-2R030",
+            "940032R030"
+          ]
+        },
+        {
+          "normalized": "940312r500",
+          "display": "94031-2R500",
+          "spellings": [
+            "94031-2R500",
+            "940312R500"
+          ]
+        },
+        {
+          "normalized": "940332r205",
+          "display": "94033-2R205",
+          "spellings": [
+            "94033-2R205",
+            "940332R205"
+          ]
+        },
+        {
+          "normalized": "940032l426",
+          "display": "94003-2L426",
+          "spellings": [
+            "94003-2L426",
+            "940032L426"
+          ]
+        },
+        {
+          "normalized": "940032r040",
+          "display": "94003-2R040",
+          "spellings": [
+            "94003-2R040",
+            "940032R040"
+          ]
+        },
+        {
+          "normalized": "940332r000",
+          "display": "94033-2R000",
+          "spellings": [
+            "94033-2R000",
+            "940332R000"
+          ]
+        },
+        {
+          "normalized": "940332r220",
+          "display": "94033-2R220",
+          "spellings": [
+            "94033-2R220",
+            "940332R220"
+          ]
+        },
+        {
+          "normalized": "940032l520",
+          "display": "94003-2L520",
+          "spellings": [
+            "94003-2L520",
+            "940032L520"
+          ]
+        },
+        {
+          "normalized": "940032r220",
+          "display": "94003-2R220",
+          "spellings": [
+            "94003-2R220",
+            "940032R220"
+          ]
+        },
+        {
+          "normalized": "940332r005",
+          "display": "94033-2R005",
+          "spellings": [
+            "94033-2R005",
+            "940332R005"
+          ]
+        },
+        {
+          "normalized": "940332r225",
+          "display": "94033-2R225",
+          "spellings": [
+            "94033-2R225",
+            "940332R225"
+          ]
+        },
+        {
+          "normalized": "940032l525",
+          "display": "94003-2L525",
+          "spellings": [
+            "94003-2L525",
+            "940032L525"
+          ]
+        },
+        {
+          "normalized": "940032r240",
+          "display": "94003-2R240",
+          "spellings": [
+            "94003-2R240",
+            "940032R240"
+          ]
+        },
+        {
+          "normalized": "940332r030",
+          "display": "94033-2R030",
+          "spellings": [
+            "94033-2R030",
+            "940332R030"
+          ]
+        },
+        {
+          "normalized": "940332r230",
+          "display": "94033-2R230",
+          "spellings": [
+            "94033-2R230",
+            "940332R230"
+          ]
+        },
+        {
+          "normalized": "940032l530",
+          "display": "94003-2L530",
+          "spellings": [
+            "94003-2L530",
+            "940032L530"
+          ]
+        },
+        {
+          "normalized": "940032r531",
+          "display": "94003-2R531",
+          "spellings": [
+            "94003-2R531",
+            "940032R531"
+          ]
+        },
+        {
+          "normalized": "940332r035",
+          "display": "94033-2R035",
+          "spellings": [
+            "94033-2R035",
+            "940332R035"
+          ]
+        },
+        {
+          "normalized": "940332r240",
+          "display": "94033-2R240",
+          "spellings": [
+            "94033-2R240",
+            "940332R240"
+          ]
+        },
+        {
+          "normalized": "940032l535",
+          "display": "94003-2L535",
+          "spellings": [
+            "94003-2L535",
+            "940032L535"
+          ]
+        },
+        {
+          "normalized": "940062r000",
+          "display": "94006-2R000",
+          "spellings": [
+            "94006-2R000",
+            "940062R000"
+          ]
+        },
+        {
+          "normalized": "940332r060",
+          "display": "94033-2R060",
+          "spellings": [
+            "94033-2R060",
+            "940332R060"
+          ]
+        },
+        {
+          "normalized": "940332r600",
+          "display": "94033-2R600",
+          "spellings": [
+            "94033-2R600",
+            "940332R600"
+          ]
+        },
+        {
+          "normalized": "940032l560",
+          "display": "94003-2L560",
+          "spellings": [
+            "94003-2L560",
+            "940032L560"
+          ]
+        },
+        {
+          "normalized": "940062r020",
+          "display": "94006-2R020",
+          "spellings": [
+            "94006-2R020",
+            "940062R020"
+          ]
+        },
+        {
+          "normalized": "940332r065",
+          "display": "94033-2R065",
+          "spellings": [
+            "94033-2R065",
+            "940332R065"
+          ]
+        },
+        {
+          "normalized": "11001039500h",
+          "display": "11001-039500H",
+          "spellings": [
+            "11001-039500H",
+            "11001039500H"
+          ]
+        },
+        {
+          "normalized": "11001042300h",
+          "display": "11001-042300H",
+          "spellings": [
+            "11001-042300H",
+            "11001042300H"
+          ]
+        },
+        {
+          "normalized": "11001397801u",
+          "display": "11001-397801U",
+          "spellings": [
+            "11001-397801U",
+            "11001397801U"
+          ]
+        },
+        {
+          "normalized": "11001765211u",
+          "display": "11001-765211U",
+          "spellings": [
+            "11001-765211U",
+            "11001765211U"
+          ]
+        },
+        {
+          "normalized": "11001039800h",
+          "display": "11001-039800H",
+          "spellings": [
+            "11001-039800H",
+            "11001039800H"
+          ]
+        },
+        {
+          "normalized": "11001333701u",
+          "display": "11001-333701U",
+          "spellings": [
+            "11001-333701U",
+            "11001333701U"
+          ]
+        },
+        {
+          "normalized": "11001764801u",
+          "display": "11001-764801U",
+          "spellings": [
+            "11001-764801U",
+            "11001764801U"
+          ]
+        },
+        {
+          "normalized": "11001765601u",
+          "display": "11001-765601U",
+          "spellings": [
+            "11001-765601U",
+            "11001765601U"
+          ]
+        },
+        {
+          "normalized": "11001039810h",
+          "display": "11001-039810H",
+          "spellings": [
+            "11001-039810H",
+            "11001039810H"
+          ]
+        },
+        {
+          "normalized": "11001333801u",
+          "display": "11001-333801U",
+          "spellings": [
+            "11001-333801U",
+            "11001333801U"
+          ]
+        },
+        {
+          "normalized": "11001764803h",
+          "display": "11001-764803H",
+          "spellings": [
+            "11001-764803H",
+            "11001764803H"
+          ]
+        },
+        {
+          "normalized": "11001765611u",
+          "display": "11001-765611U",
+          "spellings": [
+            "11001-765611U",
+            "11001765611U"
+          ]
+        },
+        {
+          "normalized": "11001041500h",
+          "display": "11001-041500H",
+          "spellings": [
+            "11001-041500H",
+            "11001041500H"
+          ]
+        },
+        {
+          "normalized": "11001335301u",
+          "display": "11001-335301U",
+          "spellings": [
+            "11001-335301U",
+            "11001335301U"
+          ]
+        },
+        {
+          "normalized": "11001764811u",
+          "display": "11001-764811U",
+          "spellings": [
+            "11001-764811U",
+            "11001764811U"
+          ]
+        },
+        {
+          "normalized": "11001765901u",
+          "display": "11001-765901U",
+          "spellings": [
+            "11001-765901U",
+            "11001765901U"
+          ]
+        },
+        {
+          "normalized": "11001041700h",
+          "display": "11001-041700H",
+          "spellings": [
+            "11001-041700H",
+            "11001041700H"
+          ]
+        },
+        {
+          "normalized": "11001335303h",
+          "display": "11001-335303H",
+          "spellings": [
+            "11001-335303H",
+            "11001335303H"
+          ]
+        },
+        {
+          "normalized": "11001765101u",
+          "display": "11001-765101U",
+          "spellings": [
+            "11001-765101U",
+            "11001765101U"
+          ]
+        },
+        {
+          "normalized": "11001766003h",
+          "display": "11001-766003H",
+          "spellings": [
+            "11001-766003H",
+            "11001766003H"
+          ]
+        },
+        {
+          "normalized": "11001041710h",
+          "display": "11001-041710H",
+          "spellings": [
+            "11001-041710H",
+            "11001041710H"
+          ]
+        },
+        {
+          "normalized": "11001397001u",
+          "display": "11001-397001U",
+          "spellings": [
+            "11001-397001U",
+            "11001397001U"
+          ]
+        },
+        {
+          "normalized": "11001765111u",
+          "display": "11001-765111U",
+          "spellings": [
+            "11001-765111U",
+            "11001765111U"
+          ]
+        },
+        {
+          "normalized": "11001768801u",
+          "display": "11001-768801U",
+          "spellings": [
+            "11001-768801U",
+            "11001768801U"
+          ]
+        },
+        {
+          "normalized": "11001041800h",
+          "display": "11001-041800H",
+          "spellings": [
+            "11001-041800H",
+            "11001041800H"
+          ]
+        },
+        {
+          "normalized": "11001397201u",
+          "display": "11001-397201U",
+          "spellings": [
+            "11001-397201U",
+            "11001397201U"
+          ]
+        },
+        {
+          "normalized": "11001765201u",
+          "display": "11001-765201U",
+          "spellings": [
+            "11001-765201U",
+            "11001765201U"
+          ]
+        },
+        {
+          "normalized": "11001795611u",
+          "display": "11001-795611U",
+          "spellings": [
+            "11001-795611U",
+            "11001795611U"
+          ]
+        }
+      ],
+      "gallery": [
+        {
+          "src": "/assets/hyundai/f50a53531063-hyundai-i30_1.jpg",
+          "sourceUrl": "https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1.jpg",
+          "alt": "Imagen del componente publicada para Hyundai i30"
+        },
+        {
+          "src": "/assets/hyundai/1149d558c54f-hyundai-i30.jpg",
+          "sourceUrl": "https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30.jpg",
+          "alt": "Imagen del componente publicada para Hyundai i30"
+        }
+      ],
+      "relatedServices": [
+        {
+          "uid": "main-3915",
+          "label": "Consultar displays Hyundai",
+          "relation": "related-component-information"
+        }
+      ],
+      "price": null,
+      "timing": null,
+      "warranty": null
+    }
+  ]
+}

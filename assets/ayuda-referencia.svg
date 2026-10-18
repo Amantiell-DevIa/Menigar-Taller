@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="830" viewBox="0 0 680 830" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Cómo distinguir una referencia de pieza de un código de avería</title>
+  <desc id="descripcion">Esquema ilustrativo. La referencia de pieza EJ-12345 aparece en una etiqueta sobre el componente. El código de diagnosis P0XXX aparece en un informe de averías. Son dos datos distintos. Los ejemplos son ficticios y la posición de las etiquetas reales puede variar.</desc>
+  <defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#0a192f}.titulo{font-size:34px;font-weight:700;letter-spacing:-1px}.sub{font-size:23px;fill:#536577}.cabecera{font-size:29px;font-weight:700}.numero{font-size:25px;font-weight:700;fill:#0056b3}.etiqueta{font-size:21px;fill:#536577;letter-spacing:1px}.codigo{font-family:Consolas,monospace;font-size:43px;font-weight:700}.nota{font-size:24px;fill:#36526f}.trazo{fill:none;stroke:#0056b3;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style></defs>
+  <rect width="680" height="830" rx="12" fill="#f6f8fb"/>
+  <text class="titulo" x="32" y="54">Dos datos distintos.</text>
+  <text class="sub" x="32" y="90">Esquema ilustrativo · Ejemplos ficticios</text>
+  <g transform="translate(28 116)">
+    <rect width="624" height="286" rx="10" fill="#fff" stroke="#dbe2e8"/>
+    <circle cx="38" cy="39" r="18" fill="#edf3fa"/>
+    <text class="numero" x="31" y="47">1</text>
+    <text class="cabecera" x="70" y="49">Referencia de la pieza</text>
+    <g transform="translate(40 85) scale(.85)">
+      <path d="M8 33h17V20h117v13h17v117H8Z" fill="#edf3fa" stroke="#8ba0b6" stroke-width="2"/>
+      <rect x="34" y="45" width="100" height="74" rx="4" fill="#fff" stroke="#bcc9d4" stroke-width="2"/>
+      <path d="M43 59h49M43 71h75M43 83h63M43 95h42" stroke="#a0b3c6" stroke-width="4"/>
+      <path d="M22 150v15m16-15v15m16-15v15m16-15v15m16-15v15m16-15v15m16-15v15m16-15v15" stroke="#8ba0b6" stroke-width="5"/>
+      <path class="trazo" d="M137 84h33l21-17h14"/>
+    </g>
+    <g transform="translate(246 95)">
+      <rect width="350" height="116" rx="5" fill="#f5f8fc" stroke="#0056b3" stroke-width="2"/>
+      <text class="etiqueta" x="19" y="34">REFERENCIA · EJEMPLO</text>
+      <text class="codigo" x="19" y="88">EJ-12345</text>
+    </g>
+    <text class="nota" x="28" y="254">Busca la etiqueta sobre el componente.</text>
+  </g>
+  <g transform="translate(28 422)">
+    <rect width="624" height="286" rx="10" fill="#fff" stroke="#dbe2e8"/>
+    <circle cx="38" cy="39" r="18" fill="#edf3fa"/>
+    <text class="numero" x="31" y="47">2</text>
+    <text class="cabecera" x="70" y="49">Código de diagnosis</text>
+    <g transform="translate(44 80) scale(.85)">
+      <path d="M0 0h115l23 23v140H0Z" fill="#edf3fa" stroke="#8ba0b6" stroke-width="2"/>
+      <path d="M115 0v23h23M21 42h75M21 62h56M21 105h90M21 125h75" fill="none" stroke="#a0b3c6" stroke-width="3"/>
+      <rect x="17" y="74" width="98" height="18" rx="3" fill="#cbdcf0"/>
+      <path class="trazo" d="M140 83h21l21-16h13"/>
+    </g>
+    <g transform="translate(246 95)">
+      <rect width="350" height="116" rx="5" fill="#f5f8fc" stroke="#0056b3" stroke-width="2"/>
+      <text class="etiqueta" x="19" y="34">DIAGNOSIS · EJEMPLO</text>
+      <text class="codigo" x="19" y="88">P0XXX</text>
+    </g>
+    <text class="nota" x="28" y="254">Busca el código en el informe de averías.</text>
+  </g>
+  <text class="sub" x="32" y="751">Las etiquetas y los informes reales pueden variar.</text>
+  <text class="sub" x="32" y="789">Si tienes dudas, adjunta una foto o el informe.</text>
+</svg>

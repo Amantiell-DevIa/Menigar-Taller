@@ -1,0 +1,241 @@
+{
+  "schemaVersion": 3,
+  "contentPilots": {
+    "hyundai": [
+      "main-1604",
+      "main-3915"
+    ]
+  },
+  "contentExpansions": {
+    "bmw": [
+      "main-2321"
+    ],
+    "sharedSourceSections": {
+      "sharedPages": 1645,
+      "imageOccurrences": 8396,
+      "tableOccurrences": 1499
+    }
+  },
+  "browserProjectionOmissions": [
+    "contentBlocks",
+    "dtcDetails",
+    "instructionGroups",
+    "sourceCapture",
+    "sourceHtmlSha256",
+    "sourceSections",
+    "sourceText"
+  ],
+  "sourcePageCounts": {
+    "main": 831,
+    "abs": 840
+  },
+  "recordCount": 1648,
+  "bySource": {
+    "abs": 830,
+    "main": 818
+  },
+  "byFamily": {
+    "abs": 834,
+    "bluetooth": 1,
+    "bsi": 1,
+    "cambio": 48,
+    "clima": 1,
+    "cuadro": 621,
+    "display": 59,
+    "ecu": 3,
+    "inmo": 1,
+    "multimedia": 66,
+    "palanca": 13
+  },
+  "brandCount": 70,
+  "modelRecords": 1302,
+  "referenceCount": 59974,
+  "dtcCodeCount": 233,
+  "instructionRecords": [
+    "abs-2444"
+  ],
+  "relatedInstructionRecords": 24,
+  "excluded": [
+    {
+      "source": "main",
+      "sourceId": 14403,
+      "url": "https://www.menigar.com/ofertas-de-empleo/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 2624,
+      "url": "https://www.menigar.com/politica-de-privacidad/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 1863,
+      "url": "https://www.menigar.com/top-repair/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 1262,
+      "url": "https://www.menigar.com/preguntas-frecuentes/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 1231,
+      "url": "https://www.menigar.com/garantias/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 1226,
+      "url": "https://www.menigar.com/envios/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 1222,
+      "url": "https://www.menigar.com/servicios/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 271,
+      "url": "https://www.menigar.com/contacto/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 45,
+      "url": "https://www.menigar.com/error-404/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 8016,
+      "url": "https://www.menigar.com/politica-de-cookies/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 8015,
+      "url": "https://www.menigar.com/avisos-legales/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 3918,
+      "url": "https://www.menigar.com/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 3883,
+      "url": "https://www.menigar.com/home/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 3295,
+      "url": "https://www.menigar.com/reparacion-abs/yamaha-moto/xj6-2009-2016/",
+      "reason": "Sin contenido de servicio en la captura."
+    },
+    {
+      "source": "abs",
+      "sourceId": 2627,
+      "url": "https://www.menigar.com/reparacion-abs/land-rover/freelander-1997-2006-ate-mk25/",
+      "reason": "Sin contenido de servicio en la captura."
+    },
+    {
+      "source": "abs",
+      "sourceId": 2140,
+      "url": "https://www.menigar.com/reparacion-abs/politica-de-cookies/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 2138,
+      "url": "https://www.menigar.com/reparacion-abs/avisos-legales/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 1983,
+      "url": "https://www.menigar.com/reparacion-abs/home-abs-motos/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 1981,
+      "url": "https://www.menigar.com/reparacion-abs/home-abs-coches/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 1247,
+      "url": "https://www.menigar.com/reparacion-abs/politica-de-privacidad/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 140,
+      "url": "https://www.menigar.com/reparacion-abs/contacto/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 58,
+      "url": "https://www.menigar.com/reparacion-abs/404-2/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "abs",
+      "sourceId": 39,
+      "url": "https://www.menigar.com/reparacion-abs/",
+      "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    }
+  ],
+  "snapshotSha256": {
+    "data/cache/pages_page_1.json": "0b1b178950d4bd69948366bda6df1ae7a7aa11ea66814163eaa9cb5bbc5f227b",
+    "data/cache/pages_page_10.json": "363d58f8ecac3a589677c15565e85d39b00b7535701a9a90fa9db5414695b750",
+    "data/cache/pages_page_11.json": "bef64b309a16eea32f9af542208bce7c3ba89f0741a3123971171449dc5c858e",
+    "data/cache/pages_page_12.json": "26aa3db704261944d598626b86ffc68b4a8347b5aaa82ae5b03d5b6377008dfe",
+    "data/cache/pages_page_13.json": "1ee5b508c64a5b2aed5e781429401a6d1dc2581aca5c16f8c6752c7600ecfe90",
+    "data/cache/pages_page_14.json": "d5955d0831fba3dc7ecb1cf48894b3093016502eea94844155fecac3c96ea3e2",
+    "data/cache/pages_page_15.json": "1045cff5f311c6342e69bbf37ebc56ae38710b43c46174ce146e96b142bd4f38",
+    "data/cache/pages_page_16.json": "9854f2cff084c74e27d4d30ec2b0f788fbd558dd42a52301c6b2d38ccdd1baf9",
+    "data/cache/pages_page_17.json": "1fd7cdc998d72d10f3dd54ca9070111c2d1e3ba61037d95453892f742b3ddfdd",
+    "data/cache/pages_page_2.json": "5f51884d9dd28d5c44c7468bc5e20427c8f31ad0270f1fa481b870efc3e94097",
+    "data/cache/pages_page_3.json": "62ef1473608c558b92db85867e782528486dc679fcf439e38b3075e837f97ad8",
+    "data/cache/pages_page_4.json": "cd5d6c16c71114a854a8e40faa997a1bcc2700a32937392ce603776a2f46c6ff",
+    "data/cache/pages_page_5.json": "057e13093ecdfc72adc48351128f80958e5728ea4bec2af54af0b9ad5b0d196e",
+    "data/cache/pages_page_6.json": "38e5c31d56e0dfc1dd2d51ed7955d47e2b75006f39432a4b834f2c399f67b786",
+    "data/cache/pages_page_7.json": "7e05151183cc384e3c43495e785a05c17382c9bd26d41ee1ddc1e654aeb5bfd3",
+    "data/cache/pages_page_8.json": "0c12d184a87f1d7dcc1a2a831336639ed3f64d6f550f243b8a5a211053b11def",
+    "data/cache/pages_page_9.json": "92460d617ecb59bbeb8c42e36a9d0b2a342be994c95924361ed32b0e8c54a85e",
+    "data/cache_abs/abs_page_1.json": "e9cdc2d2bf5dfe2f0044f1b81e723dee7f93f79dd37c9a10ea709b0622999637",
+    "data/cache_abs/abs_page_2.json": "eaf99c324bec044bc7e2e306d0430565ccd25253e5730db585e0db92fb10c234",
+    "data/cache_abs/abs_page_3.json": "8d83101afae79ff3b31c62a718c72a1aa5b1f88ecf6abac03e0de00466fc4e3c",
+    "data/cache_abs/abs_page_4.json": "4f14c2270d27d96f8fce483e8d2bd07ddc63cbade35b3c506b56e78e11d457f8",
+    "data/cache_abs/abs_page_5.json": "e0c790a6f40f3023679a1efa8b5032d4f0ea4563889d4e3ab420e2d9e3c8252e",
+    "data/cache_abs/abs_page_6.json": "3baaa1919653b87cab984f4f70de9a295357368af927b2570816980c13dae570",
+    "data/cache_abs/abs_page_7.json": "fb09ff05f68d5f8d339094623e0dbf68968868011c4cadf1622e989d9d720677",
+    "data/cache_abs/abs_page_8.json": "3bb3c18314933a03157a8f472554c6580e62ab81d3bd4e49f7e3a4a36af43c6f",
+    "data/cache_abs/abs_page_9.json": "f945ecb1d0404708e4825578eb1a9f4d137c1810db36b6802901ebaded1cde35"
+  },
+  "checks": {
+    "uniqueScopedIds": true,
+    "hondaCivicSelection": true,
+    "completePicantoReference": true,
+    "noFalse07010Dtc": true,
+    "leadingZerosAndPunctuation": true,
+    "mk61SixShippingGroups": true,
+    "snapshotsUnchanged": true
+  },
+  "limitations": [
+    "Content is recovered from the supplied local snapshots, not a new live crawl.",
+    "Imported service conditions remain specific to the original page; no price, warranty or timing defaults are added.",
+    "Editorial and technical approval is needed before production publication.",
+    "Redirects are a disabled planning manifest and do not affect menigar.com."
+  ]
+}

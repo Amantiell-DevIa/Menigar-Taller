@@ -1,0 +1,42 @@
+{
+  "scope": [
+    "main-1604",
+    "main-3915"
+  ],
+  "source": "Preserved local public WordPress snapshots; no new admin export.",
+  "modelCount": 11,
+  "modelBlockCount": 12,
+  "i30BlockCount": 2,
+  "i30ImagesPerBlock": [
+    2,
+    2
+  ],
+  "sourceImagesByRecord": {
+    "main-1604": 2,
+    "main-3915": 23
+  },
+  "uniqueMediaFiles": 23,
+  "referenceSpellings": 118,
+  "normalizedReferences": 59,
+  "symptoms": 3,
+  "knowledgeFile": "data/hyundai-pilot-knowledge.json",
+  "metadataWarnings": [
+    {
+      "model": "Getz",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz-300x225.jpg",
+      "sourceAlt": "reparacion cuadro hyundai i30",
+      "action": "Original preserved; public alt uses source section context."
+    }
+  ],
+  "checks": {
+    "modelBlocksPreserved": true,
+    "i30ReferenceSpellingsPreserved": true,
+    "galleryContextPreserved": true,
+    "crossFamilyRelationIsNotCompatibility": true
+  },
+  "pending": [
+    "No years, interchangeability or image-to-reference mapping inferred.",
+    "Other catalogue records still use the previous renderer.",
+    "Fresh WordPress export and production approval remain pending."
+  ]
+}

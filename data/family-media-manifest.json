@@ -1,0 +1,107 @@
+{
+  "purpose": "Representative home-card images for repair families; examples, not compatibility claims",
+  "wordpressArchive": "2026-10-13-publico",
+  "usageNote": "The vehicle/part pictured is one published example. Product compatibility requires review of the customer's reference and fault.",
+  "cards": [
+    {
+      "family": "cuadro",
+      "localPath": "/assets/bmw/107ed09aaed6-bmw_serie-3_f30_display.jpg",
+      "sourceUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_f30_display.jpg",
+      "sourcePage": "https://www.menigar.com/reparacion-cuadro-instrumentos/bmw/serie-3/",
+      "sourcePageId": 512,
+      "wordpressMediaId": 8752,
+      "sha256": "528183ea643fc2d91f7331cde36b4c3b106e0a9dd6ea13c2adee535a707914d2",
+      "width": 640,
+      "height": 480,
+      "alt": "Ejemplo de cuadro de instrumentos BMW Serie 3 F30 publicado por MENIGAR.",
+      "suggestedFit": "cover",
+      "suggestedPosition": "center 56%"
+    },
+    {
+      "family": "abs",
+      "localPath": "/assets/family/abs-citroen-ate-mk70.jpg",
+      "sourceUrl": "https://www.menigar.com/wp-content/uploads/2023/02/abs_ate_mk70.jpg",
+      "sourcePage": "https://www.menigar.com/reparacion-fallo-abs-c1380-citroen-ate-mk70/",
+      "sourcePageId": 13299,
+      "wordpressMediaId": 13301,
+      "sha256": "376a20802988f2a69fdcb95b114399917f52c451fbbfa834649c57b3c581a1bc",
+      "width": 300,
+      "height": 300,
+      "alt": "Ejemplo de módulo ABS ATE MK70 mostrado en una ficha de Citroën de MENIGAR.",
+      "suggestedFit": "contain",
+      "suggestedPosition": "center"
+    },
+    {
+      "family": "display",
+      "localPath": "/assets/bmw/aa76d38fccf4-display_bmw_serie1.jpg",
+      "sourceUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie1.jpg",
+      "sourcePage": "https://www.menigar.com/reparacion-displays/reparacion-display-bmw/",
+      "sourcePageId": 2321,
+      "wordpressMediaId": 8693,
+      "sha256": "a732e3fc2176b44cf6f066912a4627abde5755e385ef41d7cd11c18da0d173d6",
+      "width": 640,
+      "height": 480,
+      "alt": "Ejemplo de display de un cuadro BMW Serie 1 publicado por MENIGAR.",
+      "suggestedFit": "cover",
+      "suggestedPosition": "center 48%"
+    },
+    {
+      "family": "multimedia",
+      "localPath": "/assets/bmw/d18e0b972ece-multimedia_bmw_x5_e70.jpg",
+      "sourceUrl": "https://www.menigar.com/wp-content/uploads/2022/05/multimedia_bmw_x5_e70.jpg",
+      "sourcePage": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/bmw-connecteddrive/",
+      "sourcePageId": 8973,
+      "wordpressMediaId": 10767,
+      "sha256": "ad4df3fe328785dcb9d76db1b34cf831ef0e86355c0390b904d7b8636f693c84",
+      "width": 640,
+      "height": 480,
+      "alt": "Ejemplo de pantalla multimedia BMW X5 E70 publicada por MENIGAR.",
+      "suggestedFit": "cover",
+      "suggestedPosition": "center 52%"
+    }
+  ],
+  "alternativeAbs": {
+    "family": "abs",
+    "localPath": "/assets/family/abs-taller-menigar.jpg",
+    "sourceUrl": "https://www.menigar.com/wp-content/uploads/2017/12/reparacion_abs_menigar3.jpg",
+    "sourceAttachment": "https://www.menigar.com/reparacion_abs_menigar3/",
+    "sourcePage": null,
+    "sourceVariant": null,
+    "wordpressMediaId": 1948,
+    "sha256": "8b972361de3c383bad81ef5a7c6731a93f9e81fb1b6db8a693b11ad044301e7c",
+    "width": 640,
+    "height": 480,
+    "alt": "Técnico de MENIGAR trabajando sobre un módulo ABS en el taller.",
+    "suggestedFit": "cover",
+    "suggestedPosition": "center 58%",
+    "usageNote": "Fotografía de taller clasificada como reparación ABS por WordPress; ninguna ficha o variante concreta quedó asociada en el archivo público."
+  },
+  "workshopArchivePhotos": [
+    {
+      "subject": "banco de comprobación de cuadro",
+      "localPath": "/assets/family/taller-banco-cuadro-archivo-2017.jpg",
+      "sourceUrl": "https://www.menigar.com/wp-content/uploads/2017/04/taller_menigar04.jpg",
+      "sourceAttachment": "https://www.menigar.com/taller_menigar04/",
+      "wordpressMediaId": 159,
+      "wordpressUploadedAt": "2017-04-20T15:07:39",
+      "sha256": "628ae783355278c6595141773a9d939eabe83e0d568eed642aa2888fa90a1e16",
+      "width": 941,
+      "height": 628,
+      "alt": "Archivo de MENIGAR: técnico comprobando un cuadro de instrumentos en un banco de trabajo.",
+      "usageNote": "Imagen histórica subida a WordPress en 2017; no acredita el estado actual de las instalaciones."
+    },
+    {
+      "subject": "inspección de electrónica",
+      "localPath": "/assets/family/taller-revision-ecu-archivo-2017.jpg",
+      "sourceUrl": "https://www.menigar.com/wp-content/uploads/2017/04/rep_ecu.jpg",
+      "sourceAttachment": "https://www.menigar.com/rep_ecu/",
+      "wordpressMediaId": 156,
+      "wordpressUploadedAt": "2017-04-20T15:07:36",
+      "sha256": "79fdc1b42bd9b60ff51ea28df6276a2c49dd89f593c5bc6bbc4d895c8ea1093a",
+      "width": 1024,
+      "height": 768,
+      "alt": "Archivo de MENIGAR: técnica inspeccionando una placa electrónica en el banco de trabajo.",
+      "usageNote": "Imagen histórica subida a WordPress en 2017; no acredita el estado actual de las instalaciones."
+    }
+  ]
+}

@@ -1,0 +1,333 @@
+{
+  "scope": [
+    "main-1604",
+    "main-3915"
+  ],
+  "files": [
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1-400x300.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1.jpg 640w, https://www.menigar.com/wp-content/uploads/2024/10/hyundai-i30_1-300x225.jpg 300w",
+      "localPath": "/assets/hyundai/f50a53531063-hyundai-i30_1.jpg",
+      "sourceUids": [
+        "main-1604",
+        "main-3915"
+      ],
+      "sha256": "95724c8bb67d94a3fc024f81a0be06aa63f218e30a065e676b4e9b1980e05b78",
+      "bytes": 209947,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:15:58.764536+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30-400x300.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30.jpg 640w, https://www.menigar.com/wp-content/uploads/2024/09/hyundai-i30-300x225.jpg 300w",
+      "localPath": "/assets/hyundai/1149d558c54f-hyundai-i30.jpg",
+      "sourceUids": [
+        "main-1604",
+        "main-3915"
+      ],
+      "sha256": "893386f4c47522664e8336b69bd6a13bda07382b20e46e208312cfaf0a433721",
+      "bytes": 279685,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:15:58.846007+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2019/12/hyundai_coupe.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2019/12/hyundai_coupe.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2019/12/hyundai_coupe-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2019/12/hyundai_coupe-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2019/12/hyundai_coupe.jpg 640w",
+      "localPath": "/assets/hyundai/7d9617995d6a-hyundai_coupe.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "f35f621dd0b5817ed14e5fd4ce0ed6ae7e6f9cdea4ecc326bb3e2c44b6376ed9",
+      "bytes": 84510,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:15:56.182570+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2019/12/display_hyundai_coupe.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2019/12/display_hyundai_coupe.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2019/12/display_hyundai_coupe-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2019/12/display_hyundai_coupe-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2019/12/display_hyundai_coupe.jpg 640w",
+      "localPath": "/assets/hyundai/401479bfb27f-display_hyundai_coupe.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "f17f9e52c03558e3655e0ba2b40694a65ae97aeb2ed027cf97a438ad4b48515f",
+      "bytes": 65942,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:15:58.774472+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2021/09/hyundai_getz.jpg 640w",
+      "localPath": "/assets/hyundai/64abb710eb0d-hyundai_getz.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "da0b37bd083f7e7f1dad122f43d587d968bf762a652d559845bc8bbe32e27473",
+      "bytes": 90527,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:15:59.759498+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_hyundai_getz.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_hyundai_getz.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/display_hyundai_getz-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2021/09/display_hyundai_getz-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2021/09/display_hyundai_getz.jpg 640w",
+      "localPath": "/assets/hyundai/4fdbb982e005-display_hyundai_getz.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "6614f7ad9ea32201db57b9c07e47c135c2b11a12046e12e8de0bd9cee509de3c",
+      "bytes": 96261,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:15:59.912677+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/05/hyundai_grandeur.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/05/hyundai_grandeur.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/05/hyundai_grandeur-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2021/05/hyundai_grandeur-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2021/05/hyundai_grandeur.jpg 640w",
+      "localPath": "/assets/hyundai/222d22c18363-hyundai_grandeur.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "c648333824f946770d5ba8446aed10724fc84950e1c3a9f23ba66e4655385cfc",
+      "bytes": 108433,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:00.660645+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2023/02/hyundai_i10_2.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2023/02/hyundai_i10_2.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2023/02/hyundai_i10_2-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2023/02/hyundai_i10_2-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2023/02/hyundai_i10_2.jpg 640w",
+      "localPath": "/assets/hyundai/6247d9ffa7a4-hyundai_i10_2.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "ba741763ab35dcfda24ce5fe409457b73e4b808b099666727f287a1e8a537564",
+      "bytes": 295236,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:04.446226+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2023/02/display_hyundai_i10.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2023/02/display_hyundai_i10.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2023/02/display_hyundai_i10-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2023/02/display_hyundai_i10-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2023/02/display_hyundai_i10.jpg 640w",
+      "localPath": "/assets/hyundai/5ffef1e47657-display_hyundai_i10.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "b21c300375936a839e175dbdca8649928debe78d5c62f3a423a62ea0c0b8f122",
+      "bytes": 119773,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:02.032116+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2023/05/hyundai_i20_2.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2023/05/hyundai_i20_2.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2023/05/hyundai_i20_2-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2023/05/hyundai_i20_2-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2023/05/hyundai_i20_2.jpg 640w",
+      "localPath": "/assets/hyundai/9b4840a74f01-hyundai_i20_2.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "355e4bfeab5ab86a1212fd05c978f03be71ac61b6ddd502d3c80f8761f2c31f2",
+      "bytes": 247061,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:03.960538+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2023/05/display_hyundai_i20.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2023/05/display_hyundai_i20.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2023/05/display_hyundai_i20-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2023/05/display_hyundai_i20-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2023/05/display_hyundai_i20.jpg 640w",
+      "localPath": "/assets/hyundai/d60f0b556911-display_hyundai_i20.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "5c62e14d879bcb265022bd11e878ca7acc7eae881c82403e1ea9cf053c059afe",
+      "bytes": 198453,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:05.116153+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_i30.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_i30.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_i30-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_i30-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_i30.jpg 640w",
+      "localPath": "/assets/hyundai/0f0cd51fc84c-display_hyundai_i30.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "9923e7333f08b94271e7259ef3cb082ab301499fcce6cbbca26f82b785d24c5f",
+      "bytes": 70501,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:05.168292+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2024/10/display_hyundai_i30_2.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2024/10/display_hyundai_i30_2.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2024/10/display_hyundai_i30_2-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2024/10/display_hyundai_i30_2-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2024/10/display_hyundai_i30_2.jpg 640w",
+      "localPath": "/assets/hyundai/16b13ba692ee-display_hyundai_i30_2.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "de7ea0b9f65f19949fdfb4c6d69a646a4d28ba3e6ccabd2bef70bcec1442cef1",
+      "bytes": 210675,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:07.779993+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/06/hyundai_ix35.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/06/hyundai_ix35.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/06/hyundai_ix35-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/06/hyundai_ix35-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/06/hyundai_ix35.jpg 640w",
+      "localPath": "/assets/hyundai/a672dce8c179-hyundai_ix35.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "63a19c17ece9166a5561062be56f60923820f5eba5365813c20cd779d9a9463e",
+      "bytes": 259754,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:08.763495+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/06/display_hyundai_ix35.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/06/display_hyundai_ix35.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/06/display_hyundai_ix35-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/06/display_hyundai_ix35-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/06/display_hyundai_ix35.jpg 640w",
+      "localPath": "/assets/hyundai/8e842698a9ff-display_hyundai_ix35.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "8d1c67e5d8b3801ac9b0c479c35014730b5bcd324d0fc2b2956adbf541d8668e",
+      "bytes": 181789,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:08.410249+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2026/03/hyundai_kona.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2026/03/hyundai_kona.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2026/03/hyundai_kona-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2026/03/hyundai_kona-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2026/03/hyundai_kona.jpg 640w",
+      "localPath": "/assets/hyundai/b1b2a2491068-hyundai_kona.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "68a01f51ea1f02ba5ac8a382823ae577dd55a57f1a2f4c1caa4121162e74cee5",
+      "bytes": 252488,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:12.238412+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2026/03/display_hyundai_kona.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2026/03/display_hyundai_kona.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2026/03/display_hyundai_kona-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2026/03/display_hyundai_kona-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2026/03/display_hyundai_kona.jpg 640w",
+      "localPath": "/assets/hyundai/23ad780292eb-display_hyundai_kona.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "ed34e18f6f6b53fffef98852cb4fcc69f6d0f70c96cb33ffbf8e8bd5e6e93015",
+      "bytes": 210020,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:12.621149+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/01/santa_fe.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/01/santa_fe.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/01/santa_fe-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/01/santa_fe-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/01/santa_fe.jpg 640w",
+      "localPath": "/assets/hyundai/ac145931b702-santa_fe.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "db6526669c123f7142ab40427464c8bd3b4808e2be05f9656e78d1fc64f38b91",
+      "bytes": 107282,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:12.739245+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_santa_fe.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_santa_fe.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_santa_fe-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_santa_fe-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/01/display_hyundai_santa_fe.jpg 640w",
+      "localPath": "/assets/hyundai/0a4c2d30ea9f-display_hyundai_santa_fe.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "b9c7fd62e10d4c1393b150c5d65aef6228137cad32ec6ee9a9949364ae5d1ddd",
+      "bytes": 72385,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:13.750601+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/11/hyundai_terracan.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/11/hyundai_terracan.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/11/hyundai_terracan-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/11/hyundai_terracan-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/11/hyundai_terracan.jpg 640w",
+      "localPath": "/assets/hyundai/e0dc72a0ac3a-hyundai_terracan.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "18c8cfa3bd36d98fb9e5754b3040461ee7ff30f4ce928f9a5b0b7cf1da54e946",
+      "bytes": 86050,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:14.512725+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/11/display_hyundai_terracan.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/11/display_hyundai_terracan.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/11/display_hyundai_terracan-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2020/11/display_hyundai_terracan-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2020/11/display_hyundai_terracan.jpg 640w",
+      "localPath": "/assets/hyundai/96c959ee236f-display_hyundai_terracan.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "62e4647b40be83d38a04b952d31d7a48b23d993b32d00bbde588a48cb50d8a00",
+      "bytes": 80541,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:14.519032+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2025/09/hyundai_tucson2.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2025/09/hyundai_tucson2.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2025/09/hyundai_tucson2-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2025/09/hyundai_tucson2-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2025/09/hyundai_tucson2.jpg 640w",
+      "localPath": "/assets/hyundai/a1965fb6dd3b-hyundai_tucson2.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "63363007443763d24af12dea050e3c8d54f2b0b6b01c34fa3b552654c952479a",
+      "bytes": 276223,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:17.386248+00:00"
+    },
+    {
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2025/09/display_hyundai-tucson.jpg",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2025/09/display_hyundai-tucson.jpg",
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2025/09/display_hyundai-tucson-300x225.jpg",
+      "originalSrcset": "https://www.menigar.com/wp-content/uploads/2025/09/display_hyundai-tucson-300x225.jpg 300w, https://www.menigar.com/wp-content/uploads/2025/09/display_hyundai-tucson.jpg 640w",
+      "localPath": "/assets/hyundai/4ae575539d6c-display_hyundai-tucson.jpg",
+      "sourceUids": [
+        "main-3915"
+      ],
+      "sha256": "02759b4fa54ab31e5878f4e6642520be55132f483c912d1995b5c33f0660ce42",
+      "bytes": 131325,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T16:16:16.248058+00:00"
+    }
+  ],
+  "failures": []
+}

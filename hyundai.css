@@ -1,0 +1,53 @@
+/* Hyundai pilot: component recognition and source blocks, without inferred fit. */
+.component-gallery,.hyundai-models{margin:0 0 38px}
+.component-gallery h2,.hyundai-models h2{margin:12px 0 14px}
+.component-gallery-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.component-consult{margin-top:22px}
+.component-photo{margin:0;border:1px solid #dbe2e8;border-radius:10px;overflow:hidden;background:#fff}
+.component-photo>a{display:block;position:relative;min-height:44px}
+.component-photo img{display:block;width:100%;aspect-ratio:4/3;height:auto;object-fit:contain;background:#fff}
+.photo-zoom{display:block;font-size:12px;font-weight:600;color:#0056b3;padding:9px 12px;border-top:1px solid #edf0f4;text-align:right}
+.component-scope{padding:24px;background:#edf3fa;border-left:3px solid #0056b3;border-radius:0 10px 10px 0;margin-bottom:35px}
+.component-scope h3{font-size:20px;margin:0 0 12px}
+.component-links{display:flex;flex-direction:column;align-items:flex-start;gap:12px;margin-top:15px;font-size:14px;font-weight:600}
+.model-jump-links{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 28px}
+.model-jump-links a{border:1px solid #c8d5e4;background:#fff;border-radius:6px;min-height:44px;padding:9px 14px;display:flex;align-items:center;font-size:14px;font-weight:600}
+.hyundai-model-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.hyundai-model-card{border:1px solid #dbe2e8;border-radius:12px;padding:23px;scroll-margin-top:16px;min-width:0;display:flex;flex-direction:column}
+.hyundai-model-card h3{font-size:29px;margin:5px 0 13px}
+.hyundai-model-card>p{font-size:14px;line-height:1.65}
+.model-featured{grid-column:1/-1;border-color:#a7c3e4;background:#f8fbff}
+.model-image-sets{display:grid;grid-template-columns:1fr;gap:18px;margin:19px 0 18px}
+.model-featured .model-image-sets{grid-template-columns:1fr 1fr}
+.model-photo-pair{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.model-image-label{font-size:13px;font-weight:600;color:#536577;margin-bottom:10px}
+.model-related{background:#edf3fa;padding:18px;border-radius:8px;margin:6px 0 19px;font-size:14px}
+.model-related strong{color:#0a192f}.model-related p{font-size:14px;margin:8px 0 13px}
+.model-related a,.model-consult{font-size:14px;font-weight:600}
+.model-consult{margin-top:auto;padding-block:10px;display:block;min-height:44px}
+.pilot-reference-section{margin:32px 0}
+.pilot-reference-section h2{margin-bottom:15px}
+.pilot-reference-section .references-panel{margin:20px 0 16px}
+.pilot-reference-list{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:18px}
+.pilot-reference-list li{overflow-wrap:anywhere;font-size:13px;padding:8px;background:#f4f7fb;border-radius:5px;list-style:none}
+.reference-aliases ul{font-size:13px;line-height:1.8;margin-top:15px}
+@media(max-width:1120px){.hyundai-model-grid{grid-template-columns:1fr}.model-featured .model-image-sets{grid-template-columns:1fr}.pilot-reference-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:760px){.component-gallery-grid{gap:12px}.hyundai-model-card{padding:20px}.model-jump-links{gap:7px}.model-jump-links a{padding-inline:12px}.pilot-reference-list li{font-size:13px}.component-scope{padding:20px}.component-gallery h2,.hyundai-models h2{font-size:26px}}
+@media(max-width:480px){.component-gallery-grid{grid-template-columns:1fr}.hyundai-model-card h3{font-size:27px}.component-gallery,.hyundai-models{margin-bottom:28px}.model-image-label{font-size:13px}.model-photo-pair{gap:8px}.photo-zoom{font-size:12px;padding:8px}.component-photo img{min-width:0}.pilot-reference-list{padding-left:0}.component-links a{line-height:1.6}}
+@media print{.photo-zoom,.model-jump-links{display:none}.component-gallery-grid,.model-photo-pair{grid-template-columns:1fr 1fr}.hyundai-model-card{break-inside:avoid}.model-featured .model-image-sets{grid-template-columns:1fr 1fr}}
+
+/* V4, 18 Oct 2026: Hyundai blocks on the shared surfaces. */
+.component-photo{border-color:var(--p-line);border-radius:var(--r-card)}
+.photo-zoom{border-color:var(--p-line);color:var(--action)}
+.component-scope{border-left-color:var(--p-amber);border-radius:0 var(--r-control) var(--r-control) 0;background:var(--p-ivory-2)}
+.model-jump-links a{border-color:var(--p-line-strong);border-radius:var(--r-pill);background:var(--p-ivory-2);color:var(--p-ink);padding-inline:16px}
+.model-jump-links a:hover{border-color:var(--p-ink);background:#fff}
+.hyundai-model-card{border-color:var(--p-line);border-radius:var(--r-card);background:var(--p-card)}
+.hyundai-model-card h3{font-size:var(--fs-title);letter-spacing:var(--ls-title)}
+.model-featured{border-color:var(--p-ink-3);background:var(--p-card)}
+.model-related{border-radius:var(--r-control);background:var(--p-ivory-2)}
+.model-related strong{color:var(--p-ink)}
+.model-image-label{color:var(--p-ink-3)}
+.pilot-reference-list li{border-radius:var(--r-control);background:var(--p-ivory-2)}
+@media(max-width:760px){.component-gallery h2,.hyundai-models h2{font-size:var(--fs-title);letter-spacing:var(--ls-title)}}
+@media(max-width:480px){.hyundai-model-card h3{font-size:var(--fs-lead);letter-spacing:var(--ls-lead)}}

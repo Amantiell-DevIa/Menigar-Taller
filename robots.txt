@@ -1,0 +1,10 @@
+# Review prototype: documents carry noindex; do not announce this sitemap yet.
+# robots.txt is not access control. Private resources are blocked by the server.
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /private/
+Disallow: /_private/
+Disallow: /scripts/
+Disallow: /data/cache/
+Disallow: /data/cache_abs/

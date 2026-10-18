@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="1090" viewBox="0 0 680 1090" role="img" aria-labelledby="titulo descripcion">
+  <title id="titulo">Tres pasos para preparar el embalaje de una pieza electrónica</title>
+  <desc id="descripcion">Esquema orientativo. Primero, proteger los conectores y las zonas frágiles de la pieza. Segundo, inmovilizar la pieza dentro de una caja con material de relleno. Tercero, incluir el resumen de solicitud e identificar cada unidad. Si hay varias piezas, mantener cada una protegida e identificada. Consultar qué componentes deben enviarse para cada servicio.</desc>
+  <defs><style>text{font-family:Arial,Helvetica,sans-serif;fill:#0a192f}.titulo{font-size:34px;font-weight:700;letter-spacing:-1px}.sub{font-size:23px;fill:#536577}.cabecera{font-size:30px;font-weight:700;letter-spacing:-.5px}.numero{font-size:25px;font-weight:700;fill:#0056b3}.cuerpo{font-size:25px;fill:#36526f}.mini{font-size:21px;font-weight:700;fill:#0056b3}.trazo{fill:none;stroke:#0056b3;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}</style></defs>
+  <rect width="680" height="1090" rx="12" fill="#f6f8fb"/>
+  <text class="titulo" x="32" y="54">Protegido e identificado.</text>
+  <text class="sub" x="32" y="90">Guía visual orientativa para tu paquete</text>
+  <g transform="translate(28 118)">
+    <rect width="624" height="276" rx="10" fill="#fff" stroke="#dbe2e8"/>
+    <circle cx="38" cy="40" r="18" fill="#edf3fa"/>
+    <text class="numero" x="31" y="48">1</text>
+    <text class="cabecera" x="70" y="50">Protege conectores y pieza</text>
+    <g transform="translate(30 87)">
+      <rect x="11" y="15" width="176" height="143" rx="20" fill="#edf3fa" stroke="#9bb5d0" stroke-width="2" stroke-dasharray="5 5"/>
+      <rect x="38" y="39" width="123" height="88" rx="6" fill="#c6d8eb" stroke="#0056b3" stroke-width="2"/>
+      <path d="M51 127v17m17-17v17m17-17v17m17-17v17m17-17v17m17-17v17m17-17v17" stroke="#0056b3" stroke-width="5"/>
+      <path d="M36 134c25 17 102 24 125-1" fill="none" stroke="#fff" stroke-width="18"/>
+      <path d="M28 29h16M28 29v16M169 29h-16M169 29v16M28 143h16M28 143v-16M169 143h-16M169 143v-16" class="trazo"/>
+    </g>
+    <text class="cuerpo" x="258" y="134"><tspan x="258" dy="0">Cubre las zonas frágiles</tspan><tspan x="258" dy="36">y evita golpes directos.</tspan><tspan x="258" dy="49">Protege cada unidad</tspan><tspan x="258" dy="36">por separado.</tspan></text>
+  </g>
+  <g transform="translate(28 414)">
+    <rect width="624" height="276" rx="10" fill="#fff" stroke="#dbe2e8"/>
+    <circle cx="38" cy="40" r="18" fill="#edf3fa"/>
+    <text class="numero" x="31" y="48">2</text>
+    <text class="cabecera" x="70" y="50">Inmoviliza dentro de la caja</text>
+    <g transform="translate(30 83)">
+      <path d="M18 50h164v111H18Z" fill="#edf3fa" stroke="#8ba0b6" stroke-width="2"/>
+      <path d="m18 50 28-32h109l27 32M18 50 0 83l18 10m164-43 18 33-18 10" fill="#f6f8fb" stroke="#8ba0b6" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M33 70h15m92 0h24M31 92h22m85 0h29M31 117h20m90 0h24M33 141h130" stroke="#b2c6dc" stroke-width="8" stroke-linecap="round"/>
+      <rect x="61" y="72" width="76" height="58" rx="5" fill="#c6d8eb" stroke="#0056b3" stroke-width="2"/>
+      <path class="trazo" d="M100 39v20m-7-7 7 7 7-7M100 182v-18m-7 7 7-7 7 7"/>
+    </g>
+    <text class="cuerpo" x="258" y="134"><tspan x="258" dy="0">Utiliza una caja firme</tspan><tspan x="258" dy="36">y material de relleno.</tspan><tspan x="258" dy="49">La pieza no debe</tspan><tspan x="258" dy="36">moverse en el interior.</tspan></text>
+  </g>
+  <g transform="translate(28 710)">
+    <rect width="624" height="276" rx="10" fill="#fff" stroke="#dbe2e8"/>
+    <circle cx="38" cy="40" r="18" fill="#edf3fa"/>
+    <text class="numero" x="31" y="48">3</text>
+    <text class="cabecera" x="70" y="50">Incluye resumen e identificación</text>
+    <g transform="translate(30 88)">
+      <path d="M9 42h168v119H9Z" fill="#edf3fa" stroke="#8ba0b6" stroke-width="2"/>
+      <path d="M60 4h105v111H60Z" fill="#fff" stroke="#0056b3" stroke-width="2"/>
+      <path d="M77 25h68M77 43h54M77 62h68M77 81h43" stroke="#a0b3c6" stroke-width="3"/>
+      <path d="m9 42-9 30 9 13m168-43 22 30-22 13" fill="#f6f8fb" stroke="#8ba0b6" stroke-width="2"/>
+      <rect x="22" y="99" width="119" height="42" rx="4" fill="#fff" stroke="#0056b3" stroke-width="2"/>
+      <text class="mini" x="32" y="127">UNIDAD 1</text>
+    </g>
+    <text class="cuerpo" x="258" y="134"><tspan x="258" dy="0">Pon el resumen de</tspan><tspan x="258" dy="36">solicitud en el paquete.</tspan><tspan x="258" dy="49">Identifica cada pieza</tspan><tspan x="258" dy="36">si envías varias.</tspan></text>
+  </g>
+  <text class="sub" x="32" y="1031">Consulta qué componentes incluir en tu servicio.</text>
+  <text class="sub" x="32" y="1069">Las instrucciones específicas tienen prioridad.</text>
+</svg>

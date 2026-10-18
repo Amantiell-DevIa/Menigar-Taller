@@ -1,0 +1,16 @@
+# Use ONLY in the separate review public/ root; never merge into live WordPress.
+# It replaces that review root's normal .htaccess. Every request, including existing
+# files and direct PHP URLs, passes through the private-session gate.
+# Do NOT add Basic HTTP authentication on top: it conflicts with Bearer receipts.
+Options -Indexes
+<IfModule mod_headers.c>
+Header always set X-Robots-Tag "noindex, nofollow, noarchive"
+Header always set Cache-Control "no-store, private"
+</IfModule>
+RewriteEngine On
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+RewriteRule ^api/review\.php$ - [L]
+RewriteRule ^ api/review.php [L]
+# Nginx/Plesk must forward static-file requests through Apache too. If it serves
+# existing files directly, this file is bypassed: do not publish a review until
+# unauthenticated HTML, images, JS, PDF, direct PHP and API all fail closed.

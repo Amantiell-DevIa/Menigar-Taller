@@ -1,0 +1,20 @@
+[
+  {
+    "sourcePath": "/docs/peticion_reparacion 2026a.pdf",
+    "localPath": "/assets/documentos/1f1102c1ef69-peticion_reparacion-2026a.pdf",
+    "sha256": "1f1102c1ef69828e65e7f5ff2005b605cd450ee02cd8424f53998c37a4dbf24d",
+    "bytes": 429160
+  },
+  {
+    "sourcePath": "/docs/como_embalar.pdf",
+    "localPath": "/assets/documentos/2c0c62820e3f-como_embalar.pdf",
+    "sha256": "2c0c62820e3fe79959908ad58a6ad8b85c0ed17fcd0efe7af0f352dc482d203b",
+    "bytes": 286229
+  },
+  {
+    "sourcePath": "/docs/direccion_envio.pdf",
+    "localPath": "/assets/documentos/a56aef88074a-direccion_envio.pdf",
+    "sha256": "a56aef88074a2507bc11b1b0655726c3987be9f1477c2cff6a7682dab97a4393",
+    "bytes": 296964
+  }
+]

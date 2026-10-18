@@ -1,0 +1,682 @@
+{
+  "scope": [
+    "main-2321"
+  ],
+  "captureRun": "2026-10-13-publico",
+  "sourceHtmlSha256": "7ccbd0a9aff1daad3db35d6abc06a00ae149dbf8512047e0d0720fbb3ab8c222",
+  "files": [
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/05/reparacion_aranazos_cuadro_bmw_digital-1024x384.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/05/reparacion_aranazos_cuadro_bmw_digital.jpg",
+      "localPath": "/assets/bmw/d7fcd981bca8-reparacion_aranazos_cuadro_bmw_digital.jpg",
+      "sourceAlt": "Reparación arañazos cuadro digital BMW",
+      "sourceTitle": "reparación arañazos cuadro digital BMW",
+      "wordpressMediaId": 8400,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-ffdi6hf4cv8",
+      "sourceOrder": 7,
+      "alt": "Imagen publicada por Menigar en BMW Live Cockpit",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/05/reparacion_aranazos_cuadro_bmw_digital.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "9baa97c90b9a58982903720425289b2f4b2ec48b503108c6f06407f00fbd93d8",
+      "bytes": 143364,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:56.185413+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2022/01/bmw_alpina-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2022/01/bmw_alpina.jpg",
+      "localPath": "/assets/bmw/cb31e1393c8d-bmw_alpina.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw alpina",
+      "sourceTitle": "reparación display cuadro de instrumentos bmw alpina",
+      "wordpressMediaId": 9143,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-tk5hnq5nmlc",
+      "sourceOrder": 11,
+      "alt": "Imagen publicada por Menigar en Alpina",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2022/01/bmw_alpina.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "70a2aaf6e8ed9d0b4bf7d0a5bba1f9c6c10e10e4704e005c04f8b089aa892770",
+      "bytes": 104355,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:56.243842+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2022/01/display_bmw_alpina-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2022/01/display_bmw_alpina.jpg",
+      "localPath": "/assets/bmw/93260ab17df6-display_bmw_alpina.jpg",
+      "sourceAlt": "reparación display cuadro de instrumentos bmw alpina",
+      "sourceTitle": "reparación display cuadro de instrumentos bmw alpina",
+      "wordpressMediaId": 9144,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-tk5hnq5nmlc",
+      "sourceOrder": 13,
+      "alt": "Imagen publicada por Menigar en Alpina",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2022/01/display_bmw_alpina.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "8fd1b70956bdead05283f814b17b2e6f652765f8abaf4d6f40a5bc409404b301",
+      "bytes": 83681,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:56.214024+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie1_e81-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie1_e81.jpg",
+      "localPath": "/assets/bmw/4fc4276c0615-bmw_serie1_e81.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw serie 3 e90",
+      "sourceTitle": "reparación display bmw serie 3 e90",
+      "wordpressMediaId": 8691,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-vb2s672rr9g",
+      "sourceOrder": 47,
+      "alt": "Imagen publicada por Menigar en Serie 3 E90",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie1_e81.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "4f2385fbc24c852b6d988c729ea426b05fa9b276873ad2d94f8ffc756a8b21ce",
+      "bytes": 260530,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:56.792096+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie1-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie1.jpg",
+      "localPath": "/assets/bmw/aa76d38fccf4-display_bmw_serie1.jpg",
+      "sourceAlt": "reparación display cuadro de instrumentos bmw serie 1 y x1",
+      "sourceTitle": "reparación display cuadro de instrumentos bmw serie 1 y x1",
+      "wordpressMediaId": 8693,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-1dakuhg1crg",
+      "sourceOrder": 20,
+      "alt": "Imagen publicada por Menigar en Serie 1 E81/E87 y X1 E84",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie1.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "a732e3fc2176b44cf6f066912a4627abde5755e385ef41d7cd11c18da0d173d6",
+      "bytes": 172041,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.044126+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2022/01/bmw_serie-2_f20-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2022/01/bmw_serie-2_f20.jpg",
+      "localPath": "/assets/bmw/097c831a55c4-bmw_serie-2_f20.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw serie 1 f20",
+      "sourceTitle": "reparación display cuadro bmw serie 2",
+      "wordpressMediaId": 9089,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-2r7de02ct5c",
+      "sourceOrder": 25,
+      "alt": "Imagen publicada por Menigar en Serie 2 F22",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2022/01/bmw_serie-2_f20.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "81f013817b99430120f862ab403aedffe992677e0552bc6e3acefc80b0cb8738",
+      "bytes": 220838,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:56.817214+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2022/06/display_bmw_serie-2-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2022/06/display_bmw_serie-2.jpg",
+      "localPath": "/assets/bmw/71a7c3085762-display_bmw_serie-2.jpg",
+      "sourceAlt": "reparación display cuadro bmw serie 2",
+      "sourceTitle": "reparar display cuadro bmw serie 2",
+      "wordpressMediaId": 11015,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-2r7de02ct5c",
+      "sourceOrder": 27,
+      "alt": "Imagen publicada por Menigar en Serie 2 F22",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2022/06/display_bmw_serie-2.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "e911d1450af846cf78f5ca613e4b5a70db2527f1bd90db702ef016646b3e7313",
+      "bytes": 146510,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.273584+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_e36-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_e36.jpg",
+      "localPath": "/assets/bmw/db7806afbaaa-bmw_serie-3_e36.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw serie 3 e36",
+      "sourceTitle": "reparación display cuadro bmw serie 3 e36",
+      "wordpressMediaId": 8758,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-lvrl475c5fs",
+      "sourceOrder": 134,
+      "alt": "Imagen publicada por Menigar en Z3",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_e36.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "6db50df497f6631608421ea2cf98fd785b6b3205cc87d61b6852edb26cd8df7a",
+      "bytes": 237419,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.435853+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2019/01/display_bmw_e36-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2019/01/display_bmw_e36.jpg",
+      "localPath": "/assets/bmw/e4bd56d096fb-display_bmw_e36.jpg",
+      "sourceAlt": "reparación display bmw e36",
+      "sourceTitle": "reparación display cuadro bmw serie 3 e36",
+      "wordpressMediaId": 3035,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-lvrl475c5fs",
+      "sourceOrder": 136,
+      "alt": "Imagen publicada por Menigar en Z3",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2019/01/display_bmw_e36.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "3621096f2c8409d094c16fe250f7de39928c2dc3335493e8c68c0d4f7adbb96f",
+      "bytes": 89684,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.591446+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_e46_3-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_e46_3.jpg",
+      "localPath": "/assets/bmw/1556bda6a63b-bmw_serie-3_e46_3.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw serie 3 e46",
+      "sourceTitle": "reparación display cuadro bmw serie 3 e46",
+      "wordpressMediaId": 8750,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-2f5f5lhp28g",
+      "sourceOrder": 40,
+      "alt": "Imagen publicada por Menigar en Serie 3 E46",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_e46_3.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "e6aa9b1986958f09936e3b8bf253a1da86f6c7fe207d226add7a58bffa29cc51",
+      "bytes": 238257,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.821539+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie-3_e46-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie-3_e46.jpg",
+      "localPath": "/assets/bmw/d64acb0c3020-display_bmw_serie-3_e46.jpg",
+      "sourceAlt": "reparación display cuadro de instrumentos bmw serie 3 e46",
+      "sourceTitle": "reparación display bmw serie 3 e46",
+      "wordpressMediaId": 8751,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-2f5f5lhp28g",
+      "sourceOrder": 42,
+      "alt": "Imagen publicada por Menigar en Serie 3 E46",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/display_bmw_serie-3_e46.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "8d8e4b60549d8aed2b4e04a90335d643b72c3096515a221feb32aeeed0386f95",
+      "bytes": 209705,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.990840+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2018/02/bmw_serie5_e60_display-300x200.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2018/02/bmw_serie5_e60_display-300x200.jpg",
+      "localPath": "/assets/bmw/481a5a8bfa37-bmw_serie5_e60_display-300x200.jpg",
+      "sourceAlt": "reparar display cuadro bmw serie 5 e60",
+      "sourceTitle": "reparar display cuadro bmw serie 5 e60",
+      "wordpressMediaId": 2399,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-9upl5at8cso",
+      "sourceOrder": 115,
+      "alt": "Imagen publicada por Menigar en X5 E70 y X6 E71",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2018/02/bmw_serie5_e60_display-300x200.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "50272c07b62b09dfe27ecfd09aa6746d2195adee53c3b290dc6dde06e821bca9",
+      "bytes": 15520,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:57.957861+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_f30_display-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_f30_display.jpg",
+      "localPath": "/assets/bmw/107ed09aaed6-bmw_serie-3_f30_display.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw serie 3 f30",
+      "sourceTitle": "reparación display bmw serie 3 f30",
+      "wordpressMediaId": 8752,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-2rpor3m7er4",
+      "sourceOrder": 54,
+      "alt": "Imagen publicada por Menigar en Serie 3 F30",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-3_f30_display.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "528183ea643fc2d91f7331cde36b4c3b106e0a9dd6ea13c2adee535a707914d2",
+      "bytes": 341623,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:58.884263+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/02/display_bmw_serie-3_F30-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/02/display_bmw_serie-3_F30.jpg",
+      "localPath": "/assets/bmw/a4c1e0d004b5-display_bmw_serie-3_F30.jpg",
+      "sourceAlt": "reparación display cuadro de instrumentos bmw serie 3 f30",
+      "sourceTitle": "reparar display cuadro bmw serie 5 f30",
+      "wordpressMediaId": 8235,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-2rpor3m7er4",
+      "sourceOrder": 56,
+      "alt": "Imagen publicada por Menigar en Serie 3 F30",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/02/display_bmw_serie-3_F30.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "d0e9802b7349d795c336522bd447afc794b596abd695d08a9ec923b2cfd6a440",
+      "bytes": 94511,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:58.413708+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-5_e34-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-5_e34.jpg",
+      "localPath": "/assets/bmw/e956351a706e-bmw_serie-5_e34.jpg",
+      "sourceAlt": "reparación cuadro bmw serie 5 e34",
+      "sourceTitle": "reparación display cuadro bmw serie 5 e34",
+      "wordpressMediaId": 8763,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-k96htmv4t3g",
+      "sourceOrder": 61,
+      "alt": "Imagen publicada por Menigar en Serie 5 E34",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/09/bmw_serie-5_e34.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "eb6bcb0218b13e8aae1abbfe596a7db41e60dd9979df489f3b46d70bafc79953",
+      "bytes": 86643,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:58.426426+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2018/06/display_BMW-E34-serie-5-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2018/06/display_BMW-E34-serie-5.jpg",
+      "localPath": "/assets/bmw/c0869d5465ac-display_BMW-E34-serie-5.jpg",
+      "sourceAlt": "reparación display bmw serie 5 e34",
+      "sourceTitle": "reparación display bmw serie 5 e34",
+      "wordpressMediaId": 2707,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-k96htmv4t3g",
+      "sourceOrder": 63,
+      "alt": "Imagen publicada por Menigar en Serie 5 E34",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2018/06/display_BMW-E34-serie-5.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "7ed0bbef69555df6ae9384ce9bfe2a72b7da53c78bde72493e9f3b54f776b238",
+      "bytes": 117377,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:58.955425+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/07/bmw_e39_e53_e38-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/07/bmw_e39_e53_e38.jpg",
+      "localPath": "/assets/bmw/39a17f90e0db-bmw_e39_e53_e38.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw x5 e53",
+      "sourceTitle": "reparación display cuadro bmw x5 e53",
+      "wordpressMediaId": 8615,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-hi2k76qftko",
+      "sourceOrder": 105,
+      "alt": "Imagen publicada por Menigar en X5 E53",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/07/bmw_e39_e53_e38.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "2ff95bd3e3b2acad220698699b17731eebf0f5d0931c2602f38302a4f85d83b0",
+      "bytes": 109347,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:58.924733+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2018/01/display_e39_e53-300x77.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2018/01/display_e39_e53.jpg",
+      "localPath": "/assets/bmw/2ad5fd3cd8a5-display_e39_e53.jpg",
+      "sourceAlt": "reparación display cuadro bmw x5 E53",
+      "sourceTitle": "",
+      "wordpressMediaId": 2061,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-hi2k76qftko",
+      "sourceOrder": 108,
+      "alt": "Imagen publicada por Menigar en X5 E53",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2018/01/display_e39_e53.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "49f22c9dd16074a7e719ac64c6e71fdf1dac9a3ad527d74f757fbc20232c1875",
+      "bytes": 41429,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:59.237321+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/10/bmw_serie-5_e60-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/10/bmw_serie-5_e60.jpg",
+      "localPath": "/assets/bmw/b5ea5b180684-bmw_serie-5_e60.jpg",
+      "sourceAlt": "reparación cuadro bmw x6",
+      "sourceTitle": "reparación display bmw serie x5 e70 y x6 e71",
+      "wordpressMediaId": 8818,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-9upl5at8cso",
+      "sourceOrder": 113,
+      "alt": "Imagen publicada por Menigar en X5 E70 y X6 E71",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/10/bmw_serie-5_e60.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "0abc465930cee16c65a78853a2b50b60140e1a401a87eb0171b9b1a7df59281e",
+      "bytes": 268274,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:59.540194+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2025/01/bmw-serie-5-f10-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2025/01/bmw-serie-5-f10.jpg",
+      "localPath": "/assets/bmw/9766a6319356-bmw-serie-5-f10.jpg",
+      "sourceAlt": "reparación cuadro de instrumentos bmw serie 5 f10",
+      "sourceTitle": "reparación display bmw serie 5 f10",
+      "wordpressMediaId": 14205,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-f0thbjk1svk",
+      "sourceOrder": 83,
+      "alt": "Imagen publicada por Menigar en Serie 5 F10",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2025/01/bmw-serie-5-f10.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "7937280b2db6763b4b4b37983526ce2c91255dd90a21261c5587b1006298a621",
+      "bytes": 270727,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:59.591812+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2025/01/display-bmw-serie-5-f10-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2025/01/display-bmw-serie-5-f10.jpg",
+      "localPath": "/assets/bmw/090ad377034b-display-bmw-serie-5-f10.jpg",
+      "sourceAlt": "reparación display cuadro bmw serie 5 ",
+      "sourceTitle": "reparar display cuadro bmw serie 5 f10",
+      "wordpressMediaId": 14206,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-f0thbjk1svk",
+      "sourceOrder": 85,
+      "alt": "Imagen publicada por Menigar en Serie 5 F10",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2025/01/display-bmw-serie-5-f10.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "421eda3f53f76339c74bf295a3c905d691e9195c658bbd7d998390cc93becf61",
+      "bytes": 225008,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:57:59.820049+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2017/10/BMW_Z4_x3-300x224.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2017/10/BMW_Z4_x3.jpg",
+      "localPath": "/assets/bmw/89a0e0099da9-BMW_Z4_x3.jpg",
+      "sourceAlt": "reparacion cuadro bmw z4",
+      "sourceTitle": "reparación display cuadro bmw x3 Z4",
+      "wordpressMediaId": 1708,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-ja7ohn9psio",
+      "sourceOrder": 98,
+      "alt": "Imagen publicada por Menigar en X3 E83 y Z4 E85/86",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2017/10/BMW_Z4_x3.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "ebd28e3e8568275cdfc29001f6b94714bb37719ddb35627c220be25f90b01c18",
+      "bytes": 89987,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:00.048926+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/03/display_bmw_z4_e85-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/03/display_bmw_z4_e85.jpg",
+      "localPath": "/assets/bmw/9035908fb080-display_bmw_z4_e85.jpg",
+      "sourceAlt": "reparación display cuadro bmw z4 x3",
+      "sourceTitle": "reparación display cuadro bmw z4 e85/e86 x3 e83",
+      "wordpressMediaId": 5933,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-ja7ohn9psio",
+      "sourceOrder": 100,
+      "alt": "Imagen publicada por Menigar en X3 E83 y Z4 E85/86",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/03/display_bmw_z4_e85.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "c79e4687537f87bfca0469975bcfc438f952074c5d20d44f110960d743bd4321",
+      "bytes": 64589,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:00.102365+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2022/05/multimedia_bmw_x5_e70-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2022/05/multimedia_bmw_x5_e70.jpg",
+      "localPath": "/assets/bmw/d18e0b972ece-multimedia_bmw_x5_e70.jpg",
+      "sourceAlt": "reparación pantalla multimedia bmw x5 e70",
+      "sourceTitle": "reparación display central bmw x5 x7",
+      "wordpressMediaId": 10767,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-g76f0m2prlo",
+      "sourceOrder": 120,
+      "alt": "Imagen publicada por Menigar en X5 E70 y X6 E71",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2022/05/multimedia_bmw_x5_e70.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "ad4df3fe328785dcb9d76db1b34cf831ef0e86355c0390b904d7b8636f693c84",
+      "bytes": 188197,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:00.420140+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2022/05/puntos_negros_pantalla_multimedia_bmw_x5-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2022/05/puntos_negros_pantalla_multimedia_bmw_x5.jpg",
+      "localPath": "/assets/bmw/ef3cd79d20ea-puntos_negros_pantalla_multimedia_bmw_x5.jpg",
+      "sourceAlt": "reparación fallo puntos negros pantalla multimedia bmw",
+      "sourceTitle": "reparación fallo puntos negros pantalla multimedia bmw x5 x7",
+      "wordpressMediaId": 10768,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-g76f0m2prlo",
+      "sourceOrder": 122,
+      "alt": "Imagen publicada por Menigar en X5 E70 y X6 E71",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2022/05/puntos_negros_pantalla_multimedia_bmw_x5.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "29d0bdad93c8bd844f78c3b206f48682bfec4808a68a045feadcf79b2b2bdd92",
+      "bytes": 264777,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:00.923397+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/06/fallo_display_bmw_x5_x6-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/06/fallo_display_bmw_x5_x6.jpg",
+      "localPath": "/assets/bmw/b9fc8f6983a6-fallo_display_bmw_x5_x6.jpg",
+      "sourceAlt": "fallo display pantalla cuadro digital bmw x5 x6",
+      "sourceTitle": "fallo display pantalla cuadro digital bmw x5 x6",
+      "wordpressMediaId": 8491,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-k6qc01odipg",
+      "sourceOrder": 127,
+      "alt": "Imagen publicada por Menigar en X5 G05 y X6 F16",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/06/fallo_display_bmw_x5_x6.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "145bbb5db593580c146f5938f0f2a0b07aad244cc077623e03e8513b1393b7ed",
+      "bytes": 68823,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:00.590923+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/06/display_reparado_bmw_x5_x6-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/06/display_reparado_bmw_x5_x6.jpg",
+      "localPath": "/assets/bmw/ce3e16bd3ffb-display_reparado_bmw_x5_x6.jpg",
+      "sourceAlt": "reparación display pantalla cuadro digital bmw x5 x6",
+      "sourceTitle": "reparación display pantalla cuadro digital bmw x5 x6",
+      "wordpressMediaId": 8492,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-k6qc01odipg",
+      "sourceOrder": 129,
+      "alt": "Imagen publicada por Menigar en X5 G05 y X6 F16",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/06/display_reparado_bmw_x5_x6.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "1cea86668447f7c14919aa18e6312546d46c13a7d2870018803d599c96a53444",
+      "bytes": 85586,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:00.910577+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2024/09/bmw_z4_e86-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2024/09/bmw_z4_e86.jpg",
+      "localPath": "/assets/bmw/dcd1062101e6-bmw_z4_e86.jpg",
+      "sourceAlt": "reparacion cuadro bmw z4",
+      "sourceTitle": "reparación display cuadro de instrumentos bmw z4 e85/e86",
+      "wordpressMediaId": 14127,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-3fskh1mnkvo",
+      "sourceOrder": 142,
+      "alt": "Imagen publicada por Menigar en Z4 E85/86",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2024/09/bmw_z4_e86.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "3d602972bcb7882047a8f7083a0d016124895ff43a476061f3d2f90699bf6ad0",
+      "bytes": 254719,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:01.298822+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2024/09/display_bmw-z4-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2024/09/display_bmw-z4.jpg",
+      "localPath": "/assets/bmw/f9e386ba20fd-display_bmw-z4.jpg",
+      "sourceAlt": "reparación display cuadro de instrumentos bmw z4",
+      "sourceTitle": "reparación display cuadro de instrumentos bmw z4 e85/e86",
+      "wordpressMediaId": 14128,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-3fskh1mnkvo",
+      "sourceOrder": 144,
+      "alt": "Imagen publicada por Menigar en Z4 E85/86",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2024/09/display_bmw-z4.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "994799b140a83c208a78bdc325a8f83543a61977876fe4cd47f98cf7f837bd5a",
+      "bytes": 193287,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:01.548540+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/03/bmw_z4_e89-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/03/bmw_z4_e89.jpg",
+      "localPath": "/assets/bmw/9811e0ea1ae1-bmw_z4_e89.jpg",
+      "sourceAlt": "reparacion cuadro bmw z4",
+      "sourceTitle": "reparación display cuadro de instrumentos bmw z4 e89",
+      "wordpressMediaId": 5932,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-4v97hh2q2uo",
+      "sourceOrder": 148,
+      "alt": "Imagen publicada por Menigar en Z4 E89",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/03/bmw_z4_e89.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "81c2997ecd6dbae50884dd8f975d5032f17b8a6043692f615a14d5b00e0d4c31",
+      "bytes": 87605,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:01.427923+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2020/03/display_bmw_z4_e89-300x225.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2020/03/display_bmw_z4_e89.jpg",
+      "localPath": "/assets/bmw/9b0d116a8c02-display_bmw_z4_e89.jpg",
+      "sourceAlt": "reparación display cuadro bmw z4 e89",
+      "sourceTitle": "reparación display cuadro bmw z4 e89",
+      "wordpressMediaId": 5934,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-4v97hh2q2uo",
+      "sourceOrder": 150,
+      "alt": "Imagen publicada por Menigar en Z4 E89",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2020/03/display_bmw_z4_e89.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "14b7a2497d0b05640589e5033dbd852dae6293fcf7d4114c2fc9a0a5070c5e3e",
+      "bytes": 61483,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:01.747712+00:00"
+    },
+    {
+      "originalSrc": "https://www.menigar.com/wp-content/uploads/2021/07/reparacion_pantalla_reposacabezas_bmw-1024x384.jpg",
+      "originalSrcset": "",
+      "downloadUrl": "https://www.menigar.com/wp-content/uploads/2021/07/reparacion_pantalla_reposacabezas_bmw.jpg",
+      "localPath": "/assets/bmw/f33b37ed11dd-reparacion_pantalla_reposacabezas_bmw.jpg",
+      "sourceAlt": "reparación pantalla reposacabezas bmw",
+      "sourceTitle": "reparación pantalla reposacabezas bmw",
+      "wordpressMediaId": 8618,
+      "mediaAssociation": "matching-captured-media-id-and-observed-url",
+      "sourceModuleId": "dslc-module-i3o6u69qqu",
+      "sourceOrder": 155,
+      "alt": "Imagen publicada por Menigar en BMW pantalla reposacabezas",
+      "fetchedUrl": "https://www.menigar.com/wp-content/uploads/2021/07/reparacion_pantalla_reposacabezas_bmw.jpg",
+      "sourceUids": [
+        "main-2321"
+      ],
+      "sha256": "254bceb93fcd6885201a820eeea6a07a326491129548e07b0bfbd9c1a068141e",
+      "bytes": 152474,
+      "mime": "image/jpeg",
+      "downloadedAt": "2026-10-13T22:58:02.019222+00:00"
+    }
+  ],
+  "failures": []
+}

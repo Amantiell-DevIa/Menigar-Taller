@@ -1,0 +1,17 @@
+var/
+private/
+__pycache__/
+.DS_Store
+*.pyc
+test-results/
+dist/
+.vercel/
+data/cache/
+data/cache_abs/
+data/wordpress_exports/
+screenshot_*.png
+# Internal working documents stay on this computer (public repository).
+/README.md
+/PLAN_NUEVA_WEB.md
+DISEÑOS/
+*.code-workspace

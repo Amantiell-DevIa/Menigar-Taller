@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow"><title>Prepara tu solicitud · MENIGAR</title>
+  <meta name="description" content="Cuéntanos qué pieza necesitas revisar. Añade fotos, describe la avería y reúne los datos de tu solicitud en un solo lugar.">
+  <link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/solicitud.css">
+  <script src="/data/catalogo-v2.js" defer></script><script src="/app.js" defer></script><script src="/solicitud.js" defer></script>
+</head>
+<body data-page="request">
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="/" aria-label="Menigar, inicio"><span class="brand-name">MENIGAR<span class="brand-dot">.</span></span><span class="brand-caption">Electrónica del automóvil · Desde 1989</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span>Menú</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav id="site-nav" aria-label="Navegación principal"><ul class="nav-list"><li><a href="/servicios.html">Servicios</a></li><li><a href="/envios.html">Cómo enviar</a></li><li><a href="/taller.html">El taller</a></li><li><a href="/ayuda.html">Ayuda</a></li></ul><a class="button button-primary header-cta" href="/solicitud.html" aria-current="page">Consultar mi pieza</a></nav>
+  </div></header>
+  <main id="contenido" class="request-main">
+    <div class="container request-container">
+      <nav class="breadcrumbs" aria-label="Ruta de navegación"><a href="/">Inicio</a><span aria-hidden="true">/</span><span>Tu solicitud</span></nav>
+      <div class="request-heading"><p class="eyebrow" id="requestEyebrow">Consulta tu pieza</p><h1 id="requestTitle">Consulta tu pieza.</h1><p id="requestIntro">Cuéntanos qué ocurre para que podamos orientarte. Puedes aportar fotos si no conoces la referencia o el modelo.</p></div>
+      <p id="reviewNotice" class="review-notice" role="status">Comprobando la disponibilidad del formulario…</p>
+      <noscript><p class="notice">Este formulario necesita JavaScript. Puedes contactar con <a href="mailto:informacion@menigar.com">informacion@menigar.com</a> o en el 91 662 27 81.</p></noscript>
+      <div id="requestWorkspace" class="request-layout">
+        <div class="request-surface">
+          <ol class="request-progress" aria-label="Pasos de la solicitud"><li data-step-label="0" aria-current="step"><span>01</span>Contacto y vehículo</li><li data-step-label="1"><span>02</span>Tu pieza</li><li data-step-label="2"><span>03</span>Revisión</li></ol>
+          <form id="requestForm" novalidate>
+            <div id="formErrors" class="error-summary" role="alert" tabindex="-1" hidden></div>
+            <section class="request-step" data-step="0" aria-labelledby="contactTitle">
+              <p class="step-kicker">Paso 1 de 3</p><h2 id="contactTitle" tabindex="-1">Tus datos y los del vehículo</h2><p class="step-intro">Así podremos responderte y relacionar cada pieza con tu vehículo.</p>
+              <fieldset class="choice-fieldset"><legend>¿Qué necesitas?</legend><div class="intent-options"><label><input type="radio" name="intent" value="consultation" checked><span><strong>Consultar mi pieza</strong><small>Quiero orientación antes de enviarla.</small></span></label><label><input type="radio" name="intent" value="repair"><span><strong>Preparar solicitud de envío</strong><small>Quiero reunir los datos para enviar mi pieza.</small></span></label></div><p id="intentHelp" class="input-help">Una consulta no autoriza una reparación ni prepara una recogida.</p></fieldset>
+              <div class="form-grid">
+                <div class="field"><label for="clientType">Solicito como</label><select id="clientType" name="clientType"><option value="particular">Particular</option><option value="taller">Taller o empresa</option></select></div>
+                <div class="field"><label for="customerName">Nombre o razón social <span aria-hidden="true">*</span></label><input id="customerName" name="customerName" autocomplete="name" maxlength="180" required></div>
+                <div class="field" id="contactField" hidden><label for="customerContact">Persona de contacto <span aria-hidden="true">*</span></label><input id="customerContact" name="customerContact" autocomplete="name" maxlength="180"></div>
+                <div class="field"><label for="customerEmail">Email <span aria-hidden="true">*</span></label><input id="customerEmail" name="customerEmail" type="email" autocomplete="email" maxlength="180" required><small>Te responderemos por este medio.</small></div>
+                <div class="field"><label for="customerPhone">Teléfono <span aria-hidden="true">*</span></label><input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" maxlength="40" required></div>
+              </div>
+              <fieldset class="vehicle-fields"><legend>El vehículo</legend><div class="form-grid"><div class="field"><label for="vehicleBrand">Marca <span aria-hidden="true">*</span></label><input id="vehicleBrand" name="vehicleBrand" list="vehicleBrands" maxlength="120" required><datalist id="vehicleBrands"></datalist></div><div class="field"><label for="vehicleModel">Modelo <span id="vehicleModelRequired" aria-hidden="true">*</span></label><input id="vehicleModel" name="vehicleModel" maxlength="120" required aria-describedby="vehicleModelHelp"><label class="checkbox-field unknown-model-choice"><input type="checkbox" id="vehicleModelUnknown" name="vehicleModelUnknown" aria-describedby="vehicleModelHelp">No conozco el modelo</label><small id="vehicleModelHelp">Si no lo conoces, márcalo y continúa la consulta con la información que tengas.</small></div></div>
+                <details class="optional-details"><summary>Añadir matrícula, bastidor y otros datos</summary><div class="form-grid"><div class="field"><label for="vehiclePlate">Matrícula</label><input id="vehiclePlate" name="vehiclePlate" maxlength="24"></div><div class="field"><label for="vehicleVin">Bastidor</label><input id="vehicleVin" name="vehicleVin" maxlength="40"></div><div class="field"><label for="vehicleYear">Año o fecha de matriculación</label><input id="vehicleYear" name="vehicleYear" maxlength="30"></div><div class="field"><label for="vehicleKm">Kilómetros, si los conoces</label><input id="vehicleKm" name="vehicleKm" inputmode="numeric" maxlength="20"></div></div></details>
+              </fieldset>
+              <fieldset id="shippingFields" class="vehicle-fields" hidden><legend>Datos para preparar el envío</legend><p class="input-help">No necesitas completarlos para una consulta previa.</p><div class="form-grid"><div class="field"><label for="taxId">NIF/CIF o identificación fiscal <span aria-hidden="true">*</span></label><input id="taxId" name="taxId" maxlength="50"></div><div class="field"><label for="address">Dirección <span aria-hidden="true">*</span></label><input id="address" name="address" autocomplete="street-address" maxlength="250"></div><div class="field"><label for="city">Localidad <span aria-hidden="true">*</span></label><input id="city" name="city" autocomplete="address-level2" maxlength="120"></div><div class="field"><label for="province">Provincia</label><input id="province" name="province" autocomplete="address-level1" maxlength="120"></div><div class="field"><label for="postalCode">Código postal <span aria-hidden="true">*</span></label><input id="postalCode" name="postalCode" autocomplete="postal-code" maxlength="20"></div><div class="field"><label for="country">País <span aria-hidden="true">*</span></label><input id="country" name="country" autocomplete="country-name" maxlength="80" value="España"></div></div>
+                <label class="checkbox-field"><input type="checkbox" id="returnDifferent" name="returnDifferent">La dirección de devolución es diferente</label>
+                <div id="returnFields" class="form-grid" hidden><div class="field"><label for="returnAddress">Dirección de devolución *</label><input id="returnAddress" name="returnAddress" maxlength="250"></div><div class="field"><label for="returnCity">Localidad de devolución *</label><input id="returnCity" name="returnCity" maxlength="120"></div><div class="field"><label for="returnPostalCode">Código postal de devolución *</label><input id="returnPostalCode" name="returnPostalCode" maxlength="20"></div><div class="field"><label for="returnCountry">País de devolución *</label><input id="returnCountry" name="returnCountry" maxlength="80" value="España"></div></div>
+              </fieldset>
+              <div class="form-actions"><button class="button button-primary" type="button" data-next>Continuar con la pieza <span aria-hidden="true">→</span></button></div>
+            </section>
+            <section class="request-step" data-step="1" aria-labelledby="piecesTitle" hidden>
+              <p class="step-kicker">Paso 2 de 3</p><h2 id="piecesTitle" tabindex="-1">La pieza y lo que falla</h2><p class="step-intro">Añade una unidad por pieza a reparar. Las llaves, cables y otros accesorios se indican dentro de su pieza.</p>
+              <div id="unitsContainer"></div>
+              <button class="button button-secondary" id="addUnit" type="button">+ Añadir otra pieza</button>
+              <p id="attachmentNotice" class="input-help" aria-live="polite">Hasta 5 archivos por pieza, 5 MB por archivo y 15 MB en total. JPG, PNG, WebP y PDF.</p>
+              <div class="form-actions"><button class="button button-secondary" type="button" data-back>← Volver</button><button class="button button-primary" type="button" data-next>Revisar solicitud →</button></div>
+            </section>
+            <section class="request-step" data-step="2" aria-labelledby="reviewTitle" hidden>
+              <p class="step-kicker">Paso 3 de 3</p><h2 id="reviewTitle" tabindex="-1">Revisa tu solicitud</h2><p class="step-intro">Comprueba el contacto, el vehículo y cada pieza. Puedes volver y corregir cualquier dato.</p>
+              <div id="reviewContent"></div>
+              <div class="request-trap" aria-hidden="true"><label for="requestWebsite">Sitio web</label><input id="requestWebsite" name="website" tabindex="-1" autocomplete="off"></div>
+              <div class="request-acknowledgements"><label class="checkbox-field"><input type="checkbox" id="privacyRead" name="privacyRead" required><span>He leído la <a href="/privacidad.html" target="_blank" rel="noopener">información de privacidad</a>.</span></label><label class="checkbox-field"><input type="checkbox" id="conditionsRead" name="conditionsRead" required><span>He leído las <a href="/condiciones.html" target="_blank" rel="noopener">condiciones de la solicitud</a>. La revisión de la pieza determinará el diagnóstico y presupuesto final.</span></label></div>
+              <p class="review-save-note" id="saveNote">La solicitud de esta vista previa se guardará únicamente en este equipo.</p>
+              <div class="form-actions"><button class="button button-secondary" type="button" data-back>← Volver</button><button class="button button-primary" id="submitRequest" type="submit">Guardar solicitud de prueba →</button></div>
+            </section>
+          </form>
+        </div>
+        <aside class="request-aside"><p class="eyebrow">Para identificar tu pieza</p><h2>¿No tienes todos<br>los datos?</h2><p>Una foto de la pieza y de su etiqueta puede ayudarnos a identificarla. Explica qué sucede y cuándo aparece el fallo.</p><div class="request-tip"><span aria-hidden="true">01</span><div><strong>Referencia de pieza</strong><p>Está en la etiqueta del componente. No es lo mismo que el código de avería de la diagnosis.</p></div></div><div class="request-tip"><span aria-hidden="true">02</span><div><strong>Más de una pieza</strong><p>Añádelas por separado y señala qué accesorios acompañan a cada una.</p></div></div><hr><p>¿Ya enviaste una pieza?</p><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso →</a><p class="input-help">Ten a mano tu número de orden. Así podremos localizarla sin crear otra solicitud.</p><p class="request-contact"><a href="tel:+34916622781">91 662 27 81</a><br><a href="mailto:informacion@menigar.com">informacion@menigar.com</a></p></aside>
+      </div>
+      <section id="confirmation" class="confirmation-card" hidden aria-labelledby="confirmationTitle" tabindex="-1"><p class="eyebrow" id="confirmationKicker">Solicitud guardada en esta vista previa</p><h2 id="confirmationTitle">Tu solicitud está guardada.</h2><p>Referencia de solicitud</p><p class="confirmation-reference" id="confirmationReference"></p><p id="confirmationMessage">Los datos y archivos se han guardado en el entorno de pruebas. No se ha enviado un correo ni una orden al taller.</p><div id="confirmationUnits"></div><div class="form-actions"><a id="summaryLink" class="button button-primary" target="_blank" rel="noopener">Ver e imprimir resumen</a><a id="downloadLink" class="button button-secondary" download>Descargar datos</a><button class="button button-secondary" type="button" id="newRequest">Nueva solicitud</button></div><div class="notice"><strong>Antes de enviar tu pieza</strong><p id="confirmationNext">Esta referencia identifica la solicitud de prueba. Espera la confirmación y las instrucciones del taller antes de enviar material.</p></div></section>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container"><a class="brand" href="/">MENIGAR</a><p>Electrónica del automóvil desde 1989 · Alcobendas, Madrid</p><div class="footer-links"><a href="/ayuda.html">Contacto</a><a href="/privacidad.html">Privacidad</a><a href="/condiciones.html">Condiciones</a><a href="/cookies.html">Cookies</a></div><p>Desarrollos Digitales Menigar, S.L.</p></div></footer>
+</body></html>

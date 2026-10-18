@@ -1,996 +1,552 @@
-/**
- * MENIGAR DESARROLLOS DIGITALES - LOGIC & INTERACTIVITY
- * High-Tech Automotive Diagnostic & Quote Engine
+/* MENIGAR — Navigation, guided discovery and catalogue search.
+ * Search finds documented information; it never determines a diagnosis or a price.
+ * No third-party tracking, fake form submission or destructive source transformation.
  */
-
-document.addEventListener('DOMContentLoaded', () => {
-  initGoogleDynamicIsland();
-  initSmartVehicleFinder();
-  initDtcSearchEngine();
-  initTopRepairFilters();
-  initReviewsFilter();
-  initModalAndForms();
-  initMobileNavigation();
-  initAccessibility();
-});
-
-/* ==========================================================================
-   1. NOTIFICACIÓN FLOTANTE DYNAMIC ISLAND (RESEÑAS GOOGLE)
-   ========================================================================== */
-function initGoogleDynamicIsland() {
-  const island = document.getElementById('googleIslandBadge');
-  if (!island) return;
-
-  let hasTriggered = false;
-  let hideTimer = null;
-
-  const showIsland = () => {
-    island.classList.add('is-visible');
-    
-    // Limpiar temporizador previo si lo hubiera
-    if (hideTimer) clearTimeout(hideTimer);
-    
-    // Mantener flotante en la pantalla durante 4 segundos y luego ocultar suavemente
-    hideTimer = setTimeout(() => {
-      island.classList.remove('is-visible');
-    }, 4000);
-  };
-
-  const handleScroll = () => {
-    const scrollPos = window.scrollY || document.documentElement.scrollTop;
-
-    // Se activa al hacer un poco de scroll (más de 60px)
-    if (scrollPos > 60 && !hasTriggered) {
-      hasTriggered = true;
-      showIsland();
-    } else if (scrollPos < 20) {
-      // Si el usuario vuelve a la parte superior de la web, reseteamos el trigger
-      // para que al bajar de nuevo vuelva a verse la animación
-      hasTriggered = false;
-    }
-  };
-
-  window.addEventListener('scroll', handleScroll, { passive: true });
-
-  // Si el usuario hace clic o pulsa en el pill, navega a opiniones y oculta la isla
-  island.addEventListener('click', () => {
-    if (hideTimer) clearTimeout(hideTimer);
-    island.classList.remove('is-visible');
-  });
-}
-
-/* ==========================================================================
-   2. SMART VEHICLE & FAULT FINDER (SELECTOR EN 3 CLICS)
-   ========================================================================== */
-const VEHICLE_DATABASE = {
-  abs: {
-    name: 'Módulo y Bomba de ABS / ESP',
-    brands: {
-      bmw: {
-        name: 'BMW',
-        models: [
-          {
-            id: 'bmw-s1',
-            name: 'Serie 1 (E81, E87, F20) 2004-2016',
-            title: 'Reparación Módulo ABS BMW Serie 1 (ATE MK60 / MK61 / MK100)',
-            desc: 'Testigos de ABS, DSC y freno de mano encendidos en amarillo. Fallo recurrente en sensor de presión interno o motor de la bomba de retorno. Reparación electrónica completa sin cambiar la bomba.',
-            lights: ['abs', 'esp', 'brake'],
-            codes: ['5DF5 (Fallo Unidad)', '5DF0 (Motor Bomba)', '5E20 (Sensor Presión)']
-          },
-          {
-            id: 'bmw-s3',
-            name: 'Serie 3 (E46, E90, E91, E92, F30) 1998-2016',
-            title: 'Reparación Centralita y Bomba ABS BMW Serie 3',
-            desc: 'Avería clásica de la unidad hidráulica ATE MK60 y MK61. Se desactiva el control de estabilidad DSC. Reparación en 24h con sustitución de componentes electrónicos reforzados.',
-            lights: ['abs', 'esp', 'brake'],
-            codes: ['5DF5', '5DF0', '5E20', '5DF1']
-          },
-          {
-            id: 'bmw-s5',
-            name: 'Serie 5 (E39, E60, F10) / X5',
-            title: 'Reparación ABS Bosch 5.7 / DSC BMW Serie 5 y X5',
-            desc: 'Fallo al calentarse el motor: los velocímetros fallan o se encienden 3 luces en el cuadro. Reparación de pistas microscópicas de conexión híbrida.',
-            lights: ['abs', 'esp', 'brake'],
-            codes: ['Error Sensor Rueda', 'Fallo Relé Válvulas', 'Fallo Comunicación CAN']
-          },
-          {
-            id: 'bmw-moto',
-            name: 'BMW Motorrad (Motos R1200GS, F800, etc.)',
-            title: 'Reparación Módulo ABS Integral FTE / ATE para Motos BMW',
-            desc: 'Fallo del servofreno o motor de bomba de ABS en motocicletas BMW. Reparamos la unidad completa evitando los más de 2.000€ que cuesta en concesionario.',
-            lights: ['abs', 'brake'],
-            codes: ['Fallo Motor Bomba', 'Presión Insuficiente', 'Fallo Modulador']
-          }
-        ]
-      },
-      vag: {
-        name: 'Volkswagen / Audi / Seat / Skoda',
-        models: [
-          {
-            id: 'vag-mk60',
-            name: 'Golf V / VI, León II, A3 8P, Octavia (ATE MK60 / MK60EC1)',
-            title: 'Reparación ABS ATE MK60 y MK60EC1 Grupo VAG',
-            desc: 'Fallo masivo de sensor de presión de frenado G201 o centralita electrónica defectuosa. Testigos de ABS y ESP fijos en el cuadro. Reparación garantizada por 2 años.',
-            lights: ['abs', 'esp', 'brake'],
-            codes: ['01435 (Sensor G201)', '01130 (Señal no plausible)', '16352 (Unidad Defectuosa)']
-          },
-          {
-            id: 'vag-mk100',
-            name: 'Golf VII, Polo, Ibiza, A1, Fabia (ATE MK100)',
-            title: 'Reparación Módulo ABS ATE MK100 Grupo VAG',
-            desc: 'Pérdida de comunicación con el módulo de freno o fallo interno en la memoria EEPROM. Reparación y prueba en 24h en nuestro taller.',
-            lights: ['abs', 'esp'],
-            codes: ['01276 (Bomba V64)', 'DTC402012', 'Error Comunicación']
-          }
-        ]
-      },
-      renault: {
-        name: 'Renault',
-        models: [
-          {
-            id: 'renault-abs-mk60',
-            name: 'Megane II, Scénic II, Laguna II, Clio III',
-            title: 'Reparación Módulo ABS ATE MK60 Renault',
-            desc: 'Avería interna del sensor de presión hidráulico o relé de alimentación de bomba. Mensaje "Revisar ABS / ESP" en la pantalla de abordo.',
-            lights: ['abs', 'esp'],
-            codes: ['DF088 (Sensor Presión)', 'DF010', 'DF017']
-          }
-        ]
-      },
-      mercedes: {
-        name: 'Mercedes-Benz',
-        models: [
-          {
-            id: 'mb-sbc',
-            name: 'Clase E (W211), Clase SL (R230), CLS (W219) - Módulo SBC',
-            title: 'Reparación Unidad de Freno Electrohidráulico SBC Mercedes',
-            desc: 'Aviso en rojo en el cuadro: "Freno: ¡Detenga el vehículo!". Límite de ciclo de pisadas alcanzado o pérdida de presión acumulador.',
-            lights: ['brake', 'abs'],
-            codes: ['C249F (Vida Útil)', 'C233D', 'C223D', 'C2131']
-          }
-        ]
-      },
-      citroen: {
-        name: 'Citroën / Peugeot',
-        models: [
-          {
-            id: 'psa-mk70',
-            name: 'C2, C3, C4, 206, 207, 307 (ATE MK70)',
-            title: 'Reparación Módulo ABS ATE MK70 PSA',
-            desc: 'El fallo más común del grupo francés: fallo de alimentación del motor de bomba de recirculación de ABS.',
-            lights: ['abs'],
-            codes: ['C1380 (Fallo Motor Bomba)', 'C1350', 'C1301']
-          }
-        ]
-      }
-    }
-  },
-  cuadro: {
-    name: 'Cuadros de Instrumentos y Odómetros',
-    brands: {
-      renault: {
-        name: 'Renault',
-        models: [
-          {
-            id: 'scenic2',
-            name: 'Scénic II y Grand Scénic (2003-2009)',
-            title: 'Reparación Cuadro Digital Renault Scénic II',
-            desc: 'El cuadro se apaga por completo, parpadea intermitentemente, se desprograma la hora o suma kilómetros de forma errónea. Sustituimos transformador de alimentación, transistores MOSFET y resistencias reforzadas.',
-            lights: ['engine'],
-            codes: ['Fallo Alimentación VFD', 'Pérdida de Kilometraje Parcial']
-          },
-          {
-            id: 'megane3',
-            name: 'Megane III y Laguna III',
-            title: 'Reparación Iluminación y Pantalla Renault Megane 3',
-            desc: 'Fallo de la iluminación en el velocímetro digital o cuadro analógico apagado.',
-            lights: [],
-            codes: ['Fallo Retroiluminación LED', 'Microprocesador']
-          }
-        ]
-      },
-      ford: {
-        name: 'Ford',
-        models: [
-          {
-            id: 'focus2',
-            name: 'Focus II y C-MAX (2004-2011)',
-            title: 'Reparación Cuadro de Instrumentos Ford Focus II',
-            desc: 'Síntomas: El coche se para en marcha o no arranca, parpadea el testigo rojo del inmovilizador, agujas se caen a cero y en el display aparece "Fallo motor". Causado por grietas en soldaduras del conector principal.',
-            lights: ['engine', 'brake'],
-            codes: ['U1900 (Fallo Bus CAN)', 'U0155', 'P1260 (Inmovilizador)']
-          }
-        ]
-      },
-      psa_fiat: {
-        name: 'Citroën / Fiat / Peugeot Industriales',
-        models: [
-          {
-            id: 'odometro-399999',
-            name: 'Ducato, Jumper, Boxer (2006-2020)',
-            title: 'Reparación Fallo Cuentakilómetros Bloqueado en 399.999 km',
-            desc: 'El odómetro alcanza los 399.999 km y se bloquea permanentemente mostrando guiones o parpadeo, impidiendo superar la inspección técnica ITV. Desbloqueo y ajuste exacto en 24h.',
-            lights: [],
-            codes: ['Bloqueo EEPROM 399.999km', 'Fallo Display LCD']
-          }
-        ]
-      },
-      vag: {
-        name: 'Audi / Seat / VW / Skoda',
-        models: [
-          {
-            id: 'vag-luz',
-            name: 'Golf V, León II, A3 8P, Octavia',
-            title: 'Reparación Fallo Iluminación Cuadros VAG',
-            desc: 'Las agujas o las esferas no se iluminan, parpadean o se quedan en penumbra de noche. Cambio de líneas LED y controladores de potencia.',
-            lights: [],
-            codes: ['Fallo Driver Iluminación', 'Fallo Display FIS']
-          }
-        ]
-      },
-      nissan: {
-        name: 'Nissan',
-        models: [
-          {
-            id: 'nissan-oil',
-            name: 'Atleon, Cabstar, Interstar, Terrano',
-            title: 'Reparación Fallo Mensaje "OIL" en Display Nissan',
-            desc: 'Mensaje permanente "OIL" en el display digital a pesar de tener el nivel de aceite correcto y resetear el servicio.',
-            lights: ['engine'],
-            codes: ['Aviso Falso Nivel Aceite', 'Corrupción Datos Memoria']
-          }
-        ]
-      }
-    }
-  },
-  multimedia: {
-    name: 'Pantallas Táctiles y Multimedia',
-    brands: {
-      hyundai: {
-        name: 'Hyundai / Kia',
-        models: [
-          {
-            id: 'tucson-burbujas',
-            name: 'Tucson (2015-2021) y Sportage',
-            title: 'Reparación de Burbujas en Pantalla Táctil Hyundai Tucson',
-            desc: 'Aparición de burbujas de aire y pegamento derretido en la pantalla táctil de 8", perdiendo respuesta al tocarla. Sustituimos el digitalizador por uno nuevo reforzado que nunca vuelve a crear burbujas.',
-            lights: [],
-            codes: ['Fallo Adhesivo Óptico LOCA', 'Pulsaciones Fantasma']
-          }
-        ]
-      },
-      bmw: {
-        name: 'BMW / Mini',
-        models: [
-          {
-            id: 'bmw-puntos-negros',
-            name: 'Serie 1, Serie 3, Mini Cooper (Pantalla 6.5" y 8.8")',
-            title: 'Reparación de Puntos Negros en Pantallas BMW y Mini',
-            desc: 'Manchas negras circulares que crecen y tapan la información de navegación o radio. Reemplazo del panel LCD original.',
-            lights: [],
-            codes: ['Fuga Cristales Líquidos', 'Mancha Negra Central']
-          }
-        ]
-      },
-      opel: {
-        name: 'Opel',
-        models: [
-          {
-            id: 'opel-intellilink',
-            name: 'Astra K, Insignia (Navi Pro 39042448)',
-            title: 'Reparación Pantalla IntelliLink Opel Ref. 39042448',
-            desc: 'La pantalla se queda negra, se congela el logotipo de Opel o el táctil deja de responder.',
-            lights: [],
-            codes: ['Fallo Módulo HMI', 'Fallo Display LCD']
-          }
-        ]
-      },
-      vag: {
-        name: 'Volkswagen / Seat / Skoda',
-        models: [
-          {
-            id: 'vw-composition',
-            name: 'Golf VII, Polo, Tiguan (Composition / Discover Media)',
-            title: 'Reparación Pantalla Táctil VW Composition Media',
-            desc: 'La pantalla cambia sola de emisora ("toques fantasma") o la mitad de la pantalla no responde al pulsar.',
-            lights: [],
-            codes: ['Descalibración Digitalizador', 'Fallo Cristal Táctil']
-          }
-        ]
-      }
-    }
-  },
-  display: {
-    name: 'Displays LCD y Cuentakilómetros',
-    brands: {
-      mercedes: {
-        name: 'Mercedes-Benz',
-        models: [
-          {
-            id: 'mb-vito',
-            name: 'Vito, Viano (W639), Clase A (W169), Clase B',
-            title: 'Reparación Display Central Mercedes Vito y Viano',
-            desc: 'El display LCD del cuentakilómetros se va apagando y pierde contraste a medida que el coche se calienta. Sustitución de pantalla por una de alta definición.',
-            lights: [],
-            codes: ['Fallo Tira Plana / Flex Display']
-          }
-        ]
-      },
-      vag: {
-        name: 'Audi / VW',
-        models: [
-          {
-            id: 'vag-fis',
-            name: 'Audi A3, A4, A6, Golf IV (Pantalla FIS)',
-            title: 'Reparación Display FIS / MFA Grupo VAG',
-            desc: 'Líneas horizontales o verticales muertas, pérdida de píxeles que impiden ver el consumo o los avisos de avería.',
-            lights: [],
-            codes: ['Pérdida de Píxeles LCD']
-          }
-        ]
-      }
-    }
-  },
-  cambio: {
-    name: 'Electrónica de Cambio Automático',
-    brands: {
-      vag: {
-        name: 'Volkswagen / Audi / Seat / Skoda',
-        models: [
-          {
-            id: 'dsg-mechatronic',
-            name: 'Cajas DSG 6 (DQ250) y DSG 7 (DQ200)',
-            title: 'Reparación Mecatrónica y Centralita DSG',
-            desc: 'El cambio da tirones, no entran las marchas pares o impares, o parpadea la llave inglesa/letra PRNDS en el cuadro. Reparación de placas y solenoides.',
-            lights: ['engine', 'brake'],
-            codes: ['P17BF (Protección de Bomba)', 'P189C (Presión Insuficiente)', 'P0706']
-          }
-        ]
-      },
-      opel: {
-        name: 'Opel',
-        models: [
-          {
-            id: 'easytronic-f',
-            name: 'Corsa C/D, Meriva, Astra H (Easytronic)',
-            title: 'Reparación Módulo de Embrague y Cambio Easytronic',
-            desc: 'Aparece la letra "F" en el cuadro y el coche no arranca. Reparación electrónica del actuador de embrague y motor eléctrico.',
-            lights: ['engine'],
-            codes: ['Fallo Letra F', 'P1607 (Error Actuador Embrague)', 'P1700']
-          }
-        ]
-      },
-      mercedes: {
-        name: 'Mercedes-Benz',
-        models: [
-          {
-            id: '7g-tronic',
-            name: 'Cajas 7G-Tronic (722.9)',
-            title: 'Reparación Placa Electrónica de Cambio 7G-Tronic',
-            desc: 'El cambio se bloquea en una marcha de emergencia (limp mode). Avería recurrente de los sensores de velocidad internos Y3/8n1 y Y3/8n2.',
-            lights: ['engine'],
-            codes: ['0717 (Señal RPM Y3/8n1)', '0718', '2767', '2768']
-          }
-        ]
-      }
-    }
-  },
-  ecu: {
-    name: 'Centralita de Motor ECU',
-    brands: {
-      opel: {
-        name: 'Opel',
-        models: [
-          {
-            id: 'isuzu-17',
-            name: 'Astra, Corsa, Meriva 1.7 DTi (Isuzu)',
-            title: 'Reparación Centralita Bomba Inyección Opel 1.7 DTi (Delphi / Isuzu)',
-            desc: 'El coche se para en caliente y no arranca hasta que se enfría. Soldaduras rotas y componentes térmicos degradados. Modificación y refuerzo.',
-            lights: ['engine'],
-            codes: ['P0251 (Fallo Válvula Dosificación Bomba)', 'P0370']
-          }
-        ]
-      }
-    }
-  },
-  bsi: {
-    name: 'Unidad BSI / Confort',
-    brands: {
-      psa: {
-        name: 'Peugeot / Citroën',
-        models: [
-          {
-            id: 'psa-bsi',
-            name: '206, 207, 307, 407, Xsara, Picasso, C4',
-            title: 'Reparación Unidad BSI Peugeot y Citroën',
-            desc: 'Fallos inexplicables: limpiaparabrisas se activan solos, fallo de luces, cierre centralizado no abre o descarga de batería.',
-            lights: ['engine'],
-            codes: ['Fallo Red Multiplexada VAN/CAN', 'Relé Cierre Quemado']
-          }
-        ]
-      }
-    }
-  },
-  inmo: {
-    name: 'Inmovilizador & Blue&Me',
-    brands: {
-      fiat: {
-        name: 'Fiat / Alfa Romeo / Lancia',
-        models: [
-          {
-            id: 'blue-and-me',
-            name: 'Fiat 500, Punto, Bravo, Giulietta, Mito',
-            title: 'Reparación Centralita Bluetooth Blue&Me Fiat',
-            desc: 'Cuentakilómetros total parpadea continuamente, no conecta el teléfono por Bluetooth o descarga completamente la batería del coche en 24 horas.',
-            lights: [],
-            codes: ['Consumo de Batería 0.3A en reposo', 'Odómetro Parpadeando']
-          }
-        ]
-      }
-    }
-  }
-};
-
-function initSmartVehicleFinder() {
-  const compSelect = document.getElementById('componentSelect');
-  const brandSelect = document.getElementById('brandSelect');
-  const modelSelect = document.getElementById('modelSelect');
-  const findBtn = document.getElementById('findFixBtn');
-  const form = document.getElementById('vehicleFinderForm');
-  const resultPanel = document.getElementById('finderResult');
-
-  // Tabs & contenedores de modo
-  const tabSymptoms = document.getElementById('tabModeSymptoms');
-  const tabComponent = document.getElementById('tabModeComponent');
-  const tabDtc = document.getElementById('tabModeDtc');
-  const symptomsContainer = document.getElementById('symptomsModeContainer');
-  const dtcContainer = document.getElementById('dtcModeContainer');
-  const symptomCards = document.querySelectorAll('.symptom-card[data-comp]');
-  const btnHelpUnknown = document.getElementById('btnHelpUnknown');
-
-  // Función de conmutación de modos
-  window.setFinderMode = function(mode) {
-    if (tabSymptoms) {
-      tabSymptoms.classList.toggle('active', mode === 'symptoms');
-      tabSymptoms.setAttribute('aria-selected', mode === 'symptoms');
-    }
-    if (tabComponent) {
-      tabComponent.classList.toggle('active', mode === 'component');
-      tabComponent.setAttribute('aria-selected', mode === 'component');
-    }
-    if (tabDtc) {
-      tabDtc.classList.toggle('active', mode === 'dtc');
-      tabDtc.setAttribute('aria-selected', mode === 'dtc');
-    }
-
-    if (mode === 'symptoms') {
-      if (symptomsContainer) symptomsContainer.style.display = 'block';
-      if (form) form.style.display = 'grid';
-      if (dtcContainer) dtcContainer.style.display = 'none';
-    } else if (mode === 'component') {
-      if (symptomsContainer) symptomsContainer.style.display = 'none';
-      if (form) form.style.display = 'grid';
-      if (dtcContainer) dtcContainer.style.display = 'none';
-      if (compSelect) compSelect.focus();
-    } else if (mode === 'dtc') {
-      if (symptomsContainer) symptomsContainer.style.display = 'none';
-      if (form) form.style.display = 'none';
-      if (dtcContainer) dtcContainer.style.display = 'block';
-      const dtcInput = document.getElementById('dtcInput');
-      if (dtcInput) dtcInput.focus();
-    }
-  };
-
-  if (tabSymptoms) tabSymptoms.addEventListener('click', () => window.setFinderMode('symptoms'));
-  if (tabComponent) tabComponent.addEventListener('click', () => window.setFinderMode('component'));
-  if (tabDtc) tabDtc.addEventListener('click', () => window.setFinderMode('dtc'));
-
-  // Clic en tarjetas de síntomas
-  symptomCards.forEach(card => {
-    card.addEventListener('click', () => {
-      symptomCards.forEach(c => c.classList.remove('active'));
-      card.classList.add('active');
-      const compVal = card.getAttribute('data-comp');
-      if (compSelect && compVal) {
-        compSelect.value = compVal;
-        compSelect.dispatchEvent(new Event('change'));
-        if (brandSelect && !brandSelect.disabled) {
-          brandSelect.focus();
-        }
-      }
-    });
-  });
-
-  // Botón "¿No sabes qué le pasa?"
-  if (btnHelpUnknown) {
-    btnHelpUnknown.addEventListener('click', () => {
-      openQuoteModalWith({
-        component: 'Diagnóstico de Avería No Identificada',
-        symptoms: 'Necesito que un técnico de Menigar me ayude a diagnosticar el problema de mi vehículo.'
-      });
-    });
-  }
-
-  if (!compSelect || !brandSelect || !modelSelect) return;
-
-  // Paso 1: Cambia componente
-  compSelect.addEventListener('change', () => {
-    const compVal = compSelect.value;
-    brandSelect.innerHTML = '<option value="">Selecciona la marca...</option>';
-    modelSelect.innerHTML = '<option value="">Primero elige marca...</option>';
-    brandSelect.disabled = true;
-    modelSelect.disabled = true;
-    findBtn.disabled = true;
-    resultPanel.style.display = 'none';
-
-    // Sincronizar tarjeta de síntoma activa si existe
-    symptomCards.forEach(c => {
-      c.classList.toggle('active', c.getAttribute('data-comp') === compVal);
-    });
-
-    if (compVal && VEHICLE_DATABASE[compVal]) {
-      const brands = VEHICLE_DATABASE[compVal].brands;
-      Object.keys(brands).forEach(bKey => {
-        const opt = document.createElement('option');
-        opt.value = bKey;
-        opt.textContent = brands[bKey].name;
-        brandSelect.appendChild(opt);
-      });
-      brandSelect.disabled = false;
-    }
-  });
-
-  // Paso 2: Cambia marca
-  brandSelect.addEventListener('change', () => {
-    const compVal = compSelect.value;
-    const brandVal = brandSelect.value;
-    modelSelect.innerHTML = '<option value="">Selecciona el modelo...</option>';
-    modelSelect.disabled = true;
-    findBtn.disabled = true;
-    resultPanel.style.display = 'none';
-
-    if (compVal && brandVal && VEHICLE_DATABASE[compVal]?.brands[brandVal]) {
-      const models = VEHICLE_DATABASE[compVal].brands[brandVal].models;
-      models.forEach(m => {
-        const opt = document.createElement('option');
-        opt.value = m.id;
-        opt.textContent = m.name;
-        modelSelect.appendChild(opt);
-      });
-      modelSelect.disabled = false;
-    }
-  });
-
-  // Paso 3: Cambia modelo
-  modelSelect.addEventListener('change', () => {
-    findBtn.disabled = !modelSelect.value;
-  });
-
-  // Submit del Finder
-  form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const compVal = compSelect.value;
-    const brandVal = brandSelect.value;
-    const modelVal = modelSelect.value;
-
-    if (!compVal || !brandVal || !modelVal) return;
-
-    const brandData = VEHICLE_DATABASE[compVal]?.brands[brandVal];
-    const modelData = brandData?.models.find(m => m.id === modelVal);
-
-    if (!modelData) return;
-
-    // Inyectar datos en el resultado
-    document.getElementById('resTitle').textContent = modelData.title;
-    document.getElementById('resDesc').textContent = modelData.desc;
-
-    // Inyectar Testigos Luminosos
-    const lightsWrap = document.getElementById('resLights');
-    lightsWrap.innerHTML = '';
-    if (modelData.lights && modelData.lights.length > 0) {
-      modelData.lights.forEach(l => {
-        const badge = document.createElement('div');
-        badge.className = `dash-light ${l === 'brake' ? 'red' : 'amber'}`;
-        if (l === 'abs') badge.innerHTML = 'ABS';
-        else if (l === 'esp') badge.innerHTML = 'ESP';
-        else if (l === 'brake') badge.innerHTML = '(!)';
-        else if (l === 'engine') badge.innerHTML = 'MIL';
-        lightsWrap.appendChild(badge);
-      });
-    } else {
-      lightsWrap.innerHTML = '<span style="font-size:0.85rem; color:#94a3b8;">Fallo visible en pantalla/iluminación</span>';
-    }
-
-    // Inyectar Códigos de error
-    const codesWrap = document.getElementById('resCodes');
-    codesWrap.innerHTML = '';
-    modelData.codes.forEach(c => {
-      const pill = document.createElement('span');
-      pill.className = 'code-pill';
-      pill.textContent = c;
-      codesWrap.appendChild(pill);
-    });
-
-    // Configurar botones de CTA
-    const quoteBtn = document.getElementById('quoteDirectBtn');
-    quoteBtn.onclick = () => {
-      openQuoteModalWith({
-        vehicle: `${brandData.name} - ${modelData.name}`,
-        component: VEHICLE_DATABASE[compVal].name,
-        symptoms: `${modelData.title}. Síntomas: ${modelData.desc}`
-      });
+(() => {
+  'use strict';
+  const all = Array.isArray(window.MENIGAR_CATALOG) ? window.MENIGAR_CATALOG : [];
+  const families = Array.isArray(window.MENIGAR_FAMILIES) ? window.MENIGAR_FAMILIES : [];
+  const collator = new Intl.Collator('es', { numeric: true, sensitivity: 'base' });
+  const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+  const compact = value => normalize(value).replace(/\s/g, '');
+  const escape = value => String(value || '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
+  const unique = values => [...new Set(values.filter(Boolean))].sort(collator.compare);
+  const familyByKey = new Map(families.map(family => [family.key, family]));
+  const recordsById = new Map(all.map(record => [record.uid, record]));
+  const genericBrand = value => /^(otras?|otros?|varios?|multimarca|general|todas? las marcas|sin marca)$/i.test(String(value || '').trim());
+  const brands = unique(all.map(record => record.brand).filter(value => !genericBrand(value)));
+  const findBrand = value => brands.find(brand => normalize(brand) === normalize(value)) || '';
+  const validFamily = value => familyByKey.has(value) ? value : '';
+  const safeLocal = value => /^\/reparaciones\/[a-z0-9_-]+\/$/i.test(value || '') ? value : '/servicios.html';
+  const icon = name => {
+    const paths = {
+      cuadro:'<path d="M3 17a9 9 0 1 1 18 0M5 17h14M12 12l4-4M6 9l1 1M12 5v2M18 9l-1 1"/>',
+      abs:'<circle cx="12" cy="12" r="7"/><path d="M3 8c-2 2-2 6 0 8M21 8c2 2 2 6 0 8M10 9v6M14 9v6M10 12h4"/>',
+      display:'<rect x="3" y="5" width="18" height="13" rx="2"/><path d="M7 9h4M7 13h9M7 21h10"/>',
+      multimedia:'<rect x="3" y="4" width="18" height="15" rx="2"/><path d="M8 8h8v5H8zM8 16h8M11 22h2"/>',
+      cambio:'<circle cx="7" cy="6" r="2"/><circle cx="17" cy="6" r="2"/><circle cx="17" cy="18" r="2"/><path d="M7 8v8h10M17 8v8M12 6v10"/>',
+      palanca:'<rect x="9" y="3" width="6" height="6" rx="2"/><path d="M12 9v9M8 18h8l3 3H5l3-3Z"/>',
+      bluetooth:'<path d="m8 7 9 10-5 4V3l5 4L8 17M4 10c-1 1-1 3 0 4M21 8c2 2 2 6 0 8"/>',
+      ecu:'<rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/>',
+      clima:'<path d="M12 3v18M4 7l16 10M4 17 20 7M9 5l3 3 3-3M9 19l3-3 3 3M5 10l4-1-1-4M16 19l-1-4 4-1M5 14l4 1-1 4M16 5l-1 4 4 1"/>',
+      bsi:'<rect x="5" y="4" width="14" height="16" rx="2"/><path d="m13 7-4 6h4l-2 4 5-7h-4l1-3Z"/>',
+      inmo:'<circle cx="8" cy="9" r="4"/><path d="m11 12 8 8M16 17l3-3M14 15l2-2"/>'
     };
-
-    const waBtn = document.getElementById('whatsappDirectBtn');
-    const waText = encodeURIComponent(`Hola Menigar, consulto por la reparación de: ${modelData.title} (${brandData.name}). ¿Tenéis disponibilidad para recogida?`);
-    waBtn.href = `https://wa.me/34916622781?text=${waText}`;
-
-    // Mostrar panel
-    resultPanel.style.display = 'block';
-    resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-  });
-}
-
-// Función global para abrir el Finder preseleccionando un componente
-window.openFinderWith = function(compKey) {
-  const compSelect = document.getElementById('componentSelect');
-  const finderElem = document.getElementById('buscador-averias');
-  
-  if (typeof window.setFinderMode === 'function') {
-    window.setFinderMode('symptoms');
-  }
-
-  const symptomCards = document.querySelectorAll('.symptom-card[data-comp]');
-  symptomCards.forEach(c => {
-    c.classList.toggle('active', c.getAttribute('data-comp') === compKey);
-  });
-
-  if (compSelect && finderElem) {
-    compSelect.value = compKey;
-    compSelect.dispatchEvent(new Event('change'));
-    finderElem.scrollIntoView({ behavior: 'smooth' });
-  } else {
-    window.location.href = 'index.html#buscador-averias';
-  }
-};
-
-/* ==========================================================================
-   3. DTC / OBD ERROR CODE SEARCH ENGINE
-   ========================================================================== */
-const DTC_DATABASE = {
-  '5DF5': {
-    code: '5DF5',
-    title: 'BMW Módulo ABS (ATE MK60 / MK61) - Fallo Interno Centralita',
-    desc: 'Error crítico en memoria y procesador de la unidad de mando ABS en BMW Serie 1 (E87), Serie 3 (E90), Z4. Reparación garantizada 2 años en 24h.'
-  },
-  '01130': {
-    code: '01130',
-    title: 'Grupo VAG (VW, Seat, Skoda, Audi) - ABS Funcionamiento no Plausible',
-    desc: 'Aparece en Golf V, León II, Octavia. Módulo hidráulico pierde calibración de presión o fallo de comunicación. Reparación completa garantizada.'
-  },
-  'C1380': {
-    code: 'C1380',
-    title: 'Citroën / Peugeot (ATE MK70) - Fallo Motor Bomba de Recirculación',
-    desc: 'Avería habitual en C3, C4, 207, 307. Bloqueo de alimentación del motor eléctrico de ABS. Sustitución de electrónica de potencia reforzada.'
-  },
-  '16352': {
-    code: '16352',
-    title: 'Grupo VAG - Módulo de Control Eléctrico Defectuoso',
-    desc: 'Avería de hardware en centralita electrónica de frenado o confort. Reparamos el componente original sin codificar nada.'
-  },
-  '399999': {
-    code: '399.999 km',
-    title: 'Furgonetas Citroën Jumper / Fiat Ducato / Peugeot Boxer - Cuentakilómetros Parado',
-    desc: 'El odómetro digital se detiene al llegar a 399.999 km e impide pasar la ITV. Desbloqueo y ajuste exacto en 24h.'
-  },
-  'OIL': {
-    code: 'Aviso OIL',
-    title: 'Nissan Industriales (Atleon, Cabstar, Interstar) - Mensaje OIL en Display',
-    desc: 'El cuadro marca aviso de aceite de manera fija debido a una corrupción en el procesador. Reparación en taller en 24h.'
-  },
-  '01276': {
-    code: '01276',
-    title: 'Grupo VAG - Bomba Hidráulica de ABS (V64)',
-    desc: 'Fallo de alimentación o circuito abierto en la bomba hidráulica de ABS. Reparación de motor y conexiones internas.'
-  },
-  '01435': {
-    code: '01435',
-    title: 'Grupo VAG - Transmisor 1 Presión de Frenado (G201)',
-    desc: 'El sensor piezoeléctrico de presión interna de la bomba ATE MK60 falla. Reparamos el bloque sustituyendo el transductor por uno nuevo.'
-  },
-  '5DF0': {
-    code: '5DF0',
-    title: 'BMW ABS - Fallo Motor de la Bomba Hidráulica',
-    desc: 'Desgaste prematuro de escobillas del motor o gripaje de rodamientos de la bomba ATE MK60/MK61.'
-  },
-  '5E20': {
-    code: '5E20',
-    title: 'BMW ABS - Sensor de Presión de Freno 1 Defectuoso',
-    desc: 'Fallo en la lectura de bares de presión del circuito de freno. Solución en menos de 24h.'
-  },
-  'C1288': {
-    code: 'C1288',
-    title: 'Ford / Mazda - Transductor de Presión de Freno Primario',
-    desc: 'Avería recurrente en Ford Focus II, C-MAX y Mazda 3 con módulo ABS ATE MK60.'
-  },
-  'DF088': {
-    code: 'DF088',
-    title: 'Renault - Circuito del Sensor de Presión de Frenado',
-    desc: 'Fallo en Scénic II y Megane II. Sustitución de unidad de lectura de presión de freno.'
-  }
-};
-
-function initDtcSearchEngine() {
-  const dtcInput = document.getElementById('dtcInput');
-  const searchBtn = document.getElementById('searchDtcBtn');
-  const resultBox = document.getElementById('dtcResultBox');
-  const resTitle = document.getElementById('dtcResultTitle');
-  const resDesc = document.getElementById('dtcResultDesc');
-  const quoteBtn = document.getElementById('dtcQuoteBtn');
-  const closeBtn = document.getElementById('closeDtcBtn');
-  const chips = document.querySelectorAll('.dtc-chip');
-
-  if (!dtcInput || !searchBtn || !resultBox) return;
-
-  function executeSearch(query) {
-    const cleanQuery = query.trim().toUpperCase().replace('.', '');
-    if (!cleanQuery) return;
-
-    // Buscar coincidencia exacta o parcial
-    let match = null;
-    for (let key in DTC_DATABASE) {
-      if (cleanQuery.includes(key) || key.includes(cleanQuery)) {
-        match = DTC_DATABASE[key];
-        break;
-      }
-    }
-
-    if (match) {
-      resTitle.textContent = `Código ${match.code}: ${match.title}`;
-      resDesc.textContent = match.desc;
-      quoteBtn.onclick = () => {
-        openQuoteModalWith({
-          component: 'Diagnóstico por Código de Error',
-          symptoms: `Avería diagnosticada por código: ${match.code} - ${match.title}`
-        });
-      };
-      resultBox.style.display = 'block';
-    } else {
-      resTitle.textContent = `Código "${query}" registrado`;
-      resDesc.textContent = `Reparamos este código de avería en nuestro taller. Consúltanos con la referencia de tu centralita para confirmar disponibilidad en 24h.`;
-      quoteBtn.onclick = () => {
-        openQuoteModalWith({
-          component: 'Código de Error ' + query,
-          symptoms: `Diagnóstico máquina: código de error ${query}`
-        });
-      };
-      resultBox.style.display = 'block';
-    }
-  }
-
-  searchBtn.addEventListener('click', () => executeSearch(dtcInput.value));
-  dtcInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-      executeSearch(dtcInput.value);
-    }
-  });
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      const code = chip.getAttribute('data-code');
-      dtcInput.value = code;
-      executeSearch(code);
+    return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (paths[name] || paths.ecu) + '</svg>';
+  };
+  const modelGroupsFor = record => (record.modelGroups || []).filter(group => group.vehicleModel !== false);
+  // Editorial pilot, reviewed against sourceSections/modelGroups on 17-10-2026.
+  // These relations organise documented sections. They do NOT assert that a part,
+  // symptom, reference or generation is compatible with another generation.
+  // Names and original anchors must both still exist or the relation is ignored.
+  const MODEL_FAMILIES = Object.freeze([
+    { brand: 'Mazda', model: '3', records: {
+      'main-2942': [
+        { model: '3 BK', anchor: 'detalle-6' },
+        { model: '3 BM', anchor: 'detalle-17' }
+      ],
+      'main-712': [
+        { model: '3 BK-BL', anchor: 'detalle-27' },
+        { model: '3 BM', anchor: 'detalle-29' },
+        { model: '3 BP', anchor: 'detalle-31' }
+      ]
+    }, source: 'modelGroups and sourceSections of main-2942 and main-712', reviewed: '2026-10-17' }
+  ]);
+  const modelFamilyFor = (record, model) => MODEL_FAMILIES.find(family => normalize(record.brand) === normalize(family.brand) && normalize(model) === normalize(family.model) && family.records[record.uid]);
+  const familyGroupsFor = (record, model) => {
+    const family = modelFamilyFor(record, model);
+    if (!family) return [];
+    return family.records[record.uid].map(reviewed => modelGroupsFor(record).find(group => normalize(group.model) === normalize(reviewed.model) && group.anchor === reviewed.anchor)).filter(Boolean);
+  };
+  const documentedModels = record => {
+    const labels = new Map();
+    [record.model, ...(record.coveredModels || []), ...modelGroupsFor(record).flatMap(group => [group.model, ...(group.modelAliases || [])])].filter(Boolean).forEach(model => {
+      if (!labels.has(normalize(model))) labels.set(normalize(model), model);
     });
-  });
-
-  closeBtn.addEventListener('click', () => {
-    resultBox.style.display = 'none';
-  });
-}
-
-/* ==========================================================================
-   4. TOP REPAIR FILTERS
-   ========================================================================== */
-function initTopRepairFilters() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const repairItems = document.querySelectorAll('.repair-item');
-
-  if (!filterBtns.length || !repairItems.length) return;
-
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filter = btn.getAttribute('data-filter');
-
-      repairItems.forEach(item => {
-        const category = item.getAttribute('data-category');
-        if (filter === 'all' || category === filter) {
-          item.style.display = 'flex';
-          item.style.animation = 'fadeIn 0.3s ease';
-        } else {
-          item.style.display = 'none';
-        }
+    return [...labels.values()];
+  };
+  const modelsFor = brand => {
+    const labels = new Map();
+    const records = all.filter(record => !brand || normalize(record.brand) === normalize(brand));
+    // Keep the combined heading as evidence and as an existing URL value, while
+    // letting a person choose each explicitly named vehicle individually.
+    const combinedHeadings = new Set(records.flatMap(record => modelGroupsFor(record).filter(group => new Set((group.modelAliases || []).map(normalize)).size > 1).map(group => normalize(group.model))));
+    records.forEach(record => {
+      documentedModels(record).filter(model => !combinedHeadings.has(normalize(model))).forEach(model => {
+        if (!labels.has(normalize(model))) labels.set(normalize(model), model);
       });
     });
-  });
-}
+    return [...labels.values()].sort(collator.compare);
+  };
+  const literalPhrase = (text, phrase) => (' ' + normalize(text) + ' ').includes(' ' + normalize(phrase) + ' ');
+  const titleModelCache = new Map();
+  const titleModelsFor = record => {
+    if (!titleModelCache.has(record.uid)) titleModelCache.set(record.uid, modelsFor(record.brand).filter(model => literalPhrase(record.title, model)));
+    return titleModelCache.get(record.uid);
+  };
+  const vehicleMatch = (record, brand, model) => {
+    if (brand && normalize(record.brand) !== normalize(brand)) return 'none';
+    if (!model) return 'unfiltered';
+    if (familyGroupsFor(record, model).length) return 'model-family';
+    const known = documentedModels(record);
+    if (known.some(value => normalize(value) === normalize(model))) return 'documented';
+    if (record.model) return 'none';
+    // Some legacy records lack model metadata although their title names a car.
+    // Literal title evidence can exclude another model; it never certifies a fit.
+    const titleModels = titleModelsFor(record);
+    if (titleModels.length && !titleModels.some(value => normalize(value) === normalize(model))) return 'none';
+    // A general page can help a person review variants, without confirming their car.
+    if (record.isAggregator && modelGroupsFor(record).length) return 'brand-only';
+    if (known.length) return 'none';
+    return 'brand-only';
+  };
+  const withVehicle = (record, brand, model) => ['unfiltered', 'documented', 'model-family'].includes(vehicleMatch(record, brand, model));
+  const modelGroupFor = (record, model) => model ? modelGroupsFor(record).find(group => [group.model, ...(group.modelAliases || [])].some(value => normalize(value) === normalize(model))) : null;
+  const modelAnchor = group => {
+    const anchor = group?.anchor || (group?.model ? 'modelo-' + normalize(group.model).replace(/ /g, '-') : '');
+    return /^[a-z0-9][a-z0-9_-]*$/i.test(anchor) ? '#' + anchor : '';
+  };
+  const selectableSymptoms = (record, group) => {
+    const candidates = group ? (group.symptoms || []).concat(...(group.blocks || []).map(block => block.symptoms || [])) : (record.symptoms || []);
+    return [...new Set(candidates.filter(value => {
+      const text = normalize(value);
+      if (!text || text === normalize(record.title) || /:\s*$/.test(value)) return false;
+      if (/^(reparacion|reparaciones|reparamos|servicio|servicios|especialistas|somos capaces|en menigar|menigar|ponemos a tu alcance|contamos con|nuestro equipo|los codigos de error|los fallos mas frecuentes|las averias mas frecuentes)\b/.test(text)) return false;
+      if (/\b(equipo de profesionales|profesionales y expertos|ponemos a tu alcance|consultanos|solicita un presupuesto|ofrecemos|anos de experiencia|capaces de reparar|reparaciones frecuentes)\b/.test(text)) return false;
+      return /\b(fallos?|fallas?|error(?:es)?|averias?|averiad[oa]s?|defectuos[oa]s?|intermitentes?|apagad[oa]s?|parpade[ao]s?|parpadea|vibracion|vibra|borros[oa]s?|ilegibles?|rayas?|lineas?|pixel(?:es)?|burbujas?|presion|bloquead[oa]s?|congelad[oa]s?|ruidos?|sin comunicacion|sin iluminacion|en blanco|pantalla negra)\b/.test(text) || /\bno\b.{0,35}\b(funciona|enciende|arranca|responde|comunica|apaga|muestra|hay|frenan|frena|acumula|reduce|detecta|lee|se ve|se escucha)\b/.test(text);
+    }))];
+  };
+  const options = (select, entries, placeholder, selected = '') => {
+    if (!select) return;
+    select.replaceChildren(new Option(placeholder, ''));
+    entries.forEach(entry => {
+      const value = typeof entry === 'string' ? entry : entry.value;
+      const label = typeof entry === 'string' ? entry : entry.label;
+      select.add(new Option(label, value, false, value === selected));
+    });
+    if (![...select.options].some(option => option.value === selected)) select.value = '';
+  };
+  const familyOptions = records => {
+    const keys = new Set(records.map(record => record.componentKey));
+    return families.filter(family => keys.has(family.key)).map(family => ({ value: family.key, label: family.name }));
+  };
+  const familiesForBrand = brand => familyOptions(findBrand(brand) ? all.filter(record => normalize(record.brand) === normalize(brand)) : all);
+  const newSearchParams = state => {
+    const params = new URLSearchParams();
+    if (state.q) params.set('q', state.q);
+    if (state.brand) params.set('marca', state.brand);
+    if (state.model) params.set('modelo', state.model);
+    if (state.component) params.set('pieza', state.component);
+    if (state.page > 1) params.set('pagina', String(state.page));
+    return params;
+  };
+  const copyQueryContext = (params, state, uid, ranking) => {
+    if (!state.q) return;
+    // Keep the visitor's words even when they are not a complete identifier.
+    params.set('consulta', state.q);
+    // Only a complete match in this particular record can populate a typed field.
+    // The value remains the visitor's declaration, not a technical confirmation.
+    if (ranking?.record?.uid !== uid) return;
+    if (ranking.matchKind === 'reference-exact') params.set('referencia', state.q);
+    if (ranking.matchKind === 'dtc-exact') params.set('codigo', state.q);
+  };
+  const consultUrl = (state = {}, uid = '', symptom = '', ranking = null) => {
+    const params = new URLSearchParams({ tipo: 'consulta' });
+    if (uid) params.set('pieza', uid);
+    if (state.brand) params.set('marca', state.brand);
+    if (state.model) params.set('modelo', state.model);
+    if (state.component) params.set('familia', state.component);
+    copyQueryContext(params, state, uid, ranking);
+    if (symptom) params.set('sintoma', symptom);
+    return '/solicitud.html?' + params.toString();
+  };
 
-// Función global para solicitar presupuesto de una Top Repair
-window.requestSpecificRepair = function(repairTitle) {
-  openQuoteModalWith({
-    component: repairTitle,
-    symptoms: `Solicitud de presupuesto y recogida urgente 24h para la reparación: ${repairTitle}`
-  });
-};
-
-/* ==========================================================================
-   5. MODAL INTERACTIVO & FORMULARIOS DE PRESUPUESTO
-   ========================================================================== */
-const modal = document.getElementById('quoteModal');
-const openModalBtn = document.getElementById('openQuoteModalBtn');
-const closeModalBtn = document.getElementById('closeModalBtn');
-const modalForm = document.getElementById('modalQuoteForm');
-const mainForm = document.getElementById('mainQuoteForm');
-const toast = document.getElementById('toastMessage');
-
-function showToast(msg) {
-  if (!toast) return;
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 4500);
-}
-
-function openQuoteModalWith(data = {}) {
-  if (!modal) return;
-  if (data.vehicle) {
-    const input = document.getElementById('mVehicle');
-    if (input) input.value = data.vehicle;
+  function setupNavigation() {
+    const toggle = document.querySelector('.menu-toggle');
+    const nav = document.getElementById('site-nav');
+    if (toggle && nav) {
+      const toggleLabel = toggle.querySelector('span') || toggle;
+      const close = returnFocus => {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggleLabel.textContent = 'Menú';
+        if (returnFocus) toggle.focus();
+      };
+      toggle.addEventListener('click', () => {
+        const opening = toggle.getAttribute('aria-expanded') !== 'true';
+        toggle.setAttribute('aria-expanded', String(opening));
+        toggleLabel.textContent = opening ? 'Cerrar' : 'Menú';
+        nav.classList.toggle('is-open', opening);
+      });
+      nav.addEventListener('click', event => { if (event.target.closest('a')) close(false); });
+      document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) close(true); });
+      document.addEventListener('click', event => { if (nav.classList.contains('is-open') && !event.target.closest('.site-header')) close(false); });
+      window.addEventListener('resize', () => { if (window.innerWidth > 760) close(false); });
+    }
+    document.querySelectorAll('[data-current-year]').forEach(element => { element.textContent = String(new Date().getFullYear()); });
+    if (['localhost', '127.0.0.1', '::1'].includes(location.hostname) && !document.querySelector('.local-preview-note')) {
+      const note = document.createElement('div');
+      note.className = 'local-preview-note';
+      note.textContent = 'Versión de revisión · No publicada';
+      document.querySelector('.site-header')?.after(note);
+    }
   }
-  if (data.component) {
-    const input = document.getElementById('mComponent');
-    if (input) input.value = data.component;
-  }
-  if (data.symptoms) {
-    const input = document.getElementById('mSymptoms');
-    if (input) input.value = data.symptoms;
-  }
-  modal.classList.add('active');
-}
 
-function initModalAndForms() {
-  if (openModalBtn && modal) {
-    openModalBtn.addEventListener('click', () => {
-      modal.classList.add('active');
+  function setupFamilies() {
+    document.querySelectorAll('[data-family-grid]').forEach(grid => {
+      // The home page ships its complete family cards in HTML, avoiding a layout
+      // shift and keeping the links available before scripts run.
+      if (grid.querySelector?.('.family-featured')) return;
+      const featuredKeys = ['cuadro', 'abs', 'display', 'multimedia'];
+      const media = window.MENIGAR_FAMILY_MEDIA || {};
+      const featured = featuredKeys.map(key => familyByKey.get(key)).filter(Boolean);
+      const other = families.filter(family => !featuredKeys.includes(family.key));
+      const featuredHtml = featured.map(family => {
+        const photo = media[family.key];
+        const validPhoto = photo && /^\/assets\/[a-z0-9_./-]+$/i.test(photo.src || '') && String(photo.source || '').trim();
+        const visual = validPhoto ? '<figure class="family-media"><img src="' + escape(photo.src) + '" alt="' + escape(photo.alt || ('Ejemplo de ' + family.name + ', fotografía de ' + photo.source)) + '" width="640" height="480" loading="lazy" decoding="async"><figcaption>' + escape(photo.caption || 'Ejemplo de pieza') + '</figcaption></figure>' : '<span class="family-icon">' + icon(family.key) + '</span>';
+        return '<a class="family-card family-card--featured" href="/servicios.html?pieza=' + encodeURIComponent(family.key) + '" aria-label="Ver reparaciones de ' + escape(family.name) + '">' + visual + '<span class="family-arrow" aria-hidden="true">↗</span><h3>' + escape(family.name) + '</h3><p>' + escape(family.description) + '</p></a>';
+      }).join('');
+      const moreHtml = other.length ? '<div class="family-more"><h3>También reparamos otras piezas</h3><div class="family-more-list">' + other.map(family => '<a class="family-more-link" href="/servicios.html?pieza=' + encodeURIComponent(family.key) + '"><span>' + escape(family.name) + '</span><span aria-hidden="true">↗</span></a>').join('') + '</div></div>' : '';
+      grid.innerHTML = featuredHtml ? '<div class="family-featured">' + featuredHtml + '</div>' + moreHtml : '<div class="notice">Puedes <a href="/solicitud.html?tipo=consulta">consultar tu pieza con el equipo</a>.</div>';
     });
   }
 
-  if (closeModalBtn && modal) {
-    closeModalBtn.addEventListener('click', () => {
-      modal.classList.remove('active');
+  function setupGuidedSearch() {
+    const form = document.getElementById('guided-search-form');
+    if (!form) return;
+    const brand = document.getElementById('guide-brand');
+    const model = document.getElementById('guide-model');
+    const component = document.getElementById('guide-component');
+    const stageElements = [...form.querySelectorAll('[data-guide-stage]')];
+    const indicators = [...document.querySelectorAll('[data-guide-indicator]')];
+    const summary = document.getElementById('guide-summary');
+    const back = form.querySelector('[data-guide-back]');
+    const skip = form.querySelector('[data-guide-skip]');
+    const next = form.querySelector('[data-guide-next]');
+    const submit = form.querySelector('[data-guide-submit]');
+    let currentStep = 0;
+    options(brand, brands, 'Selecciona una marca');
+    const refreshModels = () => options(model, modelsFor(brand.value), 'Selecciona un modelo', model.value);
+    const refreshComponents = () => options(component, familiesForBrand(brand.value), 'Selecciona una pieza', component.value);
+    refreshModels();
+    refreshComponents();
+    const fields = [brand, model, component];
+    const lastStep = Math.min(fields.length, stageElements.length) - 1;
+    const render = (focus = false) => {
+      stageElements.forEach((stage, index) => { stage.hidden = index !== currentStep; });
+      indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('is-complete', index < currentStep);
+        if (index === currentStep) indicator.setAttribute('aria-current', 'step');
+        else indicator.removeAttribute('aria-current');
+      });
+      back.hidden = currentStep === 0;
+      next.hidden = currentStep === lastStep;
+      skip.hidden = false;
+      submit.hidden = currentStep !== lastStep;
+      skip.textContent = currentStep === lastStep ? 'No sé qué pieza es' : currentStep === 1 ? 'No aparece, continuar' : 'No lo sé, continuar';
+      const selected = [brand.value, model.value, familyByKey.get(component.value)?.name].filter(Boolean);
+      summary.innerHTML = selected.map(value => '<span>' + escape(value) + '</span>').join('');
+      document.querySelectorAll('[data-guide-help]').forEach(link => { link.href = consultUrl({brand:brand.value, model:model.value, component:component.value}); });
+      if (focus) fields[currentStep].focus();
+    };
+    const openResults = () => location.assign('/servicios.html?' + newSearchParams({q:'', brand:brand.value, model:model.value, component:component.value, page:1}) + '#resultados');
+    const advance = () => { currentStep = Math.min(lastStep, currentStep + 1); render(true); };
+    next.addEventListener('click', advance);
+    skip.addEventListener('click', () => {
+      fields[currentStep].value = '';
+      if (currentStep === lastStep) { render(); openResults(); return; }
+      if (currentStep === 0) { model.value = ''; component.value = ''; refreshModels(); refreshComponents(); }
+      if (currentStep === 1) { component.value = ''; refreshComponents(); }
+      advance();
     });
-  }
-
-  if (modal) {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) modal.classList.remove('active');
+    back.addEventListener('click', () => { currentStep = Math.max(0, currentStep - 1); render(true); });
+    brand.addEventListener('change', () => { model.value = ''; component.value = ''; refreshModels(); refreshComponents(); render(); });
+    model.addEventListener('change', () => { component.value = ''; refreshComponents(); render(); });
+    component.addEventListener('change', () => render());
+    form.addEventListener('submit', event => {
+      event.preventDefault();
+      if (currentStep !== lastStep) { advance(); return; }
+      openResults();
     });
-  }
-
-  // Submit Modal Form
-  if (modalForm) {
-    modalForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      modal.classList.remove('active');
-      modalForm.reset();
-      showToast('✓ ¡Solicitud enviada con éxito! Un técnico de Menigar te llamará en menos de 2 horas.');
-    });
-  }
-
-  // Submit Main Contact Form
-  if (mainForm) {
-    mainForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      mainForm.reset();
-      showToast('✓ ¡Solicitud de presupuesto recibida! Revisamos la referencia de tu pieza y te contactamos.');
-    });
-  }
-}
-
-/* ==========================================================================
-   6. NAVEGACIÓN MÓVIL
-   ========================================================================== */
-function initMobileNavigation() {
-  const toggleBtn = document.getElementById('mobileMenuToggle');
-  const mainNav = document.getElementById('mainNav');
-
-  if (!toggleBtn || !mainNav) return;
-
-  toggleBtn.addEventListener('click', () => {
-    mainNav.classList.toggle('active');
-  });
-
-  // Cerrar al hacer clic en un enlace
-  const links = mainNav.querySelectorAll('.nav-link, .dropdown-item');
-  links.forEach(l => {
-    l.addEventListener('click', () => {
-      mainNav.classList.remove('active');
-    });
-  });
-}
-
-
-/* ==========================================================================
-   8. FILTRO CATEGORIZADO DE RESEÑAS DE GOOGLE
-   ========================================================================== */
-function initReviewsFilter() {
-  const revTabs = document.querySelectorAll('.rev-tab');
-  const reviewCards = document.querySelectorAll('#reviewsGrid .google-card');
-  if (!revTabs.length || !reviewCards.length) return;
-
-  revTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      revTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-      const filter = tab.getAttribute('data-rev-filter');
-
-      reviewCards.forEach(card => {
-        const cat = card.getAttribute('data-category') || '';
-        if (filter === 'all' || cat.includes(filter)) {
-          card.style.display = 'flex';
-          card.style.animation = 'fadeIn 0.3s ease';
-        } else {
-          card.style.display = 'none';
-        }
+    const tabs = [...document.querySelectorAll('[data-search-tab]')];
+    function activateTab(tab, focus = false) {
+      tabs.forEach(item => { item.setAttribute('aria-selected', String(item === tab)); item.tabIndex = item === tab ? 0 : -1; });
+      document.querySelectorAll('[data-search-panel]').forEach(panel => { panel.hidden = panel.dataset.searchPanel !== tab.dataset.searchTab; });
+      if (focus) tab.focus();
+    }
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const index = tabs.indexOf(tab);
+        const target = event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[tabs.length - 1] : tabs[(index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
+        activateTab(target, true);
       });
     });
+    render();
+  }
+
+  // Build once; preserve the complete source values and rank before pagination.
+  let prepared = null;
+  const prepare = () => prepared ||= all.map(record => {
+    const references = (record.references || []).map(value => ({ raw: value, normalized: compact(value) }));
+    const codes = (record.dtcCodes || []).map(value => ({ raw: value, normalized: compact(value) }));
+    const title = normalize([record.title, record.brand, record.model, record.variant].join(' '));
+    const symptoms = normalize((record.symptoms || []).join(' '));
+    const text = normalize([record.componentName, record.description, record.title, record.brand, record.model, record.variant, ...documentedModels(record), ...(record.symptoms || [])].join(' '));
+    return { record, references, codes, title, symptoms, text };
   });
-}
+  const STOPWORDS = new Set(['de', 'la', 'el', 'los', 'las', 'del', 'en', 'un', 'una', 'mi', 'me', 'se', 'que', 'con', 'por', 'para', 'y']);
+  function rankRecord(entry, query) {
+    if (!query) return { score: entry.record.isAggregator ? 8 : 10, match: '', matchValue: '' };
+    const normalized = normalize(query);
+    const collapsed = compact(query);
+    if (!normalized || !collapsed) return null;
+    const exactReference = entry.references.find(reference => reference.normalized === collapsed);
+    if (exactReference) return { score: 10000, match: 'Referencia coincidente', matchValue: exactReference.raw, matchKind: 'reference-exact' };
+    const exactCode = entry.codes.find(code => code.normalized === collapsed);
+    if (exactCode) return { score: 9000, match: 'Código de avería documentado', matchValue: exactCode.raw, matchKind: 'dtc-exact' };
+    const partialReference = collapsed.length >= 4 ? entry.references.find(reference => reference.normalized.includes(collapsed)) : null;
+    if (partialReference) return { score: 5000, match: 'Coincidencia parcial de referencia', matchValue: partialReference.raw };
+    const partialCode = collapsed.length >= 4 ? entry.codes.find(code => code.normalized.includes(collapsed)) : null;
+    if (partialCode) return { score: 4000, match: 'Coincidencia parcial de código', matchValue: partialCode.raw };
+    const tokens = normalized.split(' ').filter(token => !STOPWORDS.has(token));
+    if (!tokens.length) return null;
+    const equivalents = { apagado: ['apagado', 'apaga', 'apagada', 'enciende'], apagada: ['apagada', 'apaga', 'apagado', 'enciende'], burbuja: ['burbuja', 'burbujas'], burbujas: ['burbuja', 'burbujas'], pantalla: ['pantalla', 'display'], centralita: ['centralita', 'ecu'], kilometros: ['kilometros', 'cuentakilometros', 'odometro'] };
+    const tokenMatches = tokens.every(token => (equivalents[token] || [token]).some(term => entry.text.includes(term)));
+    if (!tokenMatches) return null;
+    let score = tokens.reduce((total, token) => total + (entry.title.includes(token) ? 80 : entry.symptoms.includes(token) ? 55 : 25), 0);
+    if (entry.title.includes(normalized)) score += 500;
+    if (entry.symptoms.includes(normalized)) score += 250;
+    if (entry.record.isAggregator) score -= 15;
+    return { score, match: 'Servicio relacionado', matchValue: '' };
+  }
+  const rankedResults = (query, filters, matchVehicle) => prepare().filter(entry => matchVehicle(entry.record, filters.brand || '', filters.model || '') && (!filters.component || entry.record.componentKey === filters.component)).map(entry => {
+    const ranking = rankRecord(entry, query);
+    return ranking ? { ...ranking, record: entry.record, vehicleMatch: vehicleMatch(entry.record, filters.brand || '', filters.model || '') } : null;
+  }).filter(Boolean).sort((a, b) => b.score - a.score || collator.compare(a.record.title, b.record.title) || collator.compare(a.record.uid, b.record.uid));
+  // Exposed for meaningful integration verification without duplicating the algorithm.
+  window.MENIGAR_SEARCH = {
+    normalize,
+    modelsFor,
+    vehicleMatch,
+    familyGroupsFor,
+    search: (query, filters = {}) => rankedResults(query, filters, withVehicle),
+    brandOptions: (query, filters = {}) => filters.model && filters.brand ? rankedResults(query, filters, (record, brand, model) => vehicleMatch(record, brand, model) === 'brand-only') : [],
+    getById: uid => recordsById.get(uid)
+  };
 
-/* ==========================================================================
-   9. ACCESIBILIDAD & NAVEGACIÓN POR TECLADO
-   ========================================================================== */
-function initAccessibility() {
-  // Mega-menú accesible con teclado y foco
-  const megaParents = document.querySelectorAll('.has-megamenu');
-  megaParents.forEach(parent => {
-    const trigger = parent.querySelector('a');
-    if (!trigger) return;
-
-    trigger.setAttribute('aria-haspopup', 'true');
-    trigger.setAttribute('aria-expanded', 'false');
-
-    parent.addEventListener('mouseenter', () => {
-      trigger.setAttribute('aria-expanded', 'true');
-    });
-    parent.addEventListener('mouseleave', () => {
-      trigger.setAttribute('aria-expanded', 'false');
-    });
-    parent.addEventListener('focusin', () => {
-      trigger.setAttribute('aria-expanded', 'true');
-    });
-    parent.addEventListener('focusout', (e) => {
-      if (!parent.contains(e.relatedTarget)) {
-        trigger.setAttribute('aria-expanded', 'false');
+  function setupCatalogue() {
+    const form = document.getElementById('catalog-filter-form');
+    if (!form) return;
+    const query = document.getElementById('catalog-query');
+    const advanced = document.getElementById('catalog-advanced');
+    const brand = document.getElementById('catalog-brand');
+    const model = document.getElementById('catalog-model');
+    const component = document.getElementById('catalog-component');
+    const resultList = document.getElementById('catalog-results');
+    const relatedBrand = document.getElementById('catalog-related-brand');
+    const resultCount = document.getElementById('results-count');
+    const pagination = document.getElementById('results-pagination');
+    const activeFilters = document.getElementById('active-filters');
+    const resultGuidance = document.getElementById('results-guidance');
+    const filterPanel = document.getElementById('catalog-filter-panel');
+    const selection = document.getElementById('catalog-selection');
+    const selectionText = document.getElementById('catalog-selection-text');
+    const editSelection = document.querySelector('[data-catalog-edit]');
+    const pageSize = 18;
+    let state;
+    let filtersExpanded = false;
+    const mobileFilters = () => matchMedia('(max-width: 760px)').matches;
+    const renderFilterSummary = () => {
+      if (!filterPanel || !selection || !selectionText || !editSelection) return;
+      const values = [state.brand, state.model, familyByKey.get(state.component)?.name, state.q && 'Tu búsqueda: ' + state.q].filter(Boolean);
+      const collapsed = mobileFilters() && values.length > 0 && !filtersExpanded;
+      selectionText.textContent = values.join(' · ');
+      selection.hidden = !collapsed;
+      filterPanel.hidden = collapsed;
+      editSelection.setAttribute('aria-expanded', String(!collapsed));
+    };
+    const parseLocation = () => {
+      const params = new URLSearchParams(location.search);
+      const givenBrand = (params.get('marca') || '').slice(0, 120).trim();
+      const givenModel = (params.get('modelo') || '').slice(0, 120).trim();
+      const next = { q: (params.get('q') || '').slice(0, 180).trim(), brand: findBrand(givenBrand) || givenBrand, model: givenModel, component: validFamily(params.get('pieza')), page: Math.max(1, parseInt(params.get('pagina'), 10) || 1) };
+      // Keep an unknown vehicle in the URL and consultation; do not broaden it silently.
+      next.model = modelsFor(next.brand).find(value => normalize(value) === normalize(givenModel)) || givenModel;
+      return next;
+    };
+    const selectedOptions = (entries, value) => value && !entries.some(entry => normalize(entry) === normalize(value)) ? [...entries, value] : entries;
+    const populate = () => {
+      query.value = state.q;
+      if (advanced && state.q) advanced.open = true;
+      options(brand, selectedOptions(brands, state.brand), 'Todas las marcas', state.brand);
+      options(model, selectedOptions(modelsFor(state.brand), state.model), 'Todos los modelos', state.model);
+      const componentEntries = familiesForBrand(state.brand);
+      if (state.component && !componentEntries.some(entry => entry.value === state.component)) componentEntries.push({value:state.component, label:familyByKey.get(state.component).name + ' · consultar'});
+      options(component, componentEntries, 'Todas las piezas', state.component);
+    };
+    const updateUrl = (replace = false) => {
+      const params = newSearchParams(state).toString();
+      history[replace ? 'replaceState' : 'pushState'](null, '', location.pathname + (params ? '?' + params : ''));
+    };
+    const resultHtml = (item, isGeneric = false) => {
+      const record = item.record;
+      const family = record.componentName || familyByKey.get(record.componentKey)?.name || 'Reparación electrónica';
+      const publicTitle = record.publicTitle || record.title;
+      const group = modelGroupFor(record, state.model);
+      const selectedModel = ['documented', 'model-family'].includes(item.vehicleMatch) ? state.model : record.model;
+      const familyGroups = item.vehicleMatch === 'model-family' ? familyGroupsFor(record, state.model) : [];
+      const vehicle = [record.brand, selectedModel].filter(Boolean).join(' · ');
+      const detailUrl = safeLocal(record.localPath) + (familyGroups.length ? '?' + new URLSearchParams({marca:record.brand, modelo:state.model}).toString() : '') + modelAnchor(group);
+      const matchText = isGeneric ? 'Consulta si sirve para tu modelo' : item.match || (item.vehicleMatch === 'model-family' ? 'Versiones documentadas de este modelo' : item.vehicleMatch === 'documented' ? 'Información para este modelo' : '');
+      const match = matchText ? '<div class="result-match"><strong>' + escape(matchText) + '</strong>' + (item.matchValue ? '<br>' + escape(item.matchValue) : '') + '</div>' : '';
+      // The list is taken from this service or the selected model group, never another model.
+      const distinctSymptoms = familyGroups.length ? [] : selectableSymptoms(record, group);
+      const symptomHtml = distinctSymptoms.length ? '<div class="result-symptoms"><strong>¿Te ocurre alguno de estos fallos?</strong><p>Elige uno para explicárnoslo.</p><ul>' + distinctSymptoms.slice(0, 3).map(symptom => '<li><a class="result-symptom-link" href="' + escape(consultUrl(state, record.uid, symptom, item)) + '"><span>' + escape(symptom) + '</span><span aria-hidden="true">→</span></a></li>').join('') + '</ul>' + (distinctSymptoms.length > 3 ? '<a class="result-all-faults" href="' + detailUrl + '">Ver todos los fallos de esta ficha →</a>' : '') + '</div>' : '';
+      const groupImages = group ? (group.blocks || []).flatMap(block => block.images || []) : state.model && modelGroupsFor(record).length ? [] : (record.gallery || []);
+      const photo = groupImages.find(image => /^\/assets\/[a-z0-9_./-]+$/i.test(image.src || ''));
+      const imageHtml = photo ? '<a class="result-image" href="' + detailUrl + '"><img src="' + escape(photo.src) + '" alt="' + escape(photo.alt || 'Fotografía publicada en esta ficha de reparación') + '" width="640" height="480" loading="lazy" decoding="async"></a>' : '';
+      const groups = !familyGroups.length && (!state.model || isGeneric) ? modelGroupsFor(record) : [];
+      const modelLinks = groups.slice(0, 4).map(value => '<a href="' + safeLocal(record.localPath) + modelAnchor(value) + '">' + escape(value.model) + '</a>').join('');
+      const modelsHtml = modelLinks ? '<div class="result-models"><strong>Elige tu modelo</strong><div>' + modelLinks + '</div>' + (groups.length > 4 ? '<a href="' + safeLocal(record.localPath) + '">Ver todos los modelos →</a>' : '') + '</div>' : '';
+      const familyVariants = familyGroups.length ? '<div class="result-variants">' + familyGroups.map(variant => {
+        const variantParams = new URLSearchParams({marca:record.brand, modelo:variant.model});
+        const variantUrl = safeLocal(record.localPath) + '?' + variantParams.toString() + modelAnchor(variant);
+        const image = (variant.blocks || []).flatMap(block => block.images || []).find(value => /^\/assets\/[a-z0-9_./-]+$/i.test(value.src || ''));
+        const imageHtml = image ? '<a class="result-variant-media" href="' + variantUrl + '"><img src="' + escape(image.src) + '" alt="' + escape(image.alt || ('Pieza publicada para ' + record.brand + ' ' + variant.model)) + '" width="640" height="480" loading="lazy" decoding="async"></a>' : '';
+        return '<section class="result-variant">' + imageHtml + '<div class="result-variant-body"><h4>' + escape(record.brand + ' ' + variant.model) + '</h4><div class="result-variant-actions"><a class="result-detail-link" href="' + variantUrl + '">Ver esta versión →</a><a class="result-consult-link" href="' + escape(consultUrl({...state, model:variant.model}, record.uid, '', item)) + '">Consultar mi ' + escape(record.brand + ' ' + variant.model) + ' →</a></div></div></section>';
+      }).join('') + '</div>' : '';
+      const references = !isGeneric && !familyGroups.length ? (record.referenceGroups?.length ? record.referenceGroups.map(value => value.display) : (record.references || [])) : [];
+      const refs = references.length ? '<details class="result-references"><summary>Ver referencias de la pieza</summary><div>' + references.slice(0, 3).map(reference => '<span>' + escape(reference) + '</span>').join('') + '</div>' + (references.length > 3 ? '<a href="' + detailUrl + '">Ver todas las referencias →</a>' : '') + '</details>' : '';
+      const requestParams = new URLSearchParams({ tipo: 'consulta', pieza: record.uid });
+      if (isGeneric) requestParams.set('tipo', 'consulta');
+      if (state.brand) requestParams.set('marca', state.brand);
+      if (state.model) requestParams.set('modelo', state.model);
+      if (state.component) requestParams.set('familia', state.component);
+      copyQueryContext(requestParams, state, record.uid, item);
+      const description = familyGroups.length ? '' : isGeneric ? 'Consulta las variantes de este servicio para saber si corresponde a tu pieza.' : !distinctSymptoms.length ? 'Revisa esta ficha y compárala con tu pieza.' : '';
+      return '<article class="result-card' + (familyGroups.length ? ' result-card--variants' : '') + (isGeneric ? ' result-card--generic' : '') + '">' + imageHtml + '<div class="result-meta">' + (vehicle ? '<span class="result-vehicle">' + escape(vehicle) + '</span>' : '') + '<span class="result-family">' + escape(family) + '</span></div><h3><a href="' + detailUrl + '">' + escape(publicTitle) + '</a></h3>' + match + (description ? '<p>' + escape(description) + '</p>' : '') + symptomHtml + familyVariants + modelsHtml + refs + '<div class="result-actions"><a class="result-detail-link" href="' + detailUrl + '">Ver pieza y todos los detalles <span aria-hidden="true">↗</span></a><a class="result-consult-link" href="/solicitud.html?' + requestParams.toString() + '">' + (isGeneric ? 'Consultar mi pieza' : 'Consultar esta pieza') + ' →</a></div></article>';
+    };
+    const render = () => {
+      const items = window.MENIGAR_SEARCH.search(state.q, state);
+      const generic = window.MENIGAR_SEARCH.brandOptions(state.q, state);
+      const genericOnly = !items.length && generic.length > 0;
+      const visibleItems = genericOnly ? generic : items;
+      const totalPages = Math.max(1, Math.ceil(visibleItems.length / pageSize));
+      const requestedPage = state.page;
+      state.page = Math.min(state.page, totalPages);
+      if (state.page !== requestedPage) updateUrl(true);
+      const start = (state.page - 1) * pageSize;
+      resultCount.textContent = visibleItems.length ? visibleItems.length.toLocaleString('es-ES') + (genericOnly ? (visibleItems.length === 1 ? ' servicio para consultar' : ' servicios para consultar') : (visibleItems.length === 1 ? ' opción' : ' opciones')) + ' · Mostrando ' + (start + 1) + '–' + Math.min(start + pageSize, visibleItems.length) : state.q ? 'No encontramos coincidencias con tu búsqueda y los filtros elegidos.' : 'No tenemos una ficha para esta combinación de vehículo y pieza.';
+      const title = document.getElementById('results-title');
+      title.textContent = genericOnly ? 'Servicios de ' + state.brand + ' para consultar' : state.q ? 'Resultados de tu búsqueda' : [familyByKey.get(state.component)?.name, state.brand, state.model].filter(Boolean).join(' · ') || 'Piezas que reparamos';
+      if (resultGuidance) resultGuidance.textContent = items.some(item => item.vehicleMatch === 'model-family') ? 'Tenemos información para estas versiones del ' + [state.brand, state.model].filter(Boolean).join(' ') + '. Revisa la información de cada versión o envíanos una imagen de tu pieza si no sabes cuál es.' : genericOnly ? 'No hay una ficha específica para ' + state.model + '. Puedes revisar la información de la marca y preguntarnos por tu pieza; estas opciones no confirman que corresponda a tu modelo.' : items.length ? 'Compara los fallos, las fotos y los modelos de cada opción. No necesitas saber el nombre técnico de la avería.' : 'Podemos ayudarte aunque tu pieza no aparezca aquí. Cuéntanos qué ocurre y adjunta una foto.';
+      const chips = [['q', state.q ? 'Tu búsqueda: ' + state.q : ''], ['brand', state.brand], ['model', state.model], ['component', familyByKey.get(state.component)?.name]];
+      activeFilters.innerHTML = chips.filter(([,value]) => value).map(([key, value]) => '<button class="filter-chip" type="button" data-remove-filter="' + key + '" aria-label="Quitar filtro ' + escape(value) + '">' + escape(value) + '<span aria-hidden="true">×</span></button>').join('');
+      renderFilterSummary();
+      document.querySelectorAll('[data-context-consult]').forEach(link => { link.href = consultUrl(state); });
+      if (!visibleItems.length) {
+        const malformed = state.q && !normalize(state.q);
+        resultList.innerHTML = '<div class="empty-results"><span class="empty-icon">' + icon('ecu') + '</span><h3>' + (malformed ? 'Revisa el texto de tu búsqueda.' : '¿No ves tu pieza? Consúltanos.') + '</h3><p>' + (malformed ? 'Escribe un modelo, las letras y números de una referencia o describe brevemente qué ocurre.' : 'Que no aparezca en esta lista no significa que no podamos repararla. Envíanos una foto y dinos qué ocurre.') + '</p><a class="button button-primary" href="' + consultUrl(state) + '">Consultar mi pieza ↗</a><br>' + (state.q ? '<button class="text-button" type="button" data-remove-filter="q">Ver opciones sin este texto</button><br>' : '') + (state.model && state.brand ? '<a class="text-link" href="/servicios.html?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver piezas de ' + escape(state.brand) + ' sin elegir modelo →</a><br>' : '') + (state.q && (state.brand || state.model || state.component) ? '<button class="text-button" type="button" data-search-without-filters>Buscar este texto sin filtros de vehículo ni pieza</button><br>' : '') + '<button class="text-button" type="button" data-reset-filters>Volver a ver todas las piezas</button></div>';
+      } else resultList.innerHTML = visibleItems.slice(start, start + pageSize).map(item => resultHtml(item, genericOnly)).join('');
+      if (relatedBrand) {
+        relatedBrand.hidden = !items.length || !generic.length;
+        relatedBrand.innerHTML = items.length && generic.length ? '<h3>Otros servicios de ' + escape(state.brand) + '</h3><p>Revisa otras opciones de la marca. Si tu variante no aparece, te ayudamos a identificarla.</p><div class="results-grid">' + generic.slice(0, 3).map(item => resultHtml(item, true)).join('') + '</div>' + (generic.length > 3 ? '<a class="text-link" href="/servicios.html?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver todos los servicios de la marca →</a>' : '') : '';
       }
+      const pageLink = (page, text, current = false, label = '') => '<a href="/servicios.html?' + newSearchParams({ ...state, page }).toString() + '#resultados" data-result-page="' + page + '"' + (current ? ' aria-current="page"' : '') + (label ? ' aria-label="' + label + '"' : '') + '>' + text + '</a>';
+      if (totalPages <= 1) { pagination.innerHTML = ''; return; }
+      const pageNumbers = unique([1, state.page - 1, state.page, state.page + 1, totalPages].filter(page => page > 0 && page <= totalPages)).map(Number).sort((a,b) => a-b);
+      let previous = 0;
+      let html = state.page > 1 ? pageLink(state.page - 1, '←', false, 'Página anterior') : '';
+      pageNumbers.forEach(page => { if (previous && page > previous + 1) html += '<span class="pagination-dots" aria-hidden="true">…</span>'; html += pageLink(page, page, page === state.page, 'Página ' + page); previous = page; });
+      if (state.page < totalPages) html += pageLink(state.page + 1, '→', false, 'Página siguiente');
+      pagination.innerHTML = html;
+    };
+    const commit = () => { state = { q: query.value.trim().slice(0, 180), brand: brand.value, model: model.value, component: component.value, page: 1 }; updateUrl(); render(); };
+    form.addEventListener('submit', event => { event.preventDefault(); filtersExpanded = false; commit(); if (mobileFilters()) { resultCount.focus(); document.getElementById('resultados').scrollIntoView({block:'start', behavior:'instant'}); } });
+    brand.addEventListener('change', () => { filtersExpanded = true; model.value = ''; component.value = ''; options(model, modelsFor(brand.value), 'Todos los modelos'); options(component, familiesForBrand(brand.value), 'Todas las piezas'); commit(); });
+    model.addEventListener('change', () => { filtersExpanded = true; component.value = ''; options(component, familiesForBrand(brand.value), 'Todas las piezas'); commit(); });
+    component.addEventListener('change', () => { filtersExpanded = true; commit(); });
+    editSelection?.addEventListener('click', () => { filtersExpanded = true; renderFilterSummary(); brand.focus(); });
+    document.addEventListener('click', event => {
+      const widen = event.target.closest('[data-search-without-filters]');
+      if (widen) { filtersExpanded = true; state = {...state, brand:'', model:'', component:'', page:1}; populate(); updateUrl(); render(); resultCount.focus(); return; }
+      const reset = event.target.closest('[data-reset-filters]');
+      if (reset) { filtersExpanded = true; state = {q:'', brand:'', model:'', component:'', page:1}; populate(); updateUrl(); render(); brand.focus(); return; }
+      const chip = event.target.closest('[data-remove-filter]');
+      if (chip) { state[chip.dataset.removeFilter] = ''; if (chip.dataset.removeFilter === 'brand') { state.model = ''; state.component = ''; } if (chip.dataset.removeFilter === 'model') state.component = ''; state.page = 1; populate(); updateUrl(); render(); resultCount.focus(); return; }
+      const page = event.target.closest('[data-result-page]');
+      if (page) { event.preventDefault(); state.page = Number(page.dataset.resultPage); updateUrl(); render(); resultCount.focus(); document.getElementById('results-title').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block:'start'}); }
     });
-  });
+    window.addEventListener('popstate', () => { filtersExpanded = false; state = parseLocation(); populate(); render(); });
+    window.addEventListener('resize', renderFilterSummary);
+    state = parseLocation();
+    populate();
+    render();
+  }
 
-  // Cerrar modal o menú con tecla Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      const modal = document.getElementById('quoteModal');
-      if (modal && modal.classList.contains('active')) {
-        modal.classList.remove('active');
-      }
-      const nav = document.getElementById('mainNav');
-      if (nav && nav.classList.contains('active')) {
-        nav.classList.remove('active');
-      }
-    }
-  });
-}
+  function setupDetailContext() {
+    const source = document.querySelector('.repair-source[data-repair-uid]');
+    const status = document.getElementById('repair-model-context');
+    if (!source || !status) return;
+    const sections = [...source.querySelectorAll('.repair-variant[data-model-group][data-model-anchor]')];
+    if (!sections.length) return;
+    const params = new URLSearchParams(location.search);
+    const brand = String(source.dataset.repairBrand || '').trim();
+    // An index link selects its own documented variant. A fragment alone would
+    // retain the previous ?modelo= value and leave the highlight and general
+    // consultation attached to a different vehicle after the visitor changes it.
+    // Prepare these destinations even on an initial visit with no query string.
+    const indexLinks = [...source.querySelectorAll('a[data-model-group][data-model-anchor]')];
+    indexLinks.forEach(link => {
+      const group = String(link.dataset.modelGroup || '').trim();
+      const anchor = String(link.dataset.modelAnchor || '');
+      if (!group || !/^[a-z0-9][a-z0-9_-]*$/i.test(anchor) || !sections.some(section => section.dataset.modelAnchor === anchor && normalize(section.dataset.modelGroup) === normalize(group))) return;
+      const url = new URL(link.getAttribute('href') || '#' + anchor, (location.origin || 'https://local.invalid') + location.pathname + location.search);
+      if (brand) url.searchParams.set('marca', brand);
+      url.searchParams.set('modelo', group);
+      url.hash = anchor;
+      link.href = url.pathname + '?' + url.searchParams.toString() + url.hash;
+    });
+    const requestedBrand = (params.get('marca') || '').slice(0, 120).trim();
+    const model = (params.get('modelo') || '').slice(0, 120).trim();
+    if (!model || (requestedBrand && normalize(requestedBrand) !== normalize(brand))) return;
+    const family = MODEL_FAMILIES.find(value => normalize(value.brand) === normalize(brand) && normalize(value.model) === normalize(model) && value.records[source.dataset.repairUid]);
+    const reviewed = family?.records[source.dataset.repairUid] || [];
+    const matches = sections.filter(section => {
+      const aliases = [section.dataset.modelGroup];
+      try { if (section.dataset.modelAliases) { const values = JSON.parse(section.dataset.modelAliases); if (Array.isArray(values)) aliases.push(...values.filter(value => typeof value === 'string')); } } catch (_) { /* A damaged optional alias cannot create a match. */ }
+      if (aliases.some(value => normalize(value) === normalize(model))) return true;
+      return reviewed.some(value => normalize(value.model) === normalize(section.dataset.modelGroup) && value.anchor === section.dataset.modelAnchor);
+    });
+    if (!matches.length) return;
+    sections.forEach(section => {
+      section.classList.toggle('is-context-match', matches.includes(section));
+      section.classList.toggle('is-context-other', !matches.includes(section));
+    });
+    indexLinks.forEach(link => {
+      link.classList.toggle('is-context-match', matches.some(section => section.dataset.modelAnchor === link.dataset.modelAnchor));
+    });
+    const label = [brand, model].filter(Boolean).join(' ');
+    status.hidden = false;
+    status.textContent = family ? 'Tu búsqueda: ' + label + '. Hemos destacado sus versiones documentadas. Compara la información de cada una o consulta si no reconoces tu pieza.' : 'Tu selección: ' + label + '. Hemos destacado su apartado. Puedes revisar también las demás versiones de esta ficha.';
+    // Keep a general consultation tied to the visitor's selection. Per-variant
+    // links already contain their own model and must remain independent.
+    document.querySelectorAll('.contact-card a[href^="/solicitud.html"], .repair-unlisted a[href^="/solicitud.html"]').forEach(link => {
+      const url = new URL(link.getAttribute('href'), location.origin || 'https://local.invalid');
+      url.searchParams.set('tipo', 'consulta');
+      if (brand) url.searchParams.set('marca', brand);
+      url.searchParams.set('modelo', model);
+      link.href = url.pathname + '?' + url.searchParams.toString();
+    });
+  }
+
+  setupNavigation();
+  setupFamilies();
+  setupGuidedSearch();
+  setupCatalogue();
+  setupDetailContext();
+})();

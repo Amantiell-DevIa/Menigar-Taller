@@ -1,0 +1,15 @@
+# Vercel only needs the public website and its build script; nothing else is uploaded to the build.
+var/
+private/
+backend/
+api/
+tests/
+DISEÑOS/
+data/cache/
+data/cache_abs/
+data/wordpress_exports/
+data/*.json
+__pycache__/
+*.py
+*.md
+screenshot_*.png

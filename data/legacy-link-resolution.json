@@ -1,0 +1,913 @@
+{
+  "source": "isolated-wordpress-restored-from-2026-10-14-backup",
+  "productionNetworkUsed": false,
+  "checkedAt": "2026-10-15T12:37:41+0200",
+  "links": [
+    {
+      "originalUrl": "https://menigar.com/newweb/programacion-reparacion-centralitas/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/newweb/programacion-reparacion-centralitas/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/programacion-reparacion-centralitas/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/programacion-reparacion-centralitas/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-180",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/mitsubishi/colt/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/mitsubishi/colt/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-cuadro-instrumentos/mitsubishi/colt/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-cuadro-instrumentos/mitsubishi/colt/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-2270",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/alfa-romeo/alfa-romeo-166-1998-2007/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/alfa-romeo/alfa-romeo-166-1998-2007/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/alfa-romeo/alfa-romeo-166-1998-2007-bosch-53/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/alfa-romeo/alfa-romeo-166-1998-2007-bosch-53/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-3210",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/bmw/m3-2005-2009/",
+      "status": 404,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/bmw/m3-2005-2009/",
+          "status": 404,
+          "location": null
+        }
+      ],
+      "resolvedUid": null,
+      "resolution": "requires-review"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/bmw/serie-1-2004-2010-6-cilindros/",
+      "status": 404,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/bmw/serie-1-2004-2010-6-cilindros/",
+          "status": 404,
+          "location": null
+        }
+      ],
+      "resolvedUid": null,
+      "resolution": "requires-review"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/bmw/serie-3-2004-2009-6-cilindros/",
+      "status": 404,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/bmw/serie-3-2004-2009-6-cilindros/",
+          "status": 404,
+          "location": null
+        }
+      ],
+      "resolvedUid": null,
+      "resolution": "requires-review"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/citroen/c-crosser/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c-crosser/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/citroen/c-crosser-2004-2010/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c-crosser-2004-2010/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-949",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/citroen/c2/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c2/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/citroen/c2-2004-2010/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c2-2004-2010/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-951",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/citroen/c3/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c3/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/citroen/c3-2004-2010/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c3-2004-2010/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-953",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/citroen/c4/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c4/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/citroen/c4-2004-2010/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/citroen/c4-2004-2010/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-955",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/hyundai/i20-2008-2014/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/hyundai/i20-2008-2014/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/hyundai/i20-2008-2014-bosch-8/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/hyundai/i20-2008-2014-bosch-8/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-4971",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/kia-2/carens-2006-2011/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/kia-2/carens-2006-2011/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/kia/carens-2006-2011/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/kia/carens-2006-2011/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-1957",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/mercedes/reparacion-error-c249f/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/mercedes/reparacion-error-c249f/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/mercedes/reparacion-error-c249f-c2498/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/mercedes/reparacion-error-c249f-c2498/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-1162",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/peugeot/207-2004-2009-2/",
+      "status": 404,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/peugeot/207-2004-2009-2/",
+          "status": 404,
+          "location": null
+        }
+      ],
+      "resolvedUid": null,
+      "resolution": "requires-review"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/seat/toledo-2004-2009/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/seat/toledo-2004-2009/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/seat/toledo-2004-2009-ate-mk60/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/seat/toledo-2004-2009-ate-mk60/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-5193",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/suzuki-motocicletas/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/suzuki-motocicletas/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/motos-suzuki/suzuki-motocicletas/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/motos-suzuki/suzuki-motocicletas/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-2233",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-abs/suzuki/splash-2010-2014/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/suzuki/splash-2010-2014/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-abs/suzuki/splash-2010-2014-2/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-abs/suzuki/splash-2010-2014-2/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "abs-720",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-electronica-cambio/mercedes-aks-fcvt-vgs-7g-tronic/mercedes-fcvt/_wp_link_placeholder",
+      "status": 404,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-electronica-cambio/mercedes-aks-fcvt-vgs-7g-tronic/mercedes-fcvt/_wp_link_placeholder",
+          "status": 404,
+          "location": null
+        }
+      ],
+      "resolvedUid": null,
+      "resolution": "requires-review"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-a-1997/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-a-1997/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-a-1997/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-a-1997/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-7981",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-a-2006-2012/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-a-2006-2012/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-a-2006-2012/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-a-2006-2012/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-7990",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-b-2005-2011/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-b-2005-2011/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-b-2005-2011/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-b-2005-2011/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-7997",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-c-2000-2008/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-c-2000-2008/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-c-2000-2008/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-c-2000-2008/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-7999",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-clk-2002-2010/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-clk-2002-2010/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-clk-2002-2010/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-clk-2002-2010/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8001",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-cls-2004-2010/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-cls-2004-2010/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-cls-2004-2010/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-cls-2004-2010/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8003",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-e-2002-2009/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-e-2002-2009/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-e-2002-2009/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-e-2002-2009/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8005",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-slk-2004-2011/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-slk-2004-2011/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-slk-2004-2011/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-slk-2004-2011/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8007",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-palanca-selectora-cambio/mercedes-clase-vaneo-2001-2005/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio/mercedes-clase-vaneo-2001-2005/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-vaneo-2001-2005/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-palanca-selectora-cambio-automatico/reparacion-palanca-selectora-cambio-mercedes/mercedes-clase-vaneo-2001-2005/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8009",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/alfa-romeo-infoentretenimiento/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/alfa-romeo-infoentretenimiento/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/alfa-romeo-infoentretenimiento/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/alfa-romeo-infoentretenimiento/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-10549",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/audi-navegador-mmi/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/audi-navegador-mmi/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/audi-navegador-mmi/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/audi-navegador-mmi/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8695",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/bmw-connecteddrive/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/bmw-connecteddrive/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/bmw-connecteddrive/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/bmw-connecteddrive/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8973",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/citroen-navegador/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/citroen-navegador/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/citroen-navegador/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/citroen-navegador/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8978",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/dacia-multimedia/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/dacia-multimedia/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/dacia-multimedia/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/dacia-multimedia/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-10928",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/fiat-dab-uconnect/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/fiat-dab-uconnect/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/fiat-dab-uconnect/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/fiat-dab-uconnect/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-9085",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/ford-navegador/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/ford-navegador/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/ford-navegador/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/ford-navegador/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8982",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/hyundai-multimedia/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/hyundai-multimedia/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/hyundai-multimedia/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/hyundai-multimedia/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-11055",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/jeep-uconnect/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/jeep-uconnect/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/jeep-uconnect/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/jeep-uconnect/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-13141",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/kia-connect/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/kia-connect/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/kia-connect/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/kia-connect/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-11047",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/land-rover-incontrol/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/land-rover-incontrol/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/land-rover-incontrol/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/land-rover-incontrol/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-13098",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/mazda-connect/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/mazda-connect/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/mazda-connect/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/mazda-connect/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-10987",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/mercedes-multimedia-mbux/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/mercedes-multimedia-mbux/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/mercedes-multimedia-mbux/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/mercedes-multimedia-mbux/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8987",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/mini-connected/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/mini-connected/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/mini-connected/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/mini-connected/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8992",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/nissan-connect/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/nissan-connect/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/nissan-connect/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/nissan-connect/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-13276",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/opel-navi-pro-intellilink/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/opel-navi-pro-intellilink/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/opel-navi-pro-intellilink/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/opel-navi-pro-intellilink/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-8997",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/peugeot-i-cockpit/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/peugeot-i-cockpit/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/peugeot-i-cockpit/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/peugeot-i-cockpit/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-10691",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/porsche-multimedia/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/porsche-multimedia/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/porsche-multimedia/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/porsche-multimedia/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-10698",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/renault-multimedia/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/renault-multimedia/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/renault-multimedia/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/renault-multimedia/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-9040",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/seat-full-link/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/seat-full-link/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/seat-full-link/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/seat-full-link/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-9052",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/skoda-smartlink/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/skoda-smartlink/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/skoda-smartlink/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/skoda-smartlink/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-9048",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/smart-multimedia/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/smart-multimedia/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/smart-multimedia/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/smart-multimedia/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-9056",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/toyota-touch/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/toyota-touch/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/toyota-touch/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/toyota-touch/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-9060",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparacion-pantalla-multimedia/volkswagen-composition-media/",
+      "status": 200,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-multimedia/volkswagen-composition-media/",
+          "status": 301,
+          "location": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/volkswagen-composition-media/"
+        },
+        {
+          "url": "http://127.0.0.1:8780/reparacion-pantalla-tactil-multimedia/volkswagen-composition-media/",
+          "status": 200,
+          "location": null
+        }
+      ],
+      "resolvedUid": "main-13614",
+      "resolution": "restored-wordpress-page-id"
+    },
+    {
+      "originalUrl": "https://www.menigar.com/reparaciones/reparacion-abs-sbc-mercedes/",
+      "status": 404,
+      "chain": [
+        {
+          "url": "http://127.0.0.1:8780/reparaciones/reparacion-abs-sbc-mercedes/",
+          "status": 404,
+          "location": null
+        }
+      ],
+      "resolvedUid": null,
+      "resolution": "requires-review"
+    }
+  ]
+}

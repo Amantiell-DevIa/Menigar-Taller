@@ -1,0 +1,135 @@
+/* Source content keeps its model, equipment and reference context. */
+.repair-source { --repair-line: #d9e0e5; }
+.repair-section-index { padding: 24px; margin-bottom: 30px; background: #eaf0f2; border: 1px solid var(--repair-line); border-radius: 18px; }
+.repair-section-index h2 { font-size: 1.5rem; margin: 5px 0 18px; }
+.repair-section-index > div { display: flex; flex-wrap: wrap; gap: 8px; }
+.repair-section-index a { padding: 9px 13px; border: 1px solid #c7d3da; border-radius: 8px; background: #fff; color: #173948; font-size: .9rem; text-decoration: none; line-height: 1.35; }
+.repair-section-index a:hover { border-color: #267f8b; background: #f2fbfc; }
+.repair-source-section { scroll-margin-top: 110px; padding: 25px 0 35px; border-bottom: 1px solid var(--repair-line); }
+.repair-source-section > h2 { margin-top: 0; font-size: clamp(1.4rem, 2.6vw, 2rem); overflow-wrap: anywhere; }
+.repair-source-section > h3 { margin: 25px 0 10px; font-size: 1.15rem; }
+.repair-source-section > p { max-width: 78ch; overflow-wrap: anywhere; }
+.repair-photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; margin: 22px 0; }
+.repair-photo-grid figure { margin: 0; min-width: 0; border: 1px solid var(--repair-line); border-radius: 13px; overflow: hidden; background: #fff; }
+.repair-photo-grid a { display: flex; flex-direction: column; height: 100%; color: #315565; text-decoration: none; }
+.repair-photo-grid img { display: block; width: 100%; height: auto; aspect-ratio: 4/3; object-fit: contain; background: #f5f7f8; }
+.repair-photo-grid a > span { display: block; padding: 10px 14px; font-size: .82rem; border-top: 1px solid #e6ebee; }
+.repair-photo-grid a:hover span { color: #006575; text-decoration: underline; }
+.repair-table-scroll { max-width: 100%; overflow-x: auto; margin: 16px 0; border: 1px solid var(--repair-line); border-radius: 10px; }
+.repair-table-scroll table { border-collapse: collapse; min-width: 100%; font-size: .88rem; line-height: 1.5; }
+.repair-table-scroll td, .repair-table-scroll th { padding: 10px 13px; border: 1px solid #e0e6e9; text-align: left; vertical-align: top; }
+.repair-table-scroll tr:nth-child(even) { background: #f0f4f5; }
+.repair-table-details { padding: 16px; border: 1px solid var(--repair-line); border-radius: 12px; margin: 20px 0; background: #fff; }
+.repair-table-details summary { font-weight: 650; cursor: pointer; color: #17495b; }
+.repair-related-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; margin: 4px 7px 8px 0; background: #eaf1f3; border: 1px solid #d5e0e4; border-radius: 9px; color: #17495b; text-decoration: none; overflow-wrap: anywhere; }
+.repair-related-link:hover { background: #dcebee; }
+.repair-variant-consult { margin-top: 12px; }
+.repair-unlisted { margin: 30px 0; padding: 25px; border-radius: 16px; background: #152e3e; color: #f3f7f8; }
+.repair-unlisted h2 { color: #fff; font-size: 1.55rem; margin-top: 0; }
+.repair-unlisted p { color: #d4e1e7; }
+.repair-source a:focus-visible, .repair-table-scroll:focus-visible { outline: 3px solid #008797; outline-offset: 4px; }
+@media (max-width: 600px) {
+  .repair-section-index { padding: 18px; margin-bottom: 15px; }
+  .repair-section-index > div { max-height: 220px; overflow-y: auto; padding: 3px; }
+  .repair-photo-grid { gap: 10px; }
+  .repair-photo-grid a > span { padding: 9px; font-size: .75rem; }
+  .repair-source-section { padding: 22px 0; }
+  .repair-unlisted { padding: 20px; }
+}
+@media (max-width: 380px) { .repair-photo-grid { grid-template-columns: 1fr; } }
+
+/* Decision hierarchy and reviewed variant context. The complete source remains
+   available: matching a vehicle never hides other variants or confirms fit. */
+.repair-detail-page { --repair-paper: #fffdf8; --repair-ink: #183343; --repair-line: #d9ddd9; }
+.repair-detail-page .page-heading { background: #eeeae2; margin-bottom: 0; }
+.repair-detail-page .page-heading + .section { padding-top: 40px; }
+.repair-detail-page .page-heading h1 { color: #183343; }
+.repair-detail-page .page-heading .eyebrow { color: #365b6b; }
+.repair-detail-page .page-heading .breadcrumb,
+.repair-detail-page .page-heading .breadcrumb a { color: #50616b; }
+.repair-detail-page .page-heading .lead { color: #435865; }
+.repair-decision-note { margin: 0 0 30px; padding: 18px 22px; border-left: 3px solid #557f8b; border-radius: 0 12px 12px 0; background: #eef3f2; }
+.repair-decision-label { display: block; color: #315563; font-size: .75rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+.repair-decision-note p { margin: 6px 0 0; font-size: .95rem; line-height: 1.65; }
+.repair-section-index { background: #e8eeeb; border-color: #cddbd8; }
+.repair-section-index > p:not(.eyebrow) { margin: -6px 0 18px; max-width: 68ch; color: #465d65; font-size: .94rem; }
+.repair-section-index a { display: inline-flex; align-items: center; min-height: 44px; background: var(--repair-paper); }
+.repair-source-section.repair-variant { margin: 22px 0; padding: 26px; border: 1px solid var(--repair-line); border-radius: 18px; background: var(--repair-paper); }
+.repair-variant { scroll-margin-top: 110px; }
+.repair-variant.is-context-match { border-color: #477e8c; box-shadow: 0 0 0 2px #477e8c24; }
+.repair-section-index a.is-context-match, .model-jump-links a.is-context-match, .bmw-model-jumps a.is-context-match { background: #dfeceb; border-color: #477e8c; color: #153c4b; font-weight: 700; }
+.repair-model-context { margin: 0 0 24px; padding: 18px 22px; border: 1px solid #b6ccc9; border-radius: 12px; background: #e8f1ed; color: #173e4a; font-size: .95rem; line-height: 1.65; }
+.repair-model-context[hidden] { display: none; }
+.repair-photo-grid { align-items: start; }
+.repair-photo-grid a { position: relative; height: auto; }
+.repair-photo-grid .repair-photo-zoom { position: absolute; right: 9px; bottom: 9px; border: 1px solid #c6d3d6; border-radius: 6px; padding: 5px 9px; background: #fffffff2; font-size: .72rem; color: #214555; }
+.repair-photo-grid figcaption, .component-photo figcaption, .bmw-photo figcaption { padding: 12px 14px; border-top: 1px solid #e1e5e1; background: #faf8f2; color: #354f5b; font-size: .83rem; line-height: 1.5; }
+.repair-photo-grid img { background: #f4f3ef; }
+.repair-source-section .reference-list, .repair-table-scroll, .pilot-reference-list { font-variant-numeric: tabular-nums; }
+.repair-table-scroll td, .repair-table-scroll th { overflow-wrap: anywhere; }
+.repair-detail-page .reference-list li, .repair-detail-page code { overflow-wrap: anywhere; user-select: text; }
+.repair-detail-page .contact-card { border-top: 3px solid #bd9250; }
+.repair-detail-page .contact-card .source-note { margin-top: 24px; padding-top: 14px; border-top: 1px solid #dddeda; }
+.existing-repair-contact { scroll-margin-top: 110px; margin: 28px 0; border-left: 3px solid #557f8b; }
+.repair-variant:focus { outline: 3px solid #247487; outline-offset: 5px; }
+@media (max-width: 600px) {
+  .repair-source-section.repair-variant { padding: 20px 16px; margin: 18px 0; border-radius: 14px; }
+  .repair-section-index > div { max-height: none; overflow: visible; padding: 0; }
+  .repair-photo-grid { grid-template-columns: 1fr; gap: 14px; }
+  .repair-photo-grid figcaption, .component-photo figcaption, .bmw-photo figcaption { padding: 10px 12px; font-size: .82rem; }
+  .repair-decision-note, .repair-model-context { padding: 16px; }
+}
+.repair-index-group + .repair-index-group { margin-top: 20px; padding-top: 16px; border-top: 1px solid #cbd7d3; }
+.repair-index-group h3 { margin: 0 0 10px; font-size: .85rem; font-weight: 750; color: #38565f; }
+.repair-index-group > div { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* V4, 18 Oct 2026: fichas share the homepage system. Night heading, ivory reading surface,
+   amber as light and one action color. Source content and its structure are unchanged. */
+.repair-detail-page { --repair-paper: var(--p-card); --repair-ink: var(--p-ink); --repair-line: var(--p-line); }
+.repair-source { --repair-line: var(--p-line); }
+.repair-detail-page .page-heading { background: var(--p-night-glow), var(--p-night-1); margin-bottom: 0; }
+.repair-detail-page .page-heading h1 { color: var(--p-on-dark-1); }
+.repair-detail-page .page-heading .eyebrow.eyebrow { color: var(--p-amber); }
+.repair-detail-page .page-heading .breadcrumb, .repair-detail-page .page-heading .breadcrumb a { color: var(--p-on-dark-3); }
+.repair-detail-page .page-heading .breadcrumb a:hover { color: var(--p-on-dark-1); }
+.repair-detail-page .page-heading .lead { color: var(--p-on-dark-2); }
+.repair-detail-page .page-heading + .section { padding-top: clamp(40px, 5vw, 64px); }
+.repair-detail-page .contact-card { border: 1px solid var(--p-line); background: var(--p-card); box-shadow: var(--p-shadow); }
+.repair-detail-page .contact-card .source-note { border-color: var(--p-line); }
+.repair-decision-note { background: var(--p-ivory-2); border-left-color: var(--p-amber); border-radius: 0 var(--r-control) var(--r-control) 0; }
+.repair-decision-label { text-transform: none; letter-spacing: var(--ls-small); font-size: var(--fs-small); font-weight: 600; color: var(--p-ink-3); }
+.repair-section-index { background: var(--p-card); border-color: var(--p-line); border-radius: var(--r-card); }
+.repair-section-index a { border-color: var(--p-line-strong); border-radius: var(--r-pill); background: var(--p-ivory-2); color: var(--p-ink); padding-inline: 16px; }
+.repair-section-index a:hover { border-color: var(--p-ink); background: #fff; }
+.repair-section-index a.is-context-match, .model-jump-links a.is-context-match, .bmw-model-jumps a.is-context-match { border-color: var(--p-ink); background: #fff; color: var(--p-ink); }
+.repair-index-group + .repair-index-group { border-color: var(--p-line); }
+.repair-index-group h3 { font-size: var(--fs-small); letter-spacing: var(--ls-small); font-weight: 600; color: var(--p-ink-3); }
+.repair-source-section { border-color: var(--p-line); }
+.repair-source-section.repair-variant { border-color: var(--p-line); border-radius: var(--r-card); background: var(--p-card); }
+.repair-variant.is-context-match { border-color: var(--p-ink); box-shadow: 0 0 0 1px var(--p-ink); }
+.repair-model-context { border-color: var(--p-line); border-radius: var(--r-control); background: var(--p-ivory-2); color: var(--p-ink-2); }
+.repair-photo-grid figure { border-color: var(--p-line); border-radius: var(--r-card); }
+.repair-photo-grid img { background: #fff; }
+.repair-photo-grid a { color: var(--p-ink-2); }
+.repair-photo-grid figcaption, .component-photo figcaption, .bmw-photo figcaption { border-color: var(--p-line); background: var(--p-ivory-2); color: var(--p-ink-2); }
+.repair-photo-grid .repair-photo-zoom { border-color: var(--p-line-strong); border-radius: var(--r-pill); color: var(--action); }
+.repair-table-scroll { border-color: var(--p-line); border-radius: var(--r-control); }
+.repair-table-scroll td, .repair-table-scroll th { border-color: var(--p-line); }
+.repair-table-scroll th { background: var(--p-ivory-2); color: var(--p-ink); }
+.repair-table-scroll tr:nth-child(even) { background: #f6f5f0; }
+.repair-table-details { border-color: var(--p-line); border-radius: var(--r-card); background: var(--p-card); }
+.repair-table-details summary { color: var(--action); }
+.repair-related-link { border-color: var(--p-line-strong); border-radius: var(--r-pill); background: var(--p-card); color: var(--action); }
+.repair-related-link:hover { border-color: var(--p-ink); background: #fff; }
+.repair-unlisted { border-radius: var(--r-card); background: var(--p-night-glow), var(--p-night-2); color: var(--p-on-dark-1); }
+.repair-unlisted .eyebrow.eyebrow { color: var(--p-amber); }
+.repair-unlisted p { color: var(--p-on-dark-2); }
+.repair-unlisted a:not(.button) { color: var(--action-on-dark); }
+.repair-unlisted .button-primary { border-color: var(--action-on-dark); background: var(--action-on-dark); color: var(--on-action-dark); }
+.repair-unlisted .button-primary:hover { border-color: var(--action-on-dark-hover); background: var(--action-on-dark-hover); }
+.existing-repair-contact { border-left-color: var(--p-amber); }
+.repair-source a:focus-visible, .repair-table-scroll:focus-visible, .repair-variant:focus { outline-color: #c67b11; }
+@media (min-width: 1001px) { .repair-detail-page .contact-card { position: sticky; top: 92px; } }
+/* Heading measure kept in CSS (the generated inline style is blocked by the production CSP). */
+.repair-detail-page .page-heading h1 { max-width: 1050px; font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem); line-height: 1.1; overflow-wrap: anywhere; }
+.repair-detail-page .page-heading .lead { max-width: 850px; }

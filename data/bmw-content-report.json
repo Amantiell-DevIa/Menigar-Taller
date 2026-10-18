@@ -1,0 +1,26 @@
+{
+  "scope": [
+    "main-2321"
+  ],
+  "captureRun": "2026-10-13-publico",
+  "sourceHtmlSha256": "7ccbd0a9aff1daad3db35d6abc06a00ae149dbf8512047e0d0720fbb3ab8c222",
+  "sourceModuleCount": 25,
+  "serviceBlockCount": 22,
+  "groupCount": 21,
+  "vehicleGroupCount": 19,
+  "imageOccurrences": 42,
+  "uniqueImageFiles": 32,
+  "references": 0,
+  "dtcCodes": 0,
+  "constraints": {
+    "imageToReferenceInferred": false,
+    "fitConfirmedByImage": false,
+    "priceInferred": false,
+    "timingInferred": false
+  },
+  "notes": [
+    "Two X5 E70/X6 E71 modules remain separate: cluster screen and central screen.",
+    "Live Cockpit and headrest displays are service groups, not vehicle models.",
+    "Original X5 G05/X6 F16 wording is conserved; it is not a new compatibility validation."
+  ]
+}
