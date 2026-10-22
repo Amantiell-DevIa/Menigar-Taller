@@ -10,7 +10,7 @@
         { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "no-referrer" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'none'" }
+        { "key": "Content-Security-Policy", "value": "default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.google.com; frame-ancestors 'none'; form-action 'self'; base-uri 'none'" }
       ]
     },
     {

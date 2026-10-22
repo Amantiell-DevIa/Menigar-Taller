@@ -27,7 +27,7 @@ MAX_BODY = 25 * 1024 * 1024
 LOCK = threading.Lock()
 STATIC_ROOT_FILES = {
     'index.html', 'servicios.html', 'solicitud.html', 'envios.html', 'taller.html',
-    'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html',
+    'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js',
     'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'app.js', 'solicitud.js', 'resumen.js',
     'hero-lab.jpg', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'resumen.html', 'receipt.js',
 }
@@ -229,7 +229,7 @@ def make_handler(storage):
             self.send_header('X-Content-Type-Options', 'nosniff')
             self.send_header('Referrer-Policy', 'same-origin')
             self.send_header('X-Robots-Tag', 'noindex, nofollow')
-            self.send_header('Content-Security-Policy', "default-src 'self'; img-src 'self' data: https://www.menigar.com https://abs.menigar.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com; form-action 'self'; base-uri 'self'; frame-ancestors 'none'")
+            self.send_header('Content-Security-Policy', "default-src 'self'; img-src 'self' data: https://www.menigar.com https://abs.menigar.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.google.com; form-action 'self'; base-uri 'self'; frame-ancestors 'none'")
             super().end_headers()
 
         def log_message(self, fmt, *args):

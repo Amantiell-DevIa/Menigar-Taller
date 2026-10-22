@@ -10,11 +10,15 @@ Nueva web de MENIGAR (Desarrollos Digitales Menigar, Alcobendas, desde 1989). In
 
 El backend PHP de la solicitud no funciona en Vercel. El formulario lo detecta, se muestra como «Vista previa de diseño» y desactiva el envío.
 
+Los vídeos de YouTube y el mapa de Google de la portada se cargan solo cuando el visitante pulsa reproducir o «Ver el mapa aquí». La CSP permite únicamente esos dos marcos (`youtube-nocookie.com` y `google.com`).
+
 ## Estructura
 
 | Ruta | Contenido |
 |---|---|
-| `index.html`, `assets/css/portada.css` | Portada |
+| `index.html`, `assets/css/portada.css`, `assets/home/` | Portada y sus fotos |
+| `opciones-hero.html`, `assets/css/opciones-hero.css` | Opciones de hero para revisión |
+| `laboratorio.html`, `laboratorio.js`, `scripts/build_laboratorio.cjs` | Laboratorio de portada: página aparte, generada desde `index.html`, para comparar los diseños |
 | `servicios.html`, `app.js`, `data/*.js` | Catálogo y búsqueda |
 | `reparaciones/` | Fichas de reparación generadas |
 | `solicitud.html`, `solicitud.css`, `solicitud.js`, `resumen.html`, `receipt.js` | Solicitud y resumen |

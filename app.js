@@ -544,7 +544,38 @@
     });
   }
 
+  // Third-party players load only when the visitor asks for them: until that
+  // click no request reaches YouTube or Google Maps. Without JavaScript the
+  // video links open YouTube and the map link opens Google Maps.
+  function setupEmbeds() {
+    const sources = {
+      youtube: id => /^[\w-]{11}$/.test(id) ? 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1' : '',
+      map: url => /^https:\/\/www\.google\.com\/maps\/embed\?pb=[\w!%.-]+$/.test(url) ? url : ''
+    };
+    document.querySelectorAll('[data-embed]').forEach(frame => {
+      const trigger = frame.querySelector('[data-embed-load]');
+      const kind = frame.getAttribute('data-embed');
+      const source = (sources[kind] || (() => ''))(frame.getAttribute('data-embed-src') || '');
+      if (!trigger || !source) return;
+      trigger.hidden = false;
+      trigger.addEventListener('click', event => {
+        if (event.button > 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        const player = document.createElement('iframe');
+        player.src = source;
+        player.title = frame.getAttribute('data-embed-title') || '';
+        player.setAttribute('allow', (kind === 'youtube' ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ' : '') + 'fullscreen');
+        // The site sends no referrer; both players need the page origin to load.
+        player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        frame.classList.add('is-loaded');
+        frame.replaceChildren(player);
+        player.focus();
+      });
+    });
+  }
+
   setupNavigation();
+  setupEmbeds();
   setupFamilies();
   setupGuidedSearch();
   setupCatalogue();

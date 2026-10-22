@@ -82,6 +82,55 @@ const documentedPhotos = Object.values(mediaContext.window.MENIGAR_FAMILY_MEDIA)
 for (const [, src] of featuredMarkup.matchAll(/<img src="([^"]+)"/g)) assert.ok(documentedPhotos.includes(src), `Foto sin procedencia documentada en portada: ${src}`);
 assert.match(homepage, /Taller · archivo 2017/);
 
+// Videos and the map are click-to-load: the page itself never contains a
+// third-party frame, and each placeholder keeps a plain link that works
+// without JavaScript. The CSP must allow exactly the two player hosts.
+for (const page of ['index.html', 'opciones-hero.html']) {
+  const html = fs.readFileSync(path.join(root, page), 'utf8');
+  assert.ok(!/<iframe/i.test(html), `${page} no carga marcos de terceros al abrirse.`);
+  for (const [, src] of html.matchAll(/<img [^>]*src="([^"]+)"/g)) {
+    assert.ok(fs.existsSync(path.join(root, src)), `${page}: falta la imagen ${src}`);
+  }
+}
+const videos = [...homepage.matchAll(/data-embed="youtube" data-embed-src="([^"]+)"[\s\S]*?href="https:\/\/www\.youtube\.com\/watch\?v=([^"]+)"/g)];
+assert.equal(videos.length, 3, 'La portada muestra tres vídeos del canal.');
+for (const [, id, link] of videos) {
+  assert.match(id, /^[\w-]{11}$/, `Identificador de vídeo válido: ${id}`);
+  assert.equal(link, id, 'El enlace sin JavaScript abre el mismo vídeo.');
+}
+assert.match(homepage, /data-embed="map" data-embed-src="https:\/\/www\.google\.com\/maps\/embed\?pb=[\w!%.-]+"/, 'El mapa usa la inserción oficial de Google Maps.');
+assert.match(homepage, /href="https:\/\/maps\.app\.goo\.gl\/[\w]+"/, 'La ubicación también se abre en Google Maps sin cargar el mapa.');
+const csp = JSON.parse(fs.readFileSync(path.join(root, 'vercel.json'), 'utf8')).headers[0].headers.find(header => header.key === 'Content-Security-Policy').value;
+assert.match(csp, /frame-src https:\/\/www\.youtube-nocookie\.com https:\/\/www\.google\.com;/, 'La CSP de Vercel permite solo los dos reproductores.');
+assert.match(csp, /script-src 'self';/, 'La CSP sigue sin scripts de terceros.');
+
+// The Google rating is recognisable at a glance: Google's G sits on the hero
+// chip and on the score card, decorative for screen readers (the text says Google).
+for (const where of [/class="p-rating p-hero-rating" href="#opiniones"><span class="p-g" aria-hidden="true">/, /class="p-score-label"><span class="p-g p-g--lg" aria-hidden="true">/]) {
+  assert.match(homepage, where, 'La valoración de Google lleva la G de Google.');
+}
+
+// The review lab is a page of its own, apart from the official homepage: the
+// homepage and app.js carry nothing of it, and laboratorio.html is the homepage
+// itself plus the lab stylesheet and script, rebuilt from index.html.
+assert.ok(!/lab-panel|laboratorio\.(?:js|html)|opciones-hero\.css/.test(homepage), 'La portada oficial no incluye el laboratorio.');
+assert.ok(!/laboratorio\.(?:js|html)|setupLab/.test(application), 'app.js no carga el laboratorio en ninguna página.');
+const { buildLaboratorio } = require(path.join(root, 'scripts/build_laboratorio.cjs'));
+const labPage = fs.readFileSync(path.join(root, 'laboratorio.html'), 'utf8');
+assert.equal(labPage, buildLaboratorio(homepage), 'laboratorio.html está al día con index.html: ejecuta node scripts/build_laboratorio.cjs.');
+assert.match(labPage, /<script src="\/laboratorio\.js" defer><\/script>/, 'La página del laboratorio carga su script.');
+const vercelBuild = fs.readFileSync(path.join(root, 'scripts/build_vercel_static.cjs'), 'utf8');
+for (const file of ['laboratorio.html', 'laboratorio.js', 'opciones-hero.html']) {
+  assert.ok(fs.existsSync(path.join(root, file)) && vercelBuild.includes(`'${file}'`), `${file} existe y se publica en Vercel.`);
+}
+const lab = fs.readFileSync(path.join(root, 'laboratorio.js'), 'utf8');
+assert.ok(!/Copiar enlace|Qué es/.test(lab), 'El panel del laboratorio no muestra «Qué es» ni «Copiar enlace».');
+const options = fs.readFileSync(path.join(root, 'opciones-hero.html'), 'utf8');
+for (const key of ['a', 'b', 'c', 'd']) {
+  assert.match(options, new RegExp(`id="opcion-${key}"[\\s\\S]*?class="p-hero`), `La página de opciones aporta el diseño ${key.toUpperCase()} al laboratorio.`);
+}
+for (const palette of ['cobalto', 'cian', 'violeta', 'noche']) assert.ok(lab.includes(`'${palette}'`), `El laboratorio ofrece el fondo ${palette}.`);
+
 let modelsChecked = 0;
 const brandOptions = entries(full.element('guide-brand'));
 for (const [brand] of brandOptions) {

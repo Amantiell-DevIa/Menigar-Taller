@@ -20,7 +20,7 @@ ROOT_FILES = ['index.html', 'servicios.html', 'solicitud.html', 'envios.html', '
               'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html',
               'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css',
               'app.js', 'solicitud.js', 'resumen.js', 'robots.txt', 'sitemap.xml']
-ROOT_FILES += ['resumen.html', 'receipt.js']
+ROOT_FILES += ['resumen.html', 'receipt.js', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js']
 DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js']
 
 

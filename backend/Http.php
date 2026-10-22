@@ -11,7 +11,7 @@ final class Http
     {
         header('Cache-Control: no-store, private'); header('X-Content-Type-Options: nosniff');
         header('Referrer-Policy: no-referrer'); header('X-Robots-Tag: noindex, nofollow');
-        header("Content-Security-Policy: default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-ancestors 'none'; form-action 'self'; base-uri 'none'");
+        header("Content-Security-Policy: default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src https://www.youtube-nocookie.com https://www.google.com; frame-ancestors 'none'; form-action 'self'; base-uri 'none'");
     }
     public static function json(array $data, int $status = 200): void
     {
