@@ -52,6 +52,11 @@
       "id": "legacy-typo",
       "pattern": "\\bgarantiar su reparación\\b",
       "replacement": "trabajar en su reparación"
+    },
+    {
+      "id": "menigar-laboratorio",
+      "pattern": "\\b(n)uestro taller\\b",
+      "replacement": "\\1uestro laboratorio"
     }
   ],
   "reviewedOverrides": [
@@ -101,7 +106,7 @@
       "uid": "main-2942",
       "location": "block:50",
       "expected": "En Menigar contamos con más de 30 años de experiencia en la reparación de pantallas y displays de información en vehículos. Ponemos a su disposición un enorme stock de material para la reparación, que nos permite reparar los fallos de display al mejor precio y con la máxima eficacia. Contacte con nosotros sobre las opciones de arreglar su Mazda con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestras oficinas en Madrid.",
-      "text": "Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El taller podrá orientarte; el presupuesto final depende de la revisión de tu unidad.",
+      "text": "Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El laboratorio podrá orientarte; el presupuesto final depende de la revisión de tu unidad.",
       "reason": "Cierra con datos útiles y expectativa correcta, sin introducir operaciones internas ni comparativas sin evidencia."
     }
   ],
@@ -439,10 +444,11 @@
       "uid": "main-1072",
       "location": "block:12",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en reparación y programación de sistemas digitales en vehículos. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, material que deja reparar cuadros de instrumentos digitales y analógicos al mejor precio y con la máxima velocidad. Infórmate acerca de las posibilidades de arreglar tu coche con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar contamos con más de 30 años de experiencia en reparación y programación de sistemas digitales en vehículos. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, material que deja reparar cuadros de instrumentos digitales y analógicos con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate acerca de las posibilidades de arreglar tu coche con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar contamos con más de 30 años de experiencia en reparación y programación de sistemas digitales en vehículos. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, material que deja reparar cuadros de instrumentos digitales y analógicos con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate acerca de las posibilidades de arreglar tu coche con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-speed"
+        "maximum-speed",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "3d1d191a03031849ee816ee3f87fac48f9eac3a74225ccf7282a5cc15b23bef8"
     },
@@ -530,10 +536,11 @@
       "uid": "main-1087",
       "location": "block:20",
       "sourceText": "En Menigar contamos con más de 25 años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentos analógicos y digitales al mejor precio y con la máxima velocidad. Contacta con nosotros acerca de las opciones de reparar tu vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar contamos con más de 25 años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentos analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Contacta con nosotros acerca de las opciones de reparar tu vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar contamos con más de 25 años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentos analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Contacta con nosotros acerca de las opciones de reparar tu vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-speed"
+        "maximum-speed",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "7f30b80c1ee16a09b2079d5212b2f387376a877d73b26552b048d853485622c9"
     },
@@ -2094,10 +2101,11 @@
       "uid": "main-1639",
       "location": "block:12",
       "sourceText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima garantía. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-warranty"
+        "maximum-warranty",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "a882062806bcd6a1632dac2c8a17fe51fdf54463a58276337140fddad1254073"
     },
@@ -2181,11 +2189,22 @@
       "uid": "main-2005",
       "location": "block:18",
       "sourceText": "En Menigar contamos con más de treinta años de experiencia en reparación y programación de sistemas digitales en coches. Ponemos a tu disposición un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que permite arreglar cuadros de instrumentación digitales y analógicos al mejor precio y con la máxima rapidez. Infórmate acerca de las posibilidades de arreglar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar contamos con más de treinta años de experiencia en reparación y programación de sistemas digitales en coches. Ponemos a tu disposición un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que permite arreglar cuadros de instrumentación digitales y analógicos con un presupuesto específico para cada caso y con la máxima rapidez. Infórmate acerca de las posibilidades de arreglar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar contamos con más de treinta años de experiencia en reparación y programación de sistemas digitales en coches. Ponemos a tu disposición un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que permite arreglar cuadros de instrumentación digitales y analógicos con un presupuesto específico para cada caso y con la máxima rapidez. Infórmate acerca de las posibilidades de arreglar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
-        "best-price"
+        "best-price",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "7ba2babece844d3ca7d5fcef2c874623385420bb8667d9a3744e44d1837ed076"
+    },
+    {
+      "uid": "main-206",
+      "location": "block:12",
+      "sourceText": "Consúltanos la disponibilidad de tu vehículo contactando con nosotros o visitando nuestro taller en Madrid.",
+      "publicText": "Consúltanos la disponibilidad de tu vehículo contactando con nosotros o visitando nuestro laboratorio en Madrid.",
+      "rules": [
+        "menigar-laboratorio"
+      ],
+      "sourceTextSha256": "7ba81cdf96c1d0164774b2af604278a2e403428b8618bcb5744b94d91325cf45"
     },
     {
       "uid": "main-2273",
@@ -2225,9 +2244,10 @@
       "uid": "main-2308",
       "location": "block:503",
       "sourceText": "En Menigar contamos con más de treinta años de experiencia en las averías de displays/pantallas en vehículos. Disponemos de un enorme stock de displays de recambio, algo que nos permite reparar los displays y pantallas rápidamente y al mejor precio. Contacte con nosotros acerca de las opciones de reparar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar contamos con más de treinta años de experiencia en las averías de displays/pantallas en vehículos. Disponemos de un enorme stock de displays de recambio, algo que nos permite reparar los displays y pantallas rápidamente y con un presupuesto específico para cada caso. Contacte con nosotros acerca de las opciones de reparar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar contamos con más de treinta años de experiencia en las averías de displays/pantallas en vehículos. Disponemos de un enorme stock de displays de recambio, algo que nos permite reparar los displays y pantallas rápidamente y con un presupuesto específico para cada caso. Contacte con nosotros acerca de las opciones de reparar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
-        "best-price"
+        "best-price",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "717c788a7d6c4159f2b97e39faad4ad77264201c032207052882984cb8f98790"
     },
@@ -2292,10 +2312,11 @@
       "uid": "main-2334",
       "location": "block:72",
       "sourceText": "Desde Menigar tenemos más de 30 años de experiencia en las averías de displays en turismos. Ponemos a su disposición un gran stock de recambios de displays, algo que permite reparar los displays al mejor precio y tiempo record. Infórmese acerca de las opciones de arreglar su coche con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en las averías de displays en turismos. Ponemos a su disposición un gran stock de recambios de displays, algo que permite reparar los displays con un presupuesto específico para cada caso y un plazo que debe confirmarse para cada caso. Infórmese acerca de las opciones de arreglar su coche con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en las averías de displays en turismos. Ponemos a su disposición un gran stock de recambios de displays, algo que permite reparar los displays con un presupuesto específico para cada caso y un plazo que debe confirmarse para cada caso. Infórmese acerca de las opciones de arreglar su coche con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "record-time"
+        "record-time",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "ec2a4685b54c00f2b3937441285d221c61236dff8f279684bd416392ae96f89a"
     },
@@ -2348,10 +2369,11 @@
       "uid": "main-2344",
       "location": "block:242",
       "sourceText": "En Menigar tenemos más de 30 años de experiencia en las reparaciónes de displays y pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, algo que nos permite reparar los displays al mejor precio y con la máxima garantía. Infórmese sobre las posibilidades de reparar su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , email o bien si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar tenemos más de 30 años de experiencia en las reparaciónes de displays y pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, algo que nos permite reparar los displays con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmese sobre las posibilidades de reparar su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , email o bien si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar tenemos más de 30 años de experiencia en las reparaciónes de displays y pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, algo que nos permite reparar los displays con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmese sobre las posibilidades de reparar su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , email o bien si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-warranty"
+        "maximum-warranty",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "fb195b3dcb3e7aff599f82c57454a784234d93445dc585cc5cbc9f62107ecfd8"
     },
@@ -2485,10 +2507,11 @@
       "uid": "main-2368",
       "location": "block:20",
       "sourceText": "En Menigar tenemos más de 30 años de experiencia en las reparaciónes de displays/pantallas en vehículos. Disponemos de un enorme stock de displays de recambio, algo que nos permite reparar los displays/pantallas al mejor coste y con la máxima garantía. Infórmese sobre las posibilidades de arreglar su vehículo con Menigar mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o bien si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar tenemos más de 30 años de experiencia en las reparaciónes de displays/pantallas en vehículos. Disponemos de un enorme stock de displays de recambio, algo que nos permite reparar los displays/pantallas con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmese sobre las posibilidades de arreglar su vehículo con Menigar mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o bien si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar tenemos más de 30 años de experiencia en las reparaciónes de displays/pantallas en vehículos. Disponemos de un enorme stock de displays de recambio, algo que nos permite reparar los displays/pantallas con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmese sobre las posibilidades de arreglar su vehículo con Menigar mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o bien si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-warranty"
+        "maximum-warranty",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "29a0b5a7360f105159cde059287cdbee649eeeddfb80c501227de11db9c67247"
     },
@@ -2508,10 +2531,11 @@
       "uid": "main-2370",
       "location": "block:190",
       "sourceText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays/pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, material que permite arreglar los displays al mejor precio y con la máxima eficacia. Contacte con nosotros acerca de las opciones de arreglar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays/pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, material que permite arreglar los displays con un presupuesto específico para cada caso y según el estado de la unidad. Contacte con nosotros acerca de las opciones de arreglar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays/pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, material que permite arreglar los displays con un presupuesto específico para cada caso y según el estado de la unidad. Contacte con nosotros acerca de las opciones de arreglar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-efficacy"
+        "maximum-efficacy",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "e82e9a9676c995317038d84cbaf48b988d61231b8d75cc1c9b6fcaa6f883ce46"
     },
@@ -2531,10 +2555,11 @@
       "uid": "main-2375",
       "location": "block:119",
       "sourceText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays en vehículos. Ponemos a su disposición un enorme stock de recambios de displays, material que permite arreglar los displays al mejor precio y en el menor tiempo. Contacte con nosotros sobre las posibilidades de arreglar su vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays en vehículos. Ponemos a su disposición un enorme stock de recambios de displays, material que permite arreglar los displays con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Contacte con nosotros sobre las posibilidades de arreglar su vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays en vehículos. Ponemos a su disposición un enorme stock de recambios de displays, material que permite arreglar los displays con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Contacte con nosotros sobre las posibilidades de arreglar su vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "shortest-time"
+        "shortest-time",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "7505a0baa351bd308d7a222ce7d11f52ab7ce5e41348bfb340915eeec0efbeb5"
     },
@@ -2577,10 +2602,11 @@
       "uid": "main-2421",
       "location": "block:48",
       "sourceText": "En Menigar llevamos más de 30 años reparando las averías de displays y pantallas en vehículos. Disponiendo de un gran stock de recambios de displays, material que permite reparar los displays al mejor precio y en tiempo record. Contacte con nosotros sobre las posibilidades de arreglar su vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar llevamos más de 30 años reparando las averías de displays y pantallas en vehículos. Disponiendo de un gran stock de recambios de displays, material que permite reparar los displays con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Contacte con nosotros sobre las posibilidades de arreglar su vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar llevamos más de 30 años reparando las averías de displays y pantallas en vehículos. Disponiendo de un gran stock de recambios de displays, material que permite reparar los displays con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Contacte con nosotros sobre las posibilidades de arreglar su vehículo con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , mail o bien si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "in-record-time"
+        "in-record-time",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "5326b910099b68f4ec19c85dfcc1a2be7b7ab3b98247ed357626c4b0bee7db14"
     },
@@ -2917,10 +2943,11 @@
       "uid": "main-2920",
       "location": "block:325",
       "sourceText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays/pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, material que permite arreglar los displays al mejor precio y con la máxima eficacia. Contacte con nosotros acerca de las opciones de arreglar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays/pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, material que permite arreglar los displays con un presupuesto específico para cada caso y según el estado de la unidad. Contacte con nosotros acerca de las opciones de arreglar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar tenemos más de 30 años de experiencia en las averías de displays/pantallas en vehículos. Ponemos a su disposición un gran stock de displays de recambio, material que permite arreglar los displays con un presupuesto específico para cada caso y según el estado de la unidad. Contacte con nosotros acerca de las opciones de arreglar su vehículo con Menigar a través de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-efficacy"
+        "maximum-efficacy",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "e82e9a9676c995317038d84cbaf48b988d61231b8d75cc1c9b6fcaa6f883ce46"
     },
@@ -2938,7 +2965,7 @@
       "uid": "main-2942",
       "location": "block:50",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en la reparación de pantallas y displays de información en vehículos. Ponemos a su disposición un enorme stock de material para la reparación, que nos permite reparar los fallos de display al mejor precio y con la máxima eficacia. Contacte con nosotros sobre las opciones de arreglar su Mazda con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestras oficinas en Madrid.",
-      "publicText": "Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El taller podrá orientarte; el presupuesto final depende de la revisión de tu unidad.",
+      "publicText": "Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El laboratorio podrá orientarte; el presupuesto final depende de la revisión de tu unidad.",
       "rules": [
         "reviewed:block:50"
       ],
@@ -3642,10 +3669,11 @@
       "uid": "main-3768",
       "location": "block:51",
       "sourceText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima eficacia. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y según el estado de la unidad. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y según el estado de la unidad. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-efficacy"
+        "maximum-efficacy",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "9883982133df76aa7e4aacec1a268a741724261399a4d3d178804b75ad1335f7"
     },
@@ -3718,10 +3746,11 @@
       "uid": "main-468",
       "location": "block:51",
       "sourceText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima garantía. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-warranty"
+        "maximum-warranty",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "a882062806bcd6a1632dac2c8a17fe51fdf54463a58276337140fddad1254073"
     },
@@ -3729,10 +3758,11 @@
       "uid": "main-556",
       "location": "block:60",
       "sourceText": "Desde Menigar contamos con más de treinta años de experiencia en reparación y programación de sistemas digitales en vehículos. Ponemos a tu disposición un enorme stock en piezas nuevas, reconstruidas y de intercambio, algo que permite arreglar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima velocidad. Infórmate sobre las posibilidades de arreglar tu vehículo con Menigar mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar contamos con más de treinta años de experiencia en reparación y programación de sistemas digitales en vehículos. Ponemos a tu disposición un enorme stock en piezas nuevas, reconstruidas y de intercambio, algo que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate sobre las posibilidades de arreglar tu vehículo con Menigar mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar contamos con más de treinta años de experiencia en reparación y programación de sistemas digitales en vehículos. Ponemos a tu disposición un enorme stock en piezas nuevas, reconstruidas y de intercambio, algo que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate sobre las posibilidades de arreglar tu vehículo con Menigar mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-speed"
+        "maximum-speed",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "34df07408bca5b26a95e92ff23d6714b66db374ca66d8b6e9a79a63b9e2c77b4"
     },
@@ -3740,10 +3770,11 @@
       "uid": "main-571",
       "location": "block:21",
       "sourceText": "En Menigar contamos con más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Ponemos a tu disposición un enorme stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales al mejor coste y con la máxima velocidad. Infórmate acerca de las posibilidades de reparar tu coche con Menigar por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar contamos con más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Ponemos a tu disposición un enorme stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate acerca de las posibilidades de reparar tu coche con Menigar por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar contamos con más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Ponemos a tu disposición un enorme stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate acerca de las posibilidades de reparar tu coche con Menigar por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o bien si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-speed"
+        "maximum-speed",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "cf923ca08719349aafd8231d7048021ca3369c1cf14fe98e0852e4589d0a94b1"
     },
@@ -3761,10 +3792,11 @@
       "uid": "main-5850",
       "location": "block:18",
       "sourceText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima eficacia. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y según el estado de la unidad. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y según el estado de la unidad. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-efficacy"
+        "maximum-efficacy",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "c72ce26ad6ac018bdd9e33ce3ae1eb29a7e3d2b5f437b91e14be0c80303a31db"
     },
@@ -3804,10 +3836,11 @@
       "uid": "main-688",
       "location": "block:36",
       "sourceText": "En Menigar tenemos más de treinta años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un gran stock en piezas de intercambio, nuevas y reconstruidas, algo que permite arreglar cuadros de instrumentos analógicos y digitales al mejor coste y con la máxima garantía. Contacta con nosotros acerca de las posibilidades de arreglar tu coche con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar tenemos más de treinta años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un gran stock en piezas de intercambio, nuevas y reconstruidas, algo que permite arreglar cuadros de instrumentos analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Contacta con nosotros acerca de las posibilidades de arreglar tu coche con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar tenemos más de treinta años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un gran stock en piezas de intercambio, nuevas y reconstruidas, algo que permite arreglar cuadros de instrumentos analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Contacta con nosotros acerca de las posibilidades de arreglar tu coche con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-warranty"
+        "maximum-warranty",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "da8ebd8cb8daa11916b9ecc52a35397286b0f8cc410c51ccc58a3fd7ed511af4"
     },
@@ -3815,9 +3848,10 @@
       "uid": "main-705",
       "location": "block:15",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite reparar cuadros de instrumentación analógicos y digitales al mejor coste y con la máxima rapidez. Infórmate sobre las opciones de reparar tu coche con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "En Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con la máxima rapidez. Infórmate sobre las opciones de reparar tu coche con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "En Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con la máxima rapidez. Infórmate sobre las opciones de reparar tu coche con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , email o bien si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
-        "best-price"
+        "best-price",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "b1da69c4d917606a4fd63339855985b2afc0ffe88cf5920803c29660a53cc978"
     },
@@ -3825,10 +3859,11 @@
       "uid": "main-710",
       "location": "block:27",
       "sourceText": "Desde Menigar contamos con más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que deja reparar cuadros de instrumentación digitales y analógicos al mejor coste y con la máxima velocidad. Infórmate acerca de las opciones de arreglar tu coche con Menigar a través de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar contamos con más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que deja reparar cuadros de instrumentación digitales y analógicos con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate acerca de las opciones de arreglar tu coche con Menigar a través de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o bien si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar contamos con más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que deja reparar cuadros de instrumentación digitales y analógicos con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate acerca de las opciones de arreglar tu coche con Menigar a través de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o bien si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-speed"
+        "maximum-speed",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "2308f9e3c5cc4fcc9e77f6a05ea6c49f3e0b034078b1ef42cbc4df4f721d62a8"
     },
@@ -3847,10 +3882,11 @@
       "uid": "main-7883",
       "location": "block:14",
       "sourceText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima garantía. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en coches. Ponemos a tu disposición un enorme stock en piezas de intercambio, nuevas y reconstruidas, material que permite arreglar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar por medio de nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-warranty"
+        "maximum-warranty",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "a882062806bcd6a1632dac2c8a17fe51fdf54463a58276337140fddad1254073"
     },
@@ -3858,10 +3894,11 @@
       "uid": "main-793",
       "location": "block:18",
       "sourceText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima eficacia. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y según el estado de la unidad. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar tenemos más de 30 años de experiencia en reparación y programación de sistemas digitales en coches. Disponemos de un gran stock en piezas nuevas, reconstruidas y de intercambio, algo que deja reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y según el estado de la unidad. Infórmate acerca de las posibilidades de arreglar tu vehículo con nosotros mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , mail o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-efficacy"
+        "maximum-efficacy",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "9883982133df76aa7e4aacec1a268a741724261399a4d3d178804b75ad1335f7"
     },
@@ -4256,10 +4293,11 @@
       "uid": "main-874",
       "location": "block:81",
       "sourceText": "Desde Menigar tenemos más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un gran stock en piezas de intercambio, nuevas y reconstruidas, algo que permite reparar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima velocidad. Infórmate sobre las posibilidades de reparar tu vehículo con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefieres puedes visitar nuestro taller en Madrid.",
-      "publicText": "Desde Menigar tenemos más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un gran stock en piezas de intercambio, nuevas y reconstruidas, algo que permite reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate sobre las posibilidades de reparar tu vehículo con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefieres puedes visitar nuestro taller en Madrid.",
+      "publicText": "Desde Menigar tenemos más de treinta años de experiencia en programación y reparación de sistemas digitales en turismos. Disponemos de un gran stock en piezas de intercambio, nuevas y reconstruidas, algo que permite reparar cuadros de instrumentación analógicos y digitales con un presupuesto específico para cada caso y con un plazo que debe confirmarse para cada caso. Infórmate sobre las posibilidades de reparar tu vehículo con nosotros por medio de nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefieres puedes visitar nuestro laboratorio en Madrid.",
       "rules": [
         "best-price",
-        "maximum-speed"
+        "maximum-speed",
+        "menigar-laboratorio"
       ],
       "sourceTextSha256": "95d70e4332a40c6617a6f8c5e35ff17c09a4c79151eae396030e793183917709"
     },
