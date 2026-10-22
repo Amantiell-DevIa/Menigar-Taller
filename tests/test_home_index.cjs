@@ -80,7 +80,7 @@ const featuredMarkup = homepage.match(/<div class="home-family-grid">([\s\S]*?)<
 assert.ok(featuredMarkup.includes('class="home-family"'), 'La rejilla de familias destacadas está presente.');
 const documentedPhotos = Object.values(mediaContext.window.MENIGAR_FAMILY_MEDIA).map(item => item.src);
 for (const [, src] of featuredMarkup.matchAll(/<img src="([^"]+)"/g)) assert.ok(documentedPhotos.includes(src), `Foto sin procedencia documentada en portada: ${src}`);
-assert.match(homepage, /Taller · archivo 2017/);
+assert.match(homepage, /Laboratorio · archivo 2017/);
 
 let modelsChecked = 0;
 const brandOptions = entries(full.element('guide-brand'));

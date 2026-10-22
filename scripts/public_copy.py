@@ -24,6 +24,7 @@ RULES = [
     ('in-record-time', r'\ben tiempo r[eé]cord\b', 'con un plazo que debe confirmarse para cada caso'),
     ('guaranteed-repair', r'\bgarantizar su reparación\b', 'trabajar en su reparación'),
     ('legacy-typo', r'\bgarantiar su reparación\b', 'trabajar en su reparación'),
+    ('menigar-laboratorio', r'\b(n)uestro taller\b', r'\1uestro laboratorio'),
 ]
 
 OVERRIDES = {
@@ -53,7 +54,7 @@ OVERRIDES = {
         'reason': 'Sustituye una promesa general de stock, plazo y garantía por orientación para identificar la pieza.'},
     ('main-2942', 'block:50'): {
         'expected': 'En Menigar contamos con más de 30 años de experiencia en la reparación de pantallas y displays de información en vehículos. Ponemos a su disposición un enorme stock de material para la reparación, que nos permite reparar los fallos de display al mejor precio y con la máxima eficacia. Contacte con nosotros sobre las opciones de arreglar su Mazda con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestras oficinas en Madrid.',
-        'text': 'Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El taller podrá orientarte; el presupuesto final depende de la revisión de tu unidad.',
+        'text': 'Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El laboratorio podrá orientarte; el presupuesto final depende de la revisión de tu unidad.',
         'reason': 'Cierra con datos útiles y expectativa correcta, sin introducir operaciones internas ni comparativas sin evidencia.'},
 }
 

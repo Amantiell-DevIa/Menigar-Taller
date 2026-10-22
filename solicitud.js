@@ -96,10 +96,10 @@
     $('requestEyebrow').textContent = shipping ? 'Prepara tu envío' : 'Consulta tu pieza';
     $('requestTitle').textContent = shipping ? 'Prepara la solicitud de envío.' : 'Consulta tu pieza.';
     $('requestIntro').textContent = shipping
-      ? 'Reúne el contacto, los datos del vehículo y las piezas que quieres enviar. Podrás revisar e imprimir el resumen; espera las instrucciones del taller antes de enviarlas.'
+      ? 'Reúne el contacto, los datos del vehículo y las piezas que quieres enviar. Podrás revisar e imprimir el resumen; espera las instrucciones del laboratorio antes de enviarlas.'
       : 'Cuéntanos qué ocurre para que podamos orientarte. Puedes aportar fotos si no conoces la referencia o el modelo.';
     $('intentHelp').textContent = shipping
-      ? 'Preparar esta solicitud no reserva una recogida ni autoriza una reparación. Espera la confirmación del taller.'
+      ? 'Preparar esta solicitud no reserva una recogida ni autoriza una reparación. Espera la confirmación del laboratorio.'
       : 'Una consulta no autoriza una reparación ni prepara una recogida.';
     document.title = (shipping ? 'Preparar solicitud de envío' : 'Consultar mi pieza') + ' · MENIGAR';
     $('shippingFields').hidden = !shipping;
@@ -285,8 +285,8 @@
     else{$('downloadLink').download=result.reference+'.json';$('downloadLink').removeAttribute('target');}
     const production=result.mode==='production';
     $('confirmationKicker').textContent=production?'Solicitud registrada':'Solicitud guardada en esta vista previa';
-    $('confirmationMessage').textContent=production?'Tus datos y archivos se han registrado para que el equipo de MENIGAR revise la solicitud.':'Los datos y archivos se han guardado en el entorno de pruebas. No se ha enviado un correo ni una orden al taller.';
-    $('confirmationNext').textContent=production?'Esta referencia identifica tu solicitud; no es una orden de reparación. Espera la confirmación y las instrucciones del taller antes de enviar material.':'Esta referencia identifica la solicitud de prueba. Espera la confirmación y las instrucciones del taller antes de enviar material.';
+    $('confirmationMessage').textContent=production?'Tus datos y archivos se han registrado para que el equipo de MENIGAR revise la solicitud.':'Los datos y archivos se han guardado en el entorno de pruebas. No se ha enviado un correo ni una orden al laboratorio.';
+    $('confirmationNext').textContent=production?'Esta referencia identifica tu solicitud; no es una orden de reparación. Espera la confirmación y las instrucciones del laboratorio antes de enviar material.':'Esta referencia identifica la solicitud de prueba. Espera la confirmación y las instrucciones del laboratorio antes de enviar material.';
     $('requestWorkspace').hidden=true;$('confirmation').hidden=false;
     if(focus)$('confirmation').focus();
   }
@@ -367,9 +367,9 @@
   fetch('/api/config').then(response=>{if(!response.ok)throw new Error();return response.json();}).then(value=>{
     config=value;
     const production=value.mode==='production';
-    $('reviewNotice').textContent=production?'Tu solicitud se enviará al equipo de MENIGAR para su revisión.':'Vista previa · Las solicitudes se guardan en el entorno de pruebas. No se envían al taller.';
+    $('reviewNotice').textContent=production?'Tu solicitud se enviará al equipo de MENIGAR para su revisión.':'Vista previa · Las solicitudes se guardan en el entorno de pruebas. No se envían al laboratorio.';
     $('saveNote').textContent=production?'Al enviar se registrarán tus datos y archivos para que el equipo revise el caso.':'La solicitud de esta vista previa se guardará únicamente en el entorno de pruebas.';
-    if(!value.submissions)$('saveNote').textContent='El envío no está disponible. Conserva los datos y contacta con el taller.';
+    if(!value.submissions)$('saveNote').textContent='El envío no está disponible. Conserva los datos y contacta con el laboratorio.';
     $('submitRequest').disabled=!value.submissions;$('submitRequest').textContent=submitLabel();attachmentNotice();
     if(restored&&state.pending&&value.recovery){
       fetch('/api/recuperar',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':value.csrfToken},body:JSON.stringify({idempotencyKey:state.key})}).then(async response=>{if(!response.ok)return;const result=await response.json();showConfirmation(result,result.units||[]);try{sessionStorage.setItem(receiptKey,JSON.stringify({result,units:result.units||[]}));sessionStorage.removeItem(draftKey);}catch(_){} }).catch(()=>{});
