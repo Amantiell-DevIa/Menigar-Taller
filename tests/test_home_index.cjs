@@ -65,21 +65,14 @@ assert.deepEqual(entries(home.element('guide-brand')), entries(full.element('gui
 assert.deepEqual(entries(home.element('guide-model')), entries(full.element('guide-model')));
 assert.deepEqual(entries(home.element('guide-component')), entries(full.element('guide-component')));
 
-// The homepage presents every family before JavaScript runs. Keep its links
-// aligned with the same generated family list used by guided search.
+// The homepage is simple (owner, 22 Oct 2026): two ways to start, no finder and no family grid.
+// Way 1 searches a fault code or reference on servicios.html; way 2 opens its step-by-step filters.
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-const featuredLinks = [...homepage.matchAll(/class="home-family" href="\/servicios\.html\?pieza=([a-z]+)"/g)].map(match => match[1]);
-const otherLinks = [...homepage.matchAll(/class="home-family-link" href="\/servicios\.html\?pieza=([a-z]+)"/g)].map(match => match[1]);
-const familyKeys = Array.from(home.window.MENIGAR_FAMILIES, family => family.key);
-assert.deepEqual(featuredLinks, familyKeys.slice(0, 4), 'Las cuatro familias destacadas de portada conservan las familias principales.');
-assert.deepEqual(otherLinks, familyKeys.slice(4), 'Todos los servicios restantes tienen un enlace HTML inicial.');
-const mediaContext = {window:{}};
-vm.runInNewContext(fs.readFileSync(path.join(root, 'data/family-media.js'), 'utf8'), mediaContext);
-// Featured families are illustrated; any photograph placed there must keep its documented source.
-const featuredMarkup = homepage.match(/<div class="home-family-grid">([\s\S]*?)<\/div>/)?.[1] || '';
-assert.ok(featuredMarkup.includes('class="home-family"'), 'La rejilla de familias destacadas está presente.');
-const documentedPhotos = Object.values(mediaContext.window.MENIGAR_FAMILY_MEDIA).map(item => item.src);
-for (const [, src] of featuredMarkup.matchAll(/<img src="([^"]+)"/g)) assert.ok(documentedPhotos.includes(src), `Foto sin procedencia documentada en portada: ${src}`);
+const ways = homepage.match(/<ol class="p-ways"[\s\S]*?<\/ol>/)?.[0] || '';
+assert.equal((ways.match(/<li class="p-way/g) || []).length, 2, 'El hero ofrece exactamente dos maneras de empezar.');
+assert.match(ways, /<form class="p-search" action="\/servicios\.html" method="get" role="search">[\s\S]*?name="q"[^>]*required/, 'La primera manera busca el código o la referencia en servicios.');
+assert.match(ways, /href="\/servicios\.html#catalogo"/, 'La segunda manera abre la búsqueda paso a paso de servicios.');
+assert.ok(!/id="buscar"|id="que-reparamos"|home-index\.js/.test(homepage), 'La portada ya no incluye el buscador ni la rejilla de familias.');
 assert.match(homepage, /Laboratorio · archivo 2017/);
 
 // Videos and the map are click-to-load: the page itself never contains a

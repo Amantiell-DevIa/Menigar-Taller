@@ -100,6 +100,8 @@
       heading.append(...title.childNodes);
       title.replaceWith(heading);
     }
+    // The step-by-step search left the homepage for servicios.html (owner, 22 Oct 2026).
+    hero.querySelectorAll('a[href="/index.html#buscar"]').forEach(link => link.setAttribute('href', '/servicios.html#catalogo'));
     hero.querySelectorAll('a[href^="/index.html#"]').forEach(link => link.setAttribute('href', link.getAttribute('href').slice('/index.html'.length)));
     return hero;
   };
