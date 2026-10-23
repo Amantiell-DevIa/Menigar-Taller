@@ -21,7 +21,7 @@ if (preg_match('~^/(api|equipo)(/|$)~', $path)) {
     require $root . '/api/index.php';
     return;
 }
-$rootFiles = ['index.html','servicios.html','solicitud.html','resumen.html','envios.html','taller.html','ayuda.html','privacidad.html','condiciones.html','cookies.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml'];
+$rootFiles = ['index.html','servicios.html','solicitud.html','resumen.html','envios.html','taller.html','ayuda.html','privacidad.html','condiciones.html','cookies.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','favicon.ico','apple-touch-icon.png'];
 $allowed = $path === '/' || in_array(ltrim($path, '/'), $rootFiles, true)
     || in_array(ltrim($path, '/'), ['data/catalogo-v2.js','data/home-index.js','data/family-media.js'], true)
     || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2)$~i', $path))

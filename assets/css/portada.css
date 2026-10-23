@@ -18,14 +18,14 @@
 .p-link--dark{color:var(--action-on-dark)}
 .p-btn-lg{min-height:52px;padding-inline:26px;font-size:var(--fs-body);letter-spacing:var(--ls-body)}
 
-/* 1 · Hero, 22 Oct 2026. An electric field with a real instrument cluster from the MENIGAR archive.
+/* 1 · Hero, 22 Oct 2026; colour «Laguna» 23 Oct 2026 (the lab's cyan, a step lighter).
    Every colour of the hero is a token on .p-hero, so a palette is one rule (see opciones-hero.css). */
 .p-hero{
- --h-deep:#030a4f;--h-base:#0b1fc4;--h-mid:#0a19a6;--h-hot:#2a4dff;--h-flare:rgba(111,140,255,.42);
- --h-bloom:rgba(77,115,255,.6);--h-warm:rgba(255,166,64,.28);
- --h-ink-1:#fff;--h-ink-2:#dbe2ff;--h-ink-3:#b8c5ff;--h-accent:#ffd08a;--h-line:rgba(255,255,255,.2);
- --h-field:rgba(255,255,255,.1);--h-field-line:rgba(255,255,255,.26);--h-glass:rgba(8,18,96,.46);--h-glass-line:rgba(255,255,255,.3);
- --h-shadow:rgba(2,6,48,.6);--h-veil:#02051f;
+ --h-deep:#004352;--h-base:#006b7d;--h-mid:#005f70;--h-hot:#1fb7cb;--h-flare:rgba(120,230,245,.34);
+ --h-bloom:rgba(60,214,235,.5);--h-warm:rgba(255,213,74,.22);
+ --h-ink-1:#fff;--h-ink-2:#e3f8fb;--h-ink-3:#c8eef4;--h-accent:#ffd54a;--h-line:rgba(255,255,255,.24);
+ --h-field:rgba(255,255,255,.12);--h-field-line:rgba(255,255,255,.32);--h-glass:rgba(0,60,74,.42);--h-glass-line:rgba(255,255,255,.32);
+ --h-shadow:rgba(0,36,46,.55);--h-veil:#00242c;
  --h-core:76% 46%;--h-core-size:44% 64%;
  position:relative;isolation:isolate;overflow:hidden;padding:clamp(28px,3.4vw,52px) 0 clamp(32px,4vw,48px);color:var(--h-ink-1);
  background:radial-gradient(var(--h-core-size) at var(--h-core),var(--h-hot) 0%,transparent 72%),radial-gradient(70% 90% at 100% 0%,var(--h-flare) 0%,transparent 56%),
@@ -39,7 +39,7 @@
 .p-hero .p-lead{max-width:44ch;color:var(--h-ink-2)}
 /* Message beside the photograph, the two ways below both. The DOM keeps message → ways → photo,
    which is also the order on narrow screens. */
-.p-hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);grid-template-areas:"copy media" "ways ways";gap:clamp(28px,3vw,40px) clamp(32px,4.5vw,72px);align-items:center}
+.p-hero-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);grid-template-areas:"copy media" "ways ways";gap:clamp(24px,2.4vw,32px) clamp(32px,4.5vw,72px);align-items:center}
 .p-hero-copy{position:relative;z-index:1;grid-area:copy}
 .p-hero-ways{position:relative;z-index:1;grid-area:ways}
 .p-search{position:relative;display:flex;align-items:center;gap:8px;max-width:540px;margin-top:32px;padding:6px 6px 6px 50px;background:var(--h-field);border:1px solid var(--h-field-line);border-radius:var(--r-pill);transition:border-color .2s,background .2s,box-shadow .2s}
@@ -79,6 +79,32 @@
 .p-hero-photo .p-power{position:absolute;inset:0;background:var(--h-veil);opacity:0;pointer-events:none}
 .p-photo-tag{position:absolute;z-index:2;left:14px;top:14px;display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 10px;border-radius:var(--r-control);background:rgba(2,6,40,.6);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:var(--fs-caption);letter-spacing:var(--ls-caption);font-weight:600;line-height:1.2}
 .p-photo-tag::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--h-accent);box-shadow:0 0 10px var(--h-accent)}
+/* Three real pieces (owner, 23 Oct 2026): the lit cluster behind, the screen and the ABS module in
+   front, after the owner's reference but with MENIGAR's own photographs. One box with a fixed ratio and
+   every piece placed in percentages, so the group scales as one at any width. */
+.p-pieces{position:relative;aspect-ratio:52/39}
+.p-piece{position:absolute;margin:0}
+.p-piece img{display:block;width:100%;height:100%}
+.p-piece--cuadro{left:12%;top:0;width:88%;height:72%;overflow:hidden;border-radius:var(--r-card);background:var(--h-veil);box-shadow:0 0 0 1px rgba(255,255,255,.16),0 48px 90px -40px var(--h-shadow)}
+.p-piece--cuadro img{object-fit:cover}
+.p-piece--cuadro::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:linear-gradient(180deg,rgba(2,5,31,.3),transparent 32%);box-shadow:inset 0 1px 0 rgba(255,255,255,.22)}
+.p-piece--cuadro .p-power{position:absolute;inset:0;background:var(--h-veil);opacity:0;pointer-events:none}
+.p-piece--pantalla{left:0;top:59%;z-index:2;width:46%;height:31%}
+.p-piece--pantalla img{object-fit:cover;border-radius:var(--r-control);background:var(--h-veil);box-shadow:0 0 0 1px rgba(255,255,255,.24),0 30px 60px -24px var(--h-shadow)}
+.p-piece--abs{right:0;bottom:4%;z-index:3;width:38%;height:50%}
+.p-piece--abs img{object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 22px 26px rgba(2,6,40,.55))}
+.p-piece figcaption{position:absolute;z-index:2;left:12px;top:12px;display:inline-flex;align-items:center;gap:8px;padding:6px 11px 6px 9px;border-radius:var(--r-control);background:rgba(2,6,40,.66);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;font-size:var(--fs-caption);letter-spacing:var(--ls-caption);font-weight:600;line-height:1.2;white-space:nowrap}
+.p-piece figcaption::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--h-accent);box-shadow:0 0 10px var(--h-accent)}
+.p-piece--pantalla figcaption{top:calc(100% + 10px);left:0}
+.p-piece--abs figcaption{top:auto;left:auto;right:4px;bottom:2px}
+/* The Google rating sits under the promise it backs, not on the photographs. */
+.p-hero-copy .p-hero-rating{position:relative;left:auto;bottom:auto;display:inline-flex;gap:10px;width:auto;max-width:100%;margin:20px 0 0;padding:0;border:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
+.p-hero-copy .p-hero-rating:hover{transform:none}
+.p-hero-copy .p-hero-rating:hover b{text-decoration:underline;text-underline-offset:3px}
+.p-hero-copy .p-g{width:26px;height:26px}
+.p-hero-copy .p-g svg{width:15px;height:15px}
+.p-hero-copy .p-rating-score{font-size:1.25rem}
+.p-hero-copy .p-rating-text{flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 10px;font-size:var(--fs-small);letter-spacing:var(--ls-small)}
 /* Google rating on glass: the strongest proof, next to the photograph. */
 .p-rating{display:inline-flex;align-items:center;gap:14px;color:var(--h-ink-1);text-decoration:none}
 .p-rating:hover{text-decoration:none}
@@ -99,7 +125,7 @@
 .p-facts{display:flex;flex-wrap:wrap;gap:10px 40px;margin:clamp(32px,3.6vw,48px) 0 0;padding:22px 0 0;list-style:none;border-top:1px solid var(--h-line);font-size:var(--fs-small);letter-spacing:var(--ls-small);color:var(--h-ink-3)}
 .p-facts strong{color:var(--h-ink-1);font-weight:600}
 @media (prefers-reduced-motion:no-preference){
- .p-hero-photo .p-power{animation:p-power 1.5s .25s both}
+ .p-hero-photo .p-power,.p-piece--cuadro .p-power{animation:p-power 1.5s .25s both}
  .p-hero-media::before{animation:p-bloom 2.2s .3s both}
 }
 @keyframes p-power{0%{opacity:.94}14%{opacity:.62}18%{opacity:.88}30%{opacity:.3}36%{opacity:.5}52%{opacity:.08}100%{opacity:0}}
@@ -203,6 +229,7 @@
 .p-pro-grid{position:relative;display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:24px 64px;align-items:end}
 .p-pro .p-h2{color:var(--p-on-dark-1)}
 .p-pro .p-body{color:var(--p-on-dark-2)}
+.p-pro .p-eyebrow{color:var(--p-on-dark-2)}
 .p-pro-actions{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px;margin-top:28px}
 
 /* 8 · Contact */
@@ -247,7 +274,7 @@
  .p-hero-grid{grid-template-areas:"copy" "ways" "media"}
  .p-ways{grid-template-columns:minmax(0,1fr)}
  .p-hero-grid,.p-lab-grid,.p-pro-grid,.p-contact-grid,.p-head--split{grid-template-columns:minmax(0,1fr)}
- .p-hero{--h-core:50% 90%;--h-core-size:110% 24%}
+ .p-hero{--h-core:50% 74%;--h-core-size:110% 17%}
  .p-hero-media{max-width:680px}
  .p-hero-photo img{aspect-ratio:2/1;object-fit:cover;object-position:50% 46%}
  .p-hero-rating{position:relative;left:auto;bottom:auto;display:flex;width:max-content;max-width:calc(100% - 24px);margin:-30px 0 0 12px}
@@ -263,6 +290,9 @@
  .p-search-icon{left:16px}
  .p-search .button{padding-inline:18px}
  .p-facts{flex-direction:column;gap:8px}
+ .p-piece figcaption{left:8px;top:8px;gap:6px;padding:5px 9px 5px 8px;font-size:.6875rem}
+ .p-piece--pantalla figcaption{top:calc(100% + 6px);left:0}
+ .p-piece--abs figcaption{top:auto;left:auto;right:2px;bottom:0}
  .p-way{padding:16px 16px 18px}
  .p-way-title{align-items:flex-start;gap:10px}
  .p-way-n{width:30px;height:30px}

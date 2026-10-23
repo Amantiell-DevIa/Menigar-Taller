@@ -6,9 +6,9 @@
 (() => {
   'use strict';
   const designs = ['a', 'b', 'c', 'd'];
-  const palettes = ['cobalto', 'cian', 'violeta', 'noche'];
+  const palettes = ['laguna', 'profundo', 'turquesa', 'cian', 'cobalto', 'violeta', 'noche'];
   const designNames = { a: 'Encendido', b: 'Cabina', c: 'Bento', d: 'Escaparate' };
-  const paletteNames = { cobalto: 'Cobalto', cian: 'Cian', violeta: 'Violeta', noche: 'Noche' };
+  const paletteNames = { laguna: 'Laguna', profundo: 'Cian profundo', turquesa: 'Turquesa', cobalto: 'Cobalto', cian: 'Cian original', violeta: 'Violeta', noche: 'Noche' };
   const storageKey = 'menigar-laboratorio';
   const original = document.querySelector('main > .p-hero');
   if (!original || document.querySelector('.lab-panel')) return;
@@ -18,7 +18,7 @@
   const params = new URLSearchParams(location.search);
   const state = {
     design: pick(params.get('diseno'), designs, pick(saved.design, designs, 'a')),
-    palette: pick(params.get('fondo'), palettes, pick(saved.palette, palettes, 'cobalto'))
+    palette: pick(params.get('fondo'), palettes, pick(saved.palette, palettes, 'laguna'))
   };
   const heroes = { a: original };
   let current = original;
@@ -82,7 +82,7 @@
     if (field && field.type !== 'radio') return;
     const key = event.key.toLowerCase();
     if (designs.includes(key)) { event.preventDefault(); chooseDesign(key); }
-    else if (/^[1-4]$/.test(key)) { event.preventDefault(); choosePalette(palettes[Number(key) - 1]); }
+    else if (/^[1-7]$/.test(key)) { event.preventDefault(); choosePalette(palettes[Number(key) - 1]); }
     else if (key === 'h') { event.preventDefault(); setHidden(!panel.hidden); }
   });
 

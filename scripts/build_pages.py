@@ -61,7 +61,7 @@ def header(active=""):
     nav = "".join(f'<li><a href="/{path}"' + (' aria-current="page"' if path == active else '') + f'>{label}</a></li>' for path, label in links)
     return f'''<a class="skip-link" href="#contenido">Saltar al contenido</a>
 <header class="site-header"><div class="container header-inner">
-  <a class="brand" href="/index.html" aria-label="MENIGAR, inicio"><span class="brand-name">MENIGAR<span class="brand-dot">.</span></span><span class="brand-caption">Electrónica del automóvil · Desde 1989</span></a>
+  <a class="brand" href="/index.html" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt=""></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span>Menú</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <nav id="site-nav" aria-label="Navegación principal"><ul class="nav-list">{nav}</ul><a class="button button-primary header-cta" href="/solicitud.html?tipo=consulta">Consultar mi pieza <span aria-hidden="true">↗</span></a></nav>
 </div></header>'''
@@ -69,7 +69,7 @@ def header(active=""):
 
 def footer():
     return f'''<footer class="site-footer"><div class="container footer-grid">
-  <div><a class="brand" href="/index.html"><span class="brand-name">MENIGAR<span class="brand-dot">.</span></span><span class="brand-caption">Electrónica del automóvil · Desde 1989</span></a><p>Reparación de electrónica del automóvil.<br>Talleres y particulares.</p><a class="footer-phone" href="tel:+34916622781">{PHONE}</a></div>
+  <div><a class="brand brand--placa" href="/index.html" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt="" loading="lazy" decoding="async"></a><p>Reparación de electrónica del automóvil.<br>Talleres y particulares.</p><a class="footer-phone" href="tel:+34916622781">{PHONE}</a></div>
   <div><h2>Tu reparación</h2><a href="/servicios.html">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a><a href="/envios.html">Cómo preparar el paquete</a></div>
   <div><h2>Encuéntranos</h2><p>C/ José Echegaray, 16<br>Edificio A1 · Planta 2ª · Nave 4<br>28100 Alcobendas, Madrid</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Menigar+Alcobendas" target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a></div>
   <div><h2>Horario de atención</h2><p>Lunes a jueves<br><strong>8:00–16:00</strong></p><p>Viernes<br><strong>8:00–14:00</strong></p><a href="/ayuda.html#contacto">Consultar con el equipo →</a></div>
@@ -86,7 +86,7 @@ def page(title, description, path, body, active="", extra_head="", body_class=""
     return f'''<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{e(title)} | Menigar</title><meta name="description" content="{e(description)}"><meta name="robots" content="noindex, nofollow">
-<link rel="canonical" href="{ORIGIN}{e(path)}"><link rel="stylesheet" href="/style.css">{extra_head}<script src="/app.js" defer></script></head>
+<link rel="canonical" href="{ORIGIN}{e(path)}"><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="/style.css">{extra_head}<script src="/app.js" defer></script></head>
 <body class="{e(body_class)}">{header(active)}<main id="contenido">{body}</main>{footer()}</body></html>\n'''
 
 

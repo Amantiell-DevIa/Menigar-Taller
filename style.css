@@ -364,7 +364,7 @@ button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,s
 .family-more-link{display:flex;justify-content:space-between;align-items:center;gap:10px;min-height:44px;padding:8px 11px;border:1px solid #cbd2d0;border-radius:var(--r-control);background:#fcfaf5;color:#223743;font-size:var(--fs-small);letter-spacing:var(--ls-small);line-height:1.3}
 .family-more-link:hover{background:#e8eff1;border-color:#7c9aaa;text-decoration:none}
 .family-more-link span:last-child{color:var(--action)}
-#como-funciona,.professional-section{background:#f8f7f3}
+#como-funciona,.professional-section{background:var(--p-card,#fff)}
 .journey-heading p:not(.eyebrow){max-width:650px;font-size:var(--fs-body);letter-spacing:var(--ls-body);line-height:1.5;margin-top:9px}
 .journey-cta{margin-top:27px}
 .result-card{display:flex;flex-direction:column;gap:0;padding:19px;border-top:3px solid #294e63;box-shadow:0 4px 13px #1328320b}
@@ -562,23 +562,33 @@ button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,s
 /* V4, 18 Oct 2026: the homepage system shared by every page. Night header and page intros,
    ivory reading surfaces, amber as the light of the instruments, one action color. */
 :root{
- --p-night-0:#060d12;--p-night-1:#0b161d;--p-night-2:#101e27;--p-night-3:#172a35;
- --p-on-dark-1:#f5f3ee;--p-on-dark-2:#bccad1;--p-on-dark-3:#8499a4;--p-line-dark:rgba(255,255,255,.1);
- --p-ivory:#f5f3ee;--p-ivory-2:#ecebe4;--p-card:#fcfbf8;--p-sand:#e9e3d6;
- --p-ink:#101e27;--p-ink-2:#3d4d57;--p-ink-3:#58666e;--p-line:#d8d6cd;--p-line-strong:#c3c1b7;
- --p-amber:#f2b65f;--p-amber-hot:#ffab45;--p-amber-deep:#9a5b14;--p-red:#ff5a3c;
+ /* Cian «Laguna» (owner, 23 Oct 2026): the lab's cyan, one clear step lighter, is the base of the whole
+    site. The deep tones are teal, never black; light sections carry a cyan tint; the warm accent is the
+    logo's sunny yellow instead of gold, so nothing reads as «expensive». */
+ --p-night-0:#00414e;--p-night-1:#005566;--p-night-2:#005f70;--p-night-3:#006b7d;
+ --p-on-dark-1:#ffffff;--p-on-dark-2:#d6f2f7;--p-on-dark-3:#b6e2ea;--p-line-dark:rgba(255,255,255,.18);
+ --p-ivory:#effafc;--p-ivory-2:#ddf2f7;--p-card:#fbfeff;--p-sand:#dff1f5;
+ --p-ink:#0b2a35;--p-ink-2:#2a4a55;--p-ink-3:#486570;--p-line:#c9e2e9;--p-line-strong:#a9cbd5;
+ --p-amber:#ffd54a;--p-amber-hot:#ffc61a;--p-amber-deep:#7a5600;--p-red:#ff5a3c;
  --p-ease:cubic-bezier(.2,.8,.2,1);
  --p-shadow:0 1px 2px rgba(16,30,39,.04),0 28px 56px -28px rgba(16,30,39,.22);
- --p-night-glow:radial-gradient(110% 120% at 90% 0%,#183344 0%,transparent 60%);
+ --p-night-glow:radial-gradient(110% 120% at 90% 0%,#0e93a8 0%,transparent 62%);
 }
 html{scroll-padding-top:84px}
 body{background:var(--p-ivory)}
-.site-header{position:sticky;top:0;z-index:60;background:rgba(11,22,29,.92);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--p-line-dark)}
+/* Header with MENIGAR's own logo (owner, 23 Oct 2026). The logo is drawn for white, with black
+   lettering, so the bar is white; the footer shows it on a white plate. */
+.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(16,30,39,.1)}
 .header-inner{min-height:68px}
-.brand-name{font-size:25px;letter-spacing:-1px}
-.site-header .nav-list a{font-size:var(--fs-small);letter-spacing:var(--ls-small);color:var(--p-on-dark-2)}
-.site-header .nav-list a:hover,.site-header .nav-list a[aria-current=page]{color:#fff}
-.local-preview-note{background:var(--p-night-0);border-color:var(--p-line-dark);color:var(--p-on-dark-3)}
+.brand-logo{display:block;width:auto;height:38px}
+.site-header .nav-list a{font-size:var(--fs-small);letter-spacing:var(--ls-small);color:var(--p-ink-2)}
+.site-header .nav-list a:hover,.site-header .nav-list a[aria-current=page]{color:var(--p-ink)}
+.site-header .header-cta{background:var(--action);border-color:var(--action);color:var(--on-action)}
+.site-header .header-cta:hover{background:var(--action-hover);border-color:var(--action-hover)}
+.menu-toggle{background:#fff;color:var(--p-ink);border-color:var(--p-line-strong)}
+.site-footer .brand--placa{display:inline-flex;padding:10px 14px;background:#fff;border-radius:var(--r-control)}
+.site-footer .brand--placa .brand-logo{height:30px}
+.local-preview-note{background:var(--p-ivory-2);border-color:var(--p-line);color:var(--p-ink-3)}
 .eyebrow.eyebrow{font-size:var(--fs-small);letter-spacing:var(--ls-small);text-transform:none;font-weight:600;line-height:1.4;color:var(--p-ink-3)}
 .eyebrow-line{display:none}
 .page-intro{padding-block:clamp(28px,3.6vw,44px) clamp(40px,5vw,64px);border-bottom:0;color:var(--p-on-dark-1);background:var(--p-night-glow),var(--p-night-1)}
@@ -609,8 +619,9 @@ input[type=text],input[type=email],input[type=tel],input[type=search],input[type
 .footer-bottom{border-color:var(--p-line-dark)}
 @media(max-width:760px){
  .header-inner{min-height:62px}
- .site-header nav{background:var(--p-night-1);border-color:var(--p-line-dark)}
- .site-header .nav-list a{font-size:var(--fs-body);letter-spacing:var(--ls-body);color:var(--p-on-dark-1);border-color:var(--p-line-dark)}
+ .brand-logo{height:30px}
+ .site-header nav{background:#fff;border-color:var(--p-line)}
+ .site-header .nav-list a{font-size:var(--fs-body);letter-spacing:var(--ls-body);color:var(--p-ink);border-color:var(--p-line)}
 }
 
 /* V4 catalog: a calm filter panel, cards without coloured edges and one action color. */

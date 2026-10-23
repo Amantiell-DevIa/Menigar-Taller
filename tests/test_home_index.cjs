@@ -74,6 +74,17 @@ assert.match(ways, /<form class="p-search" action="\/servicios\.html" method="ge
 assert.match(ways, /href="\/servicios\.html#catalogo"/, 'La segunda manera abre la búsqueda paso a paso de servicios.');
 assert.ok(!/id="buscar"|id="que-reparamos"|home-index\.js/.test(homepage), 'La portada ya no incluye el buscador ni la rejilla de familias.');
 assert.match(homepage, /Laboratorio · archivo 2017/);
+// The hero shows three real pieces, each named (owner, 23 Oct 2026), and the header carries MENIGAR's
+// own logo; every responsive image candidate exists.
+const pieces = [...homepage.matchAll(/<figure class="p-piece p-piece--(\w+)">[\s\S]*?<figcaption>[^<]+<\/figcaption><\/figure>/g)].map(match => match[1]);
+assert.deepEqual(pieces, ['cuadro', 'pantalla', 'abs'], 'El hero muestra cuadro, pantalla y módulo ABS, cada uno con su nombre.');
+assert.match(homepage, /<header class="site-header">[\s\S]*?<img class="brand-logo" src="\/assets\/marca\/menigar-logo-1x\.webp"/, 'La cabecera usa el logo de MENIGAR.');
+for (const [, set] of homepage.matchAll(/srcset="([^"]+)"/g)) {
+  for (const candidate of set.split(',')) {
+    const src = candidate.trim().split(/\s+/)[0];
+    assert.ok(fs.existsSync(path.join(root, src)), `Falta la imagen ${src}`);
+  }
+}
 
 // Videos and the map are click-to-load: the page itself never contains a
 // third-party frame, and each placeholder keeps a plain link that works

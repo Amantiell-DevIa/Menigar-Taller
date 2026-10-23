@@ -2,7 +2,11 @@
    colour switch and the review toolbar. Composition A and the hero tokens live in portada.css,
    so a palette here is only a new set of --h-* values. */
 
-/* Palettes. Cobalt is the default declared on .p-hero; the radios in the toolbar swap the tokens. */
+/* Palettes. «Laguna» is the default declared on .p-hero (owner, 23 Oct 2026); «Cian» is the original
+   lab cyan he liked; the radios swap the tokens. */
+.o-page:has(#paleta-profundo:checked) .p-hero{--h-deep:#00303b;--h-base:#005566;--h-mid:#004a59;--h-hot:#0aa0b4;--h-flare:rgba(0,224,255,.26);--h-bloom:rgba(0,214,230,.46);--h-ink-2:#d6f2f7;--h-ink-3:#b0e3ea;--h-glass:rgba(0,40,50,.46);--h-veil:#00161b;--h-shadow:rgba(0,20,26,.6)}
+.o-page:has(#paleta-turquesa:checked) .p-hero{--h-deep:#004a59;--h-base:#007588;--h-mid:#006b7d;--h-hot:#2fc9da;--h-flare:rgba(150,240,250,.36);--h-bloom:rgba(90,225,240,.5);--h-ink-2:#effcfd;--h-ink-3:#d4f4f8;--h-glass:rgba(0,70,84,.42);--h-veil:#002a33;--h-shadow:rgba(0,40,50,.5)}
+.o-page:has(#paleta-cobalto:checked) .p-hero{--h-deep:#030a4f;--h-base:#0b1fc4;--h-mid:#0a19a6;--h-hot:#2a4dff;--h-flare:rgba(111,140,255,.42);--h-bloom:rgba(77,115,255,.6);--h-warm:rgba(255,166,64,.28);--h-ink-2:#dbe2ff;--h-ink-3:#b8c5ff;--h-accent:#ffd08a;--h-glass:rgba(8,18,96,.46);--h-veil:#02051f;--h-shadow:rgba(2,6,48,.6)}
 .o-page:has(#paleta-cian:checked) .p-hero{--h-deep:#00141b;--h-base:#003642;--h-mid:#002a34;--h-hot:#007f90;--h-flare:rgba(0,224,255,.26);--h-bloom:rgba(0,214,230,.46);--h-warm:rgba(255,166,64,.3);--h-ink-2:#d2f3f7;--h-ink-3:#a1dbe3;--h-accent:#ffcf87;--h-glass:rgba(0,26,34,.5);--h-veil:#00080b;--h-shadow:rgba(0,10,14,.65)}
 .o-page:has(#paleta-violeta:checked) .p-hero{--h-deep:#11044a;--h-base:#3210c2;--h-mid:#280ba0;--h-hot:#6236ff;--h-flare:rgba(178,140,255,.4);--h-bloom:rgba(140,100,255,.55);--h-ink-2:#e4dcff;--h-ink-3:#c6b8ff;--h-glass:rgba(30,10,100,.46);--h-veil:#08021f;--h-shadow:rgba(10,2,40,.65)}
 .o-page:has(#paleta-noche:checked) .p-hero{--h-deep:#060d12;--h-base:#0b161d;--h-mid:#0b161d;--h-hot:#173244;--h-flare:rgba(24,51,68,.6);--h-bloom:rgba(255,165,70,.2);--h-warm:rgba(255,166,64,.18);--h-ink-2:#bccad1;--h-ink-3:#9fb0b9;--h-accent:#f2b65f;--h-glass:rgba(11,22,29,.62);--h-veil:#05090c;--h-shadow:rgba(0,0,0,.6)}
@@ -35,6 +39,9 @@
 .o-swatch:has(input:checked){background:var(--action-on-dark);color:var(--on-action-dark)}
 .o-swatch:has(input:focus-visible){outline:3px solid #c67b11;outline-offset:2px}
 .o-dot{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(255,255,255,.35)}
+.o-dot--laguna{background:linear-gradient(135deg,#1fb7cb,#006b7d)}
+.o-dot--profundo{background:linear-gradient(135deg,#0aa0b4,#005566)}
+.o-dot--turquesa{background:linear-gradient(135deg,#2fc9da,#007588)}
 .o-dot--cobalto{background:linear-gradient(135deg,#2a4dff,#0b1fc4)}
 .o-dot--cian{background:linear-gradient(135deg,#00b7c9,#003642)}
 .o-dot--violeta{background:linear-gradient(135deg,#7a4dff,#3210c2)}
