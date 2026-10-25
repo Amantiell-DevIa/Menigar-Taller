@@ -23,7 +23,7 @@
 .p-hero{
  --h-deep:#004352;--h-base:#006b7d;--h-mid:#005f70;--h-hot:#1fb7cb;--h-flare:rgba(120,230,245,.34);
  --h-bloom:rgba(60,214,235,.5);--h-warm:rgba(255,213,74,.22);
- --h-ink-1:#fff;--h-ink-2:#e3f8fb;--h-ink-3:#c8eef4;--h-accent:#ffd54a;--h-line:rgba(255,255,255,.24);
+ --h-ink-1:#fff;--h-ink-2:#e3f8fb;--h-ink-3:#c8eef4;--h-accent:#ffd54a;--h-eyebrow:#fff0b8;--h-line:rgba(255,255,255,.24);
  --h-field:rgba(255,255,255,.12);--h-field-line:rgba(255,255,255,.32);--h-glass:rgba(0,60,74,.42);--h-glass-line:rgba(255,255,255,.32);
  --h-shadow:rgba(0,36,46,.55);--h-veil:#00242c;
  --h-core:76% 46%;--h-core-size:44% 64%;
@@ -34,7 +34,8 @@
 /* Fine grain keeps the large saturated gradients from banding. */
 .p-hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.22;mix-blend-mode:soft-light;
  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.p-hero .p-eyebrow{color:var(--h-accent)}
+/* The yellow badge colour is too dark for small text on Laguna: the eyebrow takes a paler yellow. */
+.p-hero .p-eyebrow{color:var(--h-eyebrow,var(--h-accent))}
 .p-hero .p-display{margin-bottom:20px;font-size:clamp(2.4rem,1.2rem + 2.9vw,3.5rem);color:var(--h-ink-1)}
 .p-hero .p-lead{max-width:44ch;color:var(--h-ink-2)}
 /* Message beside the photograph, the two ways below both. The DOM keeps message → ways → photo,
@@ -97,6 +98,17 @@
 .p-piece figcaption::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--h-accent);box-shadow:0 0 10px var(--h-accent)}
 .p-piece--pantalla figcaption{top:calc(100% + 10px);left:0}
 .p-piece--abs figcaption{top:auto;left:auto;right:4px;bottom:2px}
+/* Melted pieces (owner, 23 Oct 2026): the photographs dissolve into the field, as in the «Cabina»
+   option he liked, instead of sitting in framed tiles. The cluster bleeds to the window's right edge;
+   the masks sit on the images, so the labels stay sharp. The ABS is already cut out. */
+.p-piece--cuadro{left:-4%;right:calc((min(1200px,100vw - 48px) - 100vw) / 2);width:auto;height:86%;overflow:visible;border-radius:0;background:none;box-shadow:none}
+.p-piece--cuadro::after{display:none}
+.p-piece--cuadro img,.p-piece--cuadro .p-power{object-position:58% 50%;
+ -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 14%,#000 34%),linear-gradient(180deg,transparent 0%,#000 18%,#000 60%,transparent 100%);
+ -webkit-mask-composite:source-in;mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.5) 14%,#000 34%),linear-gradient(180deg,transparent 0%,#000 18%,#000 60%,transparent 100%);mask-composite:intersect}
+.p-piece--pantalla img{border-radius:0;box-shadow:none;background:none;
+ -webkit-mask-image:radial-gradient(ellipse 52% 56% at 50% 50%,#000 40%,transparent 100%);mask-image:radial-gradient(ellipse 52% 56% at 50% 50%,#000 40%,transparent 100%)}
+.p-piece--cuadro figcaption{left:auto;right:clamp(16px,3vw,40px)}
 /* The Google rating sits under the promise it backs, not on the photographs. */
 .p-hero-copy .p-hero-rating{position:relative;left:auto;bottom:auto;display:inline-flex;gap:10px;width:auto;max-width:100%;margin:20px 0 0;padding:0;border:0;background:none;-webkit-backdrop-filter:none;backdrop-filter:none;box-shadow:none}
 .p-hero-copy .p-hero-rating:hover{transform:none}
@@ -274,8 +286,9 @@
  .p-hero-grid{grid-template-areas:"copy" "ways" "media"}
  .p-ways{grid-template-columns:minmax(0,1fr)}
  .p-hero-grid,.p-lab-grid,.p-pro-grid,.p-contact-grid,.p-head--split{grid-template-columns:minmax(0,1fr)}
- .p-hero{--h-core:50% 74%;--h-core-size:110% 17%}
+ .p-hero{--h-core:50% 74%;--h-core-size:110% 17%;--h-hot:#128fa3;--h-flare:rgba(120,230,245,.14)}
  .p-hero-media{max-width:680px}
+ .p-piece--cuadro{left:0;right:0}
  .p-hero-photo img{aspect-ratio:2/1;object-fit:cover;object-position:50% 46%}
  .p-hero-rating{position:relative;left:auto;bottom:auto;display:flex;width:max-content;max-width:calc(100% - 24px);margin:-30px 0 0 12px}
  .p-lab-main{order:2}
@@ -292,6 +305,7 @@
  .p-facts{flex-direction:column;gap:8px}
  .p-piece figcaption{left:8px;top:8px;gap:6px;padding:5px 9px 5px 8px;font-size:.6875rem}
  .p-piece--pantalla figcaption{top:calc(100% + 6px);left:0}
+ .p-piece--cuadro figcaption{left:auto;right:12px}
  .p-piece--abs figcaption{top:auto;left:auto;right:2px;bottom:0}
  .p-way{padding:16px 16px 18px}
  .p-way-title{align-items:flex-start;gap:10px}

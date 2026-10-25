@@ -581,6 +581,7 @@ body{background:var(--p-ivory)}
 .site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(16,30,39,.1)}
 .header-inner{min-height:68px}
 .brand-logo{display:block;width:auto;height:38px}
+@media(max-width:1050px){.brand-logo{height:28px}}
 .site-header .nav-list a{font-size:var(--fs-small);letter-spacing:var(--ls-small);color:var(--p-ink-2)}
 .site-header .nav-list a:hover,.site-header .nav-list a[aria-current=page]{color:var(--p-ink)}
 .site-header .header-cta{background:var(--action);border-color:var(--action);color:var(--on-action)}
