@@ -18,7 +18,7 @@ try {
         if ($path === '/api/review.php') { http_response_code(404); return; }
         require $publicRoot . '/api/index.php'; return;
     }
-    $files = ['index.html','servicios.html','solicitud.html','resumen.html','envios.html','taller.html','ayuda.html','privacidad.html','condiciones.html','cookies.html','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','data/catalogo-v2.js','data/home-index.js','data/family-media.js'];
+    $files = ['index.html','servicios.html','solicitud.html','resumen.html','envios.html','taller.html','ayuda.html','privacidad.html','condiciones.html','cookies.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','data/catalogo-v2.js','data/home-index.js','data/family-media.js','favicon.ico','apple-touch-icon.png'];
     $allowed = $path === '/' || in_array(ltrim($path, '/'), $files, true)
         || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2)$~iD', $path))
         || preg_match('~^/reparaciones/[A-Za-z0-9_-]+/(?:index\.html)?$~D', $path);

@@ -25,7 +25,8 @@ class Page(HTMLParser):
             self.ids.append(attrs['id'])
         if attrs.get('data-source-module'):
             self.modules.append(attrs['data-source-module'])
-        if tag == 'img':
+        # The site logo (header and footer) is not repair content.
+        if tag == 'img' and 'brand-logo' not in (attrs.get('class') or '').split():
             self.images.append(attrs)
         if tag == 'a':
             self.links.append(attrs)

@@ -19,7 +19,8 @@ class Page(HTMLParser):
         attrs = dict(attrs)
         if attrs.get('id'):
             self.ids.append(attrs['id'])
-        if tag == 'img':
+        # The site logo (header and footer) is not repair content.
+        if tag == 'img' and 'brand-logo' not in (attrs.get('class') or '').split():
             self.images.append(attrs)
         if tag == 'a':
             self.links.append(attrs)
