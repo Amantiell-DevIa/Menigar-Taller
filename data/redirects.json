@@ -936,15 +936,6 @@
     "uid": "abs-1936"
   },
   {
-    "from": "https://www.menigar.com/reparacion-abs/bmw-motorrad/f-650-gs-bosch-5-3/",
-    "fromPath": "/reparacion-abs/bmw-motorrad/f-650-gs-bosch-5-3/",
-    "to": "/reparaciones/abs-2475-f-650-gs-bosch-5-3/",
-    "status": 301,
-    "enabled": false,
-    "reviewRequired": true,
-    "uid": "abs-2475"
-  },
-  {
     "from": "https://www.menigar.com/reparacion-abs/bmw-motorrad/f-700-gs/",
     "fromPath": "/reparacion-abs/bmw-motorrad/f-700-gs/",
     "to": "/reparaciones/abs-1938-f-700-gs/",
@@ -8136,15 +8127,6 @@
     "uid": "main-8394"
   },
   {
-    "from": "https://www.menigar.com/cambio-iluminacion-del-cuadro-de-instrumentos/",
-    "fromPath": "/cambio-iluminacion-del-cuadro-de-instrumentos/",
-    "to": "/reparaciones/main-8607-cambio-iluminacion-del-cuadro-de-instrumentos/",
-    "status": 301,
-    "enabled": false,
-    "reviewRequired": true,
-    "uid": "main-8607"
-  },
-  {
     "from": "https://www.menigar.com/reparacion-cuadro-instrumentos/temsa/",
     "fromPath": "/reparacion-cuadro-instrumentos/temsa/",
     "to": "/reparaciones/main-9161-temsa/",
@@ -9664,15 +9646,6 @@
     "enabled": false,
     "reviewRequired": true,
     "uid": "main-8236"
-  },
-  {
-    "from": "https://www.menigar.com/reparacion-cuadro-instrumentos/fiat/qubo-2/",
-    "fromPath": "/reparacion-cuadro-instrumentos/fiat/qubo-2/",
-    "to": "/reparaciones/main-8241-qubo-2/",
-    "status": 301,
-    "enabled": false,
-    "reviewRequired": true,
-    "uid": "main-8241"
   },
   {
     "from": "https://www.menigar.com/reparacion-cuadro-instrumentos/fiat/scudo/",
@@ -14139,15 +14112,6 @@
     "uid": "main-13098"
   },
   {
-    "from": "https://www.menigar.com/reparacion-pantalla-multimedia/",
-    "fromPath": "/reparacion-pantalla-multimedia/",
-    "to": "/reparaciones/main-13359-reparacion-pantalla-multimedia/",
-    "status": 301,
-    "enabled": false,
-    "reviewRequired": true,
-    "uid": "main-13359"
-  },
-  {
     "from": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/ds-navegador/",
     "fromPath": "/reparacion-pantalla-tactil-multimedia/ds-navegador/",
     "to": "/reparaciones/main-13549-ds-navegador/",
@@ -14164,15 +14128,6 @@
     "enabled": false,
     "reviewRequired": true,
     "uid": "main-13688"
-  },
-  {
-    "from": "https://www.menigar.com/reparacion-pantalla-navegador/",
-    "fromPath": "/reparacion-pantalla-navegador/",
-    "to": "/reparaciones/main-14038-reparacion-pantalla-navegador/",
-    "status": 301,
-    "enabled": false,
-    "reviewRequired": true,
-    "uid": "main-14038"
   },
   {
     "from": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/",
@@ -14544,15 +14499,6 @@
     "uid": "main-14508"
   },
   {
-    "from": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/seat-full-link/",
-    "fromPath": "/reparacion-pantalla-tactil-multimedia/seat-full-link/",
-    "to": "/reparaciones/main-9052-seat-full-link/",
-    "status": 301,
-    "enabled": false,
-    "reviewRequired": true,
-    "uid": "main-9052"
-  },
-  {
     "from": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/skoda-smartlink/",
     "fromPath": "/reparacion-pantalla-tactil-multimedia/skoda-smartlink/",
     "to": "/reparaciones/main-9048-skoda-smartlink/",
@@ -14830,5 +14776,65 @@
     "enabled": false,
     "reviewRequired": true,
     "uid": "main-8009"
+  },
+  {
+    "from": "https://www.menigar.com/reparacion-pantalla-navegador/",
+    "fromPath": "/reparacion-pantalla-navegador/",
+    "to": "/reparaciones/main-8674-reparacion-pantalla-tactil-multimedia/",
+    "status": 301,
+    "enabled": false,
+    "reviewRequired": true,
+    "uid": "main-8674",
+    "mergedFrom": "main-14038"
+  },
+  {
+    "from": "https://www.menigar.com/reparacion-pantalla-multimedia/",
+    "fromPath": "/reparacion-pantalla-multimedia/",
+    "to": "/reparaciones/main-8674-reparacion-pantalla-tactil-multimedia/",
+    "status": 301,
+    "enabled": false,
+    "reviewRequired": true,
+    "uid": "main-8674",
+    "mergedFrom": "main-13359"
+  },
+  {
+    "from": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/seat-full-link/",
+    "fromPath": "/reparacion-pantalla-tactil-multimedia/seat-full-link/",
+    "to": "/reparaciones/main-14508-seat-full-link-2/",
+    "status": 301,
+    "enabled": false,
+    "reviewRequired": true,
+    "uid": "main-14508",
+    "mergedFrom": "main-9052"
+  },
+  {
+    "from": "https://www.menigar.com/cambio-iluminacion-del-cuadro-de-instrumentos/",
+    "fromPath": "/cambio-iluminacion-del-cuadro-de-instrumentos/",
+    "to": "/reparaciones/main-8394-reparacion-aranazos-en-pantalla-display-tft-del-cuadro-de-instrumentos/",
+    "status": 301,
+    "enabled": false,
+    "reviewRequired": true,
+    "uid": "main-8394",
+    "mergedFrom": "main-8607"
+  },
+  {
+    "from": "https://www.menigar.com/reparacion-cuadro-instrumentos/fiat/qubo-2/",
+    "fromPath": "/reparacion-cuadro-instrumentos/fiat/qubo-2/",
+    "to": "/reparaciones/main-8236-qubo/",
+    "status": 301,
+    "enabled": false,
+    "reviewRequired": true,
+    "uid": "main-8236",
+    "mergedFrom": "main-8241"
+  },
+  {
+    "from": "https://www.menigar.com/reparacion-abs/bmw-motorrad/f-650-gs-bosch-5-3/",
+    "fromPath": "/reparacion-abs/bmw-motorrad/f-650-gs-bosch-5-3/",
+    "to": "/reparaciones/abs-1936-f-650-gs/",
+    "status": 301,
+    "enabled": false,
+    "reviewRequired": true,
+    "uid": "abs-1936",
+    "mergedFrom": "abs-2475"
   }
 ]

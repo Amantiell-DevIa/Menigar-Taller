@@ -11,9 +11,9 @@
       "main-2321"
     ],
     "sharedSourceSections": {
-      "sharedPages": 1645,
-      "imageOccurrences": 8396,
-      "tableOccurrences": 1499
+      "sharedPages": 1639,
+      "imageOccurrences": 8295,
+      "tableOccurrences": 1497
     }
   },
   "browserProjectionOmissions": [
@@ -29,27 +29,27 @@
     "main": 831,
     "abs": 840
   },
-  "recordCount": 1648,
+  "recordCount": 1642,
   "bySource": {
-    "abs": 830,
-    "main": 818
+    "abs": 829,
+    "main": 813
   },
   "byFamily": {
-    "abs": 834,
+    "abs": 833,
     "bluetooth": 1,
     "bsi": 1,
     "cambio": 48,
     "clima": 1,
-    "cuadro": 621,
+    "cuadro": 619,
     "display": 59,
     "ecu": 3,
     "inmo": 1,
-    "multimedia": 66,
+    "multimedia": 63,
     "palanca": 13
   },
   "brandCount": 70,
-  "modelRecords": 1302,
-  "referenceCount": 59974,
+  "modelRecords": 1300,
+  "referenceCount": 59899,
   "dtcCodeCount": 233,
   "instructionRecords": [
     "abs-2444"
@@ -61,6 +61,15 @@
       "sourceId": 14403,
       "url": "https://www.menigar.com/ofertas-de-empleo/",
       "reason": "Página institucional, navegación o legal; no es ficha de reparación."
+    },
+    {
+      "source": "main",
+      "sourceId": 14038,
+      "url": "https://www.menigar.com/reparacion-pantalla-navegador/",
+      "uid": "main-14038",
+      "reason": "Copia de otra página: se une a su ficha más completa.",
+      "mergedInto": "main-8674",
+      "formerLocalPath": "/reparaciones/main-14038-reparacion-pantalla-navegador/"
     },
     {
       "source": "main",
@@ -112,6 +121,42 @@
     },
     {
       "source": "main",
+      "sourceId": 13359,
+      "url": "https://www.menigar.com/reparacion-pantalla-multimedia/",
+      "uid": "main-13359",
+      "reason": "Copia de otra página: se une a su ficha más completa.",
+      "mergedInto": "main-8674",
+      "formerLocalPath": "/reparaciones/main-13359-reparacion-pantalla-multimedia/"
+    },
+    {
+      "source": "main",
+      "sourceId": 9052,
+      "url": "https://www.menigar.com/reparacion-pantalla-tactil-multimedia/seat-full-link/",
+      "uid": "main-9052",
+      "reason": "Copia de otra página: se une a su ficha más completa.",
+      "mergedInto": "main-14508",
+      "formerLocalPath": "/reparaciones/main-9052-seat-full-link/"
+    },
+    {
+      "source": "main",
+      "sourceId": 8607,
+      "url": "https://www.menigar.com/cambio-iluminacion-del-cuadro-de-instrumentos/",
+      "uid": "main-8607",
+      "reason": "Copia de otra página: se une a su ficha más completa.",
+      "mergedInto": "main-8394",
+      "formerLocalPath": "/reparaciones/main-8607-cambio-iluminacion-del-cuadro-de-instrumentos/"
+    },
+    {
+      "source": "main",
+      "sourceId": 8241,
+      "url": "https://www.menigar.com/reparacion-cuadro-instrumentos/fiat/qubo-2/",
+      "uid": "main-8241",
+      "reason": "Copia de otra página: se une a su ficha más completa.",
+      "mergedInto": "main-8236",
+      "formerLocalPath": "/reparaciones/main-8241-qubo-2/"
+    },
+    {
+      "source": "main",
       "sourceId": 8016,
       "url": "https://www.menigar.com/politica-de-cookies/",
       "reason": "Página institucional, navegación o legal; no es ficha de reparación."
@@ -145,6 +190,15 @@
       "sourceId": 2627,
       "url": "https://www.menigar.com/reparacion-abs/land-rover/freelander-1997-2006-ate-mk25/",
       "reason": "Sin contenido de servicio en la captura."
+    },
+    {
+      "source": "abs",
+      "sourceId": 2475,
+      "url": "https://www.menigar.com/reparacion-abs/bmw-motorrad/f-650-gs-bosch-5-3/",
+      "uid": "abs-2475",
+      "reason": "Copia de otra página: se une a su ficha más completa.",
+      "mergedInto": "abs-1936",
+      "formerLocalPath": "/reparaciones/abs-2475-f-650-gs-bosch-5-3/"
     },
     {
       "source": "abs",

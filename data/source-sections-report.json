@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "captureRun": "2026-10-13-publico",
-  "recordCount": 1648,
+  "recordCount": 1642,
   "pages": [
     {
       "uid": "abs-1616",
@@ -3797,45 +3797,6 @@
           "order": 32,
           "reason": "Decorative image explicitly omitted",
           "url": "https://www.menigar.com/reparacion-abs/wp-content/uploads/2017/03/senal_peligro-150x150.png"
-        }
-      ],
-      "view": "shared-source-sections"
-    },
-    {
-      "uid": "abs-2475",
-      "sourceHtmlSha256": "d104f4af1e853c85459a97ac07759de8eab7e7a46936b6ccbda905a6babb30e9",
-      "sectionCount": 2,
-      "renderableBlocks": {
-        "heading": 4,
-        "text": 13,
-        "image": 5,
-        "link": 1,
-        "table": 1
-      },
-      "exclusions": [
-        {
-          "order": 0,
-          "reason": "Page title shown above the service content"
-        },
-        {
-          "order": 3,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/reparacion-abs/wp-content/uploads/2017/01/icons.jpg"
-        },
-        {
-          "order": 7,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/reparacion-abs/wp-content/uploads/2017/01/circuito_animado-277x130.gif"
-        },
-        {
-          "order": 45,
-          "reason": "Decorative image explicitly omitted",
-          "url": "http://www.menigar.com/reparacion-abs/wp-content/uploads/2017/01/ventajas-150x150.png"
-        },
-        {
-          "order": 55,
-          "reason": "Decorative image explicitly omitted",
-          "url": "http://www.menigar.com/reparacion-abs/wp-content/uploads/2017/03/senal_peligro-150x150.png"
         }
       ],
       "view": "shared-source-sections"
@@ -30101,28 +30062,6 @@
       "view": "shared-source-sections"
     },
     {
-      "uid": "main-8607",
-      "sourceHtmlSha256": "c9e869f890bfcd58833cf95640c1615043c0ce3fba1831e95d5e6f5ce682285c",
-      "sectionCount": 2,
-      "renderableBlocks": {
-        "heading": 4,
-        "image": 3,
-        "link": 12
-      },
-      "exclusions": [
-        {
-          "order": 1,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/wp-content/uploads/2018/01/logo_top_repair_menigar-300x161.jpg"
-        },
-        {
-          "order": 2,
-          "reason": "Page title shown above the service content"
-        }
-      ],
-      "view": "shared-source-sections"
-    },
-    {
       "uid": "main-9161",
       "sourceHtmlSha256": "5b76d50108d3678e1580f6a41dc0564d6337f74d4d7738840b72b5549e99a8fb",
       "sectionCount": 3,
@@ -33362,25 +33301,6 @@
         "heading": 5,
         "text": 1,
         "image": 2,
-        "table": 1,
-        "link": 1
-      },
-      "exclusions": [
-        {
-          "order": 0,
-          "reason": "Page title shown above the service content"
-        }
-      ],
-      "view": "shared-source-sections"
-    },
-    {
-      "uid": "main-8241",
-      "sourceHtmlSha256": "66aa3e1ed2d470bc65c75f2fb7f769b6e3615e858665be84b697e98f929f0fb6",
-      "sectionCount": 2,
-      "renderableBlocks": {
-        "heading": 4,
-        "text": 1,
-        "image": 1,
         "table": 1,
         "link": 1
       },
@@ -42867,29 +42787,6 @@
       "view": "shared-source-sections"
     },
     {
-      "uid": "main-13359",
-      "sourceHtmlSha256": "8fccab568cdbe8869c437a6887ec2be666fcc2782337caab880c9dbb50320fb7",
-      "sectionCount": 25,
-      "renderableBlocks": {
-        "heading": 10,
-        "image": 27,
-        "link": 26,
-        "text": 1
-      },
-      "exclusions": [
-        {
-          "order": 0,
-          "reason": "Page title shown above the service content"
-        },
-        {
-          "order": 140,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/wp-content/uploads/2020/04/logo_menigar_formula.jpg"
-        }
-      ],
-      "view": "shared-source-sections"
-    },
-    {
       "uid": "main-13549",
       "sourceHtmlSha256": "8c8c0c1649e4e91aa098daa1b94bf7869de08e3f779c797407a4717eaac3ccb1",
       "sectionCount": 5,
@@ -42924,35 +42821,6 @@
         {
           "order": 2,
           "reason": "Page title shown above the service content"
-        }
-      ],
-      "view": "shared-source-sections"
-    },
-    {
-      "uid": "main-14038",
-      "sourceHtmlSha256": "30bacbcb24ec3ea6f30c0039ee03c8ef4d15d123c4f6359571cf680a029c5d59",
-      "sectionCount": 28,
-      "renderableBlocks": {
-        "heading": 11,
-        "image": 34,
-        "embed": 4,
-        "link": 30,
-        "text": 1
-      },
-      "exclusions": [
-        {
-          "order": 0,
-          "reason": "Page title shown above the service content"
-        },
-        {
-          "order": 35,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/wp-content/uploads/2023/06/logo_ds.jpg"
-        },
-        {
-          "order": 119,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/wp-content/uploads/2020/04/logo_menigar_formula.jpg"
         }
       ],
       "view": "shared-source-sections"
@@ -43755,29 +43623,6 @@
         },
         {
           "order": 13,
-          "reason": "Decorative image explicitly omitted",
-          "url": "https://www.menigar.com/wp-content/uploads/2018/01/logo_top_repair_menigar-300x161.jpg"
-        }
-      ],
-      "view": "shared-source-sections"
-    },
-    {
-      "uid": "main-9052",
-      "sourceHtmlSha256": "9102ab9d7b145576abb51b41626d36343f21f5e8c5d007b8e149d343eb0dd8e6",
-      "sectionCount": 18,
-      "renderableBlocks": {
-        "heading": 84,
-        "text": 17,
-        "image": 31,
-        "embed": 1
-      },
-      "exclusions": [
-        {
-          "order": 0,
-          "reason": "Page title shown above the service content"
-        },
-        {
-          "order": 6,
           "reason": "Decorative image explicitly omitted",
           "url": "https://www.menigar.com/wp-content/uploads/2018/01/logo_top_repair_menigar-300x161.jpg"
         }
@@ -45079,9 +44924,9 @@
     }
   ],
   "totals": {
-    "sharedPages": 1645,
-    "imageOccurrences": 8396,
-    "tableOccurrences": 1499
+    "sharedPages": 1639,
+    "imageOccurrences": 8295,
+    "tableOccurrences": 1497
   },
   "limitations": [
     "Published source content is not a fresh technical or commercial approval.",

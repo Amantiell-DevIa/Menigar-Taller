@@ -19,5 +19,19 @@
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     }
+  ],
+  "redirects": [
+    { "source": "/reparaciones/abs-2475-f-650-gs-bosch-5-3/", "destination": "/reparaciones/abs-1936-f-650-gs/", "permanent": true },
+    { "source": "/reparaciones/abs-2475-f-650-gs-bosch-5-3", "destination": "/reparaciones/abs-1936-f-650-gs/", "permanent": true },
+    { "source": "/reparaciones/main-13359-reparacion-pantalla-multimedia/", "destination": "/reparaciones/main-8674-reparacion-pantalla-tactil-multimedia/", "permanent": true },
+    { "source": "/reparaciones/main-13359-reparacion-pantalla-multimedia", "destination": "/reparaciones/main-8674-reparacion-pantalla-tactil-multimedia/", "permanent": true },
+    { "source": "/reparaciones/main-14038-reparacion-pantalla-navegador/", "destination": "/reparaciones/main-8674-reparacion-pantalla-tactil-multimedia/", "permanent": true },
+    { "source": "/reparaciones/main-14038-reparacion-pantalla-navegador", "destination": "/reparaciones/main-8674-reparacion-pantalla-tactil-multimedia/", "permanent": true },
+    { "source": "/reparaciones/main-8241-qubo-2/", "destination": "/reparaciones/main-8236-qubo/", "permanent": true },
+    { "source": "/reparaciones/main-8241-qubo-2", "destination": "/reparaciones/main-8236-qubo/", "permanent": true },
+    { "source": "/reparaciones/main-8607-cambio-iluminacion-del-cuadro-de-instrumentos/", "destination": "/reparaciones/main-8394-reparacion-aranazos-en-pantalla-display-tft-del-cuadro-de-instrumentos/", "permanent": true },
+    { "source": "/reparaciones/main-8607-cambio-iluminacion-del-cuadro-de-instrumentos", "destination": "/reparaciones/main-8394-reparacion-aranazos-en-pantalla-display-tft-del-cuadro-de-instrumentos/", "permanent": true },
+    { "source": "/reparaciones/main-9052-seat-full-link/", "destination": "/reparaciones/main-14508-seat-full-link-2/", "permanent": true },
+    { "source": "/reparaciones/main-9052-seat-full-link", "destination": "/reparaciones/main-14508-seat-full-link-2/", "permanent": true }
   ]
 }
