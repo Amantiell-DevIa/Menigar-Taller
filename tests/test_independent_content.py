@@ -40,10 +40,11 @@ class IndependentContentTests(unittest.TestCase):
         cls.media = json.loads((ROOT / 'data/media-local-manifest.json').read_text())
         cls.prepared = ROOT / 'data/wordpress_exports/2026-10-13-publico/prepared/documents'
 
-    def test_all_1648_pages_have_source_sections_or_their_reviewed_pilot(self):
-        self.assertEqual(len(self.rows), 1648)
+    def test_all_1642_pages_have_source_sections_or_their_reviewed_pilot(self):
+        # 1,648 captured pages minus six copies merged into their most complete ficha (26 Oct 2026).
+        self.assertEqual(len(self.rows), 1642)
         shared = [r for r in self.rows if r.get('contentExpansion') == 'source-v1']
-        self.assertEqual(len(shared), 1645)
+        self.assertEqual(len(shared), 1639)
         for row in self.rows:
             with self.subTest(uid=row['uid']):
                 self.assertTrue(row.get('sourceSections') or row.get('contentPilot') or row.get('contentExpansion') == 'bmw-v1')

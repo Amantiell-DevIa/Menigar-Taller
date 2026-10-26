@@ -58,6 +58,75 @@ OVERRIDES = {
         'reason': 'Cierra con datos útiles y expectativa correcta, sin introducir operaciones internas ni comparativas sin evidencia.'},
 }
 
+# Titles shared by two or more fichas on the old website (26 Oct 2026). Each new title uses only
+# what its own page states: the model, unit or screen references in its address, variant and text.
+OVERRIDES.update({
+    ('main-8026', 'title'): {
+        'expected': 'Reparación cuadro de instrumentos Audi 100',
+        'text': 'Reparación cuadro de instrumentos Audi V8',
+        'reason': 'El título repetía el del Audi 100; la ficha trata del Audi V8 (dirección, modelo y texto).'},
+    ('abs-2855', 'title'): {
+        'expected': 'Reparación módulo ABS Motos KTM',
+        'text': 'Reparación módulo ABS Moto Guzzi',
+        'reason': 'El título repetía el de KTM; la ficha trata de Moto Guzzi (dirección, marca y texto).'},
+    ('abs-4420', 'title'): {
+        'expected': 'Reparación módulo ABS Bosch 5.3 Renault Mascott 2004-2010',
+        'text': 'Reparación módulo ABS Bosch 8.0 Renault Mascott 2004-2010',
+        'reason': 'El título repetía el de la versión Bosch 5.3; la ficha trata de la unidad Bosch 8.0.'},
+    ('abs-2499', 'title'): {
+        'expected': 'Reparación módulo ABS Seat Leon 2008-2012',
+        'text': 'Reparación módulo ABS Seat Toledo 2004-2009 ATE MK61',
+        'reason': 'El título repetía el del Seat Leon; la ficha trata del Toledo 2004-2009 con ATE MK61.'},
+    ('abs-3079', 'title'): {
+        'expected': 'Reparación módulo ABS Motos Suzuki',
+        'text': 'Reparación módulo ABS Suzuki DL650 V-Strom',
+        'reason': 'Distingue la ficha del modelo, como la nombra su texto, de la página general de motos Suzuki.'},
+    ('abs-2233', 'title'): {
+        'expected': 'Reparación módulo ABS Motos Suzuki',
+        'text': 'Reparación módulo ABS motos Suzuki: defectos comunes',
+        'reason': 'Distingue la página de defectos comunes de la página general que lista los modelos.'},
+    ('abs-989', 'title'): {
+        'expected': 'Reparación módulo ABS Suzuki Swift 2004-2010',
+        'text': 'Reparación módulo ABS Suzuki Swift 2004-2010 ATE MK60',
+        'reason': 'Añade la unidad que nombra la propia ficha; la distingue de la versión ATE MK70.'},
+    ('abs-985', 'title'): {
+        'expected': 'Reparación módulo ABS Suzuki Swift 2004-2010',
+        'text': 'Reparación módulo ABS Suzuki Swift 2004-2010 ATE MK70',
+        'reason': 'Añade la unidad que nombra la propia ficha; la distingue de la versión ATE MK60.'},
+    ('abs-2192', 'title'): {
+        'expected': 'Reparación módulo ABS Suzuki Splash 2004-2010',
+        'text': 'Reparación módulo ABS Suzuki Splash 2004-2010 ATE MK70',
+        'reason': 'Añade la unidad que nombra la propia ficha; la distingue de la ficha general del Splash.'},
+    ('abs-1399', 'title'): {
+        'expected': 'Reparación módulo ABS Renault Master 2 1998-2010',
+        'text': 'Reparación módulo ABS Renault Master 2 1998-2010 ATE MK20',
+        'reason': 'Añade la unidad que nombra la propia ficha; la distingue de la versión TRW EBC430.'},
+    ('abs-3022', 'title'): {
+        'expected': 'Reparación módulo ABS Renault Master 2 1998-2010',
+        'text': 'Reparación módulo ABS Renault Master 2 1998-2010 TRW EBC430',
+        'reason': 'Añade la unidad que nombra la propia ficha; la distingue de la versión ATE MK20.'},
+    ('main-13204', 'title'): {
+        'expected': 'Reparación Pantalla Cuadro Citroen C4 Picasso',
+        'text': 'Reparación Pantalla Cuadro Citroen C4 Picasso 9814748580, 9813590280 y 9816911280',
+        'reason': 'Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso.'},
+    ('main-13206', 'title'): {
+        'expected': 'Reparación Pantalla Cuadro Citroen C4 Picasso',
+        'text': 'Reparación Pantalla Cuadro Citroen C4 Picasso 9827062880 y 9828380580',
+        'reason': 'Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso.'},
+    ('main-13207', 'title'): {
+        'expected': 'Reparación Pantalla Cuadro Citroen C4 Picasso',
+        'text': 'Reparación Pantalla Cuadro Citroen C4 Picasso LLB123LT01 y B123LT01',
+        'reason': 'Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso.'},
+    ('main-13208', 'title'): {
+        'expected': 'Reparación Pantalla Cuadro Citroen C4 Picasso',
+        'text': 'Reparación Pantalla Cuadro Citroen C4 Picasso LPM123G216A y LPM123G',
+        'reason': 'Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso.'},
+    ('main-9197', 'title'): {
+        'expected': 'Reparación Pantalla Táctil Multimedia Navegador MMI Audi',
+        'text': 'Reparación Pantalla Táctil Multimedia MMI Audi: principales fallos',
+        'reason': 'Distingue la página de fallos de la que lista los modelos de Audi.'},
+})
+
 # Captions reviewed against the actual eight image files on 17 October 2026.
 # Keys are full local paths, never image position or a filename-only guess.
 REVIEWED_CAPTIONS = {

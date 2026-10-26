@@ -106,14 +106,18 @@ class CatalogueTests(unittest.TestCase):
 
     def test_redirects_remain_disabled_and_target_matching_records(self):
         redirects = json.loads((DATA / 'redirects.json').read_text(encoding='utf-8'))
-        self.assertEqual(len(redirects), len(self.rows))
+        # A copy merged into its most complete ficha redirects there from its own old address.
+        copies = {entry['uid']: entry for entry in self.report['excluded'] if entry.get('mergedInto')}
+        self.assertEqual(len(redirects), len(self.rows) + len(copies))
         for entry in redirects:
             row = self.by_uid[entry['uid']]
+            source = copies[entry['mergedFrom']]['url'] if 'mergedFrom' in entry else row['url']
             self.assertFalse(entry['enabled'])
             self.assertTrue(entry['reviewRequired'])
-            self.assertEqual(entry['from'], row['url'])
-            self.assertEqual(entry['fromPath'], urlparse(row['url']).path)
+            self.assertEqual(entry['from'], source)
+            self.assertEqual(entry['fromPath'], urlparse(source).path)
             self.assertEqual(entry['to'], row['localPath'])
+        self.assertEqual(sorted(entry['mergedFrom'] for entry in redirects if 'mergedFrom' in entry), sorted(copies))
 
     def test_original_source_snapshots_are_unchanged(self):
         self.assertEqual(len(self.report['snapshotSha256']), 26)

@@ -47,6 +47,16 @@ EXCLUDED = {
     'avisos-legales', 'aviso-legal', 'contacto', 'envios', 'garantias',
     'preguntas-frecuentes', 'faq', 'como-llegar', 'error-404', '404-2',
 }
+# The same old page published two or three times (reviewed 26 Oct 2026). Only the most complete
+# copy becomes a ficha; links to the others open it and their old addresses redirect to it.
+MERGED_COPIES = {
+    'main-8607': 'main-8394',   # /cambio-iluminacion-del-cuadro-de-instrumentos/: the scratches page word for word
+    'main-8241': 'main-8236',   # Fiat Qubo, qubo-2: one fault line and one photo fewer
+    'abs-2475': 'abs-1936',     # BMW F 650 GS «Bosch 5.3»: four fault lines and one photo fewer, no Bosch 5.3 in its text
+    'main-13359': 'main-8674',  # /reparacion-pantalla-multimedia/: six brands and one fault fewer
+    'main-14038': 'main-8674',  # /reparacion-pantalla-navegador/: two brands fewer
+    'main-9052': 'main-14508',  # Seat Full Link: the same page without its Alhambra section
+}
 SERVICE_PREFIXES = [
     ('reparacion-palanca-selectora', 'palanca'),
     ('reparacion-modulo-bluetooth', 'bluetooth'),
@@ -335,6 +345,11 @@ def build():
         title = flat(heading.group(1)) if heading else variant
         title = title or variant
         uid = f'{source}-{page["id"]}'
+        if uid in MERGED_COPIES:
+            excluded.append({'source': source, 'sourceId': page['id'], 'url': url, 'uid': uid,
+                             'reason': 'Copia de otra página: se une a su ficha más completa.',
+                             'mergedInto': MERGED_COPIES[uid], 'formerLocalPath': f'/reparaciones/{uid}-{slug}/'})
+            continue
         is_instruction = slug == 'informacion-abs-ate-esp-mk61'
         instructions = unique(line for line in lines if re.search(r'env[ií]e|env[ií]enos|m[aá]ndenos|debe(?:r[aá])?\s+enviar|piezas.*enviar|protej|embal|conector.*(?:da[nñ]|prote)|compruebe.*c[oó]digo', line, re.I))
         warranty = next((line for line in lines if re.search(r'garant[ií]a.*\b\d+\s*(?:a[nñ]os?|meses?)', line, re.I)), '')
@@ -384,7 +399,11 @@ def build():
     from bmw_source import enrich_bmw
     bmw_report = enrich_bmw(catalogue, ROOT)
     from source_sections import enrich_sources
-    sections_report = enrich_sources(catalogue, ROOT)
+    merged = [entry for entry in excluded if entry.get('mergedInto')]
+    by_uid = {r['uid']: r for r in catalogue}
+    assert sorted(entry['uid'] for entry in merged) == sorted(MERGED_COPIES), 'A merged copy is missing from the captures'
+    assert all(entry['mergedInto'] in by_uid and entry['mergedInto'] not in MERGED_COPIES for entry in merged), 'A copy must merge into a ficha'
+    sections_report = enrich_sources(catalogue, ROOT, merged)
     # Link MK61 shipping context without treating its tables as universal compatibility.
     instruction_uid = next((r['uid'] for r in catalogue if r['isInstruction']), None)
     if instruction_uid:
@@ -431,6 +450,8 @@ def build():
     write_home_index(catalogue, FAMILIES)
     # Planning manifest only: the prototype does not enable production redirects.
     redirects = [{'from': r['url'], 'fromPath': urlparse(r['url']).path, 'to': r['localPath'], 'status': 301, 'enabled': False, 'reviewRequired': True, 'uid': r['uid']} for r in catalogue]
+    redirects += [{'from': entry['url'], 'fromPath': urlparse(entry['url']).path, 'to': by_uid[entry['mergedInto']]['localPath'], 'status': 301,
+                   'enabled': False, 'reviewRequired': True, 'uid': entry['mergedInto'], 'mergedFrom': entry['uid']} for entry in merged]
     (DATA / 'redirects.json').write_text(json.dumps(redirects, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     report = {
         'schemaVersion': 3, 'contentPilots': {'hyundai': pilot_report['scope']}, 'contentExpansions': {'bmw': bmw_report['scope'], 'sharedSourceSections': sections_report['totals']}, 'browserProjectionOmissions': sorted(browser_omissions), 'sourcePageCounts': dict(Counter(source for source, page in all_pages)),

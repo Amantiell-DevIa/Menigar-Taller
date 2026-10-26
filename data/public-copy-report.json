@@ -108,6 +108,118 @@
       "expected": "En Menigar contamos con más de 30 años de experiencia en la reparación de pantallas y displays de información en vehículos. Ponemos a su disposición un enorme stock de material para la reparación, que nos permite reparar los fallos de display al mejor precio y con la máxima eficacia. Contacte con nosotros sobre las opciones de arreglar su Mazda con nosotros mediante nuestros teléfonos 91 662 27 81 | 91 661 03 97 , email o si lo prefiere puede visitar nuestras oficinas en Madrid.",
       "text": "Para consultar tu pantalla Mazda, indica el modelo, describe lo que falla y añade una foto de la pieza o de su etiqueta. El laboratorio podrá orientarte; el presupuesto final depende de la revisión de tu unidad.",
       "reason": "Cierra con datos útiles y expectativa correcta, sin introducir operaciones internas ni comparativas sin evidencia."
+    },
+    {
+      "uid": "main-8026",
+      "location": "title",
+      "expected": "Reparación cuadro de instrumentos Audi 100",
+      "text": "Reparación cuadro de instrumentos Audi V8",
+      "reason": "El título repetía el del Audi 100; la ficha trata del Audi V8 (dirección, modelo y texto)."
+    },
+    {
+      "uid": "abs-2855",
+      "location": "title",
+      "expected": "Reparación módulo ABS Motos KTM",
+      "text": "Reparación módulo ABS Moto Guzzi",
+      "reason": "El título repetía el de KTM; la ficha trata de Moto Guzzi (dirección, marca y texto)."
+    },
+    {
+      "uid": "abs-4420",
+      "location": "title",
+      "expected": "Reparación módulo ABS Bosch 5.3 Renault Mascott 2004-2010",
+      "text": "Reparación módulo ABS Bosch 8.0 Renault Mascott 2004-2010",
+      "reason": "El título repetía el de la versión Bosch 5.3; la ficha trata de la unidad Bosch 8.0."
+    },
+    {
+      "uid": "abs-2499",
+      "location": "title",
+      "expected": "Reparación módulo ABS Seat Leon 2008-2012",
+      "text": "Reparación módulo ABS Seat Toledo 2004-2009 ATE MK61",
+      "reason": "El título repetía el del Seat Leon; la ficha trata del Toledo 2004-2009 con ATE MK61."
+    },
+    {
+      "uid": "abs-3079",
+      "location": "title",
+      "expected": "Reparación módulo ABS Motos Suzuki",
+      "text": "Reparación módulo ABS Suzuki DL650 V-Strom",
+      "reason": "Distingue la ficha del modelo, como la nombra su texto, de la página general de motos Suzuki."
+    },
+    {
+      "uid": "abs-2233",
+      "location": "title",
+      "expected": "Reparación módulo ABS Motos Suzuki",
+      "text": "Reparación módulo ABS motos Suzuki: defectos comunes",
+      "reason": "Distingue la página de defectos comunes de la página general que lista los modelos."
+    },
+    {
+      "uid": "abs-989",
+      "location": "title",
+      "expected": "Reparación módulo ABS Suzuki Swift 2004-2010",
+      "text": "Reparación módulo ABS Suzuki Swift 2004-2010 ATE MK60",
+      "reason": "Añade la unidad que nombra la propia ficha; la distingue de la versión ATE MK70."
+    },
+    {
+      "uid": "abs-985",
+      "location": "title",
+      "expected": "Reparación módulo ABS Suzuki Swift 2004-2010",
+      "text": "Reparación módulo ABS Suzuki Swift 2004-2010 ATE MK70",
+      "reason": "Añade la unidad que nombra la propia ficha; la distingue de la versión ATE MK60."
+    },
+    {
+      "uid": "abs-2192",
+      "location": "title",
+      "expected": "Reparación módulo ABS Suzuki Splash 2004-2010",
+      "text": "Reparación módulo ABS Suzuki Splash 2004-2010 ATE MK70",
+      "reason": "Añade la unidad que nombra la propia ficha; la distingue de la ficha general del Splash."
+    },
+    {
+      "uid": "abs-1399",
+      "location": "title",
+      "expected": "Reparación módulo ABS Renault Master 2 1998-2010",
+      "text": "Reparación módulo ABS Renault Master 2 1998-2010 ATE MK20",
+      "reason": "Añade la unidad que nombra la propia ficha; la distingue de la versión TRW EBC430."
+    },
+    {
+      "uid": "abs-3022",
+      "location": "title",
+      "expected": "Reparación módulo ABS Renault Master 2 1998-2010",
+      "text": "Reparación módulo ABS Renault Master 2 1998-2010 TRW EBC430",
+      "reason": "Añade la unidad que nombra la propia ficha; la distingue de la versión ATE MK20."
+    },
+    {
+      "uid": "main-13204",
+      "location": "title",
+      "expected": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "text": "Reparación Pantalla Cuadro Citroen C4 Picasso 9814748580, 9813590280 y 9816911280",
+      "reason": "Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso."
+    },
+    {
+      "uid": "main-13206",
+      "location": "title",
+      "expected": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "text": "Reparación Pantalla Cuadro Citroen C4 Picasso 9827062880 y 9828380580",
+      "reason": "Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso."
+    },
+    {
+      "uid": "main-13207",
+      "location": "title",
+      "expected": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "text": "Reparación Pantalla Cuadro Citroen C4 Picasso LLB123LT01 y B123LT01",
+      "reason": "Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso."
+    },
+    {
+      "uid": "main-13208",
+      "location": "title",
+      "expected": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "text": "Reparación Pantalla Cuadro Citroen C4 Picasso LPM123G216A y LPM123G",
+      "reason": "Añade las referencias de la pantalla que figuran en la ficha; distingue las cuatro fichas del C4 Picasso."
+    },
+    {
+      "uid": "main-9197",
+      "location": "title",
+      "expected": "Reparación Pantalla Táctil Multimedia Navegador MMI Audi",
+      "text": "Reparación Pantalla Táctil Multimedia MMI Audi: principales fallos",
+      "reason": "Distingue la página de fallos de la que lista los modelos de Audi."
     }
   ],
   "reviewedPhotoCaptions": [
@@ -179,6 +291,106 @@
     ]
   },
   "replacements": [
+    {
+      "uid": "abs-1399",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Renault Master 2 1998-2010",
+      "publicText": "Reparación módulo ABS Renault Master 2 1998-2010 ATE MK20",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "7bb7363048e475df4548ca289aeb4f4089cfd14f39453a3c8faef2d96861106c"
+    },
+    {
+      "uid": "abs-2192",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Suzuki Splash 2004-2010",
+      "publicText": "Reparación módulo ABS Suzuki Splash 2004-2010 ATE MK70",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d638fa369af4a9109164ac0829242f5bbf8dc3f1db564e3bd335a0eedcbc2f2a"
+    },
+    {
+      "uid": "abs-2233",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Motos Suzuki",
+      "publicText": "Reparación módulo ABS motos Suzuki: defectos comunes",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d60d67f284af763e358fc3f912856b7db99972e4be324219aa7a1d136efa17e2"
+    },
+    {
+      "uid": "abs-2499",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Seat Leon 2008-2012",
+      "publicText": "Reparación módulo ABS Seat Toledo 2004-2009 ATE MK61",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "82fa9abac1045170d8cb57d6638ecfcab4202e2da99c026f5357c4e87bce663d"
+    },
+    {
+      "uid": "abs-2855",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Motos KTM",
+      "publicText": "Reparación módulo ABS Moto Guzzi",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "bf2d05dc87d8cda45a610c566837a75ba086f8133d0fce42f9dbb08f6d333fea"
+    },
+    {
+      "uid": "abs-3022",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Renault Master 2 1998-2010",
+      "publicText": "Reparación módulo ABS Renault Master 2 1998-2010 TRW EBC430",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "7bb7363048e475df4548ca289aeb4f4089cfd14f39453a3c8faef2d96861106c"
+    },
+    {
+      "uid": "abs-3079",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Motos Suzuki",
+      "publicText": "Reparación módulo ABS Suzuki DL650 V-Strom",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d60d67f284af763e358fc3f912856b7db99972e4be324219aa7a1d136efa17e2"
+    },
+    {
+      "uid": "abs-4420",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Bosch 5.3 Renault Mascott 2004-2010",
+      "publicText": "Reparación módulo ABS Bosch 8.0 Renault Mascott 2004-2010",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "8b8a2ca61cb62ce0180cfa655aaf9c6b51eada88049230604f14a962ebb573c7"
+    },
+    {
+      "uid": "abs-985",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Suzuki Swift 2004-2010",
+      "publicText": "Reparación módulo ABS Suzuki Swift 2004-2010 ATE MK70",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "4feb7bb6dacbf73b3cc3c45971f8977943521f8d83886b68bea3e649e2bfffb9"
+    },
+    {
+      "uid": "abs-989",
+      "location": "title",
+      "sourceText": "Reparación módulo ABS Suzuki Swift 2004-2010",
+      "publicText": "Reparación módulo ABS Suzuki Swift 2004-2010 ATE MK60",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "4feb7bb6dacbf73b3cc3c45971f8977943521f8d83886b68bea3e649e2bfffb9"
+    },
     {
       "uid": "main-1003",
       "location": "block:21",
@@ -1035,6 +1247,16 @@
       "sourceTextSha256": "09cda48e226b301e31f423b5ad6f3991f1ea07065bad532f08a589d2ede76c9e"
     },
     {
+      "uid": "main-13204",
+      "location": "title",
+      "sourceText": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "publicText": "Reparación Pantalla Cuadro Citroen C4 Picasso 9814748580, 9813590280 y 9816911280",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d8316bf7b12955ba456562954b352225c2a61eb1ef1e6f815792b2c0bddcc109"
+    },
+    {
       "uid": "main-13205",
       "location": "block:15",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en la reparación de displays/pantallas en distintos vehículos. Disponemos de un gran stock de pantallas LCD displays de recambio, este material nos permite reparar las pantallas multimedia al mejor precio y con la máxima garantía. Infórmese sobre las opciones de arreglar la pantalla de su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestras oficinas en Madrid.",
@@ -1081,6 +1303,16 @@
       "sourceTextSha256": "da022c60354050fcef24889259117d2247381102bf91f9c77fdd638158903e44"
     },
     {
+      "uid": "main-13206",
+      "location": "title",
+      "sourceText": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "publicText": "Reparación Pantalla Cuadro Citroen C4 Picasso 9827062880 y 9828380580",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d8316bf7b12955ba456562954b352225c2a61eb1ef1e6f815792b2c0bddcc109"
+    },
+    {
       "uid": "main-13207",
       "location": "block:19",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en la reparación de displays/pantallas en distintos vehículos. Disponemos de un gran stock de pantallas LCD displays de recambio, este material nos permite reparar las pantallas multimedia al mejor precio y con la máxima garantía. Infórmese sobre las opciones de arreglar la pantalla de su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestras oficinas en Madrid.",
@@ -1104,6 +1336,16 @@
       "sourceTextSha256": "bfae4500aa3de63b26eba1e9dab4b3b95931b7074f123a41135c80683727ab50"
     },
     {
+      "uid": "main-13207",
+      "location": "title",
+      "sourceText": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "publicText": "Reparación Pantalla Cuadro Citroen C4 Picasso LLB123LT01 y B123LT01",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d8316bf7b12955ba456562954b352225c2a61eb1ef1e6f815792b2c0bddcc109"
+    },
+    {
       "uid": "main-13208",
       "location": "block:13",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en la reparación de displays/pantallas en distintos vehículos. Disponemos de un gran stock de pantallas LCD displays de recambio, este material nos permite reparar las pantallas multimedia al mejor precio y con la máxima garantía. Infórmese sobre las opciones de arreglar la pantalla de su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestras oficinas en Madrid.",
@@ -1113,6 +1355,16 @@
         "maximum-warranty"
       ],
       "sourceTextSha256": "497df6c7a5e89f9a6119861410c029d18a4b91a15550a5780b4799e6c101bbab"
+    },
+    {
+      "uid": "main-13208",
+      "location": "title",
+      "sourceText": "Reparación Pantalla Cuadro Citroen C4 Picasso",
+      "publicText": "Reparación Pantalla Cuadro Citroen C4 Picasso LPM123G216A y LPM123G",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "d8316bf7b12955ba456562954b352225c2a61eb1ef1e6f815792b2c0bddcc109"
     },
     {
       "uid": "main-13209",
@@ -4120,6 +4372,16 @@
       "sourceTextSha256": "f78b03403be6d4730c713e316570cb4dc127f296b4f0cb9af12073bb76200b75"
     },
     {
+      "uid": "main-8026",
+      "location": "title",
+      "sourceText": "Reparación cuadro de instrumentos Audi 100",
+      "publicText": "Reparación cuadro de instrumentos Audi V8",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "096ddd7cf133aa14acbaa118688ec18e8191f2dba1cf2e340aaba07fe43bbb26"
+    },
+    {
       "uid": "main-8086",
       "location": "block:9",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en programación y reparación de sistemas digitales en vehículos. Disponemos de un gran stock en piezas de intercambio, nuevas y reconstruidas, material que deja reparar cuadros de instrumentación analógicos y digitales al mejor precio y con la máxima eficacia. Infórmate acerca de las posibilidades de reparar tu vehículo con Menigar mediante nuestros teléfonos de contacto91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefieres puedes visitar nuestras instalaciones en Madrid.",
@@ -4496,27 +4758,6 @@
       "sourceTextSha256": "e72db77989bf3b53d509b09243d8bc39d961e16a945baf58647d4cfc2a6e06b7"
     },
     {
-      "uid": "main-9052",
-      "location": "block:221",
-      "sourceText": "En Menigar contamos con más de 30 años de experiencia en la reparación de displays/pantallas en distintos vehículos. Disponemos de un gran stock de pantallas LCD displays de recambio, este material nos permite reparar las pantallas multimedia al mejor precio y con la máxima garantía. Infórmese sobre las opciones de arreglar la pantalla de su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestras oficinas en Madrid.",
-      "publicText": "En Menigar contamos con más de 30 años de experiencia en la reparación de displays/pantallas en distintos vehículos. Disponemos de un gran stock de pantallas LCD displays de recambio, este material nos permite reparar las pantallas multimedia con un presupuesto específico para cada caso y con las condiciones de garantía aplicables al servicio. Infórmese sobre las opciones de arreglar la pantalla de su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestras oficinas en Madrid.",
-      "rules": [
-        "best-price",
-        "maximum-warranty"
-      ],
-      "sourceTextSha256": "497df6c7a5e89f9a6119861410c029d18a4b91a15550a5780b4799e6c101bbab"
-    },
-    {
-      "uid": "main-9052",
-      "location": "block:7",
-      "sourceText": "En Menigar reparamos con total garantía el habitual fallo de la aparición de burbujas en las pantallas táctiles multimedia de los vehículos del Grupo VAG (Audi, Seat, Skoda y Volkswagen), que afectan a la funcionalidad de la pantalla táctil, quedándose sin responder a las pulsaciones o actuando como si recibiera pulsaciones fantasma cuando no se toca.",
-      "publicText": "En Menigar reparamos con las condiciones de garantía aplicables al servicio el habitual fallo de la aparición de burbujas en las pantallas táctiles multimedia de los vehículos del Grupo VAG (Audi, Seat, Skoda y Volkswagen), que afectan a la funcionalidad de la pantalla táctil, quedándose sin responder a las pulsaciones o actuando como si recibiera pulsaciones fantasma cuando no se toca.",
-      "rules": [
-        "total-warranty"
-      ],
-      "sourceTextSha256": "cdd6fefbedbefe9ac98fd6db1aea074c63f92932608bfe524035be0380f6a169"
-    },
-    {
       "uid": "main-9056",
       "location": "block:17",
       "sourceText": "En Menigar contamos con más de 30 años de experiencia en la reparación de displays/pantallas en distintos vehículos. Disponemos de un gran stock de pantallas LCD displays de recambio, este material nos permite reparar las pantallas multimedia al mejor precio y con la máxima garantía. Infórmese sobre las opciones de arreglar la pantalla de su coche con nosotros a través de nuestros teléfonos de contacto 91 662 27 81 | 91 661 03 97 , correo electrónico o si lo prefiere puede visitar nuestras oficinas en Madrid.",
@@ -4687,6 +4928,16 @@
         "legacy-typo"
       ],
       "sourceTextSha256": "013187bd77b16650831c39fde8216620d06d562c86dd16f7bb82b015afac7a58"
+    },
+    {
+      "uid": "main-9197",
+      "location": "title",
+      "sourceText": "Reparación Pantalla Táctil Multimedia Navegador MMI Audi",
+      "publicText": "Reparación Pantalla Táctil Multimedia MMI Audi: principales fallos",
+      "rules": [
+        "reviewed:title"
+      ],
+      "sourceTextSha256": "282b431856ca07a97e9bd1369e3066f93132bcfccbcf2e471b5af1a9d54625d3"
     },
     {
       "uid": "main-926",

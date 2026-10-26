@@ -7,6 +7,7 @@ from pathlib import Path
 import re
 import sys
 import tempfile
+import unicodedata
 import unittest
 from urllib.parse import parse_qs, urlsplit
 
@@ -71,6 +72,41 @@ class PublicDecisionContentTests(unittest.TestCase):
             self.assertEqual(item['title'], archived['title'])
             expected = public_text(archived['title'], archived['uid'], 'title')
             self.assertEqual(item.get('publicTitle', item['title']), expected)
+
+    def test_public_titles_tell_every_ficha_apart(self):
+        by_title = {}
+        for row in self.rows:
+            title = public_text(row['title'], row['uid'], 'title')
+            key = re.sub(r'[^a-z0-9]+', ' ', unicodedata.normalize('NFKD', title).encode('ascii', 'ignore').decode().lower()).strip()
+            by_title.setdefault(key, set()).add(row['uid'])
+        self.assertEqual([uids for uids in by_title.values() if len(uids) > 1], [])
+        self.assertEqual(self.lookup['main-8026']['title'], 'Reparación cuadro de instrumentos Audi 100')
+        self.assertIn('<h1>Reparación cuadro de instrumentos Audi V8</h1>', repair_page(self.lookup['main-8026'], self.lookup))
+
+    def test_copies_merge_into_their_most_complete_ficha(self):
+        # The same old page published two or three times becomes one ficha (26 Oct 2026):
+        # its old addresses redirect there, and links to a copy open that ficha.
+        merged = {'main-8607': 'main-8394', 'main-8241': 'main-8236', 'abs-2475': 'abs-1936',
+                  'main-13359': 'main-8674', 'main-14038': 'main-8674', 'main-9052': 'main-14508'}
+        report = json.loads((ROOT / 'data/catalogo-report.json').read_text())
+        copies = {entry['uid']: entry for entry in report['excluded'] if entry.get('mergedInto')}
+        self.assertEqual({uid: entry['mergedInto'] for uid, entry in copies.items()}, merged)
+        redirects = {entry['from']: entry for entry in json.loads((ROOT / 'data/redirects.json').read_text())}
+        vercel = {entry['source']: entry['destination'] for entry in json.loads((ROOT / 'vercel.json').read_text())['redirects']}
+        for uid, kept in merged.items():
+            with self.subTest(uid=uid):
+                self.assertNotIn(uid, self.lookup)
+                target = self.lookup[kept]['localPath']
+                self.assertEqual((redirects[copies[uid]['url']]['to'], redirects[copies[uid]['url']]['mergedFrom']), (target, uid))
+                former = copies[uid]['formerLocalPath']
+                self.assertFalse((ROOT / former.strip('/')).exists())
+                self.assertEqual((vercel[former], vercel[former.rstrip('/')]), (target, target))
+        links = [block for section in self.lookup['main-8674']['sourceSections'] for block in section['blocks']
+                 if block.get('originalHref', '').endswith('/seat-full-link/')]
+        self.assertEqual([(block['href'], block['relatedServiceUid']) for block in links], [(self.lookup['main-14508']['localPath'], 'main-14508')])
+        # Every generated ficha folder belongs to a ficha in the catalogue.
+        folders = {path.name for path in (ROOT / 'reparaciones').iterdir() if path.is_dir()}
+        self.assertEqual(folders, {row['localPath'].strip('/').split('/')[-1] for row in self.rows})
 
     def test_bmw_and_hyundai_keep_the_same_variant_context_contract(self):
         for uid in ('main-2321', 'main-3915'):

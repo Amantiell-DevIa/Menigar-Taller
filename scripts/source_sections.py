@@ -44,7 +44,7 @@ def is_section_heading(block):
     return True
 
 
-def enrich_sources(catalogue, root):
+def enrich_sources(catalogue, root, merged=()):
     prepared = root / 'data/wordpress_exports' / RUN / 'prepared'
     media = json.loads((root / 'data/media-local-manifest.json').read_text())
     local_media = media['urlIndex']
@@ -57,10 +57,15 @@ def enrich_sources(catalogue, root):
     by_uid = {row['uid']: row for row in catalogue}
     aliases_path = root / 'data/legacy-link-resolution.json'
     aliases = {}
+    # A copy merged into its most complete ficha: links to the copy open that ficha.
+    merged_into = {entry['uid']: entry['mergedInto'] for entry in merged}
     if aliases_path.exists():
         for alias in json.loads(aliases_path.read_text())['links']:
-            if alias.get('resolvedUid') in by_uid and alias.get('resolution') == 'restored-wordpress-page-id':
-                aliases[url_path(alias['originalUrl'])] = by_uid[alias['resolvedUid']]
+            resolved = merged_into.get(alias.get('resolvedUid'), alias.get('resolvedUid'))
+            if resolved in by_uid and alias.get('resolution') == 'restored-wordpress-page-id':
+                aliases[url_path(alias['originalUrl'])] = by_uid[resolved]
+    for entry in merged:
+        aliases[url_path(entry['url'])] = by_uid[entry['mergedInto']]
     info_paths = {'/': '/index.html', '/reparacion-abs': '/servicios.html?familia=abs',
                   '/envios': '/envios.html', '/contacto': '/ayuda.html#contacto',
                   '/preguntas-frecuentes': '/ayuda.html', '/garantias': '/condiciones.html',
