@@ -56,7 +56,7 @@ def list_html(items, class_name=""):
 
 
 def header(active=""):
-    links = [("servicios.html", "Servicios"), ("envios.html", "Cómo enviar"),
+    links = [("servicios.html", "Servicios"), ("envios.html", "Cómo enviar"), ("garantia.html", "Garantía"),
              ("taller.html", "El laboratorio"), ("ayuda.html", "Ayuda")]
     nav = "".join(f'<li><a href="/{path}"' + (' aria-current="page"' if path == active else '') + f'>{label}</a></li>' for path, label in links)
     return f'''<a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -70,7 +70,7 @@ def header(active=""):
 def footer():
     return f'''<footer class="site-footer"><div class="container footer-grid">
   <div><a class="brand brand--placa" href="/index.html" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt="" loading="lazy" decoding="async"></a><p>Reparación de electrónica del automóvil.<br>Talleres y particulares.</p><a class="footer-phone" href="tel:+34916622781">{PHONE}</a></div>
-  <div><h2>Tu reparación</h2><a href="/servicios.html">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a><a href="/envios.html">Cómo preparar el paquete</a></div>
+  <div><h2>Tu reparación</h2><a href="/servicios.html">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a><a href="/envios.html">Cómo preparar el paquete</a><a href="/garantia.html">Garantía de la reparación</a></div>
   <div><h2>Encuéntranos</h2><p>C/ José Echegaray, 16<br>Edificio A1 · Planta 2ª · Nave 4<br>28100 Alcobendas, Madrid</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Menigar+Alcobendas" target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a></div>
   <div><h2>Horario de atención</h2><p>Lunes a jueves<br><strong>8:00–16:00</strong></p><p>Viernes<br><strong>8:00–14:00</strong></p><a href="/ayuda.html#contacto">Consultar con el equipo →</a></div>
 </div><div class="container footer-bottom"><span>© <span data-current-year>2026</span> MENIGAR</span><div><a href="/privacidad.html">Privacidad</a><a href="/condiciones.html">Condiciones</a><a href="/cookies.html">Cookies</a></div><span>Alcobendas · Madrid</span></div></footer>'''
@@ -139,6 +139,38 @@ def write_info_pages():
     (ROOT / "ayuda.html").write_text(page("Ayuda y contacto", "Preguntas frecuentes sobre las reparaciones de Menigar. Cómo identificar tu pieza, preparar el envío y contactar con el laboratorio.", "/ayuda.html", ayuda, "ayuda.html"), encoding="utf-8")
 
 
+def write_warranty_page():
+    """Warranty of repairs and stock (26 Oct 2026), from https://www.menigar.com/garantias/ as published
+    that day. Every condition of the source is kept; the wording only addresses the reader as «tú», like the
+    rest of the site, and splits long sentences. Pending review and approval for the new website."""
+    def items(values, class_name):
+        return f'<ul class="g-list {class_name}">' + "".join(f"<li>{value}</li>" for value in values) + "</ul>"
+    covered = ["La reparación de tu unidad, para que vuelva a funcionar como lo hacía originalmente.",
+               "Cualquier problema derivado de defectos de fabricación o de la intervención de nuestra mano de obra.",
+               "Todos los componentes internos y el trabajo realizado en Menigar.",
+               "Es válida mientras seas el dueño del vehículo. No es transferible."]
+    not_covered = ["Portes", "Desmontaje y montaje", "Diagnosis", "Codificación y programación", "Descarga de software", "Mano de obra"]
+    voiding = ["Precintos manipulados o alterados.", "Daños por agua.", "Daños por fuego.", "Daños por una subida de tensión.",
+               "Daños causados por otra unidad defectuosa del vehículo.", "Daños por arrancar el vehículo con pinzas.",
+               "Uso incorrecto de la unidad.", "En una unidad de intercambio, devolver la unidad antigua fuera de los plazos indicados."]
+    intro = f"""<section class="page-intro page-heading g-intro"><div class="container"><nav class="breadcrumb" aria-label="Ruta de navegación"><a href="/">Inicio</a><span aria-hidden="true">/</span>Garantía</nav>
+<p class="eyebrow">Garantía de reparaciones y stock</p><h1>Garantía limitada de dos años</h1><p class="lead">Las unidades reparadas, remanufacturadas o intercambiadas por Menigar llevan una garantía limitada de dos años desde la fecha de factura.</p>
+<ul class="g-facts"><li><strong>2 años</strong><span>de garantía limitada, desde la fecha de factura</span></li><li><strong>3 meses</strong><span>si la pieza llega manipulada o con intentos de reparación previos, sobre la parte reparada</span></li><li><strong>10 días</strong><span>para devolver tu compra sin usar, con su factura</span></li></ul></div></section>"""
+    body = intro + f"""<section class="section g-section"><div class="container subpage-grid"><div class="g-body">
+<div class="g-pair"><article class="card g-card"><h2>Qué cubre</h2>{items(covered, "g-list--yes")}</article><article class="card g-card"><h2>Qué no cubre</h2>{items(not_covered, "g-list--no")}</article></div>
+<article class="card g-card"><h2>Pieza manipulada antes de llegar</h2><p>Si recibimos la pieza con síntomas de manipulación o intentos de reparación previos, la garantía se limita a 3 meses sobre la parte del material reparado, no sobre la totalidad de la pieza.</p></article>
+<article class="card g-card"><h2>Qué puede anular la garantía</h2><p>Estos son algunos de los motivos; puede haber otros:</p>{items(voiding, "g-list--warn g-list--cols")}</article>
+<article class="card g-card g-card--callout"><h2>Si tu unidad ya no tiene reparación</h2><p>Si Menigar determina que la unidad ya no se puede reparar, te ofrecerá, a su criterio, una unidad de intercambio o la devolución de la totalidad del importe facturado.</p></article>
+<article class="card g-card" id="devolucion"><p class="eyebrow">Garantía de devolución del dinero</p><h2>10 días para devolver tu compra</h2><p>Si por cualquier motivo no estás totalmente satisfecho con tu compra, envíanosla de vuelta y podrás cambiar el producto u obtener la devolución del dinero pagado por la pieza. Para ello, la pieza debe volver:</p><ul class="g-chips"><li>Sin usar</li><li>En un plazo de 10 días</li><li>En su embalaje original</li><li>Con la factura</li></ul><p class="g-note">No se devuelven las codificaciones o programaciones, las adaptaciones ni las comprobaciones posteriores del material vendido codificado o programado, listo para montar (<span lang="en">ready to run</span>).</p></article>
+<section class="g-claim" id="reclamar" aria-labelledby="reclamar-titulo"><h2 id="reclamar-titulo">Cómo reclamar la garantía</h2><ol class="g-steps">
+<li><h3>Ten a mano la factura original</h3><p>Sin la factura original de compra de la pieza no se puede efectuar ninguna devolución. Menigar se reserva el derecho a aceptarla o no.</p></li>
+<li><h3>Prepara la referencia y los códigos</h3><p>Para cualquier consulta, ten siempre preparada la referencia de la pieza defectuosa y los códigos de avería generados por la diagnosis.</p></li>
+<li><h3>Contacta con el laboratorio</h3><p>En garantía, Menigar puede volver a ver la pieza y repararla una vez más si es necesario. Si la pieza no puede enviarse para que la revisen sus técnicos, se pedirá la factura original de compra de la pieza de recambio. Cada caso se estudia de forma individual.</p></li></ol></section>
+<p class="source-note">Condiciones publicadas en la <a href="https://www.menigar.com/garantias/" target="_blank" rel="noopener">página de garantías de Menigar</a> (consultada el 26 de octubre de 2026). Pendientes de revisión y aprobación para la nueva web.</p>
+</div><aside class="card contact-card g-aside"><p class="eyebrow">¿Dudas con tu garantía?</p><h2>Habla con el laboratorio</h2><p>Ten a mano la factura, la referencia de la pieza y los códigos de avería de la diagnosis.</p><a class="button button-primary" href="mailto:{EMAIL}?subject=Consulta%20de%20garant%C3%ADa">Escribir sobre mi garantía</a><p><a href="tel:+34916622781">{PHONE}</a></p><p class="source-note">Si quieres comunicarte directamente con el Director General del grupo, escribe a <a href="mailto:{EMAIL}">{EMAIL}</a>.</p><p class="source-note">Lunes a jueves, de 8:00 a 16:00.<br>Viernes, de 8:00 a 14:00.</p></aside></div></section>"""
+    (ROOT / "garantia.html").write_text(page("Garantía de reparaciones", "Garantía limitada de dos años en las reparaciones de Menigar: qué cubre, qué no cubre, qué puede anularla, la devolución en 10 días y cómo reclamarla.", "/garantia.html", body, "garantia.html", '<link rel="stylesheet" href="/garantia.css">', "warranty-page"), encoding="utf-8")
+
+
 def write_legal_pages():
     note = '<div class="notice"><strong>Documento en revisión para la nueva web.</strong><p>Esta página recoge información de la web vigente. Antes de utilizar el nuevo servicio con clientes deben validarse sus condiciones y la información sobre el tratamiento de datos. El prototipo utiliza únicamente datos de prueba.</p></div>'
     privacy = page_intro("Información sobre tus datos", "Privacidad", "Identificación del responsable y vías de contacto para consultas sobre datos personales.", "Privacidad")
@@ -146,7 +178,7 @@ def write_legal_pages():
     (ROOT / "privacidad.html").write_text(page("Privacidad", "Información de privacidad y contacto del responsable Menigar. Documento en revisión para el nuevo servicio de solicitudes.", "/privacidad.html", privacy), encoding="utf-8")
 
     terms = page_intro("Información del servicio", "Aviso legal y condiciones", "Datos del titular y condiciones que debes confirmar para tu reparación.", "Aviso legal y condiciones")
-    terms += f'''<section class="section"><div class="container prose legal-prose">{note}<h2>Titular del sitio</h2><dl class="detail-list"><dt>Denominación social</dt><dd>Desarrollos Digitales Menigar, S.L.</dd><dt>NIF</dt><dd>B87461950</dd><dt>Dirección</dt><dd>{e(ADDRESS)}</dd><dt>Contacto</dt><dd><a href="mailto:admon@menigar.com">admon@menigar.com</a> · <a href="tel:+34916610397">91 661 03 97</a></dd><dt>Datos registrales publicados</dt><dd>Registro Mercantil de Madrid, tomo 34.319, folio 1, sección 8, hoja M-617387, inscripción 1.ª.</dd></dl><h2>Catálogo y solicitud</h2><p>Las fichas describen servicios y referencias relacionados. Consultarlas o preparar una solicitud no confirma el diagnóstico de una unidad, su reparabilidad ni un presupuesto final. Si falta información o no sabes qué enviar, consulta con el laboratorio.</p><h2>Presupuesto, transporte y garantía</h2><p>Confirma las condiciones aplicables a tu servicio con Menigar. El coste, el plazo y las instrucciones pueden depender de la pieza y de su estado. Las condiciones de garantía y transporte de la web actual deben revisarse y aprobarse para esta nueva web antes de publicarla.</p><ul><li><a href="https://www.menigar.com/garantias/" target="_blank" rel="noopener">Información de garantía actualmente publicada</a>.</li><li><a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">Información de transporte actualmente publicada</a>.</li><li><a href="https://www.menigar.com/avisos-legales/" target="_blank" rel="noopener">Aviso legal actualmente publicado</a>.</li></ul><h2>Contenido y marcas</h2><p>El aviso de origen identifica al titular de los contenidos propios y reconoce los derechos de los titulares de marcas y contenidos de terceros. La mención de una marca de vehículo o fabricante de componente sirve para identificar el servicio relacionado.</p><h2>Estado del prototipo</h2><p>Esta versión se utiliza para revisar la nueva experiencia y realizar pruebas. No formaliza pedidos ni confirma cobros, reparaciones o transportes reales.</p></div></section>'''
+    terms += f'''<section class="section"><div class="container prose legal-prose">{note}<h2>Titular del sitio</h2><dl class="detail-list"><dt>Denominación social</dt><dd>Desarrollos Digitales Menigar, S.L.</dd><dt>NIF</dt><dd>B87461950</dd><dt>Dirección</dt><dd>{e(ADDRESS)}</dd><dt>Contacto</dt><dd><a href="mailto:admon@menigar.com">admon@menigar.com</a> · <a href="tel:+34916610397">91 661 03 97</a></dd><dt>Datos registrales publicados</dt><dd>Registro Mercantil de Madrid, tomo 34.319, folio 1, sección 8, hoja M-617387, inscripción 1.ª.</dd></dl><h2>Catálogo y solicitud</h2><p>Las fichas describen servicios y referencias relacionados. Consultarlas o preparar una solicitud no confirma el diagnóstico de una unidad, su reparabilidad ni un presupuesto final. Si falta información o no sabes qué enviar, consulta con el laboratorio.</p><h2>Presupuesto, transporte y garantía</h2><p>Confirma las condiciones aplicables a tu servicio con Menigar. El coste, el plazo y las instrucciones pueden depender de la pieza y de su estado. Las condiciones de garantía y transporte de la web actual deben revisarse y aprobarse para esta nueva web antes de publicarla.</p><ul><li><a href="/garantia.html">Garantía de las reparaciones</a>, con las condiciones actualmente publicadas.</li><li><a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">Información de transporte actualmente publicada</a>.</li><li><a href="https://www.menigar.com/avisos-legales/" target="_blank" rel="noopener">Aviso legal actualmente publicado</a>.</li></ul><h2>Contenido y marcas</h2><p>El aviso de origen identifica al titular de los contenidos propios y reconoce los derechos de los titulares de marcas y contenidos de terceros. La mención de una marca de vehículo o fabricante de componente sirve para identificar el servicio relacionado.</p><h2>Estado del prototipo</h2><p>Esta versión se utiliza para revisar la nueva experiencia y realizar pruebas. No formaliza pedidos ni confirma cobros, reparaciones o transportes reales.</p></div></section>'''
     (ROOT / "condiciones.html").write_text(page("Aviso legal y condiciones", "Titular de la web Menigar e información del servicio. Condiciones pendientes de validación para la nueva web.", "/condiciones.html", terms), encoding="utf-8")
 
     cookies = page_intro("Preferencias y navegación", "Cookies y almacenamiento", "Información sobre el funcionamiento de esta versión y su política de origen.", "Cookies")
@@ -234,7 +266,7 @@ def repair_page(record, records_by_id):
             body += f'<dt>Plazo indicado</dt><dd>{e(public_text(record["timing"], uid, "timing"))}</dd>'
         if record.get("warranty"):
             body += f'<dt>Garantía indicada</dt><dd>{e(public_text(record["warranty"], uid, "warranty"))}</dd>'
-        body += '</dl><p>Confirma las condiciones aplicables a tu pieza con Menigar. El plazo del laboratorio no incluye automáticamente el transporte.</p>'
+        body += '</dl><p>Confirma las condiciones aplicables a tu pieza con Menigar. El plazo del laboratorio no incluye automáticamente el transporte.</p><p><a href="/garantia.html">Qué cubre la garantía y cómo reclamarla</a></p>'
     body += '<p class="source-note">La selección del servicio no confirma un diagnóstico ni un presupuesto final.</p>'
     body += f'''</div><aside class="card contact-card"><p class="eyebrow">Tu siguiente paso</p><h2>Consulta con los datos de tu pieza</h2><p>Cuéntanos qué falla y añade fotos. Este servicio quedará seleccionado y podrás corregirlo.</p><a class="button button-primary" href="{e(request)}">Consultar mi pieza <span aria-hidden="true">↗</span></a><p>El laboratorio podrá orientarte. El presupuesto final depende de la revisión de tu unidad.</p><hr><h3>¿No es tu variante?</h3><a class="button button-secondary" href="/servicios.html">Volver a buscar</a><p><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Esta versión solo admite pruebas. Para una consulta real, contacta directamente con el laboratorio.</p></aside></div></section>'''
     detail_head = '<style>.repair-detail-page .page-heading h1{font-size:3rem;line-height:1.1;max-width:1050px;overflow-wrap:anywhere}.repair-detail-page .page-heading .lead{max-width:850px}@media(max-width:760px){.repair-detail-page .page-heading h1{font-size:2rem;line-height:1.15}}</style>'
@@ -279,7 +311,7 @@ def write_search_engine_files(paths):
     namespace = "http://www.sitemaps.org/schemas/sitemap/0.9"
     ET.register_namespace("", namespace)
     tree = ET.Element(f"{{{namespace}}}urlset")
-    for path in ["/", "/servicios.html", "/envios.html", "/taller.html", "/ayuda.html"] + paths:
+    for path in ["/", "/servicios.html", "/envios.html", "/garantia.html", "/taller.html", "/ayuda.html"] + paths:
         item = ET.SubElement(tree, f"{{{namespace}}}url")
         ET.SubElement(item, f"{{{namespace}}}loc").text = ORIGIN + path
     ET.indent(tree, space="  ")
@@ -295,6 +327,7 @@ def write_search_engine_files(paths):
 
 if __name__ == "__main__":
     write_info_pages()
+    write_warranty_page()
     write_legal_pages()
     paths = write_catalogue()
     write_search_engine_files(paths)

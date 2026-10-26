@@ -26,9 +26,9 @@ MAX_TOTAL = 15 * 1024 * 1024
 MAX_BODY = 25 * 1024 * 1024
 LOCK = threading.Lock()
 STATIC_ROOT_FILES = {
-    'index.html', 'servicios.html', 'solicitud.html', 'envios.html', 'taller.html',
+    'index.html', 'servicios.html', 'solicitud.html', 'envios.html', 'garantia.html', 'taller.html',
     'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js',
-    'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'app.js', 'solicitud.js', 'resumen.js',
+    'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'app.js', 'solicitud.js', 'resumen.js',
     'hero-lab.jpg', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'resumen.html', 'receipt.js',
 }
 

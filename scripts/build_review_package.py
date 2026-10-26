@@ -16,9 +16,9 @@ import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = Path('/Users/kaykostar/Documents/MENIGAR/nueva-web-revision-2026-10-15')
-ROOT_FILES = ['index.html', 'servicios.html', 'solicitud.html', 'envios.html', 'taller.html',
+ROOT_FILES = ['index.html', 'servicios.html', 'solicitud.html', 'envios.html', 'garantia.html', 'taller.html',
               'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html',
-              'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css',
+              'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css',
               'app.js', 'solicitud.js', 'resumen.js', 'robots.txt', 'sitemap.xml']
 ROOT_FILES += ['resumen.html', 'receipt.js', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js', 'favicon.ico', 'apple-touch-icon.png']
 DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js']
@@ -109,7 +109,7 @@ Header always set Referrer-Policy "no-referrer"
                 routes[urlsplit(alias['originalUrl']).path.rstrip('/')] = lookup[alias['resolvedUid']]['localPath']
     extras = {'/home': '/index.html', '/envios': '/envios.html', '/servicios': '/servicios.html',
               '/contacto': '/ayuda.html#contacto', '/preguntas-frecuentes': '/ayuda.html',
-              '/garantias': '/condiciones.html', '/politica-de-privacidad': '/privacidad.html',
+              '/garantias': '/garantia.html', '/politica-de-privacidad': '/privacidad.html',
               '/politica-de-cookies': '/cookies.html', '/avisos-legales': '/condiciones.html',
               '/reparacion-abs': '/servicios.html?familia=abs',
               '/reparacion-abs/home-abs-coches': '/servicios.html?familia=abs',
