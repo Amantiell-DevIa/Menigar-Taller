@@ -68,7 +68,7 @@ def enrich_sources(catalogue, root, merged=()):
         aliases[url_path(entry['url'])] = by_uid[entry['mergedInto']]
     info_paths = {'/': '/index.html', '/reparacion-abs': '/servicios.html?familia=abs',
                   '/envios': '/envios.html', '/contacto': '/ayuda.html#contacto',
-                  '/preguntas-frecuentes': '/ayuda.html', '/garantias': '/condiciones.html',
+                  '/preguntas-frecuentes': '/ayuda.html', '/garantias': '/garantia.html',
                   '/politica-de-privacidad': '/privacidad.html', '/politica-de-cookies': '/cookies.html',
                   '/avisos-legales': '/condiciones.html', '/aviso-legal': '/condiciones.html'}
     documents = {}

@@ -181,7 +181,7 @@
       nav.addEventListener('click', event => { if (event.target.closest('a')) close(false); });
       document.addEventListener('keydown', event => { if (event.key === 'Escape' && nav.classList.contains('is-open')) close(true); });
       document.addEventListener('click', event => { if (nav.classList.contains('is-open') && !event.target.closest('.site-header')) close(false); });
-      window.addEventListener('resize', () => { if (window.innerWidth > 760) close(false); });
+      window.addEventListener('resize', () => { if (window.innerWidth > 860) close(false); });
     }
     document.querySelectorAll('[data-current-year]').forEach(element => { element.textContent = String(new Date().getFullYear()); });
     if (['localhost', '127.0.0.1', '::1'].includes(location.hostname) && !document.querySelector('.local-preview-note')) {

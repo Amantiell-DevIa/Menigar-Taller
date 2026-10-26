@@ -595,7 +595,10 @@ body{background:var(--p-ivory)}
 .page-intro{padding-block:clamp(28px,3.6vw,44px) clamp(40px,5vw,64px);border-bottom:0;color:var(--p-on-dark-1);background:var(--p-night-glow),var(--p-night-1)}
 .page-intro h1{max-width:24ch;font-size:clamp(2rem,1.1rem + 3vw,3.5rem);line-height:1.04;letter-spacing:-.028em;font-weight:700;color:var(--p-on-dark-1);text-wrap:balance}
 .page-intro h1 span{color:var(--p-amber)}
-.page-intro .eyebrow.eyebrow{color:var(--p-amber)}
+/* The badge yellow is too dark for small text on the band's glow: the eyebrow takes the hero's paler
+   yellow, and on narrow screens, where the eyebrow and the lead run under the glow, the glow is smaller. */
+.page-intro .eyebrow.eyebrow{color:#fff0b8}
+@media(max-width:900px){.page-intro{background:radial-gradient(80% 55% at 100% 0%,rgba(14,147,168,.7) 0%,transparent 70%),var(--p-night-1)}}
 .page-intro p,.page-intro .lead,.page-intro>div>p:not(.eyebrow){color:var(--p-on-dark-2)}
 .page-intro .breadcrumbs,.page-intro .breadcrumb{color:var(--p-on-dark-3)}
 .page-intro .breadcrumbs a,.page-intro .breadcrumb a{color:var(--p-on-dark-2)}
@@ -618,6 +621,16 @@ input[type=text],input[type=email],input[type=tel],input[type=search],input[type
 .accordion details{border-color:var(--p-line-strong)}
 .site-footer{background:var(--p-night-1);border-top:1px solid var(--p-line-dark)}
 .footer-bottom{border-color:var(--p-line-dark)}
+/* Five links (Garantía, 26 Oct 2026) no longer fit beside the logo below 861px, so the menu folds there
+   instead of at 760px, with the same rules as the folded menu. app.js closes it above the same width. */
+@media(max-width:860px){
+ .menu-toggle{display:flex}
+ .site-header nav{position:absolute;display:none;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:15px;background:#fff;border-bottom:1px solid var(--p-line);padding:14px 20px 22px;box-shadow:0 14px 20px rgba(10,25,47,.05)}
+ .site-header nav.is-open{display:flex}
+ .nav-list{display:flex;flex-direction:column;align-items:stretch;gap:0}
+ .site-header .nav-list a{display:block;padding:13px 0;border-bottom:1px solid var(--p-line);font-size:var(--fs-body);letter-spacing:var(--ls-body);color:var(--p-ink)}
+ .header-cta{align-self:stretch;min-height:48px}
+}
 @media(max-width:760px){
  .header-inner{min-height:62px}
  .brand-logo{height:30px}
