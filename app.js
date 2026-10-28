@@ -4,17 +4,18 @@
  */
 (() => {
   'use strict';
-  const all = Array.isArray(window.MENIGAR_CATALOG) ? window.MENIGAR_CATALOG : [];
-  const families = Array.isArray(window.MENIGAR_FAMILIES) ? window.MENIGAR_FAMILIES : [];
+  // The services page loads the catalogue only when someone searches (useCatalogue below).
+  let all = Array.isArray(window.MENIGAR_CATALOG) ? window.MENIGAR_CATALOG : [];
+  let families = Array.isArray(window.MENIGAR_FAMILIES) ? window.MENIGAR_FAMILIES : [];
   const collator = new Intl.Collator('es', { numeric: true, sensitivity: 'base' });
   const normalize = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
   const compact = value => normalize(value).replace(/\s/g, '');
   const escape = value => String(value || '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[character]));
   const unique = values => [...new Set(values.filter(Boolean))].sort(collator.compare);
-  const familyByKey = new Map(families.map(family => [family.key, family]));
-  const recordsById = new Map(all.map(record => [record.uid, record]));
+  let familyByKey = new Map(families.map(family => [family.key, family]));
+  let recordsById = new Map(all.map(record => [record.uid, record]));
   const genericBrand = value => /^(otras?|otros?|varios?|multimarca|general|todas? las marcas|sin marca)$/i.test(String(value || '').trim());
-  const brands = unique(all.map(record => record.brand).filter(value => !genericBrand(value)));
+  let brands = unique(all.map(record => record.brand).filter(value => !genericBrand(value)));
   const findBrand = value => brands.find(brand => normalize(brand) === normalize(value)) || '';
   const validFamily = value => familyByKey.has(value) ? value : '';
   const safeLocal = value => /^\/reparaciones\/[a-z0-9_-]+\/$/i.test(value || '') ? value : '/servicios.html';
@@ -290,6 +291,15 @@
 
   // Build once; preserve the complete source values and rank before pagination.
   let prepared = null;
+  const useCatalogue = () => {
+    all = Array.isArray(window.MENIGAR_CATALOG) ? window.MENIGAR_CATALOG : [];
+    families = Array.isArray(window.MENIGAR_FAMILIES) ? window.MENIGAR_FAMILIES : [];
+    familyByKey = new Map(families.map(family => [family.key, family]));
+    recordsById = new Map(all.map(record => [record.uid, record]));
+    brands = unique(all.map(record => record.brand).filter(value => !genericBrand(value)));
+    prepared = null;
+    titleModelCache.clear();
+  };
   const prepare = () => prepared ||= all.map(record => {
     const references = (record.references || []).map(value => ({ raw: value, normalized: compact(value) }));
     const codes = (record.dtcCodes || []).map(value => ({ raw: value, normalized: compact(value) }));
@@ -338,9 +348,81 @@
     getById: uid => recordsById.get(uid)
   };
 
+  // The services page opens with its specialties and featured services, which need no data. The
+  // catalogue (3.45 MB) loads when the visitor arrives with a search, uses the search or the selector,
+  // or scrolls near it; whatever was chosen in the meantime is kept.
   function setupCatalogue() {
     const form = document.getElementById('catalog-filter-form');
     if (!form) return;
+    const source = form.dataset?.catalogSrc;
+    if (all.length || !source) { startCatalogue(form); return; }
+    const fields = ['catalog-query', 'catalog-brand', 'catalog-model', 'catalog-component'].map(id => document.getElementById(id)).filter(Boolean);
+    let loading = null;
+    let pending = null;
+    const intended = () => {
+      const params = new URLSearchParams();
+      [['q', 'catalog-query'], ['marca', 'catalog-brand'], ['modelo', 'catalog-model'], ['pieza', 'catalog-component']].forEach(([key, id]) => {
+        const value = (document.getElementById(id)?.value || '').trim();
+        if (value) params.set(key, value);
+      });
+      return params;
+    };
+    const load = () => loading ||= new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = source;
+      script.onload = resolve;
+      script.onerror = reject;
+      document.head.appendChild(script);
+    }).then(() => {
+      useCatalogue();
+      if (pending) history.replaceState(null, '', location.pathname + (pending.toString() ? '?' + pending : '') + '#resultados');
+      startCatalogue(form);
+    }).catch(() => {
+      const count = document.getElementById('results-count');
+      const area = document.getElementById('resultados');
+      if (area) area.hidden = false;
+      if (count) count.textContent = 'No se ha podido cargar el catálogo. Vuelve a intentarlo o consúltanos directamente.';
+    });
+    // While the catalogue arrives, the visitor already sees where the results will be.
+    const showLoading = () => {
+      const area = document.getElementById('resultados');
+      const showcase = document.getElementById('catalog-showcase');
+      if (!area) return;
+      area.hidden = false;
+      if (showcase) showcase.hidden = true;
+      document.getElementById('results-count').textContent = 'Cargando catálogo…';
+      area.scrollIntoView({block:'start', behavior:'instant'});
+    };
+    const params = new URLSearchParams(location.search);
+    if (['q', 'marca', 'modelo', 'pieza', 'pagina'].some(key => params.get(key))) { showLoading(); load(); return; }
+    // A specialty opens its results in place, without reloading the page.
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[data-catalog-link]');
+      if (!link || all.length || event.metaKey || event.ctrlKey || event.shiftKey) return;
+      event.preventDefault();
+      history.pushState(null, '', link.pathname + link.search + '#resultados');
+      pending = null;
+      showLoading();
+      load();
+    });
+    const act = event => {
+      if (all.length) return;
+      if (event.type === 'submit') event.preventDefault();
+      if (event.type !== 'focusin' && event.type !== 'pointerdown') pending = intended();
+      const area = document.getElementById('resultados');
+      if (pending?.toString() && area) showLoading();
+      load();
+    };
+    form.addEventListener('submit', act);
+    fields.forEach(field => ['focusin', 'pointerdown', 'change'].forEach(type => field.addEventListener(type, act)));
+    if (/^#(catalogo|paso-a-paso|resultados)$/.test(location.hash)) load();
+    else if ('IntersectionObserver' in window) {
+      const near = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { near.disconnect(); load(); } }, { rootMargin: '600px 0px' });
+      near.observe(document.getElementById('catalogo') || form);
+    }
+  }
+
+  function startCatalogue(form) {
     const query = document.getElementById('catalog-query');
     const advanced = document.getElementById('catalog-advanced');
     const brand = document.getElementById('catalog-brand');
@@ -356,6 +438,8 @@
     const selection = document.getElementById('catalog-selection');
     const selectionText = document.getElementById('catalog-selection-text');
     const editSelection = document.querySelector('[data-catalog-edit]');
+    const showcase = document.getElementById('catalog-showcase');
+    const familyBrands = document.getElementById('family-brands');
     const pageSize = 18;
     let state;
     let filtersExpanded = false;
@@ -431,6 +515,20 @@
       return '<article class="result-card' + (familyGroups.length ? ' result-card--variants' : '') + (isGeneric ? ' result-card--generic' : '') + '">' + imageHtml + '<div class="result-meta">' + (vehicle ? '<span class="result-vehicle">' + escape(vehicle) + '</span>' : '') + '<span class="result-family">' + escape(family) + '</span></div><h3><a href="' + detailUrl + '">' + escape(publicTitle) + '</a></h3>' + match + (description ? '<p>' + escape(description) + '</p>' : '') + symptomHtml + familyVariants + modelsHtml + refs + '<div class="result-actions"><a class="result-detail-link" href="' + detailUrl + '">Ver pieza y todos los detalles <span aria-hidden="true">↗</span></a><a class="result-consult-link" href="/solicitud.html?' + requestParams.toString() + '">' + (isGeneric ? 'Consultar mi pieza' : 'Consultar esta pieza') + ' →</a></div></article>';
     };
     const render = () => {
+      // Without a search or a filter the page shows its specialties and featured services, not
+      // the whole catalogue page by page.
+      const browsing = !state.q && !state.brand && !state.model && !state.component;
+      if (showcase) {
+        showcase.hidden = !browsing;
+        document.getElementById('resultados').hidden = browsing;
+        if (browsing) {
+          renderFilterSummary();
+          document.querySelectorAll('[data-context-consult]').forEach(link => { link.href = consultUrl(state); });
+          pagination.innerHTML = '';
+          if (familyBrands) familyBrands.hidden = true;
+          return;
+        }
+      }
       const items = window.MENIGAR_SEARCH.search(state.q, state);
       const generic = window.MENIGAR_SEARCH.brandOptions(state.q, state);
       const genericOnly = !items.length && generic.length > 0;
@@ -452,6 +550,14 @@
         const malformed = state.q && !normalize(state.q);
         resultList.innerHTML = '<div class="empty-results"><span class="empty-icon">' + icon('ecu') + '</span><h3>' + (malformed ? 'Revisa el texto de tu búsqueda.' : '¿No ves tu pieza? Consúltanos.') + '</h3><p>' + (malformed ? 'Escribe un modelo, las letras y números de una referencia o describe brevemente qué ocurre.' : 'Que no aparezca en esta lista no significa que no podamos repararla. Envíanos una foto y dinos qué ocurre.') + '</p><a class="button button-primary" href="' + consultUrl(state) + '">Consultar mi pieza ↗</a><br>' + (state.q ? '<button class="text-button" type="button" data-remove-filter="q">Ver opciones sin este texto</button><br>' : '') + (state.model && state.brand ? '<a class="text-link" href="/servicios.html?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver piezas de ' + escape(state.brand) + ' sin elegir modelo →</a><br>' : '') + (state.q && (state.brand || state.model || state.component) ? '<button class="text-button" type="button" data-search-without-filters>Buscar este texto sin filtros de vehículo ni pieza</button><br>' : '') + '<button class="text-button" type="button" data-reset-filters>Volver a ver todas las piezas</button></div>';
       } else resultList.innerHTML = visibleItems.slice(start, start + pageSize).map(item => resultHtml(item, genericOnly)).join('');
+      if (familyBrands) {
+        // A whole specialty is long: its brands, by number of fichas, narrow it in one step.
+        const counts = new Map();
+        if (state.component && !state.brand && !state.q) items.forEach(item => { const value = item.record.brand; if (value && !genericBrand(value)) counts.set(value, (counts.get(value) || 0) + 1); });
+        const top = [...counts].sort((a, b) => b[1] - a[1] || collator.compare(a[0], b[0])).slice(0, 14);
+        familyBrands.hidden = top.length < 2;
+        familyBrands.innerHTML = top.length < 2 ? '' : '<p>Elige tu marca para ver menos opciones</p><ul>' + top.map(([value, count]) => '<li><a href="/servicios.html?' + newSearchParams({...state, brand:value, model:'', page:1}).toString() + '#resultados" data-brand-shortcut="' + escape(value) + '">' + escape(value) + ' <span>' + count + '</span></a></li>').join('') + '</ul>';
+      }
       if (relatedBrand) {
         relatedBrand.hidden = !items.length || !generic.length;
         relatedBrand.innerHTML = items.length && generic.length ? '<h3>Otros servicios de ' + escape(state.brand) + '</h3><p>Revisa otras opciones de la marca. Si tu variante no aparece, te ayudamos a identificarla.</p><div class="results-grid">' + generic.slice(0, 3).map(item => resultHtml(item, true)).join('') + '</div>' + (generic.length > 3 ? '<a class="text-link" href="/servicios.html?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver todos los servicios de la marca →</a>' : '') : '';
@@ -478,6 +584,27 @@
       if (reset) { filtersExpanded = true; state = {q:'', brand:'', model:'', component:'', page:1}; populate(); updateUrl(); render(); brand.focus(); return; }
       const chip = event.target.closest('[data-remove-filter]');
       if (chip) { state[chip.dataset.removeFilter] = ''; if (chip.dataset.removeFilter === 'brand') { state.model = ''; state.component = ''; } if (chip.dataset.removeFilter === 'model') state.component = ''; state.page = 1; populate(); updateUrl(); render(); resultCount.focus(); return; }
+      const catalogLink = event.target.closest('a[data-catalog-link]');
+      if (catalogLink && !event.metaKey && !event.ctrlKey && !event.shiftKey) {
+        event.preventDefault();
+        const linked = new URLSearchParams(catalogLink.search);
+        filtersExpanded = false;
+        state = {q:(linked.get('q') || '').slice(0, 180), brand:findBrand(linked.get('marca') || ''), model:'', component:validFamily(linked.get('pieza')), page:1};
+        populate(); updateUrl(); render();
+        document.getElementById('resultados').scrollIntoView({block:'start', behavior:'instant'});
+        return;
+      }
+      const back = event.target.closest('[data-show-showcase]');
+      if (back) {
+        event.preventDefault();
+        filtersExpanded = false;
+        state = {q:'', brand:'', model:'', component:'', page:1};
+        populate(); updateUrl(); render();
+        (showcase || document.getElementById('catalogo')).scrollIntoView({block:'start', behavior:'instant'});
+        return;
+      }
+      const shortcut = event.target.closest('[data-brand-shortcut]');
+      if (shortcut) { event.preventDefault(); filtersExpanded = false; state = {...state, brand:shortcut.dataset.brandShortcut, model:'', page:1}; populate(); updateUrl(); render(); resultCount.focus(); document.getElementById('results-title').scrollIntoView({block:'start'}); return; }
       const page = event.target.closest('[data-result-page]');
       if (page) { event.preventDefault(); state.page = Number(page.dataset.resultPage); updateUrl(); render(); resultCount.focus(); document.getElementById('results-title').scrollIntoView({behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block:'start'}); }
     });
@@ -486,6 +613,7 @@
     state = parseLocation();
     populate();
     render();
+    if (location.hash === '#resultados' && showcase && !document.getElementById('resultados').hidden) document.getElementById('resultados').scrollIntoView({block:'start'});
   }
 
   function setupDetailContext() {
