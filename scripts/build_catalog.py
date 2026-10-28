@@ -313,6 +313,12 @@ def instruction_groups(raw):
     return groups
 
 
+def catalogue_json(catalogue):
+    """The catalogue as JSON with one record per line and no indentation. It holds the same data in about
+    60 % of the bytes of indent=2 (GitHub warns above 50 MB), and a diff still points to the record that changed."""
+    return '[\n' + ',\n'.join(json.dumps(record, ensure_ascii=False, separators=(',', ':')) for record in catalogue) + '\n]\n'
+
+
 def build():
     all_pages = []
     fingerprints = {}
@@ -424,7 +430,7 @@ def build():
     assert instruction_uid and len(next(r for r in catalogue if r['uid'] == instruction_uid)['instructionGroups']) == 6
     # Source snapshots are never rewritten by this builder.
     assert all(hashlib.sha256((ROOT / file).read_bytes()).hexdigest() == digest for file, digest in fingerprints.items())
-    (DATA / 'catalogo-v2.json').write_text(json.dumps(catalogue, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    (DATA / 'catalogo-v2.json').write_text(catalogue_json(catalogue), encoding='utf-8')
     browser_omissions = {'sourceText', 'dtcDetails', 'instructionGroups', 'sourceSections',
                         'sourceCapture', 'sourceHtmlSha256', 'contentBlocks'}
     browser_catalogue = []

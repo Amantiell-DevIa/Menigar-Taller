@@ -18,7 +18,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = Path('/Users/kaykostar/Documents/MENIGAR/nueva-web-revision-2026-10-15')
 ROOT_FILES = ['index.html', 'servicios.html', 'solicitud.html', 'envios.html', 'garantia.html', 'taller.html',
               'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html',
-              'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css',
+              'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'servicios.css',
               'app.js', 'solicitud.js', 'resumen.js', 'robots.txt', 'sitemap.xml']
 ROOT_FILES += ['resumen.html', 'receipt.js', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js', 'favicon.ico', 'apple-touch-icon.png']
 DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js']
