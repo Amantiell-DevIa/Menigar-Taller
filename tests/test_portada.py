@@ -60,6 +60,21 @@ class HomepageTests(unittest.TestCase):
         self.assertIn('<link rel="stylesheet" href="/assets/css/portada-v5.css">', (ROOT / 'opciones-hero.html').read_text())
 
 
+    def test_whole_site_uses_the_light_palette(self):
+        """28 Oct 2026, the user's choice: the homepage palette for every page (sky, navy, one blue)."""
+        style = (ROOT / 'style.css').read_text()
+        for token in ['--p-ivory:#edf7fe', '--p-ink:#041637', '--p-night-1:#061a3d', '--p-accent:#0077fe', '--action:#0066db']:
+            with self.subTest(token=token):
+                self.assertIn(token, style)
+        self.assertRegex(style, r'\.page-intro\{[^}]*background:var\(--p-band\)', 'Las bandas de título son claras.')
+        self.assertIn('.repair-detail-page .page-heading { background: var(--p-band);', (ROOT / 'reparaciones.css').read_text())
+        laguna = ['#006b7d', '#005566', '#00414e', '#005f70', '#0e93a8', '#fff0b8', '#ffd54a', 'rgba(14,147,168', 'rgba(255,213,74']
+        for name in ['style.css', 'servicios.css', 'garantia.css', 'paginas.css', 'reparaciones.css', 'solicitud.css', 'bmw.css', 'hyundai.css', 'assets/css/portada.css']:
+            text = (ROOT / name).read_text()
+            for colour in laguna:
+                with self.subTest(file=name, colour=colour):
+                    self.assertNotIn(colour, text)
+
 
 if __name__ == '__main__':
     unittest.main()

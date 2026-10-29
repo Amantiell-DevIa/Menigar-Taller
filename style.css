@@ -7,8 +7,8 @@
  --fs-caption:.75rem;--fs-small:.875rem;--fs-body:1.0625rem;--fs-lead:1.3125rem;--fs-title:1.5rem;
  --fs-h2:clamp(1.75rem,1.25rem + 1.6vw,2.5rem);--fs-h1:clamp(2rem,1.25rem + 2.4vw,3rem);
  --ls-caption:0;--ls-small:-.006em;--ls-body:-.013em;--ls-lead:-.018em;--ls-title:-.019em;--ls-h2:-.021em;--ls-h1:-.022em;--ls-caps:.08em;
- --action:#0058af;--action-hover:#00458a;--on-action:#fff;
- --action-on-dark:#fcfaf5;--action-on-dark-hover:#e6e1d6;--on-action-dark:#101e27;
+ --action:#0066db;--action-hover:#0052b4;--on-action:#fff;
+ --action-on-dark:#ffffff;--action-on-dark-hover:#e2effc;--on-action-dark:#041637;
  /* Concentric corners: inner radius = outer radius - padding. */
  --r-control:8px;--r-card:16px;--r-pill:999px;
 }
@@ -562,23 +562,32 @@ button:focus-visible,a:focus-visible,summary:focus-visible,input:focus-visible,s
 /* V4, 18 Oct 2026: the homepage system shared by every page. Night header and page intros,
    ivory reading surfaces, amber as the light of the instruments, one action color. */
 :root{
- /* Cian «Laguna» (owner, 23 Oct 2026): the lab's cyan, one clear step lighter, is the base of the whole
-    site. The deep tones are teal, never black; light sections carry a cyan tint; the warm accent is the
-    logo's sunny yellow instead of gold, so nothing reads as «expensive». */
- --p-night-0:#00414e;--p-night-1:#005566;--p-night-2:#005f70;--p-night-3:#006b7d;
- --p-on-dark-1:#ffffff;--p-on-dark-2:#d6f2f7;--p-on-dark-3:#b6e2ea;--p-line-dark:rgba(255,255,255,.18);
- --p-ivory:#effafc;--p-ivory-2:#ddf2f7;--p-card:#fbfeff;--p-sand:#dff1f5;
- --p-ink:#0b2a35;--p-ink-2:#2a4a55;--p-ink-3:#486570;--p-line:#c9e2e9;--p-line-strong:#a9cbd5;
- --p-amber:#ffd54a;--p-amber-hot:#ffc61a;--p-amber-deep:#7a5600;--p-red:#ff5a3c;
+ /* «Cielo» (owner's mockup, 28 Oct 2026), for the whole site: light sky surfaces, navy ink and one electric
+    blue. Dark blocks (footer, featured and help cards) are navy, never black. Yellow stays only in the logo, in
+    warnings and in Google's stars; --p-amber is an alias of the accent so no stray yellow is left.
+    The «Laguna» cyan of 23 Oct 2026 is archived in DISEÑOS/portada-dueno-2026-10-28. */
+ --p-night-0:#020f2a;--p-night-1:#061a3d;--p-night-2:#0b2452;--p-night-3:#123170;
+ --p-on-dark-1:#ffffff;--p-on-dark-2:#d6e2f6;--p-on-dark-3:#adc0e3;--p-line-dark:rgba(255,255,255,.16);
+ --p-ivory:#edf7fe;--p-ivory-2:#e2effc;--p-card:#ffffff;--p-sand:#e7f2fd;
+ --p-ink:#041637;--p-ink-2:#4c5380;--p-ink-3:#5a6488;--p-line:#d6e4f5;--p-line-strong:#b6cbe6;
+ /* The mockup's blue marks borders, icons and numbers on light surfaces (3:1 is enough there); a soft blue
+    does the same on navy. Text and buttons use --action, which white passes at 5.35:1. */
+ --p-accent:#0077fe;--p-accent-dark:#8cc8ff;
+ --p-amber:var(--p-accent);--p-amber-hot:#ffc61a;--p-amber-deep:#7a5600;--p-red:#ff5a3c;
  --p-ease:cubic-bezier(.2,.8,.2,1);
- --p-shadow:0 1px 2px rgba(16,30,39,.04),0 28px 56px -28px rgba(16,30,39,.22);
- --p-night-glow:radial-gradient(110% 120% at 90% 0%,#0e93a8 0%,transparent 62%);
+ --p-shadow:0 1px 2px rgba(4,22,55,.05),0 28px 56px -28px rgba(4,22,55,.24);
+ --p-night-glow:radial-gradient(110% 120% at 90% 0%,#1d4ea3 0%,transparent 62%);
+ /* Title bands are light, like the homepage hero: a deeper sky at the top and the blue light on the right. */
+ --p-band:radial-gradient(55% 140% at 96% 0%,rgba(0,119,254,.13) 0%,transparent 70%),linear-gradient(180deg,#e7f2fd 0%,#edf7fe 100%);
 }
+/* On narrow screens the text runs under the whole band: the light shrinks into the corner so small blue text
+   keeps AA (measured on the pixels with bgcontrast). */
+@media(max-width:900px){:root{--p-band:radial-gradient(70% 50% at 100% 0%,rgba(0,119,254,.1) 0%,transparent 70%),linear-gradient(180deg,#e9f4fd 0%,#edf7fe 100%)}}
 html{scroll-padding-top:84px}
 body{background:var(--p-ivory)}
 /* Header with MENIGAR's own logo (owner, 23 Oct 2026). The logo is drawn for white, with black
    lettering, so the bar is white; the footer shows it on a white plate. */
-.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(16,30,39,.1)}
+.site-header{position:sticky;top:0;z-index:60;background:rgba(255,255,255,.95);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(4,22,55,.1)}
 .header-inner{min-height:68px}
 .brand-logo{display:block;width:auto;height:38px}
 @media(max-width:1050px){.brand-logo{height:28px}}
@@ -592,17 +601,14 @@ body{background:var(--p-ivory)}
 .local-preview-note{background:var(--p-ivory-2);border-color:var(--p-line);color:var(--p-ink-3)}
 .eyebrow.eyebrow{font-size:var(--fs-small);letter-spacing:var(--ls-small);text-transform:none;font-weight:600;line-height:1.4;color:var(--p-ink-3)}
 .eyebrow-line{display:none}
-.page-intro{padding-block:clamp(28px,3.6vw,44px) clamp(40px,5vw,64px);border-bottom:0;color:var(--p-on-dark-1);background:var(--p-night-glow),var(--p-night-1)}
-.page-intro h1{max-width:24ch;font-size:clamp(2rem,1.1rem + 3vw,3.5rem);line-height:1.04;letter-spacing:-.028em;font-weight:700;color:var(--p-on-dark-1);text-wrap:balance}
-.page-intro h1 span{color:var(--p-amber)}
-/* The badge yellow is too dark for small text on the band's glow: the eyebrow takes the hero's paler
-   yellow, and on narrow screens, where the eyebrow and the lead run under the glow, the glow is smaller. */
-.page-intro .eyebrow.eyebrow{color:#fff0b8}
-@media(max-width:900px){.page-intro{background:radial-gradient(80% 55% at 100% 0%,rgba(14,147,168,.7) 0%,transparent 70%),var(--p-night-1)}}
-.page-intro p,.page-intro .lead,.page-intro>div>p:not(.eyebrow){color:var(--p-on-dark-2)}
-.page-intro .breadcrumbs,.page-intro .breadcrumb{color:var(--p-on-dark-3)}
-.page-intro .breadcrumbs a,.page-intro .breadcrumb a{color:var(--p-on-dark-2)}
-.page-intro .breadcrumbs a:hover,.page-intro .breadcrumb a:hover{color:#fff}
+.page-intro{padding-block:clamp(28px,3.6vw,44px) clamp(40px,5vw,64px);border-bottom:1px solid var(--p-line);color:var(--p-ink);background:var(--p-band)}
+.page-intro h1{max-width:24ch;font-size:clamp(2rem,1.1rem + 3vw,3.5rem);line-height:1.04;letter-spacing:-.03em;font-weight:800;color:var(--p-ink);text-wrap:balance}
+.page-intro h1 span{color:var(--action)}
+.page-intro .eyebrow.eyebrow{color:var(--action)}
+.page-intro p,.page-intro .lead,.page-intro>div>p:not(.eyebrow){color:var(--p-ink-2)}
+.page-intro .breadcrumbs,.page-intro .breadcrumb{color:var(--p-ink-3)}
+.page-intro .breadcrumbs a,.page-intro .breadcrumb a{color:var(--p-ink-2)}
+.page-intro .breadcrumbs a:hover,.page-intro .breadcrumb a:hover{color:var(--p-ink)}
 .card,.notice,.detail-card,.contact-card{background:var(--p-card);border-color:var(--p-line)}
 .contact-card{box-shadow:var(--p-shadow)}
 .notice{border-left-color:var(--p-ink-3);color:var(--p-ink-2)}
@@ -649,11 +655,11 @@ input[type=text],input[type=email],input[type=tel],input[type=search],input[type
 .catalog-advanced,.sidebar-help{border-color:var(--p-line)}
 .results-heading h2{color:var(--p-ink)}
 .results-heading p{color:var(--p-ink-3)}
-.results-guidance{background:var(--p-ivory-2);border-left:3px solid var(--p-amber);border-radius:0 var(--r-control) var(--r-control) 0;color:var(--p-ink-2)}
+.results-guidance{background:var(--p-ivory-2);border-left:3px solid var(--p-accent);border-radius:0 var(--r-control) var(--r-control) 0;color:var(--p-ink-2)}
 .catalog-label{background:var(--p-card);border-color:var(--p-line);color:var(--p-ink-3)}
 .filter-chip{background:var(--p-card);border-color:var(--p-line-strong);color:var(--p-ink)}
 .filter-chip:hover{background:#fff;border-color:var(--p-ink)}
-.result-card,.result-card--variants{background:var(--p-card);border:1px solid var(--p-line);box-shadow:0 1px 2px rgba(16,30,39,.04);transition:border-color .2s,box-shadow .35s var(--p-ease)}
+.result-card,.result-card--variants{background:var(--p-card);border:1px solid var(--p-line);box-shadow:0 1px 2px rgba(4,22,55,.05);transition:border-color .2s,box-shadow .35s var(--p-ease)}
 .result-card:hover{border-color:var(--p-line-strong);box-shadow:var(--p-shadow)}
 .result-card--generic{background:var(--p-ivory-2);border-color:var(--p-line);box-shadow:none}
 .result-image,.result-variant-media img{background:#fff;border-color:var(--p-line)}
@@ -661,7 +667,7 @@ input[type=text],input[type=email],input[type=tel],input[type=search],input[type
 .result-family{text-transform:none;letter-spacing:var(--ls-caption);font-weight:600;color:var(--p-ink-3)}
 .result-card h3 a,.result-variant-body h4{color:var(--p-ink)}
 .result-card>p,.result-variant-body>p{color:var(--p-ink-2)}
-.result-match{background:var(--p-ivory-2);border-left-color:var(--p-amber);color:var(--p-ink-2)}
+.result-match{background:var(--p-ivory-2);border-left-color:var(--p-accent);color:var(--p-ink-2)}
 .result-symptoms{border-color:var(--p-line)}
 .result-symptoms>strong,.result-symptoms p,.result-symptoms h4,.result-models>strong{color:var(--p-ink)}
 .result-symptom-link{background:var(--p-ivory-2);border-color:transparent}
