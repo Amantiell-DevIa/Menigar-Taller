@@ -56,8 +56,8 @@ def list_html(items, class_name=""):
 
 
 def header(active=""):
-    links = [("servicios.html", "Servicios"), ("envios.html", "Cómo enviar"), ("garantia.html", "Garantía"),
-             ("taller.html", "El laboratorio"), ("ayuda.html", "Ayuda")]
+    links = [("servicios.html", "Servicios"), ("como-funciona.html", "Cómo funciona"), ("garantia.html", "Garantía"),
+             ("sobre-nosotros.html", "Sobre nosotros"), ("ayuda.html", "Ayuda")]
     nav = "".join(f'<li><a href="/{path}"' + (' aria-current="page"' if path == active else '') + f'>{label}</a></li>' for path, label in links)
     return f'''<a class="skip-link" href="#contenido">Saltar al contenido</a>
 <header class="site-header"><div class="container header-inner">
@@ -70,7 +70,7 @@ def header(active=""):
 def footer():
     return f'''<footer class="site-footer"><div class="container footer-grid">
   <div><a class="brand brand--placa" href="/index.html" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt="" loading="lazy" decoding="async"></a><p>Reparación de electrónica del automóvil.<br>Talleres y particulares.</p><a class="footer-phone" href="tel:+34916622781">{PHONE}</a></div>
-  <div><h2>Tu reparación</h2><a href="/servicios.html">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a><a href="/envios.html">Cómo preparar el paquete</a><a href="/garantia.html">Garantía de la reparación</a></div>
+  <div><h2>Tu reparación</h2><a href="/servicios.html">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a><a href="/como-funciona.html#preparar">Cómo preparar el paquete</a><a href="/garantia.html">Garantía de la reparación</a></div>
   <div><h2>Encuéntranos</h2><p>C/ José Echegaray, 16<br>Edificio A1 · Planta 2ª · Nave 4<br>28100 Alcobendas, Madrid</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Menigar+Alcobendas" target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a></div>
   <div><h2>Horario de atención</h2><p>Lunes a jueves<br><strong>8:00–16:00</strong></p><p>Viernes<br><strong>8:00–14:00</strong></p><a href="/ayuda.html#contacto">Consultar con el equipo →</a></div>
 </div><div class="container footer-bottom"><span>© <span data-current-year>2026</span> MENIGAR</span><div><a href="/privacidad.html">Privacidad</a><a href="/condiciones.html">Condiciones</a><a href="/cookies.html">Cookies</a></div><span>Alcobendas · Madrid</span></div></footer>'''
@@ -99,28 +99,112 @@ def contact_card(title="¿Necesitas ayuda?"):
     return f'''<aside class="card contact-card"><p class="eyebrow">Atención humana</p><h2>{e(title)}</h2><p>Si no sabes qué pieza enviar, cuéntanos qué falla y añade una foto de su etiqueta.</p><a class="button button-primary" href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><p><a href="tel:+34916622781">{PHONE}</a></p><p><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Lunes a jueves, de 8:00 a 16:00.<br>Viernes, de 8:00 a 14:00.</p></aside>'''
 
 
+# Information pages (26 Oct 2026), in the language of the services page: a title band with the main actions,
+# short blocks in cards, steps numbered once and a closing card. Styles in paginas.css.
+ICONS = {
+    "buscar": '<circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/>',
+    "documento": '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/>',
+    "caja": '<path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+    "camion": '<path d="M2 7h11v9H2zM13 10h4l3 3v3h-7z"/><circle cx="6" cy="18" r="2"/><circle cx="17" cy="18" r="2"/>',
+    "consulta": '<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9h8M8 12h5"/>',
+    "reloj": '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    "escudo": '<path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+}
+
+
+def svg_icon(name, class_name=""):
+    return f'<svg class="{class_name}" viewBox="0 0 24 24" aria-hidden="true" focusable="false">{ICONS[name]}</svg>'
+
+
+def photo(src, alt, sizes, eager=False, widths=(280, 480, 640)):
+    from build_servicios import variants
+    candidates = variants(src, "paginas", widths)
+    url, width, height = candidates[-1]
+    srcset = ", ".join(f"{path} {size}w" for path, size, _ in candidates)
+    loading = 'fetchpriority="high" decoding="async"' if eager else 'loading="lazy" decoding="async"'
+    return f'<img src="{url}" srcset="{srcset}" sizes="{sizes}" width="{width}" height="{height}" alt="{e(alt)}" {loading}>'
+
+
+def intro_band(kicker, title, lead, breadcrumb, actions, media=""):
+    crumb = f'<nav class="breadcrumb" aria-label="Ruta de navegación"><a href="/">Inicio</a><span aria-hidden="true">/</span>{e(breadcrumb)}</nav>'
+    buttons = "".join(f'<a class="{"pg-button-light" if primary else "pg-link-light"}" href="{href}"{extra}>{label}</a>' for href, label, primary, extra in actions)
+    text = f'<p class="eyebrow">{e(kicker)}</p><h1>{e(title)}</h1><p class="lead">{e(lead)}</p><div class="pg-actions">{buttons}</div>'
+    body = f'<div class="pg-intro-grid"><div>{text}</div>{media}</div>' if media else text
+    return f'<section class="page-intro page-heading pg-intro"><div class="container">{crumb}{body}</div></section>'
+
+
+def help_card(eyebrow="¿Tienes dudas?", title="Habla con el laboratorio", text="Cuéntanos qué falla y añade una foto de la etiqueta. Te orientamos aunque no conozcas la referencia."):
+    return f"""<section class="pg-help"><div class="container"><div class="pg-help-card"><div><p class="eyebrow">{e(eyebrow)}</p><h2>{e(title)}</h2><p>{e(text)}</p></div>
+<div class="pg-help-actions"><a class="pg-button-light" href="/solicitud.html?tipo=consulta">Consultar mi pieza <span aria-hidden="true">↗</span></a><a href="tel:+34916622781">Llamar al {PHONE}</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a></div></div></div></section>"""
+
+
+INFO_HEAD = '<link rel="stylesheet" href="/paginas.css">'
+
+
+def fragment(name):
+    """Markup moved from the homepage (28 Oct 2026), kept in scripts/fragmentos/ without its header comment."""
+    return (ROOT / "scripts" / "fragmentos" / f"{name}.html").read_text(encoding="utf-8").split("-->", 1)[1].strip()
+SPECIALTIES = [("cuadro", "Cuadros de instrumentos"), ("abs", "ABS y ESP"), ("multimedia", "Pantallas y multimedia"),
+               ("display", "Displays y cuentakilómetros"), ("cambio", "Electrónica de cambio"), ("palanca", "Palancas selectoras")]
+
+
 def write_info_pages():
-    envios = page_intro("Tu pieza, bien preparada", "Cómo enviar tu pieza a Menigar", "Prepara el envío con la información necesaria y protege la pieza para que podamos identificarla al recibirla.", "Cómo enviar")
-    envios += f'''<section class="section"><div class="container subpage-grid"><div class="prose">
-<details class="card packaging-guide"><summary>Ver guía visual de embalaje</summary><figure style="max-width:680px;margin:20px auto 0"><img src="/assets/ayuda-embalaje.svg" alt="Guía de embalaje: proteger los conectores, inmovilizar la pieza dentro de la caja e incluir el resumen de solicitud" width="680" height="1090" loading="lazy" style="max-width:100%;height:auto"><figcaption>Guía general de preparación. Consulta las instrucciones específicas de tu pieza. <a href="/assets/ayuda-embalaje.svg" target="_blank" rel="noopener">Ampliar esquema ↗</a></figcaption></figure></details>
-<ol class="steps-list"><li><span class="step-number">01</span><div><h2>Identifica la pieza y cuéntanos el fallo</h2><p>Busca tu servicio o describe la avería. Añade la referencia y una foto de la etiqueta si la tienes. Si el caso no está claro, consúltanos antes de enviar.</p><a class="button button-primary" href="/solicitud.html?tipo=consulta">Consultar mi pieza</a></div></li>
-<li><span class="step-number">02</span><div><h2>Incluye un resumen dentro de la caja</h2><p>Incluye la petición de reparación cumplimentada o el resumen de solicitud, con tus datos de contacto, la pieza y el fallo observado. Si envías varias unidades, identifica cada una y sus accesorios.</p><p>Durante esta revisión de la nueva web, la solicitud digital solo sirve para pruebas. Para un envío real utiliza el documento vigente y confirma las instrucciones con el laboratorio.</p><a href="https://www.menigar.com/docs/peticion_reparacion%202026a.pdf" target="_blank" rel="noopener">Descargar petición de reparación vigente (PDF)</a></div></li>
-<li><span class="step-number">03</span><div><h2>Protege las partes delicadas</h2><p>Utiliza una caja resistente ajustada a la pieza. Envuelve la unidad con material protector, protege conectores y rellena los huecos para que no se mueva. No envíes componentes adicionales sin comprobar las instrucciones del servicio.</p><a href="https://www.menigar.com/docs/como_embalar.pdf" target="_blank" rel="noopener">Ver instrucciones de embalaje (PDF)</a></div></li>
-<li><span class="step-number">04</span><div><h2>Confirma el transporte y guarda el seguimiento</h2><p>Puedes consultar al laboratorio las opciones de envío y sus condiciones. Para Canarias, Ceuta, Melilla o envíos internacionales, confirma previamente la documentación necesaria. Conserva el justificante y número de seguimiento.</p><p>No confundas el número del transportista con la referencia de tu solicitud.</p></div></li></ol>
-<div class="card"><p class="eyebrow">Destino del envío</p><h2>Menigar · Alcobendas, Madrid</h2><address>{e(ADDRESS)}<br>Desarrollos Digitales Menigar, S.L.<br>Teléfono: {PHONE}</address><p><a href="https://www.menigar.com/docs/direccion_envio.pdf" target="_blank" rel="noopener">Descargar etiqueta con la dirección (PDF)</a></p></div>
-<h2>Cada pieza puede necesitar una preparación distinta</h2><p>En algunos servicios debe enviarse el conjunto completo; en otros, una parte concreta. Revisa la ficha de tu pieza o pregúntanos antes de desmontar y enviar. Los componentes de seguridad deben ser manipulados por personal cualificado.</p><a href="/servicios.html" class="button button-secondary">Consultar mi servicio</a>
-<p class="source-note">Información preparada a partir de las instrucciones de <a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">envíos de Menigar</a>. Las modalidades y tarifas de transporte deben confirmarse para cada envío.</p>
-</div>{contact_card()}</div></section>'''
-    (ROOT / "envios.html").write_text(page("Cómo enviar tu pieza", "Prepara e identifica tu pieza antes de enviarla al laboratorio Menigar en Alcobendas. Dirección, embalaje y petición de reparación.", "/envios.html", envios, "envios.html"), encoding="utf-8")
+    # Cómo funciona (28 Oct 2026, formerly «Cómo enviar»): the three steps of a repair first, then how to
+    # prepare the parcel, the address and what to check before closing the box.
+    blank = ' target="_blank" rel="noopener"'
+    funciona = intro_band("Cómo funciona", "Así funciona, en tres pasos", "Cuéntanos qué falla, te orientamos y envías tu pieza desde cualquier punto de España.", "Cómo funciona",
+                          [("/solicitud.html?tipo=consulta", 'Consultar mi pieza <span aria-hidden="true">↗</span>', True, ""), ("#preparar", "Cómo preparar el envío", False, "")])
+    journey = [("documento", "Cuéntanos qué falla", "Indica el vehículo y lo que observas. Una foto de la pieza y de su etiqueta nos ayuda a identificarla."),
+               ("consulta", "Te orientamos", "El equipo revisa tu caso y te explica cómo continuar."),
+               ("caja", "Envía tu pieza", "Desde cualquier punto de España, siguiendo nuestras instrucciones de embalaje.")]
+    journey_html = "".join(f'<li>{svg_icon(icon, "pg-step-icon")}<h3>{title}</h3><p>{text}</p></li>' for icon, title, text in journey)
+    steps = [
+        ("buscar", "Identifica la pieza y cuéntanos el fallo", "<p>Busca tu servicio o describe la avería. Añade la referencia y una foto de la etiqueta si la tienes. Si el caso no está claro, consúltanos antes de enviar.</p>",
+         '<a class="pg-step-link" href="/solicitud.html?tipo=consulta">Consultar mi pieza →</a>'),
+        ("documento", "Incluye un resumen dentro de la caja", "<p>Incluye la petición de reparación cumplimentada o el resumen de solicitud, con tus datos de contacto, la pieza y el fallo observado. Si envías varias unidades, identifica cada una y sus accesorios.</p><p class=\"pg-note\">Durante esta revisión de la nueva web, la solicitud digital solo sirve para pruebas. Para un envío real utiliza el documento vigente y confirma las instrucciones con el laboratorio.</p>",
+         f'<a class="pg-step-link" href="https://www.menigar.com/docs/peticion_reparacion%202026a.pdf"{blank}>Descargar petición de reparación vigente (PDF)</a>'),
+        ("caja", "Protege las partes delicadas", "<p>Utiliza una caja resistente ajustada a la pieza. Envuelve la unidad con material protector, protege conectores y rellena los huecos para que no se mueva. No envíes componentes adicionales sin comprobar las instrucciones del servicio.</p>",
+         f'<a class="pg-step-link" href="https://www.menigar.com/docs/como_embalar.pdf"{blank}>Ver instrucciones de embalaje (PDF)</a>'),
+        ("camion", "Confirma el transporte y guarda el seguimiento", "<p>Puedes consultar al laboratorio las opciones de envío y sus condiciones. Para Canarias, Ceuta, Melilla o envíos internacionales, confirma previamente la documentación necesaria. Conserva el justificante y número de seguimiento.</p><p class=\"pg-note\">No confundas el número del transportista con la referencia de tu solicitud.</p>", ""),
+    ]
+    steps_html = "".join(f'<li>{svg_icon(icon, "pg-step-icon")}<h3>{title}</h3>{text}{link}</li>' for icon, title, text, link in steps)
+    funciona += f"""<section class="pg-section" aria-label="Los tres pasos"><div class="container"><ol class="pg-steps pg-steps--3">{journey_html}</ol>
+<div class="pg-grid pg-grid--stretch pg-audience"><article class="pg-card"><h2>La información útil, a mano</h2><ul class="pg-check"><li>Marca, modelo y año del vehículo.</li><li>Referencia o fotografía legible de la etiqueta.</li><li>Qué falla y cuándo ocurre.</li><li>Códigos de diagnosis, si los tienes.</li></ul><p><a class="button button-primary" href="/solicitud.html?tipo=consulta">Consultar mi pieza</a></p></article>
+<article class="pg-card"><h2>Una alternativa a estudiar antes de sustituir</h2><p>Si tu pieza tiene reparación, recuperar su funcionamiento puede evitar una sustitución completa. La solución y el presupuesto dependen de la unidad, la avería y su estado. También puedes consultar disponibilidad de recambio cuando sea necesario.</p><p>El presupuesto final se confirma al revisar la unidad.</p></article></div></div></section>
+<section class="pg-section" id="preparar" aria-labelledby="pasos-titulo"><div class="container"><div class="pg-head"><p class="eyebrow">Paso a paso</p><h2 id="pasos-titulo">Cómo preparar el envío</h2><p>Sigue el orden: así podremos identificar la pieza en cuanto llegue.</p><div class="pg-links"><a href="/solicitud.html?intencion=envio">Preparar mi solicitud de envío <span aria-hidden="true">→</span></a></div></div><ol class="pg-steps">{steps_html}</ol></div></section>
+<section class="pg-section" aria-labelledby="destino-titulo"><div class="container pg-grid pg-grid--stretch">
+<div class="pg-card pg-address"><p class="eyebrow">Destino del envío</p><h2 id="destino-titulo">Menigar · Alcobendas, Madrid</h2><address>{e(ADDRESS)}<br>Desarrollos Digitales Menigar, S.L.<br>Teléfono: <a href="tel:+34916622781">{PHONE}</a></address><div class="pg-links"><a href="https://www.menigar.com/docs/direccion_envio.pdf"{blank}>Descargar etiqueta con la dirección (PDF)</a></div>
+<div class="pg-guide"><a href="/assets/ayuda-embalaje.svg"{blank}><img src="/assets/ayuda-embalaje.svg" width="680" height="1090" alt="Guía de embalaje: proteger los conectores, inmovilizar la pieza dentro de la caja e incluir el resumen de solicitud" loading="lazy" decoding="async"></a><p><strong>Guía visual de embalaje</strong><br>Guía general de preparación. Consulta las instrucciones específicas de tu pieza. <a href="/assets/ayuda-embalaje.svg"{blank}>Ampliar esquema ↗</a></p></div></div>
+<div class="pg-card"><p class="eyebrow">Antes de cerrar la caja</p><h2>Comprueba que incluyes</h2><ul class="pg-check"><li>La referencia o una foto legible de la etiqueta.</li><li>La petición de reparación o el resumen de solicitud, dentro de la caja.</li><li>Cada unidad y sus accesorios identificados, si envías varias.</li><li>Los conectores protegidos y los huecos rellenos para que la pieza no se mueva.</li><li>El justificante y el número de seguimiento guardados.</li></ul></div>
+</div></section>
+<section class="pg-section"><div class="container"><div class="pg-card pg-callout"><h2>Cada pieza puede necesitar una preparación distinta</h2><p>En algunos servicios debe enviarse el conjunto completo; en otros, una parte concreta. Revisa la ficha de tu pieza o pregúntanos antes de desmontar y enviar. Los componentes de seguridad deben ser manipulados por personal cualificado.</p><div class="pg-links"><a href="/servicios.html">Consultar mi servicio →</a></div></div>
+<p class="source-note">Información preparada a partir de las instrucciones de <a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">envíos de Menigar</a>. Las modalidades y tarifas de transporte deben confirmarse para cada envío.</p></div></section>
+{help_card("¿Dudas antes de enviar?")}"""
+    (ROOT / "como-funciona.html").write_text(page("Cómo funciona", "Cómo reparar tu pieza con Menigar: cuéntanos qué falla, te orientamos y la envías desde cualquier punto de España. Dirección, embalaje y petición de reparación.", "/como-funciona.html", funciona, "como-funciona.html", INFO_HEAD, "info-page"), encoding="utf-8")
 
-    taller = page_intro("Electrónica del automóvil", "Laboratorio de reparación de electrónica del automóvil en Alcobendas", "Cuadros de instrumentos, ABS, pantallas y módulos electrónicos. Atención para talleres y particulares desde Alcobendas, Madrid.", "El laboratorio")
-    taller += f'''<section class="section"><div class="container subpage-grid"><div class="prose"><figure class="workshop-figure"><img src="/assets/hero-lab.jpg" alt="Banco de trabajo de electrónica con instrumental y una pieza en revisión" loading="lazy" width="1000" height="680"><figcaption>Trabajo especializado en electrónica del automóvil.</figcaption></figure>
-<p class="eyebrow">Menigar · Desde 1989</p><h2>Encontrar una solución empieza por entender el fallo</h2><p>Trabajamos con componentes electrónicos del automóvil y con las averías descritas en nuestro catálogo. Cuéntanos qué ocurre y aporta la referencia de la pieza o los códigos de diagnosis disponibles.</p><div class="card-grid"><article class="card"><h3>Para talleres</h3><p>Fichas con referencias y fallos relacionados para consultar el servicio y preparar el envío de la pieza de tu cliente.</p></article><article class="card"><h3>Para particulares</h3><p>Ayuda para identificar la pieza, explicar los síntomas y preparar la solicitud aunque no conozcas su código.</p></article></div>
-<h2>Una alternativa a estudiar antes de sustituir</h2><p>Si tu pieza tiene reparación, recuperar su funcionamiento puede evitar una sustitución completa. La solución y el presupuesto dependen de la unidad, la avería y su estado. También puedes consultar disponibilidad de recambio cuando sea necesario.</p><h2>La información útil, a mano</h2><ul><li>Marca, modelo y año del vehículo.</li><li>Referencia o fotografía legible de la etiqueta.</li><li>Qué falla y cuándo ocurre.</li><li>Códigos de diagnosis, si los tienes.</li></ul><a class="button button-primary" href="/servicios.html">Buscar mi pieza o avería</a>
-<div class="card"><h2>Estamos en Alcobendas</h2><address>{e(ADDRESS)}</address><p><a href="https://www.google.com/maps/search/?api=1&amp;query=Menigar+Jose+Echegaray+16+Alcobendas" target="_blank" rel="noopener">Ver ubicación en Google Maps ↗</a></p><p><strong>Atención telefónica</strong><br>Lunes a jueves, de 8:00 a 16:00. Viernes, de 8:00 a 14:00.</p></div>
-</div>{contact_card("Habla con el laboratorio")}</div></section>'''
-    (ROOT / "taller.html").write_text(page("El laboratorio", "Menigar, laboratorio especializado en la reparación de electrónica del automóvil para profesionales y particulares en Alcobendas, Madrid.", "/taller.html", taller, "taller.html"), encoding="utf-8")
+    # Sobre nosotros (28 Oct 2026, formerly «El laboratorio»): the laboratory, why repair, what we repair, videos,
+    # reviews and where we are. Why repair, the videos, the reviews and the contact block come from the homepage.
+    lab_photo = f'<figure class="pg-intro-photo">{photo("/assets/hero-lab.jpg", "Banco de trabajo de electrónica con instrumental y una pieza en revisión", "(max-width: 900px) 92vw, 520px", eager=True, widths=(480, 760, 1024))}<figcaption>Trabajo especializado en electrónica del automóvil.</figcaption></figure>'
+    sobre = intro_band("Sobre nosotros · Desde 1989", "Laboratorio de reparación de electrónica del automóvil en Alcobendas", "Cuadros de instrumentos, ABS, pantallas y módulos electrónicos. Atención para talleres y particulares desde Alcobendas, Madrid.", "Sobre nosotros",
+                       [("/solicitud.html?tipo=consulta", 'Consultar mi pieza <span aria-hidden="true">↗</span>', True, ""), ("#donde-estamos", "Cómo llegar", False, "")], lab_photo)
+    chips = "".join(f'<li><a href="/servicios.html?pieza={key}#resultados">{e(name)}</a></li>' for key, name in SPECIALTIES) + '<li><a href="/servicios.html">Ver todos los servicios →</a></li>'
+    gallery = [
+        ("/assets/family/abs-taller-menigar.jpg", "Técnico de MENIGAR trabajando sobre un módulo ABS en el taller.", "Reparación de un módulo ABS"),
+        ("/assets/family/taller-banco-cuadro-archivo-2017.jpg", "Archivo de MENIGAR: técnico comprobando un cuadro de instrumentos en un banco de trabajo.", "Comprobación de un cuadro de instrumentos"),
+        ("/assets/family/taller-revision-ecu-archivo-2017.jpg", "Archivo de MENIGAR: técnica inspeccionando una placa electrónica en el banco de trabajo.", "Inspección de una placa electrónica"),
+    ]
+    # On phones the first photograph takes the whole width and the other two share a row.
+    gallery_html = "".join(f'<li><figure>{photo(src, alt, ("(max-width: 600px) 92vw" if index == 0 else "(max-width: 600px) 46vw") + ", (max-width: 1240px) 31vw, 400px")}<figcaption><strong>{e(title)}</strong>Laboratorio · archivo 2017</figcaption></figure></li>' for index, (src, alt, title) in enumerate(gallery))
+    sobre += f"""<section class="pg-section" aria-labelledby="laboratorio-titulo"><div class="container"><div class="pg-head"><p class="eyebrow">El laboratorio</p><h2 id="laboratorio-titulo">Un laboratorio de electrónica en Alcobendas</h2><p>Ingenieros y técnicos especializados en el automóvil, con sistemas propios de diagnosis y programación. Pioneros en España en la reparación y programación de sistemas digitales del vehículo.</p></div><ul class="pg-gallery">{gallery_html}</ul></div></section>
+{fragment("por-que-reparar")}
+<section class="pg-section" aria-labelledby="reparamos-titulo"><div class="container"><div class="pg-head"><p class="eyebrow">Qué reparamos</p><h2 id="reparamos-titulo">Encontrar una solución empieza por entender el fallo</h2><p>Trabajamos con componentes electrónicos del automóvil y con las averías descritas en nuestro catálogo. Cuéntanos qué ocurre y aporta la referencia de la pieza o los códigos de diagnosis disponibles.</p></div><ul class="pg-chips">{chips}</ul>
+<div class="pg-grid pg-grid--stretch pg-audience"><article class="pg-card"><h3>Para talleres</h3><p>Tu departamento de electrónica. Fichas con referencias y fallos relacionados para consultar el servicio y preparar el envío de la pieza de tu cliente. Envía varias unidades en una sola solicitud, cada una con su referencia, sus fotos y su fallo.</p><div class="pg-links"><a href="/solicitud.html?cliente=empresa&amp;tipo=consulta">Consultar como taller <span aria-hidden="true">↗</span></a></div></article><article class="pg-card"><h3>Para particulares</h3><p>Ayuda para identificar la pieza, explicar los síntomas y preparar la solicitud aunque no conozcas su código.</p><div class="pg-links"><a href="/solicitud.html?tipo=consulta">Consultar mi pieza <span aria-hidden="true">↗</span></a></div></article></div></div></section>
+{fragment("videos")}
+{fragment("opiniones")}
+{fragment("donde-estamos")}"""
+    (ROOT / "sobre-nosotros.html").write_text(page("Sobre nosotros", "Menigar, laboratorio especializado en la reparación de electrónica del automóvil para profesionales y particulares en Alcobendas, Madrid, desde 1989.", "/sobre-nosotros.html", sobre, "sobre-nosotros.html", INFO_HEAD, "info-page"), encoding="utf-8")
 
+    # Ayuda: the most common needs first, then the questions by topic and the two ways to reach us.
     faqs = [
         ("¿Atendéis a particulares o solo a talleres?", "Atendemos tanto a talleres y profesionales del sector como a particulares. Puedes buscar el servicio o contarnos qué falla, aunque no conozcas la referencia."),
         ("¿Y si no encuentro mi pieza o avería?", "Consúltanos antes de enviarla. Indica marca, modelo y referencia si la tienes; añade fotos y códigos de diagnosis. Que una pieza no aparezca en la búsqueda no significa que no podamos ayudarte."),
@@ -133,10 +217,27 @@ def write_info_pages():
         ("¿Cómo preparo el paquete?", "Protege la pieza y sus conectores, rellena los huecos de la caja e incluye la petición cumplimentada con tus datos. Revisa las instrucciones específicas del servicio y conserva el seguimiento del envío."),
         ("¿Cómo consulto una reparación que ya está en Menigar?", "Contacta directamente con el laboratorio e indica el número de orden, si lo tienes, y los datos necesarios para localizar el caso. El buscador y la solicitud nueva no son un seguimiento de reparaciones existentes."),
     ]
-    faq_html = "".join(f'<details class="faq-item"' + (' id="reparacion-en-curso-pregunta"' if q.startswith("¿Cómo consulto una reparación") else "") + f'><summary>{e(q)}</summary><div>{paragraphs(a)}</div></details>' for q, a in faqs)
-    ayuda = page_intro("Preguntas y contacto", "Ayuda para reparar y enviar tu pieza", "Información para consultar un servicio, preparar la solicitud y enviar la unidad. Si tu caso necesita más contexto, habla con el laboratorio.", "Ayuda")
-    ayuda += f'''<section class="section"><div class="container subpage-grid"><div><div class="faq-list">{faq_html}</div><section class="card existing-repair-contact" id="reparacion-en-curso"><p class="eyebrow">Tu pieza ya está en Menigar</p><h2>Consultar una reparación en curso</h2><p>Contacta con el laboratorio e indica el número de orden, si lo tienes, y el nombre de quien solicitó la reparación. No necesitas crear otra consulta nueva.</p><a class="button button-primary" href="mailto:{EMAIL}?subject=Consulta%20de%20reparaci%C3%B3n%20en%20curso">Escribir sobre mi reparación</a><p><a href="tel:+34916622781">Llamar al {PHONE}</a></p></section><div class="card" id="contacto"><p class="eyebrow">Consulta tu caso</p><h2>Atención directa de Menigar</h2><p>Para una reparación ya enviada, ten a mano tu número de orden y los datos del solicitante.</p><p><strong>Asistencia técnica:</strong> <a href="mailto:{EMAIL}">{EMAIL}</a><br><strong>Administración:</strong> <a href="mailto:admon@menigar.com">admon@menigar.com</a><br><strong>Teléfonos:</strong> <a href="tel:+34916622781">{PHONE}</a> / <a href="tel:+34916610397">91 661 03 97</a></p><p>Lunes a jueves: 8:00–16:00. Viernes: 8:00–14:00.</p></div><p class="source-note">Contenido adaptado de las <a href="https://www.menigar.com/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes actuales</a> y del proceso documentado del laboratorio. Las condiciones concretas se comunican para cada caso.</p></div>{contact_card()}</div></section>'''
-    (ROOT / "ayuda.html").write_text(page("Ayuda y contacto", "Preguntas frecuentes sobre las reparaciones de Menigar. Cómo identificar tu pieza, preparar el envío y contactar con el laboratorio.", "/ayuda.html", ayuda, "ayuda.html"), encoding="utf-8")
+    def faq(index):
+        question, answer = faqs[index]
+        anchor = ' id="reparacion-en-curso-pregunta"' if question.startswith("¿Cómo consulto una reparación") else ""
+        return f'<details class="faq-item"{anchor}><summary>{e(question)}</summary><div>{paragraphs(answer)}</div></details>'
+    groups = [("Antes de consultar", [0, 1, 2, 4]), ("Al preparar el envío", [3, 6, 8]), ("Precio, plazos y después", [5, 7, 9])]
+    faq_html = "".join(f'<div class="pg-card"><h3>{e(name)}</h3>{"".join(faq(index) for index in indexes)}</div>' for name, indexes in groups)
+    assert sorted(index for _, indexes in groups for index in indexes) == list(range(len(faqs))), "Every question belongs to one topic"
+    tiles = [("consulta", "/solicitud.html?tipo=consulta", "Consultar mi pieza", "Cuéntanos qué falla y añade una foto de la etiqueta."),
+             ("reloj", "#reparacion-en-curso", "Mi pieza ya está en Menigar", "Consulta una reparación en curso."),
+             ("caja", "/como-funciona.html", "Cómo funciona", "Los pasos y cómo preparar el envío."),
+             ("escudo", "/garantia.html", "Garantía", "Qué cubre y cómo reclamarla.")]
+    tiles_html = "".join(f'<li><a class="pg-tile" href="{href}"><span class="pg-tile-icon">{svg_icon(icon)}</span><span class="pg-tile-title">{e(title)}</span><span class="pg-tile-text">{e(text)}</span></a></li>' for icon, href, title, text in tiles)
+    ayuda = intro_band("Ayuda", "¿En qué podemos ayudarte?", "Información para consultar un servicio, preparar la solicitud y enviar la unidad. Si tu caso necesita más contexto, habla con el laboratorio.", "Ayuda",
+                       [("#contacto", "Contactar con el laboratorio", True, ""), ("tel:+34916622781", f"Llamar al {PHONE}", False, "")])
+    ayuda += f"""<section class="pg-section" aria-label="Lo más consultado"><div class="container"><ul class="pg-tiles">{tiles_html}</ul></div></section>
+<section class="pg-section" aria-labelledby="preguntas-titulo"><div class="container"><div class="pg-head"><p class="eyebrow">Preguntas frecuentes</p><h2 id="preguntas-titulo">Respuestas rápidas</h2></div><div class="pg-faq">{faq_html}</div></div></section>
+<section class="pg-section pg-help" aria-labelledby="contacto-titulo"><div class="container"><div class="pg-head"><p class="eyebrow">Contacto</p><h2 id="contacto-titulo">Habla con el laboratorio</h2></div><div class="pg-grid pg-grid--stretch">
+<section class="pg-card existing-repair-contact" id="reparacion-en-curso"><p class="eyebrow">Tu pieza ya está en Menigar</p><h2>Consultar una reparación en curso</h2><p>Contacta con el laboratorio e indica el número de orden, si lo tienes, y el nombre de quien solicitó la reparación. No necesitas crear otra consulta nueva.</p><p><a class="button button-primary" href="mailto:{EMAIL}?subject=Consulta%20de%20reparaci%C3%B3n%20en%20curso">Escribir sobre mi reparación</a></p><p><a href="tel:+34916622781">Llamar al {PHONE}</a></p></section>
+<div class="pg-card pg-contact" id="contacto"><p class="eyebrow">Consulta tu caso</p><h2>Atención directa de Menigar</h2><p>Para una reparación ya enviada, ten a mano tu número de orden y los datos del solicitante.</p><dl><dt>Asistencia técnica</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd><dt>Administración</dt><dd><a href="mailto:admon@menigar.com">admon@menigar.com</a></dd><dt>Teléfonos</dt><dd><a class="pg-nowrap" href="tel:+34916622781">{PHONE}</a> / <a class="pg-nowrap" href="tel:+34916610397">91 661 03 97</a></dd><dt>Horario</dt><dd>Lunes a jueves: <span class="pg-nowrap">8:00–16:00</span>. Viernes: <span class="pg-nowrap">8:00–14:00</span>.</dd></dl></div>
+</div><p class="source-note">Contenido adaptado de las <a href="https://www.menigar.com/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes actuales</a> y del proceso documentado del laboratorio. Las condiciones concretas se comunican para cada caso.</p></div></section>"""
+    (ROOT / "ayuda.html").write_text(page("Ayuda y contacto", "Preguntas frecuentes sobre las reparaciones de Menigar. Cómo identificar tu pieza, preparar el envío y contactar con el laboratorio.", "/ayuda.html", ayuda, "ayuda.html", INFO_HEAD, "info-page"), encoding="utf-8")
 
 
 def write_warranty_page():
@@ -311,7 +412,7 @@ def write_search_engine_files(paths):
     namespace = "http://www.sitemaps.org/schemas/sitemap/0.9"
     ET.register_namespace("", namespace)
     tree = ET.Element(f"{{{namespace}}}urlset")
-    for path in ["/", "/servicios.html", "/envios.html", "/garantia.html", "/taller.html", "/ayuda.html"] + paths:
+    for path in ["/", "/servicios.html", "/como-funciona.html", "/garantia.html", "/sobre-nosotros.html", "/ayuda.html"] + paths:
         item = ET.SubElement(tree, f"{{{namespace}}}url")
         ET.SubElement(item, f"{{{namespace}}}loc").text = ORIGIN + path
     ET.indent(tree, space="  ")

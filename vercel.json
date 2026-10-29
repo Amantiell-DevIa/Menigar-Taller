@@ -32,6 +32,8 @@
     { "source": "/reparaciones/main-8607-cambio-iluminacion-del-cuadro-de-instrumentos/", "destination": "/reparaciones/main-8394-reparacion-aranazos-en-pantalla-display-tft-del-cuadro-de-instrumentos/", "permanent": true },
     { "source": "/reparaciones/main-8607-cambio-iluminacion-del-cuadro-de-instrumentos", "destination": "/reparaciones/main-8394-reparacion-aranazos-en-pantalla-display-tft-del-cuadro-de-instrumentos/", "permanent": true },
     { "source": "/reparaciones/main-9052-seat-full-link/", "destination": "/reparaciones/main-14508-seat-full-link-2/", "permanent": true },
-    { "source": "/reparaciones/main-9052-seat-full-link", "destination": "/reparaciones/main-14508-seat-full-link-2/", "permanent": true }
+    { "source": "/reparaciones/main-9052-seat-full-link", "destination": "/reparaciones/main-14508-seat-full-link-2/", "permanent": true },
+    { "source": "/envios.html", "destination": "/como-funciona.html", "permanent": true },
+    { "source": "/taller.html", "destination": "/sobre-nosotros.html", "permanent": true }
   ]
 }

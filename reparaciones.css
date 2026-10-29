@@ -87,16 +87,16 @@
    amber as light and one action color. Source content and its structure are unchanged. */
 .repair-detail-page { --repair-paper: var(--p-card); --repair-ink: var(--p-ink); --repair-line: var(--p-line); }
 .repair-source { --repair-line: var(--p-line); }
-.repair-detail-page .page-heading { background: var(--p-night-glow), var(--p-night-1); margin-bottom: 0; }
-.repair-detail-page .page-heading h1 { color: var(--p-on-dark-1); }
-.repair-detail-page .page-heading .eyebrow.eyebrow { color: var(--p-amber); }
-.repair-detail-page .page-heading .breadcrumb, .repair-detail-page .page-heading .breadcrumb a { color: var(--p-on-dark-3); }
-.repair-detail-page .page-heading .breadcrumb a:hover { color: var(--p-on-dark-1); }
-.repair-detail-page .page-heading .lead { color: var(--p-on-dark-2); }
+.repair-detail-page .page-heading { background: var(--p-band); border-bottom: 1px solid var(--p-line); margin-bottom: 0; }
+.repair-detail-page .page-heading h1 { color: var(--p-ink); }
+.repair-detail-page .page-heading .eyebrow.eyebrow { color: var(--action); }
+.repair-detail-page .page-heading .breadcrumb, .repair-detail-page .page-heading .breadcrumb a { color: var(--p-ink-3); }
+.repair-detail-page .page-heading .breadcrumb a:hover { color: var(--p-ink); }
+.repair-detail-page .page-heading .lead { color: var(--p-ink-2); }
 .repair-detail-page .page-heading + .section { padding-top: clamp(40px, 5vw, 64px); }
 .repair-detail-page .contact-card { border: 1px solid var(--p-line); background: var(--p-card); box-shadow: var(--p-shadow); }
 .repair-detail-page .contact-card .source-note { border-color: var(--p-line); }
-.repair-decision-note { background: var(--p-ivory-2); border-left-color: var(--p-amber); border-radius: 0 var(--r-control) var(--r-control) 0; }
+.repair-decision-note { background: var(--p-ivory-2); border-left-color: var(--p-accent); border-radius: 0 var(--r-control) var(--r-control) 0; }
 .repair-decision-label { text-transform: none; letter-spacing: var(--ls-small); font-size: var(--fs-small); font-weight: 600; color: var(--p-ink-3); }
 .repair-section-index { background: var(--p-card); border-color: var(--p-line); border-radius: var(--r-card); }
 .repair-section-index a { border-color: var(--p-line-strong); border-radius: var(--r-pill); background: var(--p-ivory-2); color: var(--p-ink); padding-inline: 16px; }
@@ -122,12 +122,12 @@
 .repair-related-link { border-color: var(--p-line-strong); border-radius: var(--r-pill); background: var(--p-card); color: var(--action); }
 .repair-related-link:hover { border-color: var(--p-ink); background: #fff; }
 .repair-unlisted { border-radius: var(--r-card); background: var(--p-night-glow), var(--p-night-2); color: var(--p-on-dark-1); }
-.repair-unlisted .eyebrow.eyebrow { color: var(--p-amber); }
+.repair-unlisted .eyebrow.eyebrow { color: var(--p-accent-dark); }
 .repair-unlisted p { color: var(--p-on-dark-2); }
 .repair-unlisted a:not(.button) { color: var(--action-on-dark); }
 .repair-unlisted .button-primary { border-color: var(--action-on-dark); background: var(--action-on-dark); color: var(--on-action-dark); }
 .repair-unlisted .button-primary:hover { border-color: var(--action-on-dark-hover); background: var(--action-on-dark-hover); }
-.existing-repair-contact { border-left-color: var(--p-amber); }
+.existing-repair-contact { border-left-color: var(--p-accent); }
 .repair-source a:focus-visible, .repair-table-scroll:focus-visible, .repair-variant:focus { outline-color: #c67b11; }
 @media (min-width: 1001px) { .repair-detail-page .contact-card { position: sticky; top: 92px; } }
 /* Heading measure kept in CSS (the generated inline style is blocked by the production CSP). */

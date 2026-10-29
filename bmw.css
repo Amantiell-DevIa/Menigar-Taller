@@ -49,7 +49,7 @@
 /* V4, 18 Oct 2026: BMW blocks on the shared surfaces, without coloured top edges. */
 .bmw-index-intro{border:1px solid var(--p-line);border-radius:var(--r-card);background:var(--p-card)}
 .bmw-fault-overview{border-top:0;border-radius:var(--r-card);background:var(--p-night-glow),var(--p-night-2)}
-.bmw-fault-overview .eyebrow.eyebrow{color:var(--p-amber)}
+.bmw-fault-overview .eyebrow.eyebrow{color:var(--p-accent-dark)}
 .bmw-fault-overview>p{color:var(--p-on-dark-2)}
 .bmw-fault-list li{border-color:var(--p-line-dark);border-radius:var(--r-control);background:var(--p-night-3);color:var(--p-on-dark-1)}
 .bmw-model-index{border-color:var(--p-line);border-radius:var(--r-card);background:var(--p-card)}
@@ -60,7 +60,7 @@
 .bmw-model-jumps a:hover{border-color:var(--p-ink);background:#fff}
 .bmw-model-card{border-color:var(--p-line);border-radius:var(--r-card);background:var(--p-card)}
 .bmw-model-heading{background:var(--p-night-2)}
-.bmw-model-heading .eyebrow.eyebrow{font-size:var(--fs-caption);color:var(--p-amber)}
+.bmw-model-heading .eyebrow.eyebrow{font-size:var(--fs-caption);color:var(--p-accent-dark)}
 .bmw-model-heading h3{font-size:var(--fs-title);letter-spacing:var(--ls-title)}
 .bmw-model-block+.bmw-model-block{border-color:var(--p-line)}
 .bmw-model-block .bmw-screen-type{border-left-color:var(--p-amber);color:var(--p-ink-2);letter-spacing:var(--ls-caption)}
