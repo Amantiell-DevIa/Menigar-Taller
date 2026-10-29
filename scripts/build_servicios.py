@@ -87,11 +87,11 @@ def variants(src, folder='servicios', sizes=VARIANTS):
     return candidates
 
 
-def image(src, fit, alt, sizes):
+def image(src, fit, alt, sizes, prefix='s'):
     candidates = variants(src)
     largest = candidates[-1]
     srcset = ', '.join(f'{url} {width}w' for url, width, _ in candidates)
-    return (f'<img class="s-fit-{fit}" src="{largest[0]}" srcset="{srcset}" sizes="{sizes}" alt="{escape(alt)}" '
+    return (f'<img class="{prefix}-fit-{fit}" src="{largest[0]}" srcset="{srcset}" sizes="{sizes}" alt="{escape(alt)}" '
             f'width="{largest[1]}" height="{largest[2]}" loading="lazy" decoding="async">')
 
 
@@ -131,16 +131,33 @@ def build():
             'opciones-pieza': family_options, 'total': f'<strong>{number(total)}</strong> fichas de reparación'}
 
 
-def write():
-    page = PAGE.read_text()
-    for name, html in build().items():
+def build_home():
+    """The homepage's specialty cards (28 Oct 2026): the same six specialties, names and photographs as the
+    services page, each opening it on that specialty."""
+    _, families, _ = catalogue()
+    names = {family['key']: family['name'] for family in families}
+    arrow = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
+    cards = ''.join(f'<li><a class="h-cat" href="/servicios.html?pieza={key}#resultados"><span class="h-cat-media">'
+                    f'{image(src, fit, alt, "(max-width: 600px) 44vw, (max-width: 1100px) 30vw, 180px", "h")}</span>'
+                    f'<span class="h-cat-name">{escape(names[key])}</span><span class="h-cat-go" aria-hidden="true">{arrow}</span></a></li>'
+                    for key, src, fit, alt, _ in SPECIALTIES)
+    return {'portada-especialidades': f'<ul class="h-cat-grid">{cards}</ul>'}
+
+
+def fill(path, blocks):
+    page = path.read_text()
+    for name, html in blocks.items():
         pattern = re.compile(rf'(<!-- generado:{name} -->).*?(<!-- /generado:{name} -->)', re.S)
         if not pattern.search(page):
-            raise SystemExit(f'Falta el marcador generado:{name} en servicios.html')
+            raise SystemExit(f'Falta el marcador generado:{name} en {path.name}')
         page = pattern.sub(lambda match: match.group(1) + html + match.group(2), page)
-    PAGE.write_text(page)
-    print('servicios.html actualizado')
+    path.write_text(page)
 
+
+def write():
+    fill(PAGE, build())
+    fill(ROOT / 'index.html', build_home())
+    print('servicios.html e index.html actualizados')
 
 if __name__ == '__main__':
     write()

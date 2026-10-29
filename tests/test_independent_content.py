@@ -141,7 +141,7 @@ class IndependentContentTests(unittest.TestCase):
             path = ROOT / row['localPath'].lstrip('/')
             self.assertTrue(path.read_bytes().startswith(b'%PDF'))
             self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), row['sha256'])
-        envios = (ROOT / 'envios.html').read_text()
+        envios = (ROOT / 'como-funciona.html').read_text()
         self.assertNotIn('https://www.menigar.com/docs/', envios)
 
 

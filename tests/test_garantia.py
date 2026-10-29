@@ -48,13 +48,15 @@ class WarrantyPageTests(unittest.TestCase):
         self.assertIn('noindex, nofollow', self.page)
 
     def test_every_header_and_the_fichas_link_to_it(self):
-        pages = ['index.html', 'laboratorio.html', 'servicios.html', 'solicitud.html', 'opciones-hero.html', 'envios.html',
-                 'taller.html', 'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html', 'garantia.html']
+        pages = ['index.html', 'laboratorio.html', 'servicios.html', 'solicitud.html', 'opciones-hero.html', 'como-funciona.html',
+                 'sobre-nosotros.html', 'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html', 'garantia.html']
         for name in pages:
             with self.subTest(page=name):
                 nav = re.search(r'<ul class="nav-list">(.*?)</ul>', (ROOT / name).read_text(), re.S).group(1)
                 labels = re.findall(r'<a href="/([^"]+)"[^>]*>([^<]+)</a>', nav)
-                self.assertEqual([href for href, _ in labels], ['servicios.html', 'envios.html', 'garantia.html', 'taller.html', 'ayuda.html'])
+                # Order of the owner's mockup (28 Oct 2026): Cómo funciona before Sobre nosotros, Garantía between them.
+                self.assertEqual(labels, [('servicios.html', 'Servicios'), ('como-funciona.html', 'Cómo funciona'), ('garantia.html', 'Garantía'),
+                                          ('sobre-nosotros.html', 'Sobre nosotros'), ('ayuda.html', 'Ayuda')])
         ficha = (ROOT / 'reparaciones/abs-1936-f-650-gs/index.html').read_text()
         self.assertIn('<a href="/garantia.html">Qué cubre la garantía y cómo reclamarla</a>', ficha)
         self.assertIn('<a href="/garantia.html">Garantía de la reparación</a>', ficha)
