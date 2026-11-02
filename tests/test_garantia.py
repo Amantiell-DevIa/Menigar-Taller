@@ -1,5 +1,5 @@
-"""The warranty page (26 Oct 2026) keeps every condition published at menigar.com/garantias and is
-reachable from every header, the footer, the fichas and the old address."""
+"""The warranty page (26 Oct 2026) keeps every condition published at menigar.com/garantias, answers at
+that same address (2 Nov 2026) and is reachable from every header, the footer and the fichas."""
 import json
 from pathlib import Path
 import re
@@ -13,7 +13,7 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 class WarrantyPageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.page = (ROOT / 'garantia.html').read_text()
+        cls.page = (ROOT / 'garantias/index.html').read_text()
 
     def test_every_published_condition_is_on_the_page(self):
         text = re.sub(r'\s+', ' ', re.sub(r'<[^>]+>', ' ', self.page))
@@ -43,38 +43,41 @@ class WarrantyPageTests(unittest.TestCase):
     def test_page_follows_the_site_rules(self):
         self.assertIn('<title>Garantía de reparaciones | Menigar</title>', self.page)
         self.assertIn('<link rel="stylesheet" href="/garantia.css">', self.page)
-        self.assertIn('<a href="/garantia.html" aria-current="page">Garantía</a>', self.page)
+        self.assertIn('<a href="/garantias/" aria-current="page">Garantía</a>', self.page)
+        self.assertIn('<link rel="canonical" href="https://www.menigar.com/garantias/">', self.page)
         self.assertNotRegex(self.page, r'\sstyle="', 'La CSP no admite estilos en línea.')
         self.assertIn('noindex, nofollow', self.page)
 
     def test_every_header_and_the_fichas_link_to_it(self):
-        pages = ['index.html', 'laboratorio.html', 'servicios.html', 'solicitud.html', 'opciones-hero.html', 'como-funciona.html',
-                 'sobre-nosotros.html', 'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html', 'garantia.html']
+        pages = ['index.html', 'laboratorio.html', 'servicios/index.html', 'solicitud.html', 'opciones-hero.html', 'envios/index.html',
+                 'sobre-nosotros/index.html', 'preguntas-frecuentes/index.html', 'politica-de-privacidad/index.html',
+                 'avisos-legales/index.html', 'politica-de-cookies/index.html', 'garantias/index.html']
         for name in pages:
             with self.subTest(page=name):
                 nav = re.search(r'<ul class="nav-list">(.*?)</ul>', (ROOT / name).read_text(), re.S).group(1)
                 labels = re.findall(r'<a href="/([^"]+)"[^>]*>([^<]+)</a>', nav)
                 # Order of the owner's mockup (28 Oct 2026): Cómo funciona before Sobre nosotros, Garantía between them.
-                self.assertEqual(labels, [('servicios.html', 'Servicios'), ('como-funciona.html', 'Cómo funciona'), ('garantia.html', 'Garantía'),
-                                          ('sobre-nosotros.html', 'Sobre nosotros'), ('ayuda.html', 'Ayuda')])
-        ficha = (ROOT / 'reparaciones/abs-1936-f-650-gs/index.html').read_text()
-        self.assertIn('<a href="/garantia.html">Qué cubre la garantía y cómo reclamarla</a>', ficha)
-        self.assertIn('<a href="/garantia.html">Garantía de la reparación</a>', ficha)
-        self.assertIn('<a href="/garantia.html">', (ROOT / 'condiciones.html').read_text())
+                # The labels stay; the addresses are those of WordPress.
+                self.assertEqual(labels, [('servicios/', 'Servicios'), ('envios/', 'Cómo funciona'), ('garantias/', 'Garantía'),
+                                          ('sobre-nosotros/', 'Sobre nosotros'), ('preguntas-frecuentes/', 'Ayuda')])
+        ficha = (ROOT / 'reparacion-abs/bmw-motorrad/f-650-gs/index.html').read_text()
+        self.assertIn('<a href="/garantias/">Qué cubre la garantía y cómo reclamarla</a>', ficha)
+        self.assertIn('<a href="/garantias/">Garantía de la reparación</a>', ficha)
+        self.assertIn('<a href="/garantias/">', (ROOT / 'avisos-legales/index.html').read_text())
 
-    def test_old_address_and_public_file_lists(self):
+    def test_wordpress_address_and_public_file_lists(self):
         catalogue = json.loads((ROOT / 'data/catalogo-v2.json').read_text())
         links = [block for row in catalogue for section in row.get('sourceSections') or [] for block in section['blocks']
                  if block.get('originalHref', '').rstrip('/').endswith('/garantias')]
         self.assertTrue(links)
-        self.assertTrue(all(block['href'] == '/garantia.html' for block in links))
+        self.assertTrue(all(block['href'] == '/garantias/' for block in links))
         for name in ['servidor.py', 'backend/dev-router.php', 'backend/review-router.php',
                      'scripts/build_vercel_static.cjs', 'scripts/build_review_package.py']:
             source = (ROOT / name).read_text()
             with self.subTest(file=name):
-                self.assertIn("'garantia.html'", source)
+                self.assertIn("'garantias/'", source)
                 self.assertIn("'garantia.css'", source)
-        self.assertIn('<loc>https://www.menigar.com/garantia.html</loc>', (ROOT / 'sitemap.xml').read_text())
+        self.assertIn('<loc>https://www.menigar.com/garantias/</loc>', (ROOT / 'sitemap.xml').read_text())
 
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
-/* MENIGAR · Servicios (26 Oct 2026). Loaded only by servicios.html, after style.css and on its V4 tokens.
-   The page opens with what MENIGAR repairs: one search, the specialties and a few featured services.
+/* MENIGAR · Servicios (26 Oct 2026). Loaded only by the services page, /servicios/, after style.css and
+   on its V4 tokens. The page opens with what MENIGAR repairs: one search, the specialties and a few featured services.
    The catalogue appears only when the visitor searches or chooses a vehicle, a specialty or a brand. */
 .p-visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 

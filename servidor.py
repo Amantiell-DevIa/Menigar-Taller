@@ -26,11 +26,25 @@ MAX_TOTAL = 15 * 1024 * 1024
 MAX_BODY = 25 * 1024 * 1024
 LOCK = threading.Lock()
 STATIC_ROOT_FILES = {
-    'index.html', 'servicios.html', 'solicitud.html', 'como-funciona.html', 'garantia.html', 'sobre-nosotros.html',
-    'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js',
+    'index.html', 'solicitud.html', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js',
     'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'servicios.css', 'paginas.css', 'app.js', 'solicitud.js', 'resumen.js',
     'hero-lab.jpg', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'resumen.html', 'receipt.js',
 }
+# Pages served from a folder at their WordPress address (scripts/site_paths.py): the general pages and every ficha.
+PAGE_FOLDERS = {
+    'servicios/', 'envios/', 'garantias/', 'preguntas-frecuentes/', 'sobre-nosotros/',
+    'politica-de-privacidad/', 'politica-de-cookies/', 'avisos-legales/',
+}
+FICHA_FOLDER = re.compile(r'(?:reparacion|fallo|programacion|sustitucion)-[a-z0-9_-]+/(?:[a-z0-9_-]+/){0,3}')
+
+
+def load_redirects():
+    """The preview's 301s from vercel.json: WordPress addresses that change and the prototype's former ones."""
+    try:
+        config = json.loads((ROOT / 'vercel.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return {}
+    return {item['source']: item['destination'] for item in config.get('redirects', [])}
 
 
 class ValidationError(ValueError):
@@ -220,6 +234,8 @@ def summary_html(reference, created, payload, token=''):
 
 
 def make_handler(storage):
+    redirects = load_redirects()
+
     class Handler(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
             super().__init__(*args, directory=str(ROOT), **kwargs)
@@ -306,9 +322,24 @@ def make_handler(storage):
                 return False
             if path.startswith('assets/'):
                 return target.suffix.lower() in ('.jpg', '.jpeg', '.png', '.svg', '.webp', '.ico', '.gif', '.pdf', '.woff2', '.css') and target.is_file()
-            if path.startswith('reparaciones/'):
-                return (target / 'index.html').is_file() if target.is_dir() else target.suffix == '.html' and target.is_file()
+            # A page folder, its index.html, or the folder without its final slash, which the parent
+            # handler answers with a 301 to the address with it, as WordPress does.
+            folder = path.removesuffix('index.html').rstrip('/') + '/'
+            if folder in PAGE_FOLDERS or FICHA_FOLDER.fullmatch(folder):
+                return (ROOT / folder / 'index.html').is_file()
             return False
+
+        def redirect(self):
+            path = urlparse(self.path).path
+            # Vercel's trailingSlash adds the final slash before applying its redirects; so does this server.
+            target = redirects.get(path) or (path + '/' if path + '/' in redirects else None)
+            if not target:
+                return False
+            self.send_response(301)
+            self.send_header('Location', target)
+            self.send_header('Content-Length', '0')
+            self.end_headers()
+            return True
 
         def do_GET(self):
             if urlparse('http://' + self.headers.get('Host', '')).hostname not in ('localhost', '127.0.0.1'):
@@ -320,6 +351,8 @@ def make_handler(storage):
                     'emailConfigured': False, 'workshopIntegrationConfigured': False})
             if path.startswith('/api/'):
                 return self.private_route()
+            if self.redirect():
+                return None
             if not self.static_allowed():
                 return self.send_error(404)
             return super().do_GET()
@@ -327,6 +360,8 @@ def make_handler(storage):
         def do_HEAD(self):
             if urlparse(self.path).path.startswith('/api/'):
                 return self.private_route(head=True)
+            if self.redirect():
+                return None
             if not self.static_allowed():
                 return self.send_error(404)
             return super().do_HEAD()

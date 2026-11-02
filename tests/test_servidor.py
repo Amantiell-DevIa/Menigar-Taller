@@ -1,6 +1,7 @@
 """HTTP acceptance checks for saved requests, files and retry behaviour."""
 import base64
 import copy
+import http.client
 import importlib.util
 import json
 import sqlite3
@@ -80,6 +81,45 @@ class IntakeHTTPTests(unittest.TestCase):
         self.assertEqual(self.request('/var/uploads/' + file_id)[0], 404)
         self.assertEqual(self.request('/data/cache/pages_page_1.json')[0], 404)
         self.assertEqual(self.request('/servidor.py')[0], 404)
+
+    def raw(self, path):
+        """One request without following redirects: (status, Location)."""
+        connection = http.client.HTTPConnection('127.0.0.1', self.server.server_port, timeout=10)
+        try:
+            connection.request('GET', path)
+            response = connection.getresponse()
+            response.read()
+            return response.status, response.getheader('Location')
+        finally:
+            connection.close()
+
+    def test_pages_answer_at_their_wordpress_address(self):
+        for path in ['/', '/servicios/', '/envios/', '/garantias/', '/preguntas-frecuentes/', '/sobre-nosotros/',
+                     '/politica-de-privacidad/', '/politica-de-cookies/', '/avisos-legales/', '/reparacion-bsi/',
+                     '/reparacion-cuadro-instrumentos/', '/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/',
+                     '/reparacion-cuadro-instrumentos/bmw/serie-3/index.html', '/sitemap.xml']:
+            with self.subTest(path=path):
+                self.assertEqual(self.raw(path), (200, None))
+        # Like WordPress, an address without its final slash leads to the one with it.
+        self.assertEqual(self.raw('/envios'), (301, '/envios/'))
+        self.assertEqual(self.raw('/reparacion-abs/jaguar/x-type-2001-2009-bosch_57?marca=Jaguar'),
+                         (301, '/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/?marca=Jaguar'))
+
+    def test_old_addresses_redirect_once_to_their_page(self):
+        for path, target in [('/contacto/', '/preguntas-frecuentes/#contacto'), ('/home/', '/'),
+                             ('/reparacion-abs/', '/servicios/?pieza=abs#resultados'),
+                             ('/reparacion-pantalla-multimedia/', '/reparacion-pantalla-tactil-multimedia/'),
+                             ('/como-funciona.html', '/envios/'), ('/servicios.html', '/servicios/'),
+                             ('/reparaciones/abs-1786-x-type-2001-2009-bosch_57/', '/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/'),
+                             ('/reparaciones/abs-1786-x-type-2001-2009-bosch_57', '/reparaciones/abs-1786-x-type-2001-2009-bosch_57/')]:
+            with self.subTest(path=path):
+                self.assertEqual(self.raw(path), (301, target))
+
+    def test_folders_that_are_not_pages_stay_private(self):
+        for path in ['/scripts/', '/tests/', '/backend/', '/data/', '/dist/', '/var/', '/reparaciones/',
+                     '/reparacion-abs/wp-content/', '/scripts/fragmentos/videos.html', '/servicios/../servidor.py']:
+            with self.subTest(path=path):
+                self.assertEqual(self.raw(path)[0], 404)
 
     def test_changed_retry_is_not_a_second_request(self):
         payload = self.fixture('test-idempotency-conflict')

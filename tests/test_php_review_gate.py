@@ -54,6 +54,9 @@ class GateService:
                 shutil.copyfile(ROOT / 'api' / name, self.public / 'api' / name)
             for name in ['index.html','resumen.html','receipt.js','style.css']:
                 shutil.copyfile(ROOT / name, self.public / name)
+            # Pages live in a folder at their WordPress address.
+            for name in ['envios/index.html', 'reparacion-abs/jaguar/x-type-2001-2009-bosch_57/index.html']:
+                (self.public / name).parent.mkdir(parents=True, exist_ok=True); shutil.copyfile(ROOT / name, self.public / name)
             # Small static fixtures exercise the same path allowlist and MIME behavior.
             (self.public / 'assets').mkdir()
             (self.public / 'assets/probe.svg').write_text('<svg xmlns="http://www.w3.org/2000/svg"/>')
@@ -131,7 +134,7 @@ class ReviewGateTests(unittest.TestCase):
     def setUp(self): self.client = GateClient(self.service)
 
     def test_01_all_types_and_direct_php_fail_closed_without_cookie(self):
-        for path in ['/', '/index.html', '/resumen.html', '/style.css', '/receipt.js',
+        for path in ['/', '/index.html', '/resumen.html', '/style.css', '/receipt.js', '/envios/', '/envios',
             '/assets/probe.svg', '/assets/probe.pdf', '/api/config', '/api/index.php',
             '/api/review.php', '/api/should-not-run.php', '/equipo/solicitudes', '/backend/README.md']:
             status, body, headers = self.client.request(path)
@@ -153,6 +156,15 @@ class ReviewGateTests(unittest.TestCase):
         self.assertEqual(self.client.request('/assets/probe.pdf')[0], 200)
         self.assertEqual(self.client.request('/backend/README.md')[0], 404)
         self.assertEqual(self.client.request('/api/should-not-run.php')[0], 404)
+        for path in ['/envios/', '/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/']:
+            self.assertEqual(self.client.request(path)[0], 200, path)
+        self.assertEqual(self.client.request('/reparacion-abs/')[0], 404)
+        # Like WordPress, a page address without its final slash leads to the one with it.
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, *args): return None
+        opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(self.client.cookies), NoRedirect())
+        with self.assertRaises(urllib.error.HTTPError) as context: opener.open(self.service.base + '/envios', timeout=5)
+        self.assertEqual((context.exception.code, context.exception.headers['Location']), (301, '/envios/')); context.exception.close()
 
     def test_03_cookie_gate_plus_bearer_and_staff_basic_preserve_separate_auth(self):
         self.assertEqual(self.client.login()[0], 200); self.client.load_config()

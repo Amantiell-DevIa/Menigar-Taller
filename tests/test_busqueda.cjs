@@ -38,15 +38,25 @@ test('Las claves son únicas y recuperan exactamente la misma ficha.', () => {
   assert.equal(new Set(catalog.map(record => record.uid)).size, catalog.length);
   for (const record of catalog) {
     assert.strictEqual(engine.getById(record.uid), record);
-    assert.match(record.localPath, /^\/reparaciones\/[a-z0-9_-]+\/$/i);
+    assert.equal(record.localPath, new URL(record.url).pathname, 'Cada ficha conserva la dirección de su página de WordPress.');
   }
 });
 
-test('La ficha Jaguar con guion bajo conserva su ruta local completa.', () => {
+test('La ficha Jaguar con guion bajo conserva su dirección completa.', () => {
   const record = engine.getById('abs-1786');
   assert.ok(record);
-  assert.equal(record.localPath, '/reparaciones/abs-1786-x-type-2001-2009-bosch_57/');
-  assert.match(record.localPath, /^\/reparaciones\/[a-z0-9_-]+\/$/i);
+  assert.equal(record.localPath, '/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/');
+  assert.ok(fs.existsSync(path.join(root, record.localPath, 'index.html')), 'La ficha se genera en esa dirección.');
+});
+
+test('El enlace de cada resultado admite la dirección de WordPress de todas las fichas.', () => {
+  // safeLocal() turns any other value into the services page; it must never do that to a real ficha.
+  const source = fs.readFileSync(path.join(root, 'app.js'), 'utf8');
+  const safeLocal = new RegExp(source.match(/const safeLocal = value => \/(.+?)\/\.test\(/)[1]);
+  for (const record of catalog) assert.ok(safeLocal.test(record.localPath), record.localPath);
+  for (const value of ['//otro.example/', 'javascript:alert(1)', '/reparacion-abs/../servidor.py', 'https://otro.example/x/']) {
+    assert.equal(safeLocal.test(value), false, value);
+  }
 });
 
 test('Referencia exacta: espacios y guiones conservan resultados y orden.', () => {
@@ -166,7 +176,7 @@ function controllerFixture(mode, search = '', viewport = 1280, familyMedia = {})
   const idsForMode = mode === 'guided' ? ['guided-search-form','guide-brand','guide-model','guide-component','guide-summary'] : ['catalog-filter-form','catalog-query','catalog-advanced','catalog-brand','catalog-model','catalog-component','catalog-results','catalog-related-brand','results-count','results-pagination','active-filters','results-title','results-guidance','catalog-filter-panel','catalog-selection','catalog-selection-text','resultados'];
   idsForMode.forEach(element);
   const document = { events: new Map(), querySelector(selector) { return selector === '[data-catalog-edit]' && mode === 'catalogue' ? element('catalog-edit') : null; }, querySelectorAll(selector) { return selector === '[data-guide-indicator]' ? indicators : selector === '[data-guide-help]' && mode === 'guided' ? [element('guide-help')] : selector === '[data-family-grid]' ? [element('family-grid')] : []; }, getElementById(id) { return nodes.get(id) || null; }, addEventListener(name, fn) { this.events.set(name, fn); } };
-  const location = { hostname: 'tests.example', pathname:'/servicios.html', search, assigned:'', assign(url) { this.assigned = url; } };
+  const location = { hostname: 'tests.example', pathname:'/servicios/', search, assigned:'', assign(url) { this.assigned = url; } };
   const fixtureContext = { window: { MENIGAR_FAMILY_MEDIA:familyMedia, events: new Map(), addEventListener(name, fn) { this.events.set(name, fn); } }, document, location, history:{ pushState(_a,_b,url) { location.search = url.includes('?') ? '?' + url.split('?')[1] : ''; }, replaceState(_a,_b,url) { location.search = url.includes('?') ? '?' + url.split('?')[1] : ''; } }, console, Intl, URLSearchParams, Map, Set, Date, matchMedia(query) { return {matches:query.includes('max-width') ? viewport <= 760 : true}; }, Option: function(label,value,_default,selected) { this.label = label; this.value = value; this.selected = selected; } };
   vm.createContext(fixtureContext);
   for (const file of ['data/catalogo-v2.js','app.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),fixtureContext,{filename:file});
@@ -187,7 +197,7 @@ test('Marca → modelo → pieza llega a resultados sin paso de síntoma ni text
   assert.equal(view.buttons.skip.textContent,'No sé qué pieza es');
   view.element('guided-search-form').emit('submit');
   const url = new URL(view.location.assigned,'https://tests.example');
-  assert.equal(url.pathname,'/servicios.html');
+  assert.equal(url.pathname,'/servicios/');
   assert.equal(url.hash,'#resultados');
   assert.equal(url.searchParams.get('marca'),'Hyundai');
   assert.equal(url.searchParams.get('modelo'),'i30');
@@ -220,7 +230,7 @@ test('Continuar sin modelo permite buscar por marca y pieza sin inventar un mode
 test('La ficha Hyundai i30 se reconoce por sus fallos sin escribir una avería.', () => {
   const view = controllerFixture('catalogue','?marca=Hyundai&modelo=i30&pieza=cuadro');
   const html = view.element('catalog-results').innerHTML;
-  assert.match(html,/main-1604-i30/);
+  assert.match(html,/href="\/reparacion-cuadro-instrumentos\/hyundai\/i30\/[?"]/);
   assert.match(html,/¿Te ocurre alguno de estos fallos\?/);
   assert.match(html,/Fallo del display del cuadro de instrumentos/);
   assert.match(html,/Fallo de vibración y parpadeos/);
@@ -332,7 +342,7 @@ test('El historial y la paginación conservan filtros y la página visible.', ()
   view.location.search = '?marca=Hyundai&modelo=i30&pieza=display';
   view.window.events.get('popstate')();
   assert.equal(view.element('catalog-model').value,'i30');
-  assert.match(view.element('catalog-results').innerHTML,/main-3915-reparacion-display-hyundai\/#modelo-i30/);
+  assert.match(view.element('catalog-results').innerHTML,/\/reparacion-displays\/reparacion-display-hyundai\/#modelo-i30/);
 });
 
 test('Audi sin ficha específica muestra una consulta como alternativa principal y conserva el modelo.', () => {
@@ -365,7 +375,7 @@ test('BMW permite elegir aliases documentados y excluye componentes que no son m
 test('El alias BMW abre su grupo original y conserva el modelo elegido en la consulta.', () => {
   const view = controllerFixture('catalogue','?marca=BMW&modelo=X1%20E84&pieza=display');
   const html = view.element('catalog-results').innerHTML;
-  assert.match(html,/main-2321-reparacion-display-bmw\/#modelo-serie-1-e81-e87-y-x1-e84/);
+  assert.match(html,/\/reparacion-displays\/reparacion-display-bmw\/#modelo-serie-1-e81-e87-y-x1-e84/);
   assert.match(html,/modelo=X1\+E84/);
   assert.match(html,/familia=display/);
   assert.match(html,/Información para este modelo/);
@@ -419,7 +429,7 @@ test('Los modelos combinados BMW se sustituyen por sus aliases al elegir, pero s
   assert.equal(engine.vehicleMatch(engine.getById('main-2321'),'BMW',combined),'documented');
   const view = controllerFixture('catalogue','?marca=BMW&modelo=' + encodeURIComponent(combined) + '&pieza=display');
   assert.equal(view.element('catalog-model').value,combined);
-  assert.match(view.element('catalog-results').innerHTML,/main-2321-reparacion-display-bmw\/#modelo-serie-1-e81-e87-y-x1-e84/);
+  assert.match(view.element('catalog-results').innerHTML,/\/reparacion-displays\/reparacion-display-bmw\/#modelo-serie-1-e81-e87-y-x1-e84/);
   assert.match(view.element('catalog-results').innerHTML,/modelo=Serie\+1\+E81%2FE87\+y\+X1\+E84/);
 });
 
@@ -463,7 +473,7 @@ test('La presentación no convierte un título ni un párrafo de marketing en fa
   assert.match(record.symptoms[1],/En Menigar ponemos a tu alcance/);
   const view = controllerFixture('catalogue','?marca=BMW&pieza=display');
   const cards = view.element('catalog-results').innerHTML.match(/<article\b[^>]*>[\s\S]*?<\/article>/g) || [];
-  const card = cards.find(value=>value.includes('/main-2819-'));
+  const card = cards.find(value=>value.includes('href="'+record.localPath));
   assert.ok(card,'La ficha sigue visible en el listado de su marca.');
   assert.equal(card.includes('result-symptoms'),false);
   assert.equal(card.includes('Consultar este fallo'),false);
@@ -582,7 +592,7 @@ test('Mazda 3 muestra sus variantes documentadas de display sin ofrecer Mazda 5 
   for (const group of groups) {
     const image = group.blocks.flatMap(block => block.images || [])[0];
     assert.ok(html.includes(image.src),'La foto corresponde al grupo '+group.model);
-    const url = new URL('/reparaciones/main-2942-reparacion-display-mazda/?marca=Mazda&modelo='+encodeURIComponent(group.model)+'#'+group.anchor,'https://tests.example');
+    const url = new URL('/reparacion-displays/reparacion-display-mazda/?marca=Mazda&modelo='+encodeURIComponent(group.model)+'#'+group.anchor,'https://tests.example');
     assert.ok(html.includes(url.searchParams.toString()+'#'+group.anchor));
   }
 });
@@ -640,7 +650,7 @@ test('Sin coincidencias se puede buscar el mismo texto sin filtros mediante una 
   const params = new URLSearchParams(view.location.search);
   assert.equal(params.get('q'),'94003-2L410');
   assert.equal(params.has('marca'),false); assert.equal(params.has('modelo'),false); assert.equal(params.has('pieza'),false);
-  assert.match(view.element('catalog-results').innerHTML,/main-1604-i30/);
+  assert.match(view.element('catalog-results').innerHTML,/href="\/reparacion-cuadro-instrumentos\/hyundai\/i30\/[?"]/);
   assert.match(view.element('catalog-results').innerHTML,/Referencia coincidente/);
 });
 

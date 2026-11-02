@@ -11,16 +11,17 @@ import json
 from pathlib import Path
 import re
 import shutil
-from urllib.parse import urlsplit
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_OUTPUT = Path('/Users/kaykostar/Documents/MENIGAR/nueva-web-revision-2026-10-15')
-ROOT_FILES = ['index.html', 'servicios.html', 'solicitud.html', 'como-funciona.html', 'garantia.html', 'sobre-nosotros.html',
-              'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html',
+ROOT_FILES = ['index.html', 'solicitud.html',
               'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'servicios.css', 'paginas.css',
               'app.js', 'solicitud.js', 'resumen.js', 'robots.txt', 'sitemap.xml']
 ROOT_FILES += ['resumen.html', 'receipt.js', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js', 'favicon.ico', 'apple-touch-icon.png']
+# Pages served from a folder at their WordPress address (scripts/site_paths.py): these general pages and every ficha.
+PAGE_FOLDERS = ['servicios/', 'envios/', 'garantias/', 'preguntas-frecuentes/', 'sobre-nosotros/',
+                'politica-de-privacidad/', 'politica-de-cookies/', 'avisos-legales/']
 DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js']
 
 
@@ -32,6 +33,7 @@ def build(destination, with_backend=False, review_gate=False):
     public.mkdir(exist_ok=True)
     catalogue = json.loads((ROOT / 'data/catalogo-v2.json').read_text())
     selected = [ROOT / f for f in ROOT_FILES] + [ROOT / 'data' / f for f in DATA_FILES]
+    selected += [ROOT / folder / 'index.html' for folder in PAGE_FOLDERS]
     selected += [ROOT / row['localPath'].lstrip('/') / 'index.html' for row in catalogue]
     selected += [p for p in (ROOT / 'assets').rglob('*') if p.is_file() and not p.name.startswith('.')
                  and p.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.ico', '.pdf', '.css', '.woff2'}]
@@ -100,32 +102,18 @@ Header always set Referrer-Policy "no-referrer"
         for target in [*public_controllers, rules]:
             manifest.append({'path': str(target.relative_to(public)), 'bytes': target.stat().st_size,
                              'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
-    routes = {row['fromPath'].rstrip('/') or '/': row['to'] for row in json.loads((ROOT / 'data/redirects.json').read_text())}
-    alias_path = ROOT / 'data/legacy-link-resolution.json'
-    lookup = {r['uid']: r for r in catalogue}
-    if alias_path.exists():
-        for alias in json.loads(alias_path.read_text())['links']:
-            if alias.get('resolvedUid') in lookup:
-                routes[urlsplit(alias['originalUrl']).path.rstrip('/')] = lookup[alias['resolvedUid']]['localPath']
-    extras = {'/home': '/index.html', '/envios': '/como-funciona.html', '/servicios': '/servicios.html',
-              '/contacto': '/ayuda.html#contacto', '/preguntas-frecuentes': '/ayuda.html',
-              '/garantias': '/garantia.html', '/politica-de-privacidad': '/privacidad.html',
-              '/politica-de-cookies': '/cookies.html', '/avisos-legales': '/condiciones.html',
-              '/reparacion-abs': '/servicios.html?familia=abs',
-              '/reparacion-abs/home-abs-coches': '/servicios.html?familia=abs',
-              '/reparacion-abs/home-abs-motos': '/servicios.html?familia=abs',
-              '/reparacion-abs/contacto': '/ayuda.html#contacto',
-              '/reparacion-abs/politica-de-privacidad': '/privacidad.html',
-              '/reparacion-abs/politica-de-cookies': '/cookies.html',
-              '/reparacion-abs/avisos-legales': '/condiciones.html'}
-    routes.update(extras)
-    candidates = [{'fromPath': path + '/', 'to': target, 'status': 301, 'enabled': False}
+    # Every page keeps its WordPress address; data/redirects.json lists only the old addresses that change.
+    routes = {row['fromPath']: row['to'] for row in json.loads((ROOT / 'data/redirects.json').read_text()) if row['status'] == 301}
+    candidates = [{'fromPath': path, 'to': target, 'status': 301, 'enabled': False}
                   for path, target in sorted(routes.items())]
     (destination / 'redirecciones-propuestas.json').write_text(json.dumps(candidates, ensure_ascii=False, indent=2) + '\n')
     rules = ['# Proposed Apache rules. Review and test in the target Plesk stack before enabling.',
-             '# This file is deliberately OUTSIDE public/. No redirects are enabled by this package.']
+             '# This file is deliberately OUTSIDE public/. No redirects are enabled by this package.',
+             '# Some destinations carry a #fragment (#contacto, #resultados): check that Apache sends it unescaped.']
     for path, target in sorted(routes.items()):
-        rules.append('RedirectMatch 301 "^' + re.escape(path) + '/?$" "' + target + '"')
+        # A folder address also answers without its final slash, as on WordPress.
+        pattern = re.escape(path.rstrip('/')) + '/?' if path.endswith('/') else re.escape(path)
+        rules.append('RedirectMatch 301 "^' + pattern + '$" "' + target + '"')
     (destination / 'redirecciones-apache-propuestas.conf').write_text('\n'.join(rules) + '\n')
     media_routes = json.loads((ROOT / 'data/legacy-media-routes.json').read_text()) if with_backend else {}
     if with_backend:
@@ -156,7 +144,7 @@ La carpeta `public/` contiene la web y sus medios propios. Si se ha incluido el 
 
 **No es una entrega aprobada para producción.** Antes de publicar se debe validar el backend del formulario, su almacenamiento privado y avisos, el alojamiento y el espacio, las condiciones del servicio, las redirecciones y la vuelta atrás. El entorno de revisión remoto necesita control de acceso; `noindex` y `robots.txt` no sustituyen una contraseña.
 
-Las redirecciones propuestas están fuera de `public/` y permanecen desactivadas. También deben decidirse las páginas históricas de empleo y Top Repair, las dos fichas de origen sin contenido y los enlaces de origen sin destino válido. Ninguna propuesta de baja o borrado queda ejecutada.
+Cada página conserva su dirección de WordPress. Las redirecciones propuestas, solo para las direcciones que cambian y cada una con su motivo en `data/redirects.json`, están fuera de `public/` y permanecen desactivadas. Las de las páginas históricas de empleo y Top Repair esperan la confirmación del dueño, y los enlaces de origen sin destino válido siguen sin decidir. Ninguna propuesta de baja o borrado queda ejecutada.
 
 `manifest.json` permite contrastar cada archivo por tamaño y SHA-256. Este paquete se regenera con `scripts/build_review_package.py` desde el proyecto; los originales privados de la copia externa permanecen separados.
 ''')

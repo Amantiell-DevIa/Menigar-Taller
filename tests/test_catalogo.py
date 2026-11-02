@@ -33,7 +33,8 @@ class CatalogueTests(unittest.TestCase):
                 self.assertEqual(row['uid'], f"{row['source']}-{row['sourceId']}")
                 source_page = self.snapshots[row['source']][row['sourceId']]
                 self.assertEqual(row['url'], source_page['link'])
-                self.assertEqual(row['localPath'], f"/reparaciones/{row['uid']}-{row['slug']}/")
+                # The ficha keeps the address of its WordPress page (URL parity, 2 Nov 2026).
+                self.assertEqual(row['localPath'], urlparse(row['url']).path)
 
     def test_honda_selection_cannot_resolve_to_the_other_wordpress_mini(self):
         honda, mini = self.by_uid['abs-3198'], self.by_uid['main-3198']
@@ -104,20 +105,24 @@ class CatalogueTests(unittest.TestCase):
         self.assertTrue(all('price' not in row and 'estimatedPrice' not in row for row in self.rows))
         self.assertTrue(all(row['reviewStatus'] == 'source-imported' for row in self.rows))
 
-    def test_redirects_remain_disabled_and_target_matching_records(self):
+    def test_redirects_remain_disabled_and_only_cover_addresses_that_change(self):
         redirects = json.loads((DATA / 'redirects.json').read_text(encoding='utf-8'))
-        # A copy merged into its most complete ficha redirects there from its own old address.
+        # A ficha keeps its address, so it needs no redirect; a copy merged into its most complete
+        # ficha redirects there from its own old address.
         copies = {entry['uid']: entry for entry in self.report['excluded'] if entry.get('mergedInto')}
-        self.assertEqual(len(redirects), len(self.rows) + len(copies))
+        self.assertFalse({urlparse(row['url']).path for row in self.rows} & {entry['fromPath'] for entry in redirects})
         for entry in redirects:
-            row = self.by_uid[entry['uid']]
-            source = copies[entry['mergedFrom']]['url'] if 'mergedFrom' in entry else row['url']
-            self.assertFalse(entry['enabled'])
-            self.assertTrue(entry['reviewRequired'])
-            self.assertEqual(entry['from'], source)
-            self.assertEqual(entry['fromPath'], urlparse(source).path)
-            self.assertEqual(entry['to'], row['localPath'])
-        self.assertEqual(sorted(entry['mergedFrom'] for entry in redirects if 'mergedFrom' in entry), sorted(copies))
+            with self.subTest(source=entry['fromPath']):
+                self.assertFalse(entry['enabled'])
+                self.assertTrue(entry['reviewRequired'])
+                self.assertEqual((entry['status'], entry['fromPath']), (301, urlparse(entry['from']).path))
+                self.assertTrue(entry['reason'] and entry['kind'])
+                if 'uid' in entry:
+                    self.assertEqual(entry['to'], self.by_uid[entry['uid']]['localPath'])
+        merged = {entry['mergedFrom']: entry for entry in redirects if 'mergedFrom' in entry}
+        self.assertEqual(sorted(merged), sorted(copies))
+        for uid, entry in merged.items():
+            self.assertEqual((entry['from'], entry['uid']), (copies[uid]['url'], copies[uid]['mergedInto']))
 
     def test_original_source_snapshots_are_unchanged(self):
         self.assertEqual(len(self.report['snapshotSha256']), 26)

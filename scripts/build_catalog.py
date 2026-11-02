@@ -18,7 +18,9 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from build_home_index import write_home_index
+from build_redirects import write_redirects
 from public_copy import public_text
+from site_paths import FICHA_PATH, PAGE
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / 'data'
@@ -370,8 +372,9 @@ def build():
             if any(s in norm(image_url) for s in ['logo', 'banner', 'telefono', 'trabaja_con', 'garantia', 'precio', 'google', 'estrella', 'fondo', 'envio']): continue
             images.append(image_url)
         record = {
+            # A ficha keeps the address of its WordPress page (URL parity, 2 Nov 2026).
             'uid': uid, 'source': source, 'sourceId': page['id'], 'url': url,
-            'slug': slug, 'localPath': f'/reparaciones/{uid}-{slug}/',
+            'slug': slug, 'localPath': urlparse(url).path,
             'brand': brand, 'model': model, 'variant': variant,
             'componentKey': component, 'componentName': FAMILY_NAMES[component],
             'title': title, 'description': first_description(raw, lines),
@@ -418,6 +421,8 @@ def build():
                 record['relatedInstructions'].append(instruction_uid)
     assert len(catalogue) == len({r['uid'] for r in catalogue}), 'Duplicate scoped UID'
     assert len(catalogue) == len({r['localPath'] for r in catalogue}), 'Duplicate public path'
+    assert all(FICHA_PATH.fullmatch(r['localPath']) for r in catalogue), 'A ficha address outside the WordPress service folders'
+    assert not {r['localPath'] for r in catalogue} & set(PAGE.values()), 'A ficha address taken by a general page'
     honda = next(r for r in catalogue if r['uid'] == 'abs-3198')
     assert honda['brand'] == 'Honda' and honda['model'] == 'Civic' and 'Civic' in honda['title']
     picanto = next(r for r in catalogue if r['slug'] == 'picanto' and r['source'] == 'main')
@@ -454,11 +459,8 @@ def build():
         browser_catalogue.append(item)
     (DATA / 'catalogo-v2.js').write_text('// Generated offline by scripts/build_catalog.py. Do not edit by hand.\nwindow.MENIGAR_FAMILIES = ' + json.dumps(FAMILIES, ensure_ascii=False, separators=(',', ':')) + ';\nwindow.MENIGAR_CATALOG = ' + json.dumps(browser_catalogue, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf-8')
     write_home_index(catalogue, FAMILIES)
-    # Planning manifest only: the prototype does not enable production redirects.
-    redirects = [{'from': r['url'], 'fromPath': urlparse(r['url']).path, 'to': r['localPath'], 'status': 301, 'enabled': False, 'reviewRequired': True, 'uid': r['uid']} for r in catalogue]
-    redirects += [{'from': entry['url'], 'fromPath': urlparse(entry['url']).path, 'to': by_uid[entry['mergedInto']]['localPath'], 'status': 301,
-                   'enabled': False, 'reviewRequired': True, 'uid': entry['mergedInto'], 'mergedFrom': entry['uid']} for entry in merged]
-    (DATA / 'redirects.json').write_text(json.dumps(redirects, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    # Only the old addresses that change: disabled on menigar.com until the migration, active on the preview.
+    write_redirects(catalogue, excluded)
     report = {
         'schemaVersion': 3, 'contentPilots': {'hyundai': pilot_report['scope']}, 'contentExpansions': {'bmw': bmw_report['scope'], 'sharedSourceSections': sections_report['totals']}, 'browserProjectionOmissions': sorted(browser_omissions), 'sourcePageCounts': dict(Counter(source for source, page in all_pages)),
         'recordCount': len(catalogue), 'bySource': dict(Counter(r['source'] for r in catalogue)),

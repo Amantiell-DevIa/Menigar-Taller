@@ -1,6 +1,6 @@
-/* MENIGAR · Garantía (26 Oct 2026). Loaded only by garantia.html, after style.css, and built on its V4
-   tokens (--p-*): the Laguna title band shows the three figures a customer looks for first, and the
-   conditions below read as short blocks instead of one long legal paragraph. */
+/* MENIGAR · Garantía (26 Oct 2026). Loaded only by the warranty page, /garantias/, after style.css, and
+   built on its V4 tokens (--p-*): the Laguna title band shows the three figures a customer looks for
+   first, and the conditions below read as short blocks instead of one long legal paragraph. */
 
 /* The three figures, on the title band. */
 .g-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;max-width:980px;margin:32px 0 0;padding:0;list-style:none}

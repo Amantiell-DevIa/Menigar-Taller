@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit, urlencode
 from public_copy import public_text, photo_caption, REVIEWED_INDEX_GROUPS
+from site_paths import ABS_RESULTS, CONTACT, PAGE
 
 RUN = '2026-10-13-publico'
 
@@ -66,11 +67,11 @@ def enrich_sources(catalogue, root, merged=()):
                 aliases[url_path(alias['originalUrl'])] = by_uid[resolved]
     for entry in merged:
         aliases[url_path(entry['url'])] = by_uid[entry['mergedInto']]
-    info_paths = {'/': '/index.html', '/reparacion-abs': '/servicios.html?familia=abs',
-                  '/envios': '/como-funciona.html', '/contacto': '/ayuda.html#contacto',
-                  '/preguntas-frecuentes': '/ayuda.html', '/garantias': '/garantia.html',
-                  '/politica-de-privacidad': '/privacidad.html', '/politica-de-cookies': '/cookies.html',
-                  '/avisos-legales': '/condiciones.html', '/aviso-legal': '/condiciones.html'}
+    info_paths = {'/': '/', '/reparacion-abs': ABS_RESULTS,
+                  '/envios': PAGE['como-funciona'], '/contacto': CONTACT,
+                  '/preguntas-frecuentes': PAGE['ayuda'], '/garantias': PAGE['garantia'],
+                  '/politica-de-privacidad': PAGE['privacidad'], '/politica-de-cookies': PAGE['cookies'],
+                  '/avisos-legales': PAGE['condiciones'], '/aviso-legal': PAGE['condiciones']}
     documents = {}
     docs_dir = root / 'assets/documentos'
     docs_dir.mkdir(exist_ok=True)
@@ -156,9 +157,9 @@ def enrich_sources(catalogue, root, merged=()):
                     elif unquote(parsed.path) in documents:
                         block['href'] = documents[unquote(parsed.path)]
                     elif path.endswith('/contacto') or path == '/newweb/contacto':
-                        block['href'] = '/ayuda.html#contacto'
+                        block['href'] = CONTACT
                     elif path == '/reparacion-abs/reparacion-abs':
-                        block['href'] = '/servicios.html?familia=abs'
+                        block['href'] = ABS_RESULTS
                     elif path in info_paths:
                         block['href'] = info_paths[path]
                     elif '/wp-content/uploads/' in path and re.search(r'(?:senal_peligro|logo_top_repair)', path, re.I):

@@ -18,7 +18,8 @@
   let brands = unique(all.map(record => record.brand).filter(value => !genericBrand(value)));
   const findBrand = value => brands.find(brand => normalize(brand) === normalize(value)) || '';
   const validFamily = value => familyByKey.has(value) ? value : '';
-  const safeLocal = value => /^\/reparaciones\/[a-z0-9_-]+\/$/i.test(value || '') ? value : '/servicios.html';
+  // A ficha keeps its WordPress address, such as /reparacion-cuadro-instrumentos/bmw/serie-3/.
+  const safeLocal = value => /^\/(?:[a-z0-9_-]+\/){1,4}$/.test(value || '') ? value : '/servicios/';
   const icon = name => {
     const paths = {
       cuadro:'<path d="M3 17a9 9 0 1 1 18 0M5 17h14M12 12l4-4M6 9l1 1M12 5v2M18 9l-1 1"/>',
@@ -206,9 +207,9 @@
         const photo = media[family.key];
         const validPhoto = photo && /^\/assets\/[a-z0-9_./-]+$/i.test(photo.src || '') && String(photo.source || '').trim();
         const visual = validPhoto ? '<figure class="family-media"><img src="' + escape(photo.src) + '" alt="' + escape(photo.alt || ('Ejemplo de ' + family.name + ', fotografía de ' + photo.source)) + '" width="640" height="480" loading="lazy" decoding="async"><figcaption>' + escape(photo.caption || 'Ejemplo de pieza') + '</figcaption></figure>' : '<span class="family-icon">' + icon(family.key) + '</span>';
-        return '<a class="family-card family-card--featured" href="/servicios.html?pieza=' + encodeURIComponent(family.key) + '" aria-label="Ver reparaciones de ' + escape(family.name) + '">' + visual + '<span class="family-arrow" aria-hidden="true">↗</span><h3>' + escape(family.name) + '</h3><p>' + escape(family.description) + '</p></a>';
+        return '<a class="family-card family-card--featured" href="/servicios/?pieza=' + encodeURIComponent(family.key) + '" aria-label="Ver reparaciones de ' + escape(family.name) + '">' + visual + '<span class="family-arrow" aria-hidden="true">↗</span><h3>' + escape(family.name) + '</h3><p>' + escape(family.description) + '</p></a>';
       }).join('');
-      const moreHtml = other.length ? '<div class="family-more"><h3>También reparamos otras piezas</h3><div class="family-more-list">' + other.map(family => '<a class="family-more-link" href="/servicios.html?pieza=' + encodeURIComponent(family.key) + '"><span>' + escape(family.name) + '</span><span aria-hidden="true">↗</span></a>').join('') + '</div></div>' : '';
+      const moreHtml = other.length ? '<div class="family-more"><h3>También reparamos otras piezas</h3><div class="family-more-list">' + other.map(family => '<a class="family-more-link" href="/servicios/?pieza=' + encodeURIComponent(family.key) + '"><span>' + escape(family.name) + '</span><span aria-hidden="true">↗</span></a>').join('') + '</div></div>' : '';
       grid.innerHTML = featuredHtml ? '<div class="family-featured">' + featuredHtml + '</div>' + moreHtml : '<div class="notice">Puedes <a href="/solicitud.html?tipo=consulta">consultar tu pieza con el equipo</a>.</div>';
     });
   }
@@ -251,7 +252,7 @@
       document.querySelectorAll('[data-guide-help]').forEach(link => { link.href = consultUrl({brand:brand.value, model:model.value, component:component.value}); });
       if (focus) fields[currentStep].focus();
     };
-    const openResults = () => location.assign('/servicios.html?' + newSearchParams({q:'', brand:brand.value, model:model.value, component:component.value, page:1}) + '#resultados');
+    const openResults = () => location.assign('/servicios/?' + newSearchParams({q:'', brand:brand.value, model:model.value, component:component.value, page:1}) + '#resultados');
     const advance = () => { currentStep = Math.min(lastStep, currentStep + 1); render(true); };
     next.addEventListener('click', advance);
     skip.addEventListener('click', () => {
@@ -548,7 +549,7 @@
       document.querySelectorAll('[data-context-consult]').forEach(link => { link.href = consultUrl(state); });
       if (!visibleItems.length) {
         const malformed = state.q && !normalize(state.q);
-        resultList.innerHTML = '<div class="empty-results"><span class="empty-icon">' + icon('ecu') + '</span><h3>' + (malformed ? 'Revisa el texto de tu búsqueda.' : '¿No ves tu pieza? Consúltanos.') + '</h3><p>' + (malformed ? 'Escribe un modelo, las letras y números de una referencia o describe brevemente qué ocurre.' : 'Que no aparezca en esta lista no significa que no podamos repararla. Envíanos una foto y dinos qué ocurre.') + '</p><a class="button button-primary" href="' + consultUrl(state) + '">Consultar mi pieza ↗</a><br>' + (state.q ? '<button class="text-button" type="button" data-remove-filter="q">Ver opciones sin este texto</button><br>' : '') + (state.model && state.brand ? '<a class="text-link" href="/servicios.html?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver piezas de ' + escape(state.brand) + ' sin elegir modelo →</a><br>' : '') + (state.q && (state.brand || state.model || state.component) ? '<button class="text-button" type="button" data-search-without-filters>Buscar este texto sin filtros de vehículo ni pieza</button><br>' : '') + '<button class="text-button" type="button" data-reset-filters>Volver a ver todas las piezas</button></div>';
+        resultList.innerHTML = '<div class="empty-results"><span class="empty-icon">' + icon('ecu') + '</span><h3>' + (malformed ? 'Revisa el texto de tu búsqueda.' : '¿No ves tu pieza? Consúltanos.') + '</h3><p>' + (malformed ? 'Escribe un modelo, las letras y números de una referencia o describe brevemente qué ocurre.' : 'Que no aparezca en esta lista no significa que no podamos repararla. Envíanos una foto y dinos qué ocurre.') + '</p><a class="button button-primary" href="' + consultUrl(state) + '">Consultar mi pieza ↗</a><br>' + (state.q ? '<button class="text-button" type="button" data-remove-filter="q">Ver opciones sin este texto</button><br>' : '') + (state.model && state.brand ? '<a class="text-link" href="/servicios/?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver piezas de ' + escape(state.brand) + ' sin elegir modelo →</a><br>' : '') + (state.q && (state.brand || state.model || state.component) ? '<button class="text-button" type="button" data-search-without-filters>Buscar este texto sin filtros de vehículo ni pieza</button><br>' : '') + '<button class="text-button" type="button" data-reset-filters>Volver a ver todas las piezas</button></div>';
       } else resultList.innerHTML = visibleItems.slice(start, start + pageSize).map(item => resultHtml(item, genericOnly)).join('');
       if (familyBrands) {
         // A whole specialty is long: its brands, by number of fichas, narrow it in one step.
@@ -556,13 +557,13 @@
         if (state.component && !state.brand && !state.q) items.forEach(item => { const value = item.record.brand; if (value && !genericBrand(value)) counts.set(value, (counts.get(value) || 0) + 1); });
         const top = [...counts].sort((a, b) => b[1] - a[1] || collator.compare(a[0], b[0])).slice(0, 14);
         familyBrands.hidden = top.length < 2;
-        familyBrands.innerHTML = top.length < 2 ? '' : '<p>Elige tu marca para ver menos opciones</p><ul>' + top.map(([value, count]) => '<li><a href="/servicios.html?' + newSearchParams({...state, brand:value, model:'', page:1}).toString() + '#resultados" data-brand-shortcut="' + escape(value) + '">' + escape(value) + ' <span>' + count + '</span></a></li>').join('') + '</ul>';
+        familyBrands.innerHTML = top.length < 2 ? '' : '<p>Elige tu marca para ver menos opciones</p><ul>' + top.map(([value, count]) => '<li><a href="/servicios/?' + newSearchParams({...state, brand:value, model:'', page:1}).toString() + '#resultados" data-brand-shortcut="' + escape(value) + '">' + escape(value) + ' <span>' + count + '</span></a></li>').join('') + '</ul>';
       }
       if (relatedBrand) {
         relatedBrand.hidden = !items.length || !generic.length;
-        relatedBrand.innerHTML = items.length && generic.length ? '<h3>Otros servicios de ' + escape(state.brand) + '</h3><p>Revisa otras opciones de la marca. Si tu variante no aparece, te ayudamos a identificarla.</p><div class="results-grid">' + generic.slice(0, 3).map(item => resultHtml(item, true)).join('') + '</div>' + (generic.length > 3 ? '<a class="text-link" href="/servicios.html?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver todos los servicios de la marca →</a>' : '') : '';
+        relatedBrand.innerHTML = items.length && generic.length ? '<h3>Otros servicios de ' + escape(state.brand) + '</h3><p>Revisa otras opciones de la marca. Si tu variante no aparece, te ayudamos a identificarla.</p><div class="results-grid">' + generic.slice(0, 3).map(item => resultHtml(item, true)).join('') + '</div>' + (generic.length > 3 ? '<a class="text-link" href="/servicios/?' + newSearchParams({...state, model:'', page:1}).toString() + '">Ver todos los servicios de la marca →</a>' : '') : '';
       }
-      const pageLink = (page, text, current = false, label = '') => '<a href="/servicios.html?' + newSearchParams({ ...state, page }).toString() + '#resultados" data-result-page="' + page + '"' + (current ? ' aria-current="page"' : '') + (label ? ' aria-label="' + label + '"' : '') + '>' + text + '</a>';
+      const pageLink = (page, text, current = false, label = '') => '<a href="/servicios/?' + newSearchParams({ ...state, page }).toString() + '#resultados" data-result-page="' + page + '"' + (current ? ' aria-current="page"' : '') + (label ? ' aria-label="' + label + '"' : '') + '>' + text + '</a>';
       if (totalPages <= 1) { pagination.innerHTML = ''; return; }
       const pageNumbers = unique([1, state.page - 1, state.page, state.page + 1, totalPages].filter(page => page > 0 && page <= totalPages)).map(Number).sort((a,b) => a-b);
       let previous = 0;

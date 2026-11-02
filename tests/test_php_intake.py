@@ -489,6 +489,29 @@ class PhpIntakeTests(unittest.TestCase):
         self.assertIn('<dt>NIF/CIF</dt>'.encode(),page)
         self.assertIn('Calle de prueba 1, 28000, Madrid, España'.encode(),page)
 
+    def test_27_pages_answer_at_their_wordpress_address_and_other_folders_stay_closed(self):
+        class NoRedirect(urllib.request.HTTPRedirectHandler):
+            def redirect_request(self, req, fp, code, msg, headers, newurl):
+                return None
+        opener=urllib.request.build_opener(NoRedirect())
+        def get(path):
+            try:
+                with opener.open(self.service.base+path,timeout=10) as response:
+                    return response.status,response.headers.get('Location')
+            except urllib.error.HTTPError as error:
+                error.close()
+                return error.code,error.headers.get('Location')
+        for path in ['/','/servicios/','/envios/','/preguntas-frecuentes/','/reparacion-bsi/',
+                     '/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/','/reparacion-cuadro-instrumentos/bmw/serie-3/index.html']:
+            self.assertEqual(get(path),(200,None),path)
+        # Like WordPress, an address without its final slash leads to the one with it.
+        self.assertEqual(get('/envios'),(301,'/envios/'))
+        self.assertEqual(get('/reparacion-abs/jaguar/x-type-2001-2009-bosch_57?marca=Jaguar'),
+                         (301,'/reparacion-abs/jaguar/x-type-2001-2009-bosch_57/?marca=Jaguar'))
+        for path in ['/reparacion-abs/','/reparaciones/','/scripts/','/tests/','/backend/','/data/',
+                     '/como-funciona.html','/servicios.html','/scripts/fragmentos/videos.html']:
+            self.assertEqual(get(path)[0],404,path)
+
 
 if __name__ == '__main__':
     unittest.main()

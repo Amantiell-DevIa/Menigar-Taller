@@ -17,7 +17,7 @@
     const url = URL.createObjectURL(blob); const link = document.createElement('a');
     link.href = url; link.download = name; link.click(); setTimeout(() => URL.revokeObjectURL(url), 30000);
   };
-  const failure = message => { root.innerHTML = '<h1>No se ha podido abrir el resumen</h1><p>' + escape(message) + '</p><p><a href="/ayuda.html#contacto">Contactar con el laboratorio</a></p>'; };
+  const failure = message => { root.innerHTML = '<h1>No se ha podido abrir el resumen</h1><p>' + escape(message) + '</p><p><a href="/preguntas-frecuentes/#contacto">Contactar con el laboratorio</a></p>'; };
   if (!/^[A-Za-z0-9_-]{43}$/.test(token)) { failure('Utiliza el enlace completo que apareció al registrar tu solicitud.'); return; }
   fetch('/api/resumen', {headers, cache:'no-store'}).then(async response => {
     if (!response.ok) throw new Error('El enlace no es válido o el servicio no está disponible.');

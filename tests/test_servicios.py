@@ -1,5 +1,6 @@
 """The services page (26 Oct 2026) opens with the specialties and the featured services instead of the
-whole catalogue page by page, and loads the catalogue only when someone searches or chooses."""
+whole catalogue page by page, and loads the catalogue only when someone searches or chooses. Since 2 Nov 2026
+it answers at the address of its WordPress page, /servicios/."""
 from pathlib import Path
 import re
 import sys
@@ -13,7 +14,7 @@ import build_servicios
 class ServicesPageTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.page = (ROOT / 'servicios.html').read_text()
+        cls.page = (ROOT / 'servicios/index.html').read_text()
 
     def test_generated_blocks_match_the_catalogue(self):
         for name, html in build_servicios.build().items():
@@ -39,7 +40,7 @@ class ServicesPageTests(unittest.TestCase):
         self.assertRegex(self.page, r'<button class="button button-primary" type="submit" form="catalog-filter-form">')
 
     def test_specialties_and_featured_services_are_real(self):
-        tiles = re.findall(r'<a class="s-family" href="/servicios\.html\?pieza=(\w+)#resultados" data-catalog-link>', self.page)
+        tiles = re.findall(r'<a class="s-family" href="/servicios/\?pieza=(\w+)#resultados" data-catalog-link>', self.page)
         self.assertEqual(tiles, ['cuadro', 'abs', 'multimedia', 'display', 'cambio', 'palanca'])
         featured = re.findall(r'<a class="s-featured-card" href="([^"]+)">', self.page)
         self.assertEqual(len(featured), 6)

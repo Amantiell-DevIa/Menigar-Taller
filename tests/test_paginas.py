@@ -1,14 +1,17 @@
 """Cómo funciona, Sobre nosotros and Ayuda share paginas.css and the language of the services page: a title band
 with the main actions, short blocks in cards and a closing block to talk to the laboratory. On 28 Oct 2026
 «Cómo enviar» became Cómo funciona and «El laboratorio» became Sobre nosotros, which received the homepage's
-why repair, videos, reviews and contact sections."""
+why repair, videos, reviews and contact sections. On 2 Nov 2026 Cómo funciona and Ayuda moved to the addresses
+of their WordPress pages, /envios/ and /preguntas-frecuentes/, and Sobre nosotros to /sobre-nosotros/."""
 from pathlib import Path
 import json
 import re
 import unittest
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGES = ['como-funciona.html', 'sobre-nosotros.html', 'ayuda.html']
+PAGES = ['envios/index.html', 'sobre-nosotros/index.html', 'preguntas-frecuentes/index.html']
+# Every name the prototype gave a general page before it took its WordPress address.
+FORMER_NAMES = r'/(?:envios|taller|como-funciona|sobre-nosotros|ayuda|garantia|servicios|privacidad|cookies|condiciones)\.html'
 
 
 def local_files(html):
@@ -37,18 +40,22 @@ class InformationPagesTests(unittest.TestCase):
                      'scripts/build_vercel_static.cjs', 'scripts/build_review_package.py']:
             with self.subTest(file=name):
                 text = (ROOT / name).read_text()
-                for page in ['paginas.css', 'como-funciona.html', 'sobre-nosotros.html']:
+                for page in ['paginas.css', 'envios/', 'sobre-nosotros/', 'preguntas-frecuentes/']:
                     self.assertIn(f"'{page}'", text)
-                self.assertNotRegex(text, r"'(envios|taller)\.html'")
+                self.assertNotRegex(text, "'" + FORMER_NAMES[1:])
 
     def test_former_addresses_redirect_and_no_page_links_to_them(self):
         redirects = {item['source']: item['destination'] for item in json.loads((ROOT / 'vercel.json').read_text())['redirects']}
-        self.assertEqual(redirects['/envios.html'], '/como-funciona.html')
-        self.assertEqual(redirects['/taller.html'], '/sobre-nosotros.html')
-        self.assertFalse((ROOT / 'envios.html').exists() or (ROOT / 'taller.html').exists())
-        for name in ['index.html', 'servicios.html', 'solicitud.html', 'garantia.html', 'sitemap.xml', *PAGES]:
+        self.assertEqual(redirects['/envios.html'], '/envios/')
+        self.assertEqual(redirects['/taller.html'], '/sobre-nosotros/')
+        self.assertEqual(redirects['/como-funciona.html'], '/envios/')
+        self.assertEqual(redirects['/sobre-nosotros.html'], '/sobre-nosotros/')
+        self.assertEqual(redirects['/ayuda.html'], '/preguntas-frecuentes/')
+        for name in ['envios', 'taller', 'como-funciona', 'sobre-nosotros', 'ayuda']:
+            self.assertFalse((ROOT / (name + '.html')).exists(), name)
+        for name in ['index.html', 'servicios/index.html', 'solicitud.html', 'garantias/index.html', 'sitemap.xml', *PAGES]:
             with self.subTest(page=name):
-                self.assertNotRegex((ROOT / name).read_text(), r'/(envios|taller)\.html')
+                self.assertNotRegex((ROOT / name).read_text(), FORMER_NAMES)
 
     def test_every_image_and_document_exists(self):
         for name, html in self.pages.items():
@@ -57,8 +64,8 @@ class InformationPagesTests(unittest.TestCase):
                     self.assertTrue((ROOT / path.lstrip('/')).is_file())
 
     def test_how_it_works_opens_with_three_steps_and_keeps_the_shipping_guide(self):
-        html = self.pages['como-funciona.html']
-        self.assertIn('<a href="/como-funciona.html" aria-current="page">Cómo funciona</a>', html)
+        html = self.pages['envios/index.html']
+        self.assertIn('<a href="/envios/" aria-current="page">Cómo funciona</a>', html)
         journey = re.search(r'<ol class="pg-steps pg-steps--3">(.*?)</ol>', html, re.S)
         self.assertEqual(re.findall(r'<h3>([^<]+)</h3>', journey.group(1)), ['Cuéntanos qué falla', 'Te orientamos', 'Envía tu pieza'])
         steps = re.search(r'<ol class="pg-steps">(.*?)</ol>', html, re.S)
@@ -77,12 +84,12 @@ class InformationPagesTests(unittest.TestCase):
         self.assertIn('El presupuesto final se confirma al revisar la unidad.', html)
 
     def test_about_page_calls_menigar_a_laboratory_and_holds_the_moved_sections(self):
-        html = self.pages['sobre-nosotros.html']
-        self.assertIn('<a href="/sobre-nosotros.html" aria-current="page">Sobre nosotros</a>', html)
+        html = self.pages['sobre-nosotros/index.html']
+        self.assertIn('<a href="/sobre-nosotros/" aria-current="page">Sobre nosotros</a>', html)
         h1 = re.search(r'<h1[^>]*>(.*?)</h1>', html, re.S).group(1)
         self.assertIn('Laboratorio', h1)
         self.assertNotRegex(h1, r'\b[Tt]aller\b')
-        chips = re.findall(r'<a href="/servicios\.html\?pieza=(\w+)#resultados">', html)
+        chips = re.findall(r'<a href="/servicios/\?pieza=(\w+)#resultados">', html)
         self.assertEqual(chips, ['cuadro', 'abs', 'multimedia', 'display', 'cambio', 'palanca'])
         gallery = re.search(r'<ul class="pg-gallery">(.*?)</ul>', html, re.S).group(1)
         self.assertEqual(len(re.findall(r'<figcaption><strong>', gallery)), 3)
@@ -90,12 +97,12 @@ class InformationPagesTests(unittest.TestCase):
         for section in ['por-que-reparar', 'videos', 'opiniones', 'donde-estamos']:
             with self.subTest(section=section):
                 self.assertEqual(len(re.findall(rf'<section class="p-section [^"]+" id="{section}"', html)), 1)
-        self.assertIn('<a href="/garantia.html">Ver la garantía</a>', html)
+        self.assertIn('<a href="/garantias/">Ver la garantía</a>', html)
         self.assertIn('href="#donde-estamos">Cómo llegar', html)
         self.assertIn('href="/solicitud.html?cliente=empresa&amp;tipo=consulta"', html, 'El bloque para talleres vive aquí.')
 
     def test_videos_and_map_load_only_on_request(self):
-        html = self.pages['sobre-nosotros.html']
+        html = self.pages['sobre-nosotros/index.html']
         self.assertNotRegex(html, r'(?i)<iframe', 'Nada de marcos de terceros al abrir la página.')
         videos = re.findall(r'data-embed="youtube" data-embed-src="([^"]+)".*?href="https://www\.youtube\.com/watch\?v=([^"]+)"', html, re.S)
         self.assertEqual(len(videos), 3)
@@ -111,7 +118,7 @@ class InformationPagesTests(unittest.TestCase):
                 self.assertIn(selector, css)
 
     def test_help_page_keeps_every_question_and_anchor(self):
-        html = self.pages['ayuda.html']
+        html = self.pages['preguntas-frecuentes/index.html']
         for anchor in ['reparacion-en-curso', 'reparacion-en-curso-pregunta', 'contacto']:
             with self.subTest(anchor=anchor):
                 self.assertEqual(len(re.findall(rf'\bid="{anchor}"', html)), 1)
@@ -121,7 +128,9 @@ class InformationPagesTests(unittest.TestCase):
                 if href.startswith('#'):
                     self.assertIn(f'id="{href[1:]}"', html)
                 else:
-                    self.assertTrue((ROOT / href.split('?')[0].lstrip('/')).is_file())
+                    # A folder address is its index.html, as on WordPress.
+                    target = ROOT / href.split('?')[0].lstrip('/')
+                    self.assertTrue((target / 'index.html' if href.endswith('/') else target).is_file())
         for contact in ['mailto:informacion@menigar.com', 'mailto:admon@menigar.com', 'tel:+34916622781', 'tel:+34916610397']:
             with self.subTest(contact=contact):
                 self.assertIn(f'href="{contact}', html)

@@ -100,13 +100,16 @@ class PublicDecisionContentTests(unittest.TestCase):
                 self.assertEqual((redirects[copies[uid]['url']]['to'], redirects[copies[uid]['url']]['mergedFrom']), (target, uid))
                 former = copies[uid]['formerLocalPath']
                 self.assertFalse((ROOT / former.strip('/')).exists())
-                self.assertEqual((vercel[former], vercel[former.rstrip('/')]), (target, target))
+                # vercel.json adds the final slash first ("trailingSlash"), then applies this redirect.
+                self.assertEqual(vercel[former], target)
         links = [block for section in self.lookup['main-8674']['sourceSections'] for block in section['blocks']
                  if block.get('originalHref', '').endswith('/seat-full-link/')]
         self.assertEqual([(block['href'], block['relatedServiceUid']) for block in links], [(self.lookup['main-14508']['localPath'], 'main-14508')])
-        # Every generated ficha folder belongs to a ficha in the catalogue.
-        folders = {path.name for path in (ROOT / 'reparaciones').iterdir() if path.is_dir()}
-        self.assertEqual(folders, {row['localPath'].strip('/').split('/')[-1] for row in self.rows})
+        # Every generated ficha page belongs to a ficha in the catalogue, at its WordPress address.
+        tops = {row['localPath'].split('/')[1] for row in self.rows}
+        pages = {'/' + str(page.parent.relative_to(ROOT)) + '/' for top in tops for page in (ROOT / top).rglob('index.html')}
+        self.assertEqual(pages, {row['localPath'] for row in self.rows})
+        self.assertFalse((ROOT / 'reparaciones').exists(), 'The prototype addresses only redirect now.')
 
     def test_bmw_and_hyundai_keep_the_same_variant_context_contract(self):
         for uid in ('main-2321', 'main-3915'):
@@ -124,7 +127,7 @@ class PublicDecisionContentTests(unittest.TestCase):
         request_queries = [parse_qs(urlsplit(a.get('href', '')).query) for a in links if a.get('href', '').startswith('/solicitud.html')]
         self.assertIn({'tipo': ['consulta']}, request_queries)
         self.assertIn({'intencion': ['envio']}, request_queries)
-        self.assertTrue(any(a.get('href') == '/ayuda.html#reparacion-en-curso' for a in links))
+        self.assertTrue(any(a.get('href') == '/preguntas-frecuentes/#reparacion-en-curso' for a in links))
         for uid in ('main-2942', 'main-514', 'main-1604', 'main-3915', 'main-2321'):
             document = repair_page(self.lookup[uid], self.lookup)
             self.assertIn('noindex, nofollow', document)

@@ -18,10 +18,20 @@ try {
         if ($path === '/api/review.php') { http_response_code(404); return; }
         require $publicRoot . '/api/index.php'; return;
     }
-    $files = ['index.html','servicios.html','solicitud.html','resumen.html','como-funciona.html','garantia.html','sobre-nosotros.html','ayuda.html','privacidad.html','condiciones.html','cookies.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','garantia.css','servicios.css','paginas.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','data/catalogo-v2.js','data/home-index.js','data/family-media.js','favicon.ico','apple-touch-icon.png'];
-    $allowed = $path === '/' || in_array(ltrim($path, '/'), $files, true)
+    $files = ['index.html','solicitud.html','resumen.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','garantia.css','servicios.css','paginas.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','data/catalogo-v2.js','data/home-index.js','data/family-media.js','favicon.ico','apple-touch-icon.png'];
+    // Pages served from a folder at their WordPress address (scripts/site_paths.py): the general pages and every ficha.
+    $pageFolders = ['servicios/','envios/','garantias/','preguntas-frecuentes/','sobre-nosotros/','politica-de-privacidad/','politica-de-cookies/','avisos-legales/'];
+    $isPage = static fn(string $folder): bool => in_array($folder, $pageFolders, true)
+        || preg_match('~^(?:reparacion|fallo|programacion|sustitucion)-[a-z0-9_-]+/(?:[a-z0-9_-]+/){0,3}$~D', $folder) === 1;
+    $relative = ltrim($path, '/');
+    // Like WordPress, a page address without its final slash answers with a 301 to the address with it.
+    if ($relative !== '' && !str_ends_with($relative, '/') && $isPage($relative . '/') && is_file($publicRoot . '/' . $relative . '/index.html')) {
+        $query = (string) parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_QUERY);
+        header('Location: /' . $relative . '/' . ($query !== '' ? '?' . $query : ''), true, 301); return;
+    }
+    $allowed = $path === '/' || in_array($relative, $files, true)
         || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2)$~iD', $path))
-        || preg_match('~^/reparaciones/[A-Za-z0-9_-]+/(?:index\.html)?$~D', $path);
+        || $isPage(preg_replace('~index\.html$~D', '', $relative));
     $target = realpath($publicRoot . ($path === '/' ? '/index.html' : $path));
     if ($target && is_dir($target)) $target = realpath($target . '/index.html');
     if (!$allowed || !$target || !is_file($target) || !str_starts_with($target, realpath($publicRoot) . '/')) { http_response_code(404); return; }

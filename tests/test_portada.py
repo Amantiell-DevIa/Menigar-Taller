@@ -19,24 +19,24 @@ class HomepageTests(unittest.TestCase):
     def test_specialty_cards_match_the_catalogue(self):
         for name, html in build_servicios.build_home().items():
             self.assertIn(f'<!-- generado:{name} -->{html}<!-- /generado:{name} -->', self.page, 'Ejecuta python3 scripts/build_servicios.py')
-        cards = re.findall(r'<a class="h-cat" href="/servicios\.html\?pieza=(\w+)#resultados">', self.main)
+        cards = re.findall(r'<a class="h-cat" href="/servicios/\?pieza=(\w+)#resultados">', self.main)
         self.assertEqual(cards, ['cuadro', 'abs', 'multimedia', 'display', 'cambio', 'palanca'])
 
     def test_one_search_and_the_step_by_step_link(self):
-        forms = re.findall(r'<form class="h-search" action="/servicios\.html" method="get" role="search">(.*?)</form>', self.main, re.S)
+        forms = re.findall(r'<form class="h-search" action="/servicios/" method="get" role="search">(.*?)</form>', self.main, re.S)
         self.assertEqual(len(forms), 1)
         self.assertRegex(forms[0], r'<input id="h-query" type="search" name="q"[^>]*required')
         self.assertEqual(len(re.findall(r'<form\b', self.main)), 1)
         # The line of example searches under the field was removed at the user's request (28 Oct 2026).
         self.assertNotIn('h-examples', self.page)
-        self.assertNotRegex(self.main, r'href="/servicios\.html\?q=')
-        self.assertIn('href="/servicios.html#catalogo"', self.main, 'La segunda manera, paso a paso, sigue a mano.')
+        self.assertNotRegex(self.main, r'href="/servicios/\?q=')
+        self.assertIn('href="/servicios/#catalogo"', self.main, 'La segunda manera, paso a paso, sigue a mano.')
 
     def test_no_way_out_except_starting_a_repair(self):
         links = re.findall(r'href="([^"]+)"', self.main)
         for href in links:
             with self.subTest(href=href):
-                self.assertRegex(href, r'^/(servicios|solicitud)\.html', 'Desde la portada solo se busca la pieza o se consulta.')
+                self.assertRegex(href, r'^/(servicios/|solicitud\.html)', 'Desde la portada solo se busca la pieza o se consulta.')
         for gone in ['id="videos"', 'id="opiniones"', 'id="por-que-reparar"', 'data-embed', 'id="contacto"', 'id="talleres"']:
             with self.subTest(section=gone):
                 self.assertNotIn(gone, self.page)

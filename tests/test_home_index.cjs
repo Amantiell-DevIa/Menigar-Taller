@@ -65,11 +65,11 @@ assert.deepEqual(entries(home.element('guide-brand')), entries(full.element('gui
 assert.deepEqual(entries(home.element('guide-model')), entries(full.element('guide-model')));
 assert.deepEqual(entries(home.element('guide-component')), entries(full.element('guide-component')));
 
-// The homepage follows the owner's mockup (28 Oct 2026): one search on servicios.html, the step-by-step
+// The homepage follows the owner's mockup (28 Oct 2026): one search on /servicios/, the step-by-step
 // link, the six specialties and three steps. Videos, reviews and the map moved to Sobre nosotros.
 const homepage = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
-assert.match(homepage, /<form class="h-search" action="\/servicios\.html" method="get" role="search">[\s\S]*?name="q"[^>]*required/, 'La portada busca el código, la referencia o el modelo en servicios.');
-assert.match(homepage, /href="\/servicios\.html#catalogo"/, 'La búsqueda paso a paso sigue a un clic.');
+assert.match(homepage, /<form class="h-search" action="\/servicios\/" method="get" role="search">[\s\S]*?name="q"[^>]*required/, 'La portada busca el código, la referencia o el modelo en servicios.');
+assert.match(homepage, /href="\/servicios\/#catalogo"/, 'La búsqueda paso a paso sigue a un clic.');
 assert.ok(!/id="buscar"|id="que-reparamos"|home-index\.js/.test(homepage), 'La portada no carga el buscador antiguo.');
 const pieces = [...homepage.matchAll(/<figure class="h-piece h-piece--(\w+)">/g)].map(match => match[1]);
 assert.deepEqual(pieces, ['cuadro', 'pantalla', 'abs'], 'El hero muestra cuadro, pantalla y módulo ABS.');
@@ -83,8 +83,8 @@ for (const [, set] of homepage.matchAll(/srcset="([^"]+)"/g)) {
 
 // Videos and the map are click-to-load: no page contains a third-party frame on arrival, and each
 // placeholder keeps a plain link that works without JavaScript. The CSP allows exactly the two players.
-const about = fs.readFileSync(path.join(root, 'sobre-nosotros.html'), 'utf8');
-for (const page of ['index.html', 'sobre-nosotros.html', 'opciones-hero.html']) {
+const about = fs.readFileSync(path.join(root, 'sobre-nosotros/index.html'), 'utf8');
+for (const page of ['index.html', 'sobre-nosotros/index.html', 'opciones-hero.html']) {
   const html = fs.readFileSync(path.join(root, page), 'utf8');
   assert.ok(!/<iframe/i.test(html), `${page} no carga marcos de terceros al abrirse.`);
   for (const [, src] of html.matchAll(/<img [^>]*src="([^"]+)"/g)) {

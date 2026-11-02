@@ -17,6 +17,7 @@ from hyundai_views import pilot_content, pilot_references
 from bmw_views import bmw_content
 from source_sections import render_sections
 from public_copy import public_text, reset_copy_report, write_copy_report
+from site_paths import FICHA_PATH, GENERAL_PAGES, PAGE
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -56,12 +57,12 @@ def list_html(items, class_name=""):
 
 
 def header(active=""):
-    links = [("servicios.html", "Servicios"), ("como-funciona.html", "Cómo funciona"), ("garantia.html", "Garantía"),
-             ("sobre-nosotros.html", "Sobre nosotros"), ("ayuda.html", "Ayuda")]
-    nav = "".join(f'<li><a href="/{path}"' + (' aria-current="page"' if path == active else '') + f'>{label}</a></li>' for path, label in links)
+    links = [(PAGE["servicios"], "Servicios"), (PAGE["como-funciona"], "Cómo funciona"), (PAGE["garantia"], "Garantía"),
+             (PAGE["sobre-nosotros"], "Sobre nosotros"), (PAGE["ayuda"], "Ayuda")]
+    nav = "".join(f'<li><a href="{path}"' + (' aria-current="page"' if path == active else '') + f'>{label}</a></li>' for path, label in links)
     return f'''<a class="skip-link" href="#contenido">Saltar al contenido</a>
 <header class="site-header"><div class="container header-inner">
-  <a class="brand" href="/index.html" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt=""></a>
+  <a class="brand" href="/" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt=""></a>
   <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav"><span>Menú</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <nav id="site-nav" aria-label="Navegación principal"><ul class="nav-list">{nav}</ul><a class="button button-primary header-cta" href="/solicitud.html?tipo=consulta">Consultar mi pieza <span aria-hidden="true">↗</span></a></nav>
 </div></header>'''
@@ -69,11 +70,11 @@ def header(active=""):
 
 def footer():
     return f'''<footer class="site-footer"><div class="container footer-grid">
-  <div><a class="brand brand--placa" href="/index.html" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt="" loading="lazy" decoding="async"></a><p>Reparación de electrónica del automóvil.<br>Talleres y particulares.</p><a class="footer-phone" href="tel:+34916622781">{PHONE}</a></div>
-  <div><h2>Tu reparación</h2><a href="/servicios.html">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a><a href="/como-funciona.html#preparar">Cómo preparar el paquete</a><a href="/garantia.html">Garantía de la reparación</a></div>
+  <div><a class="brand brand--placa" href="/" aria-label="MENIGAR, inicio"><img class="brand-logo" src="/assets/marca/menigar-logo-1x.webp" srcset="/assets/marca/menigar-logo-2x.webp 2x, /assets/marca/menigar-logo-3x.webp 3x" width="256" height="38" alt="" loading="lazy" decoding="async"></a><p>Reparación de electrónica del automóvil.<br>Talleres y particulares.</p><a class="footer-phone" href="tel:+34916622781">{PHONE}</a></div>
+  <div><h2>Tu reparación</h2><a href="/servicios/">Buscar mi pieza</a><a href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><a href="/solicitud.html?intencion=envio">Preparar solicitud de envío</a><a href="/preguntas-frecuentes/#reparacion-en-curso">Consultar una reparación en curso</a><a href="/envios/#preparar">Cómo preparar el paquete</a><a href="/garantias/">Garantía de la reparación</a></div>
   <div><h2>Encuéntranos</h2><p>C/ José Echegaray, 16<br>Edificio A1 · Planta 2ª · Nave 4<br>28100 Alcobendas, Madrid</p><a href="mailto:{EMAIL}">{EMAIL}</a><a href="https://www.google.com/maps/search/?api=1&amp;query=Menigar+Alcobendas" target="_blank" rel="noopener noreferrer">Cómo llegar ↗</a></div>
-  <div><h2>Horario de atención</h2><p>Lunes a jueves<br><strong>8:00–16:00</strong></p><p>Viernes<br><strong>8:00–14:00</strong></p><a href="/ayuda.html#contacto">Consultar con el equipo →</a></div>
-</div><div class="container footer-bottom"><span>© <span data-current-year>2026</span> MENIGAR</span><div><a href="/privacidad.html">Privacidad</a><a href="/condiciones.html">Condiciones</a><a href="/cookies.html">Cookies</a></div><span>Alcobendas · Madrid</span></div></footer>'''
+  <div><h2>Horario de atención</h2><p>Lunes a jueves<br><strong>8:00–16:00</strong></p><p>Viernes<br><strong>8:00–14:00</strong></p><a href="/preguntas-frecuentes/#contacto">Consultar con el equipo →</a></div>
+</div><div class="container footer-bottom"><span>© <span data-current-year>2026</span> MENIGAR</span><div><a href="/politica-de-privacidad/">Privacidad</a><a href="/avisos-legales/">Condiciones</a><a href="/politica-de-cookies/">Cookies</a></div><span>Alcobendas · Madrid</span></div></footer>'''
 
 
 def page(title, description, path, body, active="", extra_head="", body_class=""):
@@ -90,13 +91,20 @@ def page(title, description, path, body, active="", extra_head="", body_class=""
 <body class="{e(body_class)}">{header(active)}<main id="contenido">{body}</main>{footer()}</body></html>\n'''
 
 
+def write_page(path, document):
+    """A page lives at its address, as on WordPress: /envios/ is envios/index.html."""
+    target = ROOT / path.strip("/") / "index.html"
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(document, encoding="utf-8")
+
+
 def page_intro(kicker, title, intro, breadcrumb=""):
     crumb = f'<nav class="breadcrumb" aria-label="Ruta de navegación"><a href="/">Inicio</a><span aria-hidden="true">/</span>{breadcrumb}</nav>' if breadcrumb else ""
     return f'<section class="page-intro page-heading"><div class="container">{crumb}<p class="eyebrow">{e(kicker)}</p><h1>{e(title)}</h1><p class="lead">{e(intro)}</p></div></section>'
 
 
 def contact_card(title="¿Necesitas ayuda?"):
-    return f'''<aside class="card contact-card"><p class="eyebrow">Atención humana</p><h2>{e(title)}</h2><p>Si no sabes qué pieza enviar, cuéntanos qué falla y añade una foto de su etiqueta.</p><a class="button button-primary" href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><p><a href="tel:+34916622781">{PHONE}</a></p><p><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Lunes a jueves, de 8:00 a 16:00.<br>Viernes, de 8:00 a 14:00.</p></aside>'''
+    return f'''<aside class="card contact-card"><p class="eyebrow">Atención humana</p><h2>{e(title)}</h2><p>Si no sabes qué pieza enviar, cuéntanos qué falla y añade una foto de su etiqueta.</p><a class="button button-primary" href="/solicitud.html?tipo=consulta">Consultar mi pieza</a><p><a href="tel:+34916622781">{PHONE}</a></p><p><a href="/preguntas-frecuentes/#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Lunes a jueves, de 8:00 a 16:00.<br>Viernes, de 8:00 a 14:00.</p></aside>'''
 
 
 # Information pages (26 Oct 2026), in the language of the services page: a title band with the main actions,
@@ -135,7 +143,7 @@ def intro_band(kicker, title, lead, breadcrumb, actions, media=""):
 
 def help_card(eyebrow="¿Tienes dudas?", title="Habla con el laboratorio", text="Cuéntanos qué falla y añade una foto de la etiqueta. Te orientamos aunque no conozcas la referencia."):
     return f"""<section class="pg-help"><div class="container"><div class="pg-help-card"><div><p class="eyebrow">{e(eyebrow)}</p><h2>{e(title)}</h2><p>{e(text)}</p></div>
-<div class="pg-help-actions"><a class="pg-button-light" href="/solicitud.html?tipo=consulta">Consultar mi pieza <span aria-hidden="true">↗</span></a><a href="tel:+34916622781">Llamar al {PHONE}</a><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a></div></div></div></section>"""
+<div class="pg-help-actions"><a class="pg-button-light" href="/solicitud.html?tipo=consulta">Consultar mi pieza <span aria-hidden="true">↗</span></a><a href="tel:+34916622781">Llamar al {PHONE}</a><a href="/preguntas-frecuentes/#reparacion-en-curso">Consultar una reparación en curso</a></div></div></div></section>"""
 
 
 INFO_HEAD = '<link rel="stylesheet" href="/paginas.css">'
@@ -177,17 +185,18 @@ def write_info_pages():
 <div class="pg-guide"><a href="/assets/ayuda-embalaje.svg"{blank}><img src="/assets/ayuda-embalaje.svg" width="680" height="1090" alt="Guía de embalaje: proteger los conectores, inmovilizar la pieza dentro de la caja e incluir el resumen de solicitud" loading="lazy" decoding="async"></a><p><strong>Guía visual de embalaje</strong><br>Guía general de preparación. Consulta las instrucciones específicas de tu pieza. <a href="/assets/ayuda-embalaje.svg"{blank}>Ampliar esquema ↗</a></p></div></div>
 <div class="pg-card"><p class="eyebrow">Antes de cerrar la caja</p><h2>Comprueba que incluyes</h2><ul class="pg-check"><li>La referencia o una foto legible de la etiqueta.</li><li>La petición de reparación o el resumen de solicitud, dentro de la caja.</li><li>Cada unidad y sus accesorios identificados, si envías varias.</li><li>Los conectores protegidos y los huecos rellenos para que la pieza no se mueva.</li><li>El justificante y el número de seguimiento guardados.</li></ul></div>
 </div></section>
-<section class="pg-section"><div class="container"><div class="pg-card pg-callout"><h2>Cada pieza puede necesitar una preparación distinta</h2><p>En algunos servicios debe enviarse el conjunto completo; en otros, una parte concreta. Revisa la ficha de tu pieza o pregúntanos antes de desmontar y enviar. Los componentes de seguridad deben ser manipulados por personal cualificado.</p><div class="pg-links"><a href="/servicios.html">Consultar mi servicio →</a></div></div>
+<section class="pg-section"><div class="container"><div class="pg-card pg-callout"><h2>Cada pieza puede necesitar una preparación distinta</h2><p>En algunos servicios debe enviarse el conjunto completo; en otros, una parte concreta. Revisa la ficha de tu pieza o pregúntanos antes de desmontar y enviar. Los componentes de seguridad deben ser manipulados por personal cualificado.</p><div class="pg-links"><a href="/servicios/">Consultar mi servicio →</a></div></div>
 <p class="source-note">Información preparada a partir de las instrucciones de <a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">envíos de Menigar</a>. Las modalidades y tarifas de transporte deben confirmarse para cada envío.</p></div></section>
 {help_card("¿Dudas antes de enviar?")}"""
-    (ROOT / "como-funciona.html").write_text(page("Cómo funciona", "Cómo reparar tu pieza con Menigar: cuéntanos qué falla, te orientamos y la envías desde cualquier punto de España. Dirección, embalaje y petición de reparación.", "/como-funciona.html", funciona, "como-funciona.html", INFO_HEAD, "info-page"), encoding="utf-8")
+    path = PAGE["como-funciona"]
+    write_page(path, page("Cómo funciona", "Cómo reparar tu pieza con Menigar: cuéntanos qué falla, te orientamos y la envías desde cualquier punto de España. Dirección, embalaje y petición de reparación.", path, funciona, path, INFO_HEAD, "info-page"))
 
     # Sobre nosotros (28 Oct 2026, formerly «El laboratorio»): the laboratory, why repair, what we repair, videos,
     # reviews and where we are. Why repair, the videos, the reviews and the contact block come from the homepage.
     lab_photo = f'<figure class="pg-intro-photo">{photo("/assets/hero-lab.jpg", "Banco de trabajo de electrónica con instrumental y una pieza en revisión", "(max-width: 900px) 92vw, 520px", eager=True, widths=(480, 760, 1024))}<figcaption>Trabajo especializado en electrónica del automóvil.</figcaption></figure>'
     sobre = intro_band("Sobre nosotros · Desde 1989", "Laboratorio de reparación de electrónica del automóvil en Alcobendas", "Cuadros de instrumentos, ABS, pantallas y módulos electrónicos. Atención para talleres y particulares desde Alcobendas, Madrid.", "Sobre nosotros",
                        [("/solicitud.html?tipo=consulta", 'Consultar mi pieza <span aria-hidden="true">↗</span>', True, ""), ("#donde-estamos", "Cómo llegar", False, "")], lab_photo)
-    chips = "".join(f'<li><a href="/servicios.html?pieza={key}#resultados">{e(name)}</a></li>' for key, name in SPECIALTIES) + '<li><a href="/servicios.html">Ver todos los servicios →</a></li>'
+    chips = "".join(f'<li><a href="/servicios/?pieza={key}#resultados">{e(name)}</a></li>' for key, name in SPECIALTIES) + '<li><a href="/servicios/">Ver todos los servicios →</a></li>'
     gallery = [
         ("/assets/family/abs-taller-menigar.jpg", "Técnico de MENIGAR trabajando sobre un módulo ABS en el taller.", "Reparación de un módulo ABS"),
         ("/assets/family/taller-banco-cuadro-archivo-2017.jpg", "Archivo de MENIGAR: técnico comprobando un cuadro de instrumentos en un banco de trabajo.", "Comprobación de un cuadro de instrumentos"),
@@ -202,7 +211,8 @@ def write_info_pages():
 {fragment("videos")}
 {fragment("opiniones")}
 {fragment("donde-estamos")}"""
-    (ROOT / "sobre-nosotros.html").write_text(page("Sobre nosotros", "Menigar, laboratorio especializado en la reparación de electrónica del automóvil para profesionales y particulares en Alcobendas, Madrid, desde 1989.", "/sobre-nosotros.html", sobre, "sobre-nosotros.html", INFO_HEAD, "info-page"), encoding="utf-8")
+    path = PAGE["sobre-nosotros"]
+    write_page(path, page("Sobre nosotros", "Menigar, laboratorio especializado en la reparación de electrónica del automóvil para profesionales y particulares en Alcobendas, Madrid, desde 1989.", path, sobre, path, INFO_HEAD, "info-page"))
 
     # Ayuda: the most common needs first, then the questions by topic and the two ways to reach us.
     faqs = [
@@ -226,8 +236,8 @@ def write_info_pages():
     assert sorted(index for _, indexes in groups for index in indexes) == list(range(len(faqs))), "Every question belongs to one topic"
     tiles = [("consulta", "/solicitud.html?tipo=consulta", "Consultar mi pieza", "Cuéntanos qué falla y añade una foto de la etiqueta."),
              ("reloj", "#reparacion-en-curso", "Mi pieza ya está en Menigar", "Consulta una reparación en curso."),
-             ("caja", "/como-funciona.html", "Cómo funciona", "Los pasos y cómo preparar el envío."),
-             ("escudo", "/garantia.html", "Garantía", "Qué cubre y cómo reclamarla.")]
+             ("caja", "/envios/", "Cómo funciona", "Los pasos y cómo preparar el envío."),
+             ("escudo", "/garantias/", "Garantía", "Qué cubre y cómo reclamarla.")]
     tiles_html = "".join(f'<li><a class="pg-tile" href="{href}"><span class="pg-tile-icon">{svg_icon(icon)}</span><span class="pg-tile-title">{e(title)}</span><span class="pg-tile-text">{e(text)}</span></a></li>' for icon, href, title, text in tiles)
     ayuda = intro_band("Ayuda", "¿En qué podemos ayudarte?", "Información para consultar un servicio, preparar la solicitud y enviar la unidad. Si tu caso necesita más contexto, habla con el laboratorio.", "Ayuda",
                        [("#contacto", "Contactar con el laboratorio", True, ""), ("tel:+34916622781", f"Llamar al {PHONE}", False, "")])
@@ -237,7 +247,8 @@ def write_info_pages():
 <section class="pg-card existing-repair-contact" id="reparacion-en-curso"><p class="eyebrow">Tu pieza ya está en Menigar</p><h2>Consultar una reparación en curso</h2><p>Contacta con el laboratorio e indica el número de orden, si lo tienes, y el nombre de quien solicitó la reparación. No necesitas crear otra consulta nueva.</p><p><a class="button button-primary" href="mailto:{EMAIL}?subject=Consulta%20de%20reparaci%C3%B3n%20en%20curso">Escribir sobre mi reparación</a></p><p><a href="tel:+34916622781">Llamar al {PHONE}</a></p></section>
 <div class="pg-card pg-contact" id="contacto"><p class="eyebrow">Consulta tu caso</p><h2>Atención directa de Menigar</h2><p>Para una reparación ya enviada, ten a mano tu número de orden y los datos del solicitante.</p><dl><dt>Asistencia técnica</dt><dd><a href="mailto:{EMAIL}">{EMAIL}</a></dd><dt>Administración</dt><dd><a href="mailto:admon@menigar.com">admon@menigar.com</a></dd><dt>Teléfonos</dt><dd><a class="pg-nowrap" href="tel:+34916622781">{PHONE}</a> / <a class="pg-nowrap" href="tel:+34916610397">91 661 03 97</a></dd><dt>Horario</dt><dd>Lunes a jueves: <span class="pg-nowrap">8:00–16:00</span>. Viernes: <span class="pg-nowrap">8:00–14:00</span>.</dd></dl></div>
 </div><p class="source-note">Contenido adaptado de las <a href="https://www.menigar.com/preguntas-frecuentes/" target="_blank" rel="noopener">preguntas frecuentes actuales</a> y del proceso documentado del laboratorio. Las condiciones concretas se comunican para cada caso.</p></div></section>"""
-    (ROOT / "ayuda.html").write_text(page("Ayuda y contacto", "Preguntas frecuentes sobre las reparaciones de Menigar. Cómo identificar tu pieza, preparar el envío y contactar con el laboratorio.", "/ayuda.html", ayuda, "ayuda.html", INFO_HEAD, "info-page"), encoding="utf-8")
+    path = PAGE["ayuda"]
+    write_page(path, page("Ayuda y contacto", "Preguntas frecuentes sobre las reparaciones de Menigar. Cómo identificar tu pieza, preparar el envío y contactar con el laboratorio.", path, ayuda, path, INFO_HEAD, "info-page"))
 
 
 def write_warranty_page():
@@ -269,22 +280,23 @@ def write_warranty_page():
 <li><h3>Contacta con el laboratorio</h3><p>En garantía, Menigar puede volver a ver la pieza y repararla una vez más si es necesario. Si la pieza no puede enviarse para que la revisen sus técnicos, se pedirá la factura original de compra de la pieza de recambio. Cada caso se estudia de forma individual.</p></li></ol></section>
 <p class="source-note">Condiciones publicadas en la <a href="https://www.menigar.com/garantias/" target="_blank" rel="noopener">página de garantías de Menigar</a> (consultada el 26 de octubre de 2026). Pendientes de revisión y aprobación para la nueva web.</p>
 </div><aside class="card contact-card g-aside"><p class="eyebrow">¿Dudas con tu garantía?</p><h2>Habla con el laboratorio</h2><p>Ten a mano la factura, la referencia de la pieza y los códigos de avería de la diagnosis.</p><a class="button button-primary" href="mailto:{EMAIL}?subject=Consulta%20de%20garant%C3%ADa">Escribir sobre mi garantía</a><p><a href="tel:+34916622781">{PHONE}</a></p><p class="source-note">Si quieres comunicarte directamente con el Director General del grupo, escribe a <a href="mailto:{EMAIL}">{EMAIL}</a>.</p><p class="source-note">Lunes a jueves, de 8:00 a 16:00.<br>Viernes, de 8:00 a 14:00.</p></aside></div></section>"""
-    (ROOT / "garantia.html").write_text(page("Garantía de reparaciones", "Garantía limitada de dos años en las reparaciones de Menigar: qué cubre, qué no cubre, qué puede anularla, la devolución en 10 días y cómo reclamarla.", "/garantia.html", body, "garantia.html", '<link rel="stylesheet" href="/garantia.css">', "warranty-page"), encoding="utf-8")
+    path = PAGE["garantia"]
+    write_page(path, page("Garantía de reparaciones", "Garantía limitada de dos años en las reparaciones de Menigar: qué cubre, qué no cubre, qué puede anularla, la devolución en 10 días y cómo reclamarla.", path, body, path, '<link rel="stylesheet" href="/garantia.css">', "warranty-page"))
 
 
 def write_legal_pages():
     note = '<div class="notice"><strong>Documento en revisión para la nueva web.</strong><p>Esta página recoge información de la web vigente. Antes de utilizar el nuevo servicio con clientes deben validarse sus condiciones y la información sobre el tratamiento de datos. El prototipo utiliza únicamente datos de prueba.</p></div>'
     privacy = page_intro("Información sobre tus datos", "Privacidad", "Identificación del responsable y vías de contacto para consultas sobre datos personales.", "Privacidad")
     privacy += f'''<section class="section"><div class="container prose legal-prose">{note}<h2>Responsable</h2><p>Desarrollos Digitales Menigar, S.L. · NIF B87461950.<br>{e(ADDRESS)}<br><a href="mailto:admon@menigar.com">admon@menigar.com</a>.</p><h2>Consultas y solicitudes</h2><p>La política vigente de Menigar contempla tramitar encargos y solicitudes, responder consultas y atender las peticiones realizadas por sus vías de contacto. La finalidad de la nueva solicitud es aportar la información necesaria para consultar y gestionar la reparación de una pieza.</p><h2>Información que puede incluir la solicitud</h2><p>Datos de contacto e identificación del solicitante, información del vehículo y de la pieza, descripción de la avería, dirección para la devolución y archivos aportados. No adjuntes documentación personal ajena a la reparación ni datos bancarios.</p><h2>Conservación, proveedores y base del tratamiento</h2><p>La política de origen indica que los datos se conservan durante el tiempo necesario para su finalidad y las obligaciones legales que correspondan. El nuevo servicio debe confirmar sus plazos concretos, la base jurídica aplicable y los proveedores que intervienen antes de su publicación. No se presume que un proveedor o una integración estén ya configurados.</p><h2>Tus derechos y contacto</h2><p>La política vigente informa sobre acceso, rectificación, supresión, portabilidad, limitación y oposición, y sobre la retirada del consentimiento cuando sea aplicable. Puedes dirigirte a <a href="mailto:admon@menigar.com">admon@menigar.com</a>. También puedes presentar una reclamación ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener">Agencia Española de Protección de Datos</a>.</p><h2>Política de origen</h2><p><a href="https://www.menigar.com/politica-de-privacidad/" target="_blank" rel="noopener">Consultar la política de privacidad publicada por Menigar</a>.</p><p class="source-note">Adaptación informativa de la política conservada en las fuentes del proyecto. No sustituye la revisión y aprobación de la información aplicable al nuevo servicio.</p></div></section>'''
-    (ROOT / "privacidad.html").write_text(page("Privacidad", "Información de privacidad y contacto del responsable Menigar. Documento en revisión para el nuevo servicio de solicitudes.", "/privacidad.html", privacy), encoding="utf-8")
+    write_page(PAGE["privacidad"], page("Privacidad", "Información de privacidad y contacto del responsable Menigar. Documento en revisión para el nuevo servicio de solicitudes.", PAGE["privacidad"], privacy))
 
     terms = page_intro("Información del servicio", "Aviso legal y condiciones", "Datos del titular y condiciones que debes confirmar para tu reparación.", "Aviso legal y condiciones")
-    terms += f'''<section class="section"><div class="container prose legal-prose">{note}<h2>Titular del sitio</h2><dl class="detail-list"><dt>Denominación social</dt><dd>Desarrollos Digitales Menigar, S.L.</dd><dt>NIF</dt><dd>B87461950</dd><dt>Dirección</dt><dd>{e(ADDRESS)}</dd><dt>Contacto</dt><dd><a href="mailto:admon@menigar.com">admon@menigar.com</a> · <a href="tel:+34916610397">91 661 03 97</a></dd><dt>Datos registrales publicados</dt><dd>Registro Mercantil de Madrid, tomo 34.319, folio 1, sección 8, hoja M-617387, inscripción 1.ª.</dd></dl><h2>Catálogo y solicitud</h2><p>Las fichas describen servicios y referencias relacionados. Consultarlas o preparar una solicitud no confirma el diagnóstico de una unidad, su reparabilidad ni un presupuesto final. Si falta información o no sabes qué enviar, consulta con el laboratorio.</p><h2>Presupuesto, transporte y garantía</h2><p>Confirma las condiciones aplicables a tu servicio con Menigar. El coste, el plazo y las instrucciones pueden depender de la pieza y de su estado. Las condiciones de garantía y transporte de la web actual deben revisarse y aprobarse para esta nueva web antes de publicarla.</p><ul><li><a href="/garantia.html">Garantía de las reparaciones</a>, con las condiciones actualmente publicadas.</li><li><a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">Información de transporte actualmente publicada</a>.</li><li><a href="https://www.menigar.com/avisos-legales/" target="_blank" rel="noopener">Aviso legal actualmente publicado</a>.</li></ul><h2>Contenido y marcas</h2><p>El aviso de origen identifica al titular de los contenidos propios y reconoce los derechos de los titulares de marcas y contenidos de terceros. La mención de una marca de vehículo o fabricante de componente sirve para identificar el servicio relacionado.</p><h2>Estado del prototipo</h2><p>Esta versión se utiliza para revisar la nueva experiencia y realizar pruebas. No formaliza pedidos ni confirma cobros, reparaciones o transportes reales.</p></div></section>'''
-    (ROOT / "condiciones.html").write_text(page("Aviso legal y condiciones", "Titular de la web Menigar e información del servicio. Condiciones pendientes de validación para la nueva web.", "/condiciones.html", terms), encoding="utf-8")
+    terms += f'''<section class="section"><div class="container prose legal-prose">{note}<h2>Titular del sitio</h2><dl class="detail-list"><dt>Denominación social</dt><dd>Desarrollos Digitales Menigar, S.L.</dd><dt>NIF</dt><dd>B87461950</dd><dt>Dirección</dt><dd>{e(ADDRESS)}</dd><dt>Contacto</dt><dd><a href="mailto:admon@menigar.com">admon@menigar.com</a> · <a href="tel:+34916610397">91 661 03 97</a></dd><dt>Datos registrales publicados</dt><dd>Registro Mercantil de Madrid, tomo 34.319, folio 1, sección 8, hoja M-617387, inscripción 1.ª.</dd></dl><h2>Catálogo y solicitud</h2><p>Las fichas describen servicios y referencias relacionados. Consultarlas o preparar una solicitud no confirma el diagnóstico de una unidad, su reparabilidad ni un presupuesto final. Si falta información o no sabes qué enviar, consulta con el laboratorio.</p><h2>Presupuesto, transporte y garantía</h2><p>Confirma las condiciones aplicables a tu servicio con Menigar. El coste, el plazo y las instrucciones pueden depender de la pieza y de su estado. Las condiciones de garantía y transporte de la web actual deben revisarse y aprobarse para esta nueva web antes de publicarla.</p><ul><li><a href="/garantias/">Garantía de las reparaciones</a>, con las condiciones actualmente publicadas.</li><li><a href="https://www.menigar.com/envios/" target="_blank" rel="noopener">Información de transporte actualmente publicada</a>.</li><li><a href="https://www.menigar.com/avisos-legales/" target="_blank" rel="noopener">Aviso legal actualmente publicado</a>.</li></ul><h2>Contenido y marcas</h2><p>El aviso de origen identifica al titular de los contenidos propios y reconoce los derechos de los titulares de marcas y contenidos de terceros. La mención de una marca de vehículo o fabricante de componente sirve para identificar el servicio relacionado.</p><h2>Estado del prototipo</h2><p>Esta versión se utiliza para revisar la nueva experiencia y realizar pruebas. No formaliza pedidos ni confirma cobros, reparaciones o transportes reales.</p></div></section>'''
+    write_page(PAGE["condiciones"], page("Aviso legal y condiciones", "Titular de la web Menigar e información del servicio. Condiciones pendientes de validación para la nueva web.", PAGE["condiciones"], terms))
 
     cookies = page_intro("Preferencias y navegación", "Cookies y almacenamiento", "Información sobre el funcionamiento de esta versión y su política de origen.", "Cookies")
     cookies += f'''<section class="section"><div class="container prose legal-prose">{note}<h2>Esta versión en revisión</h2><p>El prototipo no incorpora herramientas de publicidad ni seguimiento de visitas. Las fotografías y los recursos principales se sirven desde el propio proyecto. Los enlaces a mapas, correo y documentos externos solo abren esos servicios cuando los utilizas.</p><h2>Vídeos y mapa de la portada</h2><p>La portada enseña vídeos del canal de YouTube de MENIGAR y un mapa de Google, pero no los carga al abrir la página: hasta que pulsas «Reproducir» o «Ver el mapa aquí» solo se ve una imagen servida desde el propio proyecto. Al pulsar, el navegador se conecta con YouTube, en su modo de privacidad mejorada (youtube-nocookie.com), o con Google Maps. Esos servicios reciben tu dirección IP y pueden usar sus propias cookies según sus políticas. Si prefieres no hacerlo, puedes abrir los vídeos en YouTube o la ubicación en Google Maps desde sus enlaces.</p><h2>Datos de prueba en tu dispositivo</h2><p>El formulario puede conservar un borrador en el navegador para no perder lo escrito al cambiar de paso. Utiliza únicamente datos ficticios. La acción para borrar el borrador está disponible en el propio formulario cuando esta función esté activada.</p><h2>Antes de publicar</h2><p>La política definitiva debe corresponder a las herramientas y al almacenamiento realmente instalados. Si se añaden analítica u otros servicios, deben revisarse sus condiciones y los controles de consentimiento que correspondan. El texto sobre los vídeos y el mapa debe confirmarlo el asesor legal de la empresa.</p><h2>Política de la web actual</h2><p><a href="https://www.menigar.com/politica-de-cookies/" target="_blank" rel="noopener">Consultar la política de cookies publicada por Menigar</a>.</p><p class="source-note">La política de origen describe servicios de la web actual; no se atribuyen automáticamente a este prototipo.</p></div></section>'''
-    (ROOT / "cookies.html").write_text(page("Cookies y almacenamiento", "Información sobre cookies, almacenamiento de borradores y política de origen de Menigar.", "/cookies.html", cookies), encoding="utf-8")
+    write_page(PAGE["cookies"], page("Cookies y almacenamiento", "Información sobre cookies, almacenamiento de borradores y política de origen de Menigar.", PAGE["cookies"], cookies))
 
 
 def instruction_tables(groups):
@@ -320,7 +332,7 @@ def repair_page(record, records_by_id):
     vehicle = " · ".join(dict.fromkeys(v for v in [brand, model] if v and v.lower() not in ["varios", "general", "multimarca", "otras marcas"]))
     path = record["localPath"]
     request = "/solicitud.html?pieza=" + quote(uid, safe="") + "&tipo=consulta"
-    crumb = f'<a href="/servicios.html">Servicios</a><span aria-hidden="true">/</span><span>{e(family)}</span>'
+    crumb = f'<a href="/servicios/">Servicios</a><span aria-hidden="true">/</span><span>{e(family)}</span>'
     body = page_intro(family, title, description, crumb)
     if record.get("isInstruction"):
         body += '<section class="section"><div class="container subpage-grid"><div class="prose">'
@@ -367,16 +379,16 @@ def repair_page(record, records_by_id):
             body += f'<dt>Plazo indicado</dt><dd>{e(public_text(record["timing"], uid, "timing"))}</dd>'
         if record.get("warranty"):
             body += f'<dt>Garantía indicada</dt><dd>{e(public_text(record["warranty"], uid, "warranty"))}</dd>'
-        body += '</dl><p>Confirma las condiciones aplicables a tu pieza con Menigar. El plazo del laboratorio no incluye automáticamente el transporte.</p><p><a href="/garantia.html">Qué cubre la garantía y cómo reclamarla</a></p>'
+        body += '</dl><p>Confirma las condiciones aplicables a tu pieza con Menigar. El plazo del laboratorio no incluye automáticamente el transporte.</p><p><a href="/garantias/">Qué cubre la garantía y cómo reclamarla</a></p>'
     body += '<p class="source-note">La selección del servicio no confirma un diagnóstico ni un presupuesto final.</p>'
-    body += f'''</div><aside class="card contact-card"><p class="eyebrow">Tu siguiente paso</p><h2>Consulta con los datos de tu pieza</h2><p>Cuéntanos qué falla y añade fotos. Este servicio quedará seleccionado y podrás corregirlo.</p><a class="button button-primary" href="{e(request)}">Consultar mi pieza <span aria-hidden="true">↗</span></a><p>El laboratorio podrá orientarte. El presupuesto final depende de la revisión de tu unidad.</p><hr><h3>¿No es tu variante?</h3><a class="button button-secondary" href="/servicios.html">Volver a buscar</a><p><a href="/ayuda.html#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Esta versión solo admite pruebas. Para una consulta real, contacta directamente con el laboratorio.</p></aside></div></section>'''
+    body += f'''</div><aside class="card contact-card"><p class="eyebrow">Tu siguiente paso</p><h2>Consulta con los datos de tu pieza</h2><p>Cuéntanos qué falla y añade fotos. Este servicio quedará seleccionado y podrás corregirlo.</p><a class="button button-primary" href="{e(request)}">Consultar mi pieza <span aria-hidden="true">↗</span></a><p>El laboratorio podrá orientarte. El presupuesto final depende de la revisión de tu unidad.</p><hr><h3>¿No es tu variante?</h3><a class="button button-secondary" href="/servicios/">Volver a buscar</a><p><a href="/preguntas-frecuentes/#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Esta versión solo admite pruebas. Para una consulta real, contacta directamente con el laboratorio.</p></aside></div></section>'''
     detail_head = '<style>.repair-detail-page .page-heading h1{font-size:3rem;line-height:1.1;max-width:1050px;overflow-wrap:anywhere}.repair-detail-page .page-heading .lead{max-width:850px}@media(max-width:760px){.repair-detail-page .page-heading h1{font-size:2rem;line-height:1.15}}</style>'
     if record.get('contentPilot'):
         detail_head += '<link rel="stylesheet" href="/hyundai.css">'
     if record.get('contentExpansion') == 'bmw-v1':
         detail_head += '<link rel="stylesheet" href="/bmw.css">'
     detail_head += '<link rel="stylesheet" href="/reparaciones.css">'
-    return page(title, description[:240], path, body, "servicios.html", detail_head, "repair-detail-page")
+    return page(title, description[:240], path, body, PAGE["servicios"], detail_head, "repair-detail-page")
 
 
 def write_catalogue():
@@ -393,16 +405,15 @@ def write_catalogue():
         raise ValueError("Duplicate catalogue UID; pages were not generated")
     seen_paths = set()
     for record in catalog:
+        # Each ficha keeps its WordPress address; the routers serve only this shape.
         path = record.get("localPath", "")
-        if not re.fullmatch(r"/reparaciones/[a-zA-Z0-9_-]+/", path):
+        if not FICHA_PATH.fullmatch(path):
             raise ValueError(f"Unsafe catalogue path: {path!r}")
         if path in seen_paths:
             raise ValueError(f"Duplicate catalogue path: {path}")
         seen_paths.add(path)
     for record in catalog:
-        folder = ROOT / record["localPath"].lstrip("/")
-        folder.mkdir(parents=True, exist_ok=True)
-        (folder / "index.html").write_text(repair_page(record, lookup), encoding="utf-8")
+        write_page(record["localPath"], repair_page(record, lookup))
     write_copy_report(ROOT)
     print(f"Generated {len(catalog)} source-backed repair pages")
     return sorted(seen_paths)
@@ -412,7 +423,8 @@ def write_search_engine_files(paths):
     namespace = "http://www.sitemaps.org/schemas/sitemap/0.9"
     ET.register_namespace("", namespace)
     tree = ET.Element(f"{{{namespace}}}urlset")
-    for path in ["/", "/servicios.html", "/como-funciona.html", "/garantia.html", "/sobre-nosotros.html", "/ayuda.html"] + paths:
+    # Every page of the new site, as WordPress listed all of its pages, legal ones included.
+    for path in ["/"] + [general["path"] for general in GENERAL_PAGES] + paths:
         item = ET.SubElement(tree, f"{{{namespace}}}url")
         ET.SubElement(item, f"{{{namespace}}}loc").text = ORIGIN + path
     ET.indent(tree, space="  ")

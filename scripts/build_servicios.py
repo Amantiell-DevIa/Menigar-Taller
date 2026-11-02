@@ -1,9 +1,9 @@
 """Services page: specialties, featured services and the selector options (26 Oct 2026).
 
-servicios.html opens with what MENIGAR repairs instead of the whole catalogue in 92 pages. The
-blocks that depend on the catalogue are written here, between markers in servicios.html, so every
-count, brand and title always matches data/catalogo-v2.json and the public titles of
-data/catalogo-v2.js. The rest of the page is edited by hand.
+The services page (/servicios/, in servicios/index.html) opens with what MENIGAR repairs instead of
+the whole catalogue in 92 pages. The blocks that depend on the catalogue are written here, between
+markers in that page, so every count, brand and title always matches data/catalogo-v2.json and the
+public titles of data/catalogo-v2.js. The rest of the page is edited by hand.
 
 The featured services are a choice of the company: change FEATURED (and their photos) and run
     python3 scripts/build_servicios.py
@@ -15,7 +15,7 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
-PAGE = ROOT / 'servicios.html'
+PAGE = ROOT / 'servicios' / 'index.html'
 
 # The six main specialties, with a representative photograph of the kind of piece (not of a vehicle
 # match). «contain» keeps a product shot or a cut-out whole; «cover» fills the frame with a scene.
@@ -106,11 +106,11 @@ def build():
     for key, src, fit, alt, text in SPECIALTIES:
         brands = Counter(record['brand'] for record in services if record['componentKey'] == key and record['brand'] and not GENERIC_BRAND.match(record['brand']))
         top = [brand for brand, _ in brands.most_common(3)]
-        tiles.append(f'''<li><a class="s-family" href="/servicios.html?pieza={key}#resultados" data-catalog-link><span class="s-family-media">{image(src, fit, alt, "(max-width: 600px) 120px, (max-width: 1100px) 46vw, 380px")}</span>
+        tiles.append(f'''<li><a class="s-family" href="/servicios/?pieza={key}#resultados" data-catalog-link><span class="s-family-media">{image(src, fit, alt, "(max-width: 600px) 120px, (max-width: 1100px) 46vw, 380px")}</span>
 <span class="s-family-body"><span class="s-family-name">{escape(names[key])}</span><span class="s-family-text">{escape(text)}</span>
 <span class="s-family-meta">{plural(counts[key], "ficha", "fichas")} · {escape(", ".join(top))} y más</span></span><span class="s-family-go" aria-hidden="true">→</span></a></li>''')
     minor = [family for family in families if family['key'] not in {key for key, *_ in SPECIALTIES} and counts[family['key']]]
-    minor_html = ''.join(f'<li><a href="/servicios.html?pieza={family["key"]}#resultados" data-catalog-link>{escape(family["name"])}</a></li>' for family in minor)
+    minor_html = ''.join(f'<li><a href="/servicios/?pieza={family["key"]}#resultados" data-catalog-link>{escape(family["name"])}</a></li>' for family in minor)
     specialties = (f'<ul class="s-families">{"".join(tiles)}</ul>\n'
                    f'<div class="s-minor"><p>También reparamos</p><ul>{minor_html}</ul></div>')
 
@@ -137,7 +137,7 @@ def build_home():
     _, families, _ = catalogue()
     names = {family['key']: family['name'] for family in families}
     arrow = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>'
-    cards = ''.join(f'<li><a class="h-cat" href="/servicios.html?pieza={key}#resultados"><span class="h-cat-media">'
+    cards = ''.join(f'<li><a class="h-cat" href="/servicios/?pieza={key}#resultados"><span class="h-cat-media">'
                     f'{image(src, fit, alt, "(max-width: 600px) 44vw, (max-width: 1100px) 30vw, 180px", "h")}</span>'
                     f'<span class="h-cat-name">{escape(names[key])}</span><span class="h-cat-go" aria-hidden="true">{arrow}</span></a></li>'
                     for key, src, fit, alt, _ in SPECIALTIES)
@@ -157,7 +157,7 @@ def fill(path, blocks):
 def write():
     fill(PAGE, build())
     fill(ROOT / 'index.html', build_home())
-    print('servicios.html e index.html actualizados')
+    print('servicios/index.html e index.html actualizados')
 
 if __name__ == '__main__':
     write()

@@ -9,10 +9,14 @@ const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
-const ROOT_FILES = ['index.html', 'servicios.html', 'solicitud.html', 'como-funciona.html', 'garantia.html', 'sobre-nosotros.html',
-  'ayuda.html', 'privacidad.html', 'condiciones.html', 'cookies.html',
+const ROOT_FILES = ['index.html', 'solicitud.html',
   'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'servicios.css', 'paginas.css',
   'app.js', 'solicitud.js', 'resumen.js', 'robots.txt', 'sitemap.xml', 'resumen.html', 'receipt.js', 'opciones-hero.html', 'laboratorio.js', 'laboratorio.html', 'favicon.ico', 'apple-touch-icon.png'];
+// Pages served from a folder at their WordPress address (scripts/site_paths.py): these general pages
+// and every ficha of the catalogue.
+const PAGE_FOLDERS = ['servicios/', 'envios/', 'garantias/', 'preguntas-frecuentes/', 'sobre-nosotros/',
+  'politica-de-privacidad/', 'politica-de-cookies/', 'avisos-legales/'];
+const FICHA_PATH = /^\/(?:reparacion|fallo|programacion|sustitucion)-[a-z0-9_-]+\/(?:[a-z0-9_-]+\/){0,3}$/;
 const DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js'];
 const ASSET_TYPES = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.ico', '.pdf', '.css', '.woff2']);
 
@@ -41,8 +45,13 @@ fs.rmSync(out, { recursive: true, force: true });
 fs.writeFileSync(path.join(root, 'laboratorio.html'), require('./build_laboratorio.cjs').buildLaboratorio(fs.readFileSync(path.join(root, 'index.html'), 'utf8')));
 ROOT_FILES.forEach(copy);
 DATA_FILES.forEach(name => copy(path.join('data', name)));
-for (const entry of fs.readdirSync(path.join(root, 'reparaciones'), { withFileTypes: true })) {
-  if (entry.isDirectory() && /^[A-Za-z0-9_-]+$/.test(entry.name)) copy(path.join('reparaciones', entry.name, 'index.html'));
+PAGE_FOLDERS.forEach(folder => copy(path.join(folder, 'index.html')));
+// The fichas the catalogue lists, and only those, whatever else their folders hold.
+const catalogue = fs.readFileSync(path.join(root, 'data', 'catalogo-v2.js'), 'utf8');
+const records = JSON.parse(catalogue.split('window.MENIGAR_CATALOG = ')[1].trim().replace(/;$/, ''));
+for (const record of records) {
+  if (!FICHA_PATH.test(record.localPath)) throw new Error('Unexpected ficha address: ' + record.localPath);
+  copy(path.join(record.localPath.slice(1), 'index.html'));
 }
 walk('assets', file => ASSET_TYPES.has(path.extname(file).toLowerCase())
   || (file.startsWith(path.join('assets', 'fonts')) && /^LICENSE.*\.txt$/.test(path.basename(file))));
