@@ -617,6 +617,8 @@ body{background:var(--p-ivory)}
 .button-secondary{background:var(--p-card);border-color:var(--p-line-strong);color:var(--p-ink)}
 .button-secondary:hover{background:#fff;border-color:var(--p-ink)}
 input[type=text],input[type=email],input[type=tel],input[type=search],input[type=number],input[type=date],select,textarea{border-color:var(--p-line-strong);color:var(--p-ink)}
+/* An empty search field keeps no room for its invisible clear button, so the hint is not cut on phones. */
+input[type=search]:placeholder-shown::-webkit-search-cancel-button{display:none}
 .prose h2,.prose h3{color:var(--p-ink)}
 .detail-list>div{border-color:var(--p-line)}
 .reference-list li{background:var(--p-ivory-2);border-color:var(--p-line)}

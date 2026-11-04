@@ -37,7 +37,8 @@ class ServicesPageTests(unittest.TestCase):
             with self.subTest(element=element_id):
                 self.assertEqual(len(re.findall(rf'\bid="{element_id}"', self.page)), 1)
         self.assertRegex(self.page, r'<input type="search" name="q" id="catalog-query" form="catalog-filter-form"')
-        self.assertRegex(self.page, r'<button class="button button-primary" type="submit" form="catalog-filter-form">')
+        # On phones the button shows only the arrow; its visually hidden text keeps the name «Buscar».
+        self.assertRegex(self.page, r'<button class="button button-primary s-search-btn" type="submit" form="catalog-filter-form"><span>Buscar</span><svg [^>]*aria-hidden="true"')
 
     def test_specialties_and_featured_services_are_real(self):
         tiles = re.findall(r'<a class="s-family" href="/servicios/\?pieza=(\w+)#resultados" data-catalog-link>', self.page)

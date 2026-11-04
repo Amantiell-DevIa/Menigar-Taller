@@ -112,5 +112,9 @@
  .h-search-btn{padding:0 18px}
  .h-search-btn span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 }
+@media(max-width:400px){
+ /* The narrowest phones (360 px): a slightly smaller hint, so it is never cut. */
+ .h-search input::placeholder{font-size:1rem}
+}
 @media(prefers-reduced-motion:reduce){.h-cat{transition:none}.h-cat:hover{transform:none}}
 @media print{.h-page{background:#fff}.h-pieces{display:none}}
