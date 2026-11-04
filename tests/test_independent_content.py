@@ -52,7 +52,8 @@ class IndependentContentTests(unittest.TestCase):
 
     def test_every_selected_media_file_exists_and_matches_its_manifest(self):
         self.assertEqual(self.media['totals']['files'], len(self.media['files']))
-        self.assertGreater(len(self.media['files']), 3800)
+        # Fewer than the 3,871 of October: since 4 Nov 2026 the small copies of a photo share its original.
+        self.assertGreater(len(self.media['files']), 3300)
         for entry in self.media['files']:
             path = ROOT / entry['localPath'].lstrip('/')
             with self.subTest(path=entry['localPath']):

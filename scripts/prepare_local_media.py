@@ -22,6 +22,14 @@ MANIFEST = ROOT / 'data/media-local-manifest.json'
 # Replaced by the new site's own interface. All omissions remain inventoried.
 DECORATIVE_NAMES = {'ventajas-150x150.png', 'icons.jpg', 'circuito_animado-277x130.gif',
                     'senal_peligro-150x150.png'}
+# Live Composer cut its own copies of a photo (name-400x300.jpg), which WordPress does not list as
+# sizes of the image. A copy gives way to its original only when the original is clearly larger,
+# still and, cut to the same proportions, the same picture.
+COPY_SUFFIX = re.compile(r'-\d+x\d+(?=\.\w+$)')
+CLEARLY_LARGER = 1.25
+# Mean difference out of 255 between two small grey versions: a copy and its original stay
+# under 3, and two different photos start at 26.
+SAME_PICTURE = 10
 
 
 def key(url):
@@ -43,8 +51,27 @@ def decorative(url):
     return name in DECORATIVE_NAMES or bool(re.search(r'^(?:logo[_-]|banner[_-]|google[_-]|estrellas[_-]|trabaja_con)', name))
 
 
+def flattened(image):
+    """A grey version of an image, with any transparency over white."""
+    from PIL import Image
+    rgba = image.convert('RGBA')
+    return Image.alpha_composite(Image.new('RGBA', rgba.size, 'white'), rgba).convert('L')
+
+
+def replaces_copy(copy_path, original_path):
+    """True when the original can stand in for a Live Composer copy of it."""
+    from PIL import Image, ImageChops, ImageOps, ImageStat
+    with Image.open(copy_path) as copy, Image.open(original_path) as original:
+        if getattr(original, 'is_animated', False) or max(original.size) < max(copy.size) * CLEARLY_LARGER:
+            return False
+        small, large = flattened(copy), flattened(original)
+    large = ImageOps.fit(large, small.size)
+    grid = (48, 48)
+    return ImageStat.Stat(ImageChops.difference(small.resize(grid), large.resize(grid))).mean[0] <= SAME_PICTURE
+
+
 def build():
-    from PIL import Image, ImageOps
+    from PIL import Image
     source_files = {}
     with (BACKUP / 'control/archivos-copiados.jsonl').open() as stream:
         for line in stream:
@@ -61,13 +88,26 @@ def build():
     files, by_content, url_index, occurrences, missing, omitted = [], {}, {}, [], [], []
     resolved = {}
 
+    def larger_original(url):
+        full = COPY_SUFFIX.sub('', url)
+        copy, original = source_files.get(key(url)), source_files.get(key(full))
+        if full == url or not copy or not original:
+            return None
+        try:
+            return full if replaces_copy(BACKUP / copy['local_path'], BACKUP / original['local_path']) else None
+        except OSError:
+            return None
+
     def resolve(source, url):
         path = key(url)
         cache_key = (source, path)
         if cache_key in resolved:
             return resolved[cache_key]
         item = metadata.get(cache_key, {})
-        candidates = [item.get('source_url', ''), url]
+        full = None if item else larger_original(url)
+        if full:
+            item = metadata.get((source, key(full)), {})
+        candidates = [item.get('source_url', ''), full or '', url]
         candidates += [s.get('source_url', '') for s in sorted(item.get('media_details', {}).get('sizes', {}).values(), key=lambda s: -s.get('width', 0))]
         selected = next(((candidate, source_files[key(candidate)]) for candidate in candidates if key(candidate) in source_files), None)
         if selected is None:
@@ -95,7 +135,9 @@ def build():
                 entry['format'] = 'SVG'
             else:
                 with Image.open(original) as im:
-                    image = ImageOps.exif_transpose(im)
+                    # The rotation tag is not applied: all 43 tagged photos are already upright,
+                    # and turning them laid the displays on their side or upside down.
+                    image = im.copy()
                     entry['sourceWidth'], entry['sourceHeight'] = image.size
                     if getattr(im, 'is_animated', False):
                         target = folder / (digest[:16] + '-' + stem + suffix)
@@ -149,7 +191,8 @@ def build():
         if index and index % 300 == 0:
             print('Documentos revisados:', index, 'archivos propios:', len(files), flush=True)
     report = {'schemaVersion': 1, 'source': 'verified-external-backup', 'networkUsed': False,
-              'optimization': {'maxDimensions': [1600, 1600], 'jpegWebpQuality': 90, 'pngConversion': 'lossless', 'originalsPreservedInBackup': True},
+              'optimization': {'maxDimensions': [1600, 1600], 'jpegWebpQuality': 90, 'pngConversion': 'lossless', 'originalsPreservedInBackup': True,
+                               'exifOrientation': 'not applied'},
               'files': files, 'urlIndex': url_index, 'occurrences': occurrences,
               'omitted': omitted, 'missing': missing,
               'totals': {'files': len(files), 'imageOccurrences': len(occurrences), 'omittedOccurrences': len(omitted),
