@@ -10,10 +10,19 @@ import json
 from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit, urlencode
-from public_copy import public_text, photo_caption, REVIEWED_INDEX_GROUPS
+from public_copy import public_text, photo_caption, REVIEWED_INDEX_GROUPS, YOUTUBE_VIDEOS
 from site_paths import ABS_RESULTS, CONTACT, PAGE
 
 RUN = '2026-10-13-publico'
+PLAY_ICON = '<svg viewBox="0 0 24 24" focusable="false"><path d="M8.5 5.8v12.4L18.6 12Z"/></svg>'
+
+
+def youtube_video(url):
+    """The reviewed video behind an embed address, as (id, title, poster), or None for any other embed."""
+    match = re.match(r'https?://www\.youtube(?:-nocookie)?\.com/embed/([\w-]{11})(?:[?#]|$)', url)
+    if match and match.group(1) in YOUTUBE_VIDEOS:
+        return (match.group(1), *YOUTUBE_VIDEOS[match.group(1)])
+    return None
 
 
 def url_path(value):
@@ -257,6 +266,7 @@ def render_sections(record):
         if section['title']:
             output.append('<h2>' + e(public_text(section['title'], record['uid'], 'section:' + section['anchor'])) + '</h2>')
         images = []
+        videos = []
         photo_blocks = [b for b in section['blocks'] if b['kind'] == 'image']
         photo_orders = {b['order']: i for i, b in enumerate(photo_blocks, 1)}
 
@@ -265,18 +275,33 @@ def render_sections(record):
                 output.append('<div class="repair-photo-grid">' + ''.join(images) + '</div>')
                 images.clear()
 
+        def flush_videos():
+            if videos:
+                grid = 'repair-video-grid repair-video-grid--varios' if len(videos) > 1 else 'repair-video-grid'
+                output.append('<div class="' + grid + '">' + ''.join(videos) + '</div>')
+                videos.clear()
+
         for block in section['blocks']:
             kind, text = block['kind'], block.get('text', '')
             marker = ' data-source-order="' + str(block['order']) + '"'
             if not section['title'] and kind in {'heading', 'text'} and ' '.join(text.split()) == ' '.join(record.get('description', '').split()):
                 continue  # Already shown, unchanged, in the page introduction.
             if kind == 'image':
+                flush_videos()
                 caption = photo_caption(record, block, section['title'], photo_orders[block['order']], len(photo_blocks))
                 images.append('<figure' + marker + '><a href="' + e(block['src']) + '" target="_blank" rel="noopener" aria-label="Ampliar: ' + e(caption) + '"><img src="' + e(block['src']) + '" alt="' + e(block['alt']) + '" width="640" height="480" loading="lazy" decoding="async"><span class="repair-photo-zoom" aria-hidden="true">Ampliar ↗</span></a><figcaption>' + e(caption) + '</figcaption></figure>')
                 continue
             if kind == 'link' and not text and block.get('href', '').startswith('/assets/media/'):
                 continue
             flush_images()
+            video = youtube_video(block.get('src', '')) if kind == 'embed' else None
+            if video:
+                # Same player as Sobre nosotros: nothing reaches YouTube until the visitor clicks (setupEmbeds in app.js).
+                video_id, title, poster = video
+                videos.append('<figure class="repair-video"' + marker + '><div class="repair-video-frame" data-embed="youtube" data-embed-src="' + e(video_id) + '" data-embed-title="Vídeo de YouTube: ' + e(title) + '"><img src="' + e(poster) + '" width="640" height="480" alt="" loading="lazy" decoding="async"><a class="repair-video-play" href="https://www.youtube.com/watch?v=' + e(video_id) + '" target="_blank" rel="noopener noreferrer" data-embed-load aria-label="Reproducir el vídeo: ' + e(title) + '"><span class="repair-video-button" aria-hidden="true">' + PLAY_ICON + '</span></a></div><figcaption>Vídeo · ' + e(title) + '</figcaption></figure>')
+                continue
+            if kind not in {'heading', 'text'} or text:
+                flush_videos()
             if kind in {'heading', 'text'} and text:
                 tag = 'h3' if kind == 'heading' and len(text) < 115 and not re.match(r'^[-–•]', text) else 'p'
                 output.append('<' + tag + marker + '>' + e(public_text(text, record['uid'], 'block:' + str(block['order']))) + '</' + tag + '>')
@@ -303,11 +328,12 @@ def render_sections(record):
                 query = urlencode({'pieza': record['uid'], 'tipo': 'consulta', 'consulta': text})
                 output.append('<a class="repair-related-link"' + marker + ' href="/solicitud.html?' + e(query) + '">Consultar: ' + e(text) + ' →</a>')
             elif kind == 'embed':
-                # External videos stay explicit links; no third-party embed is loaded.
+                # Any embed without a reviewed title and poster stays an explicit link.
                 url = block.get('src', '')
                 if url.startswith(('https://', 'http://')):
                     output.append('<a class="repair-related-link"' + marker + ' href="' + e(url) + '" target="_blank" rel="noopener">Ver vídeo de este servicio ↗</a>')
         flush_images()
+        flush_videos()
         if section.get('vehicleModel') and any(b['kind'] in {'image', 'table'} for b in section['blocks']):
             model = section['vehicleModel']
             query = urlencode({'pieza': record['uid'], 'marca': record['brand'], 'modelo': model, 'tipo': 'consulta'})

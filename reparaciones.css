@@ -133,3 +133,16 @@
 /* Heading measure of every ficha. It lives here because the CSP admits stylesheets only, never an inline style. */
 .repair-detail-page .page-heading h1 { max-width: 1050px; font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem); line-height: 1.1; overflow-wrap: anywhere; }
 .repair-detail-page .page-heading .lead { max-width: 850px; }
+/* Videos of the fichas: MENIGAR's own photo as the poster; the player loads only on click (setupEmbeds in app.js). */
+.repair-video-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; max-width: 720px; margin: 22px 0; }
+.repair-video { min-width: 0; margin: 0; overflow: hidden; border: 1px solid var(--p-line); border-radius: var(--r-card); background: var(--p-card); }
+.repair-video-frame { position: relative; aspect-ratio: 16 / 9; background: #000; }
+.repair-video-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.repair-video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.repair-video-play { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(4, 22, 55, .2); }
+.repair-video-button { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%; background: #fff; color: var(--on-action-dark); box-shadow: 0 10px 28px -10px rgba(4, 22, 55, .7); transition: transform .3s var(--p-ease); }
+.repair-video-button svg { width: 26px; height: 26px; margin-left: 3px; fill: currentColor; }
+.repair-video-play:hover .repair-video-button, .repair-video-play:focus-visible .repair-video-button { transform: scale(1.08); }
+.repair-video-play:focus-visible { outline-offset: -6px; }
+.repair-video figcaption { padding: 12px 14px; border-top: 1px solid var(--p-line); background: var(--p-ivory-2); color: var(--p-ink-2); font-size: .83rem; line-height: 1.5; }
+@media (min-width: 761px) { .repair-video-grid--varios { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; } }

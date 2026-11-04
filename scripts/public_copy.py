@@ -148,6 +148,37 @@ REVIEWED_INDEX_GROUPS = {
     ],
 }
 
+# The videos the fichas carry, all on MENIGAR's own YouTube channel (checked 4 November 2026).
+# Title: what the video shows, without the channel's «TEST REPAIR» label. Poster: MENIGAR's own photo of the
+# same model, chosen by eye, because the CSP admits no image from YouTube.
+YOUTUBE_VIDEOS = {
+    'LT4vR-0Y2_k': ('Cuadro de instrumentos Audi A3 8P', '/assets/media/97/97b251d5be253467-audi-a3-8p.webp'),
+    'DRmWoI8biG4': ('Cuadro de instrumentos Citroen C4', '/assets/media/99/99ee915ede9c2bf6-citroen-c4-1.webp'),
+    'IxQAC_Ijudo': ('Cuadro de instrumentos Ford Focus C-Max', '/assets/media/dd/ddcecc94754ef42c-display-ford-focus2.webp'),
+    '61dTflhPwAM': ('Cuadro de instrumentos Peugeot 307', '/assets/media/27/27da0a703737263d-peugeot-307.webp'),
+    'GgX4pXNHIyE': ('Cuadro de instrumentos Renault Megane 2', '/assets/media/5c/5c4a9f62e68bc61a-renault-megane-2.webp'),
+    'RIBZI4hAPGc': ('Cuadro de instrumentos Renault Megane 4', '/assets/media/8a/8abc5900886ffe63-renault-megane-iv.webp'),
+    'q2KgvFlVAeQ': ('Cuadro de instrumentos Renault Scenic 2', '/assets/media/40/40ef0b2d19d2f0eb-renault-scenic-2.webp'),
+    'hfXBV_sgGAA': ('Cuadro de instrumentos Seat Ibiza 6L', '/assets/media/b5/b5fccecf6184d297-seat-ibiza-6l.webp'),
+    'iFx2z7XWDBs': ('Cuadro de instrumentos Toyota Prius', '/assets/media/12/127f028d9efb5237-toyota-prius.webp'),
+    'fDXJFpaodI8': ('Cuadro de instrumentos VW Passat', '/assets/media/ac/acd49a8788796cb7-vw-passat-b6.webp'),
+    '5vc4uaEtXWo': ('Cuadro de instrumentos VW T4', '/assets/media/85/854a170636722282-vw-t4-transporter-caravelle.webp'),
+    'h7pEn5sztoU': ('Cuentakilómetros Porsche 964', '/assets/media/12/12901320a155e6f0-reloj-porsche-964.webp'),
+    'gjX6lrWqZJ0': ('Display Renault Laguna 3', '/assets/media/b5/b564e2afd2f194e0-display-laguna-3.webp'),
+    '5aGHWrZTaJs': ('Display y aguja del velocímetro, Mercedes Vito', '/assets/media/28/284e99bfebdbc84c-display-mercedes-viano-w639.webp'),
+    'CNIa_aITpu4': ('Display y cuadro de instrumentos Peugeot 207', '/assets/media/1b/1b42368f55fe8cef-peugeot-207.webp'),
+    '7PVE2mocaso': ('Fallo OIL del display Nissan', '/assets/media/28/289c1782039f493a-display-nissan-cabstar-atleon.webp'),
+    'PtxhRibOHHY': ('Marcador de combustible Audi A4', '/assets/media/1e/1e2c771210911711-audi-a4-b8.webp'),
+    'nqp4b0Ww1lY': ('Marcador de combustible Audi TT', '/assets/media/5f/5f07b6eb29fe5514-audi-tt-fis.webp'),
+    '1DWTQse8ujU': ('Pantalla multimedia Jeep Uconnect', '/assets/media/57/57dcaf2d047dc55a-pantalla-multimedia-jeep-uconnect-5.webp'),
+    'SVlizCtuYd8': ('Pantalla multimedia Mini', '/assets/media/20/20ad5004a254e06d-pantalla-multimedia-mini-rota.webp'),
+    '5T4_RNRwfPU': ('Pantalla multimedia Opel IntelliLink', '/assets/media/77/770c2e00c2cff25c-pantalla-opel-astra-k.webp'),
+    '1FOr0biPJI0': ('Pantalla multimedia Seat Leon', '/assets/media/08/08b2b14384c30c02-pantalla-seat-leon19.webp'),
+    '-nxf6uDPNd0': ('Pantalla táctil Hyundai Tucson con burbujas', '/assets/media/97/97bdb4b17ec447f3-pantalla-hyundai-tucson2.webp'),
+    'R0hrL_p9y9g': ('Pantalla táctil VW MIB 2.0', '/assets/media/85/850c1ff9de5d9fa5-int-pantalla-vw-golf-7.webp'),
+    'SPo2gSGeuE0': ('Velocímetro Mercedes Vito', '/assets/media/91/91886f47fb92f6ad-mercedes-vito-w638.webp'),
+}
+
 _changes = {}
 
 
