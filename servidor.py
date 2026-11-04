@@ -47,6 +47,21 @@ def load_redirects():
     return {item['source']: item['destination'] for item in config.get('redirects', [])}
 
 
+def load_csp():
+    """The preview's Content-Security-Policy from vercel.json, so what Vercel blocks is blocked here too.
+
+    Until 2 Nov 2026 this server allowed inline styles, and an inline <style> in every ficha went unnoticed."""
+    try:
+        config = json.loads((ROOT / 'vercel.json').read_text(encoding='utf-8'))
+    except (OSError, ValueError):
+        return "default-src 'self'"
+    for rule in config.get('headers', []):
+        for header in rule.get('headers', []):
+            if header['key'] == 'Content-Security-Policy':
+                return header['value']
+    return "default-src 'self'"
+
+
 class ValidationError(ValueError):
     pass
 
@@ -235,6 +250,7 @@ def summary_html(reference, created, payload, token=''):
 
 def make_handler(storage):
     redirects = load_redirects()
+    csp = load_csp()
 
     class Handler(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
@@ -245,7 +261,7 @@ def make_handler(storage):
             self.send_header('X-Content-Type-Options', 'nosniff')
             self.send_header('Referrer-Policy', 'same-origin')
             self.send_header('X-Robots-Tag', 'noindex, nofollow')
-            self.send_header('Content-Security-Policy', "default-src 'self'; img-src 'self' data: https://www.menigar.com https://abs.menigar.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-src https://www.youtube-nocookie.com https://www.google.com; form-action 'self'; base-uri 'self'; frame-ancestors 'none'")
+            self.send_header('Content-Security-Policy', csp)
             super().end_headers()
 
         def log_message(self, fmt, *args):

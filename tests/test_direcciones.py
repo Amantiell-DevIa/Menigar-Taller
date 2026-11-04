@@ -112,6 +112,20 @@ class UrlParityTests(unittest.TestCase):
                         problems.append((document.relative_to(ROOT).as_posix(), href, 'no section'))
         self.assertEqual(problems, [])
 
+    def test_fichas_link_to_the_pages_above_them_like_wordpress(self):
+        """WordPress linked every page to its parent; the breadcrumb keeps those links to the brand and family pages."""
+        addresses = {row['localPath'] for row in self.rows}
+        linked = 0
+        for row in self.rows:
+            parts = row['localPath'].strip('/').split('/')
+            above = [path for path in ('/' + '/'.join(parts[:depth]) + '/' for depth in range(1, len(parts))) if path in addresses]
+            crumb = re.search(r'<nav class="breadcrumb"[^>]*>(.*?)</nav>', served(row['localPath']).read_text(), re.S).group(1)
+            with self.subTest(path=row['localPath']):
+                self.assertEqual(re.findall(r'href="([^"]+)"', crumb), ['/', '/servicios/', *above])
+            linked += bool(above)
+        # 1,549 of the 1,642 fichas have a WordPress page above them.
+        self.assertEqual(linked, 1549)
+
     def test_sitemap_and_canonicals_use_the_wordpress_addresses(self):
         locs = re.findall(r'<loc>([^<]+)</loc>', (ROOT / 'sitemap.xml').read_text())
         self.assertEqual(len(locs), len(set(locs)))

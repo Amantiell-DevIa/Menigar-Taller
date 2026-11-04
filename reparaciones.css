@@ -130,6 +130,6 @@
 .existing-repair-contact { border-left-color: var(--p-accent); }
 .repair-source a:focus-visible, .repair-table-scroll:focus-visible, .repair-variant:focus { outline-color: #c67b11; }
 @media (min-width: 1001px) { .repair-detail-page .contact-card { position: sticky; top: 92px; } }
-/* Heading measure kept in CSS (the generated inline style is blocked by the production CSP). */
+/* Heading measure of every ficha. It lives here because the CSP admits stylesheets only, never an inline style. */
 .repair-detail-page .page-heading h1 { max-width: 1050px; font-size: clamp(2rem, 1.2rem + 2.4vw, 3rem); line-height: 1.1; overflow-wrap: anywhere; }
 .repair-detail-page .page-heading .lead { max-width: 850px; }

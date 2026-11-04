@@ -322,17 +322,45 @@ def instruction_tables(groups):
     return "".join(parts)
 
 
-def repair_page(record, records_by_id):
+GENERIC_VEHICLES = {"varios", "general", "multimarca", "otras marcas"}
+
+
+def ancestor_pages(record, records_by_path):
+    """The WordPress pages above a ficha, top first, as (address, label). WordPress linked every page to its parent."""
+    parts = record["localPath"].strip("/").split("/")
+    ancestors = []
+    for depth in range(1, len(parts)):
+        parent = records_by_path.get("/" + "/".join(parts[:depth]) + "/")
+        if not parent:
+            continue
+        if depth == 1:
+            label = parent.get("componentName")
+        else:
+            label = next((v for v in (parent.get("model"), parent.get("brand")) if v and v.lower() not in GENERIC_VEHICLES), None)
+        ancestors.append((parent["localPath"], label or public_text(parent.get("title"), parent["uid"], "title")))
+    return ancestors
+
+
+def repair_page(record, records_by_id, records_by_path=None):
+    if records_by_path is None:
+        records_by_path = {item["localPath"]: item for item in records_by_id.values()}
     uid = record["uid"]
     title = public_text(record.get("title") or record.get("variant") or record.get("model") or record.get("componentName"), uid, 'title')
     description = public_text(record.get("description") or f'Información sobre {title}. Consulta referencias y cuéntanos la avería de tu pieza.', uid, 'description')
     family = record.get("componentName") or "Reparación electrónica"
     brand = record.get("brand") or ""
     model = record.get("model") or ""
-    vehicle = " · ".join(dict.fromkeys(v for v in [brand, model] if v and v.lower() not in ["varios", "general", "multimarca", "otras marcas"]))
+    vehicle = " · ".join(dict.fromkeys(v for v in [brand, model] if v and v.lower() not in GENERIC_VEHICLES))
     path = record["localPath"]
     request = "/solicitud.html?pieza=" + quote(uid, safe="") + "&tipo=consulta"
-    crumb = f'<a href="/servicios/">Servicios</a><span aria-hidden="true">/</span><span>{e(family)}</span>'
+    # Servicios, then the family and brand pages above the ficha as links; the family is named as text
+    # when it has no page of its own (ABS lost /reparacion-abs/).
+    ancestors = ancestor_pages(record, records_by_path)
+    crumbs = ['<a href="/servicios/">Servicios</a>']
+    if not (ancestors and ancestors[0][0].count("/") == 2):
+        crumbs.append(f'<span>{e(family)}</span>')
+    crumbs += [f'<a href="{e(address)}">{e(label)}</a>' for address, label in ancestors]
+    crumb = '<span aria-hidden="true">/</span>'.join(crumbs)
     body = page_intro(family, title, description, crumb)
     if record.get("isInstruction"):
         body += '<section class="section"><div class="container subpage-grid"><div class="prose">'
@@ -382,7 +410,7 @@ def repair_page(record, records_by_id):
         body += '</dl><p>Confirma las condiciones aplicables a tu pieza con Menigar. El plazo del laboratorio no incluye automáticamente el transporte.</p><p><a href="/garantias/">Qué cubre la garantía y cómo reclamarla</a></p>'
     body += '<p class="source-note">La selección del servicio no confirma un diagnóstico ni un presupuesto final.</p>'
     body += f'''</div><aside class="card contact-card"><p class="eyebrow">Tu siguiente paso</p><h2>Consulta con los datos de tu pieza</h2><p>Cuéntanos qué falla y añade fotos. Este servicio quedará seleccionado y podrás corregirlo.</p><a class="button button-primary" href="{e(request)}">Consultar mi pieza <span aria-hidden="true">↗</span></a><p>El laboratorio podrá orientarte. El presupuesto final depende de la revisión de tu unidad.</p><hr><h3>¿No es tu variante?</h3><a class="button button-secondary" href="/servicios/">Volver a buscar</a><p><a href="/preguntas-frecuentes/#reparacion-en-curso">Consultar una reparación en curso</a></p><p class="source-note">Esta versión solo admite pruebas. Para una consulta real, contacta directamente con el laboratorio.</p></aside></div></section>'''
-    detail_head = '<style>.repair-detail-page .page-heading h1{font-size:3rem;line-height:1.1;max-width:1050px;overflow-wrap:anywhere}.repair-detail-page .page-heading .lead{max-width:850px}@media(max-width:760px){.repair-detail-page .page-heading h1{font-size:2rem;line-height:1.15}}</style>'
+    detail_head = ''
     if record.get('contentPilot'):
         detail_head += '<link rel="stylesheet" href="/hyundai.css">'
     if record.get('contentExpansion') == 'bmw-v1':
@@ -412,8 +440,9 @@ def write_catalogue():
         if path in seen_paths:
             raise ValueError(f"Duplicate catalogue path: {path}")
         seen_paths.add(path)
+    by_path = {record["localPath"]: record for record in catalog}
     for record in catalog:
-        write_page(record["localPath"], repair_page(record, lookup))
+        write_page(record["localPath"], repair_page(record, lookup, by_path))
     write_copy_report(ROOT)
     print(f"Generated {len(catalog)} source-backed repair pages")
     return sorted(seen_paths)
