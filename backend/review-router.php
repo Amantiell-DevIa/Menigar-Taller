@@ -30,13 +30,13 @@ try {
         header('Location: /' . $relative . '/' . ($query !== '' ? '?' . $query : ''), true, 301); return;
     }
     $allowed = $path === '/' || in_array($relative, $files, true)
-        || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2)$~iD', $path))
+        || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2|mp4)$~iD', $path))
         || $isPage(preg_replace('~index\.html$~D', '', $relative));
     $target = realpath($publicRoot . ($path === '/' ? '/index.html' : $path));
     if ($target && is_dir($target)) $target = realpath($target . '/index.html');
     if (!$allowed || !$target || !is_file($target) || !str_starts_with($target, realpath($publicRoot) . '/')) { http_response_code(404); return; }
     if (!in_array($_SERVER['REQUEST_METHOD'] ?? '', ['GET', 'HEAD'], true)) { header('Allow: GET, HEAD'); http_response_code(405); return; }
-    $types = ['html'=>'text/html; charset=utf-8','css'=>'text/css; charset=utf-8','js'=>'text/javascript; charset=utf-8','xml'=>'application/xml; charset=utf-8','txt'=>'text/plain; charset=utf-8','jpg'=>'image/jpeg','jpeg'=>'image/jpeg','png'=>'image/png','gif'=>'image/gif','webp'=>'image/webp','svg'=>'image/svg+xml','ico'=>'image/x-icon','pdf'=>'application/pdf','woff2'=>'font/woff2'];
+    $types = ['html'=>'text/html; charset=utf-8','css'=>'text/css; charset=utf-8','js'=>'text/javascript; charset=utf-8','xml'=>'application/xml; charset=utf-8','txt'=>'text/plain; charset=utf-8','jpg'=>'image/jpeg','jpeg'=>'image/jpeg','png'=>'image/png','gif'=>'image/gif','webp'=>'image/webp','svg'=>'image/svg+xml','ico'=>'image/x-icon','pdf'=>'application/pdf','woff2'=>'font/woff2','mp4'=>'video/mp4'];
     header('Content-Type: ' . ($types[strtolower(pathinfo($target, PATHINFO_EXTENSION))] ?? 'application/octet-stream'));
     header('Content-Length: ' . filesize($target));
     if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'HEAD') readfile($target);

@@ -37,7 +37,7 @@ $folder = preg_replace('~index\.html$~D', '', $relative);
 // A folder without its own index.html would make the PHP server look for one in the folders above it.
 $allowed = $path === '/' || in_array($relative, $rootFiles, true)
     || in_array($relative, ['data/catalogo-v2.js','data/home-index.js','data/family-media.js'], true)
-    || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2)$~i', $path))
+    || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2|mp4)$~i', $path))
     || ($isPage($folder) && is_file($root . '/' . $folder . 'index.html'));
 $target = realpath($root . ($path === '/' ? '/index.html' : $path));
 if (!$allowed || !$target || !str_starts_with($target, $root . '/')) { http_response_code(404); exit; }

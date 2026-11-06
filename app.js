@@ -675,11 +675,13 @@
 
   // Third-party players load only when the visitor asks for them: until that
   // click no request reaches YouTube or Google Maps. Without JavaScript the
-  // video links open YouTube and the map link opens Google Maps.
+  // video links open YouTube and the map link opens Google Maps. The site's own
+  // videos wait for the click as well, so a visit does not download them.
   function setupEmbeds() {
     const sources = {
       youtube: id => /^[\w-]{11}$/.test(id) ? 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0&playsinline=1' : '',
-      map: url => /^https:\/\/www\.google\.com\/maps\/embed\?pb=[\w!%.-]+$/.test(url) ? url : ''
+      map: url => /^https:\/\/www\.google\.com\/maps\/embed\?pb=[\w!%.-]+$/.test(url) ? url : '',
+      video: path => /^\/assets\/video\/[\w-]+\.mp4$/.test(path) ? path : ''
     };
     document.querySelectorAll('[data-embed]').forEach(frame => {
       const trigger = frame.querySelector('[data-embed-load]');
@@ -690,15 +692,24 @@
       trigger.addEventListener('click', event => {
         if (event.button > 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
-        const player = document.createElement('iframe');
+        const player = document.createElement(kind === 'video' ? 'video' : 'iframe');
         player.src = source;
         player.title = frame.getAttribute('data-embed-title') || '';
-        player.setAttribute('allow', (kind === 'youtube' ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ' : '') + 'fullscreen');
-        // The site sends no referrer; both players need the page origin to load.
-        player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        if (kind === 'video') {
+          player.controls = true;
+          player.playsInline = true;
+          // One video at a time: starting one pauses the other.
+          player.addEventListener('play', () => document.querySelectorAll('[data-embed] video').forEach(other => { if (other !== player) other.pause(); }));
+        } else {
+          player.setAttribute('allow', (kind === 'youtube' ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; ' : '') + 'fullscreen');
+          // The site sends no referrer; both players need the page origin to load.
+          player.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+        }
         frame.classList.add('is-loaded');
         frame.replaceChildren(player);
         player.focus();
+        // A refused start leaves the controls on screen, so the visitor can still press play.
+        if (kind === 'video') player.play().catch(() => {});
       });
     });
   }

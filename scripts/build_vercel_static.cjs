@@ -18,7 +18,7 @@ const PAGE_FOLDERS = ['servicios/', 'envios/', 'garantias/', 'preguntas-frecuent
   'politica-de-privacidad/', 'politica-de-cookies/', 'avisos-legales/'];
 const FICHA_PATH = /^\/(?:reparacion|fallo|programacion|sustitucion)-[a-z0-9_-]+\/(?:[a-z0-9_-]+\/){0,3}$/;
 const DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js'];
-const ASSET_TYPES = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.ico', '.pdf', '.css', '.woff2']);
+const ASSET_TYPES = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.ico', '.pdf', '.css', '.woff2', '.mp4']);
 
 let files = 0;
 let bytes = 0;

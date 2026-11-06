@@ -70,6 +70,42 @@ class PublishedVideos(unittest.TestCase):
             self.assertFalse(title.isupper(), title)
 
 
+class ProcessVideos(unittest.TestCase):
+    """The two videos the owner sent, made with AI, in Cómo funciona. They come from the site itself, not from YouTube."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.html = (ROOT / 'envios/index.html').read_text(encoding='utf-8')
+        cls.frames = re.findall(r'data-embed="video" data-embed-src="([^"]+)" data-embed-title="[^"]+"><img src="([^"]+)"[^>]*alt=""[^>]*>'
+                                r'<a class="p-video-play" href="([^"]+)"', cls.html)
+
+    def test_both_wait_for_the_click(self):
+        self.assertEqual(len(self.frames), 2)
+        self.assertNotRegex(self.html, r'(?i)<video|<iframe', 'Abrir la página no descarga ningún vídeo.')
+
+    def test_the_player_accepts_them_and_they_are_light(self):
+        app = (ROOT / 'app.js').read_text(encoding='utf-8')
+        self.assertIn(r'/^\/assets\/video\/[\w-]+\.mp4$/', app)
+        for video, poster, link in self.frames:
+            self.assertEqual(video, link)
+            self.assertRegex(video, r'^/assets/video/[\w-]+\.mp4$')
+            self.assertLess((ROOT / video.lstrip('/')).stat().st_size, 10_000_000, video)
+            self.assertLess((ROOT / poster.lstrip('/')).stat().st_size, 200_000, poster)
+
+    def test_the_page_says_they_are_made_with_ai(self):
+        self.assertIn('Vídeos realizados con inteligencia artificial.', self.html)
+
+    def test_they_stay_apart_from_the_filmed_videos(self):
+        about = (ROOT / 'sobre-nosotros/index.html').read_text(encoding='utf-8')
+        self.assertIn('grabadas en el laboratorio', about)
+        self.assertNotIn('/assets/video/', about)
+
+    def test_every_way_of_serving_the_site_lets_them_through(self):
+        for source in ('scripts/build_vercel_static.cjs', 'scripts/build_review_package.py', 'servidor.py',
+                       'backend/review-router.php', 'backend/dev-router.php'):
+            self.assertIn('mp4', (ROOT / source).read_text(encoding='utf-8'), source)
+
+
 class Renderer(unittest.TestCase):
     known = 'https://www.youtube.com/embed/h7pEn5sztoU'
 

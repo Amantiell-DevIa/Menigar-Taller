@@ -337,7 +337,7 @@ def make_handler(storage):
             except ValueError:
                 return False
             if path.startswith('assets/'):
-                return target.suffix.lower() in ('.jpg', '.jpeg', '.png', '.svg', '.webp', '.ico', '.gif', '.pdf', '.woff2', '.css') and target.is_file()
+                return target.suffix.lower() in ('.jpg', '.jpeg', '.png', '.svg', '.webp', '.ico', '.gif', '.pdf', '.woff2', '.css', '.mp4') and target.is_file()
             # A page folder, its index.html, or the folder without its final slash, which the parent
             # handler answers with a 301 to the address with it, as WordPress does.
             folder = path.removesuffix('index.html').rstrip('/') + '/'

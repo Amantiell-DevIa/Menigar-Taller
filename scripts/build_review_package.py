@@ -36,7 +36,7 @@ def build(destination, with_backend=False, review_gate=False):
     selected += [ROOT / folder / 'index.html' for folder in PAGE_FOLDERS]
     selected += [ROOT / row['localPath'].lstrip('/') / 'index.html' for row in catalogue]
     selected += [p for p in (ROOT / 'assets').rglob('*') if p.is_file() and not p.name.startswith('.')
-                 and p.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.ico', '.pdf', '.css', '.woff2'}]
+                 and p.suffix.lower() in {'.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.ico', '.pdf', '.css', '.woff2', '.mp4'}]
     # The OFL licence travels with the self-hosted typeface; the routers do not serve .txt files.
     selected += sorted((ROOT / 'assets/fonts').rglob('LICENSE*.txt'))
     manifest = []
