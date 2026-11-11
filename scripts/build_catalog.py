@@ -17,7 +17,6 @@ from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urlparse
 
-from build_home_index import write_home_index
 from build_redirects import write_redirects
 from public_copy import public_text
 from site_paths import FICHA_PATH, PAGE
@@ -458,7 +457,6 @@ def build():
             } for group in item['modelGroups']]
         browser_catalogue.append(item)
     (DATA / 'catalogo-v2.js').write_text('// Generated offline by scripts/build_catalog.py. Do not edit by hand.\nwindow.MENIGAR_FAMILIES = ' + json.dumps(FAMILIES, ensure_ascii=False, separators=(',', ':')) + ';\nwindow.MENIGAR_CATALOG = ' + json.dumps(browser_catalogue, ensure_ascii=False, separators=(',', ':')) + ';\n', encoding='utf-8')
-    write_home_index(catalogue, FAMILIES)
     # Only the old addresses that change: disabled on menigar.com until the migration, active on the preview.
     write_redirects(catalogue, excluded)
     report = {

@@ -49,7 +49,7 @@ class WarrantyPageTests(unittest.TestCase):
         self.assertIn('noindex, nofollow', self.page)
 
     def test_every_header_and_the_fichas_link_to_it(self):
-        pages = ['index.html', 'laboratorio.html', 'servicios/index.html', 'solicitud.html', 'opciones-hero.html', 'envios/index.html',
+        pages = ['index.html', 'servicios/index.html', 'solicitud.html', 'envios/index.html',
                  'sobre-nosotros/index.html', 'preguntas-frecuentes/index.html', 'politica-de-privacidad/index.html',
                  'avisos-legales/index.html', 'politica-de-cookies/index.html', 'garantias/index.html']
         for name in pages:

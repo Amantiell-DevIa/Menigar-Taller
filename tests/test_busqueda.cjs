@@ -153,7 +153,7 @@ test('Las referencias del cuadro i30 conservan ambas escrituras y el servicio es
 
 
 // Exercise the production controllers with minimal DOM elements, not a copied state machine.
-function controllerFixture(mode, search = '', viewport = 1280, familyMedia = {}) {
+function controllerFixture(mode, search = '', viewport = 1280) {
   class Element {
     constructor() { this.value = ''; this.options = []; this.events = new Map(); this.hidden = false; this.innerHTML = ''; this.textContent = ''; this.attributes = {}; this.focused = false; this.open = false; this.dataset = {}; this.classList = { toggle() {} }; }
     addEventListener(name, action) { this.events.set(name, action); }
@@ -167,65 +167,14 @@ function controllerFixture(mode, search = '', viewport = 1280, familyMedia = {})
   }
   const nodes = new Map();
   const element = id => { if (!nodes.has(id)) nodes.set(id, new Element()); return nodes.get(id); };
-  const form = element(mode === 'guided' ? 'guided-search-form' : 'catalog-filter-form');
-  const stages = [new Element(), new Element(), new Element()];
-  const indicators = [new Element(), new Element(), new Element()];
-  const buttons = Object.fromEntries(['back', 'skip', 'next', 'submit'].map(key => [key, new Element()]));
-  form.querySelectorAll = selector => selector === '[data-guide-stage]' ? stages : [];
-  form.querySelector = selector => buttons[selector.match(/data-guide-(\w+)/)?.[1]] || null;
-  const idsForMode = mode === 'guided' ? ['guided-search-form','guide-brand','guide-model','guide-component','guide-summary'] : ['catalog-filter-form','catalog-query','catalog-advanced','catalog-brand','catalog-model','catalog-component','catalog-results','catalog-related-brand','results-count','results-pagination','active-filters','results-title','results-guidance','catalog-filter-panel','catalog-selection','catalog-selection-text','resultados'];
-  idsForMode.forEach(element);
-  const document = { events: new Map(), querySelector(selector) { return selector === '[data-catalog-edit]' && mode === 'catalogue' ? element('catalog-edit') : null; }, querySelectorAll(selector) { return selector === '[data-guide-indicator]' ? indicators : selector === '[data-guide-help]' && mode === 'guided' ? [element('guide-help')] : selector === '[data-family-grid]' ? [element('family-grid')] : []; }, getElementById(id) { return nodes.get(id) || null; }, addEventListener(name, fn) { this.events.set(name, fn); } };
+  ['catalog-filter-form','catalog-query','catalog-advanced','catalog-brand','catalog-model','catalog-component','catalog-results','catalog-related-brand','results-count','results-pagination','active-filters','results-title','results-guidance','catalog-filter-panel','catalog-selection','catalog-selection-text','resultados'].forEach(element);
+  const document = { events: new Map(), querySelector(selector) { return selector === '[data-catalog-edit]' && mode === 'catalogue' ? element('catalog-edit') : null; }, querySelectorAll() { return []; }, getElementById(id) { return nodes.get(id) || null; }, addEventListener(name, fn) { this.events.set(name, fn); } };
   const location = { hostname: 'tests.example', pathname:'/servicios/', search, assigned:'', assign(url) { this.assigned = url; } };
-  const fixtureContext = { window: { MENIGAR_FAMILY_MEDIA:familyMedia, events: new Map(), addEventListener(name, fn) { this.events.set(name, fn); } }, document, location, history:{ pushState(_a,_b,url) { location.search = url.includes('?') ? '?' + url.split('?')[1] : ''; }, replaceState(_a,_b,url) { location.search = url.includes('?') ? '?' + url.split('?')[1] : ''; } }, console, Intl, URLSearchParams, Map, Set, Date, matchMedia(query) { return {matches:query.includes('max-width') ? viewport <= 760 : true}; }, Option: function(label,value,_default,selected) { this.label = label; this.value = value; this.selected = selected; } };
+  const fixtureContext = { window: { events: new Map(), addEventListener(name, fn) { this.events.set(name, fn); } }, document, location, history:{ pushState(_a,_b,url) { location.search = url.includes('?') ? '?' + url.split('?')[1] : ''; }, replaceState(_a,_b,url) { location.search = url.includes('?') ? '?' + url.split('?')[1] : ''; } }, console, Intl, URLSearchParams, Map, Set, Date, matchMedia(query) { return {matches:query.includes('max-width') ? viewport <= 760 : true}; }, Option: function(label,value,_default,selected) { this.label = label; this.value = value; this.selected = selected; } };
   vm.createContext(fixtureContext);
   for (const file of ['data/catalogo-v2.js','app.js']) vm.runInContext(fs.readFileSync(path.join(root,file),'utf8'),fixtureContext,{filename:file});
-  return { element, buttons, stages, indicators, location, document, window:fixtureContext.window };
+  return { element, location, document, window:fixtureContext.window };
 }
-
-test('Marca → modelo → pieza llega a resultados sin paso de síntoma ni texto obligatorio.', () => {
-  const view = controllerFixture('guided');
-  const brand = view.element('guide-brand'); brand.value = 'Hyundai'; brand.emit('change');
-  view.buttons.next.emit('click');
-  const model = view.element('guide-model'); model.value = 'i30'; model.emit('change');
-  view.buttons.next.emit('click');
-  const component = view.element('guide-component'); component.value = 'display'; component.emit('change');
-  assert.equal(view.stages[2].hidden,false);
-  assert.equal(view.buttons.submit.hidden,false);
-  assert.equal(view.buttons.next.hidden,true);
-  assert.equal(view.buttons.skip.hidden,false);
-  assert.equal(view.buttons.skip.textContent,'No sé qué pieza es');
-  view.element('guided-search-form').emit('submit');
-  const url = new URL(view.location.assigned,'https://tests.example');
-  assert.equal(url.pathname,'/servicios/');
-  assert.equal(url.hash,'#resultados');
-  assert.equal(url.searchParams.get('marca'),'Hyundai');
-  assert.equal(url.searchParams.get('modelo'),'i30');
-  assert.equal(url.searchParams.get('pieza'),'display');
-  assert.equal(url.searchParams.has('q'),false);
-});
-
-test('Cambiar marca en el recorrido guiado borra el modelo y la pieza anteriores.', () => {
-  const view = controllerFixture('guided');
-  view.element('guide-brand').value = 'Hyundai'; view.element('guide-brand').emit('change');
-  view.element('guide-model').value = 'i30'; view.element('guide-component').value = 'display';
-  view.element('guide-brand').value = 'Honda'; view.element('guide-brand').emit('change');
-  assert.equal(view.element('guide-model').value,'');
-  assert.equal(view.element('guide-component').value,'');
-  assert.ok(view.element('guide-model').options.some(option => option.value === 'Civic'));
-  assert.equal(view.element('guide-model').options.some(option => /i30/i.test(option.value)),false);
-});
-
-test('Continuar sin modelo permite buscar por marca y pieza sin inventar un modelo.', () => {
-  const view = controllerFixture('guided');
-  view.element('guide-brand').value = 'Hyundai'; view.element('guide-brand').emit('change');
-  view.buttons.next.emit('click'); view.buttons.skip.emit('click');
-  view.element('guide-component').value = 'display'; view.element('guided-search-form').emit('submit');
-  const url = new URL(view.location.assigned,'https://tests.example');
-  assert.equal(url.searchParams.has('modelo'),false);
-  assert.equal(url.searchParams.get('marca'),'Hyundai');
-  assert.equal(url.searchParams.get('pieza'),'display');
-});
 
 test('La ficha Hyundai i30 se reconoce por sus fallos sin escribir una avería.', () => {
   const view = controllerFixture('catalogue','?marca=Hyundai&modelo=i30&pieza=cuadro');
@@ -284,16 +233,6 @@ test('En móvil se resume la búsqueda y Cambiar recupera los filtros; en escrit
   const desktop = controllerFixture('catalogue',search,1280);
   assert.equal(desktop.element('catalog-filter-panel').hidden,false);
   assert.equal(desktop.element('catalog-selection').hidden,true);
-});
-
-test('Cuatro familias muestran fotos como ejemplos y las otras siete siguen accesibles.', () => {
-  const media = {cuadro:{src:'/assets/hyundai/ejemplo.jpg',source:'Hyundai i30'},abs:{src:'https://externo.example/foto.jpg',source:'ABS de prueba'}};
-  const html = controllerFixture('catalogue','',1280,media).element('family-grid').innerHTML;
-  assert.equal((html.match(/family-card--featured/g) || []).length,4);
-  assert.equal((html.match(/family-more-link/g) || []).length,7);
-  assert.match(html,/alt="Ejemplo de Cuadros de instrumentos, fotografía de Hyundai i30"/);
-  assert.match(html,/Ejemplo de pieza/);
-  assert.equal(html.includes('https://externo.example/foto.jpg'),false);
 });
 
 test('Los servicios genéricos no se cuentan como coincidencias del modelo.', () => {
@@ -394,24 +333,10 @@ test('Los fallos generales BMW no se atribuyen a un grupo que no los documenta.'
   assert.match(general,/sintoma=Fallos/);
 });
 
-test('Las piezas del asistente corresponden a la marca, sin limitarse al modelo elegido.', () => {
-  const view = controllerFixture('guided');
-  const brand = view.element('guide-brand'); brand.value = 'BMW'; brand.emit('change');
-  const model = view.element('guide-model'); model.value = 'X1 E84'; model.emit('change');
-  let pieces = view.element('guide-component').options.map(option=>option.value).filter(Boolean);
-  assert.deepEqual(pieces,['cuadro','abs','display','multimedia','cambio']);
-  assert.equal(pieces.includes('bluetooth'),false);
-  assert.ok(pieces.includes('display'),'Se incluyen las fichas generales de BMW, no solo una coincidencia estricta del modelo.');
-  brand.value = 'Fiat'; brand.emit('change');
-  pieces = view.element('guide-component').options.map(option=>option.value).filter(Boolean);
-  assert.ok(pieces.includes('bluetooth'));
-  brand.value = ''; brand.emit('change');
-  assert.equal(view.element('guide-component').options.length - 1,context.window.MENIGAR_FAMILIES.length);
-});
-
 test('El catálogo limita piezas por marca y conserva una pieza válida recibida en el enlace.', () => {
   const view = controllerFixture('catalogue','?marca=BMW&modelo=X1%20E84&pieza=display');
   assert.equal(view.element('catalog-component').value,'display');
+  assert.deepEqual(view.element('catalog-component').options.map(option=>option.value).filter(Boolean),['cuadro','abs','display','multimedia','cambio'],'Las piezas son las de la marca, sin limitarse al modelo elegido.');
   assert.equal(view.element('catalog-component').options.some(option=>option.value==='bluetooth'),false);
   const brand = view.element('catalog-brand'); brand.value = 'Fiat'; brand.emit('change');
   assert.equal(view.element('catalog-component').value,'');
@@ -481,38 +406,6 @@ test('La presentación no convierte un título ni un párrafo de marketing en fa
   const documented = controllerFixture('catalogue','?marca=Hyundai&modelo=i30&pieza=cuadro').element('catalog-results').innerHTML;
   assert.match(documented,/Fallo en las agujas de los indicadores analógicos/);
   assert.match(documented,/result-symptom-link/);
-});
-
-test('No sé qué pieza es muestra opciones de mi vehículo sin inventar una familia.', () => {
-  const view = controllerFixture('guided');
-  view.element('guide-brand').value = 'BMW'; view.element('guide-brand').emit('change');
-  view.buttons.next.emit('click');
-  view.element('guide-model').value = 'X1 E84'; view.element('guide-model').emit('change');
-  view.buttons.next.emit('click');
-  view.element('guide-component').value = 'display'; view.element('guide-component').emit('change');
-  assert.equal(view.buttons.skip.textContent,'No sé qué pieza es');
-  view.buttons.skip.emit('click');
-  const url = new URL(view.location.assigned,'https://tests.example');
-  assert.equal(url.searchParams.get('marca'),'BMW');
-  assert.equal(url.searchParams.get('modelo'),'X1 E84');
-  assert.equal(url.searchParams.has('pieza'),false);
-  assert.equal(url.searchParams.has('q'),false);
-  assert.equal(url.hash,'#resultados');
-});
-
-test('La ayuda del asistente conserva marca y modelo y se actualiza al cambiar de vehículo.', () => {
-  const view = controllerFixture('guided');
-  view.element('guide-brand').value = 'Hyundai'; view.element('guide-brand').emit('change');
-  view.element('guide-model').value = 'i30'; view.element('guide-model').emit('change');
-  let url = new URL(view.element('guide-help').href,'https://tests.example');
-  assert.equal(url.searchParams.get('tipo'),'consulta');
-  assert.equal(url.searchParams.get('marca'),'Hyundai');
-  assert.equal(url.searchParams.get('modelo'),'i30');
-  assert.equal(url.searchParams.has('familia'),false);
-  view.element('guide-brand').value = 'BMW'; view.element('guide-brand').emit('change');
-  url = new URL(view.element('guide-help').href,'https://tests.example');
-  assert.equal(url.searchParams.get('marca'),'BMW');
-  assert.equal(url.searchParams.has('modelo'),false);
 });
 
 test('Una página fuera del rango se corrige también en la URL sin perder los filtros.', () => {

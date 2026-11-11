@@ -26,9 +26,9 @@ MAX_TOTAL = 15 * 1024 * 1024
 MAX_BODY = 25 * 1024 * 1024
 LOCK = threading.Lock()
 STATIC_ROOT_FILES = {
-    'index.html', 'solicitud.html', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js',
+    'index.html', 'solicitud.html',
     'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'servicios.css', 'paginas.css', 'app.js', 'solicitud.js', 'resumen.js',
-    'hero-lab.jpg', 'robots.txt', 'sitemap.xml', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'resumen.html', 'receipt.js',
+    'robots.txt', 'sitemap.xml', 'favicon.svg', 'favicon.ico', 'apple-touch-icon.png', 'resumen.html', 'receipt.js',
 }
 # Pages served from a folder at their WordPress address (scripts/site_paths.py): the general pages and every ficha.
 PAGE_FOLDERS = {
@@ -327,7 +327,7 @@ def make_handler(storage):
             path = unquote(urlparse(self.path).path).lstrip('/')
             if not path:
                 return True
-            if path in STATIC_ROOT_FILES or path in ('data/catalogo-v2.js', 'data/catalogo-v2.json', 'data/home-index.js', 'data/family-media.js'):
+            if path in STATIC_ROOT_FILES or path in ('data/catalogo-v2.js', 'data/catalogo-v2.json'):
                 return True
             if any(part.startswith('.') or part == '..' for part in Path(path).parts):
                 return False

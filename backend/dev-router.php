@@ -21,7 +21,7 @@ if (preg_match('~^/(api|equipo)(/|$)~', $path)) {
     require $root . '/api/index.php';
     return;
 }
-$rootFiles = ['index.html','solicitud.html','resumen.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','garantia.css','servicios.css','paginas.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','favicon.ico','apple-touch-icon.png'];
+$rootFiles = ['index.html','solicitud.html','resumen.html','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','garantia.css','servicios.css','paginas.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','favicon.ico','apple-touch-icon.png'];
 // Pages served from a folder at their WordPress address (scripts/site_paths.py): the general pages and every ficha.
 $pageFolders = ['servicios/','envios/','garantias/','preguntas-frecuentes/','sobre-nosotros/','politica-de-privacidad/','politica-de-cookies/','avisos-legales/'];
 $isPage = static fn(string $folder): bool => in_array($folder, $pageFolders, true)
@@ -36,7 +36,7 @@ if ($relative !== '' && !str_ends_with($relative, '/') && $isPage($relative . '/
 $folder = preg_replace('~index\.html$~D', '', $relative);
 // A folder without its own index.html would make the PHP server look for one in the folders above it.
 $allowed = $path === '/' || in_array($relative, $rootFiles, true)
-    || in_array($relative, ['data/catalogo-v2.js','data/home-index.js','data/family-media.js'], true)
+    || $relative === 'data/catalogo-v2.js'
     || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2|mp4)$~i', $path))
     || ($isPage($folder) && is_file($root . '/' . $folder . 'index.html'));
 $target = realpath($root . ($path === '/' ? '/index.html' : $path));

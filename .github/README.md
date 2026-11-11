@@ -19,8 +19,6 @@ Los vídeos de YouTube y el mapa de Google de la portada se cargan solo cuando e
 | Ruta | Contenido |
 |---|---|
 | `index.html`, `assets/css/portada.css`, `assets/home/` | Portada y sus fotos |
-| `opciones-hero.html`, `assets/css/opciones-hero.css` | Opciones de hero para revisión |
-| `laboratorio.html`, `laboratorio.js`, `scripts/build_laboratorio.cjs` | Laboratorio de portada: página aparte, generada desde `index.html`, para comparar los diseños |
 | `servicios/index.html`, `app.js`, `data/*.js` | Catálogo y búsqueda, en `/servicios/` |
 | `reparacion-*/`, `fallo-*/`, `programacion-*/`, `sustitucion-*/` | Fichas de reparación generadas, en la dirección de su página de WordPress |
 | `envios/`, `garantias/`, `preguntas-frecuentes/`, `sobre-nosotros/`, `politica-de-privacidad/`, `politica-de-cookies/`, `avisos-legales/` | Páginas generales generadas |

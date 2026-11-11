@@ -57,7 +57,6 @@ class HomepageTests(unittest.TestCase):
                 self.assertIn(token, css)
         self.assertRegex(css, r'\.h-search-btn\{[^}]*background:var\(--h-action\)', 'El blanco sobre #0077fe no llega a AA: el botón usa #0066db.')
         self.assertNotRegex(self.page, r'\sstyle="', 'La CSP no admite estilos en línea.')
-        self.assertIn('<link rel="stylesheet" href="/assets/css/portada-v5.css">', (ROOT / 'opciones-hero.html').read_text())
 
 
     def test_whole_site_uses_the_light_palette(self):

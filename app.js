@@ -194,102 +194,6 @@
     }
   }
 
-  function setupFamilies() {
-    document.querySelectorAll('[data-family-grid]').forEach(grid => {
-      // The home page ships its complete family cards in HTML, avoiding a layout
-      // shift and keeping the links available before scripts run.
-      if (grid.querySelector?.('.family-featured')) return;
-      const featuredKeys = ['cuadro', 'abs', 'display', 'multimedia'];
-      const media = window.MENIGAR_FAMILY_MEDIA || {};
-      const featured = featuredKeys.map(key => familyByKey.get(key)).filter(Boolean);
-      const other = families.filter(family => !featuredKeys.includes(family.key));
-      const featuredHtml = featured.map(family => {
-        const photo = media[family.key];
-        const validPhoto = photo && /^\/assets\/[a-z0-9_./-]+$/i.test(photo.src || '') && String(photo.source || '').trim();
-        const visual = validPhoto ? '<figure class="family-media"><img src="' + escape(photo.src) + '" alt="' + escape(photo.alt || ('Ejemplo de ' + family.name + ', fotografía de ' + photo.source)) + '" width="640" height="480" loading="lazy" decoding="async"><figcaption>' + escape(photo.caption || 'Ejemplo de pieza') + '</figcaption></figure>' : '<span class="family-icon">' + icon(family.key) + '</span>';
-        return '<a class="family-card family-card--featured" href="/servicios/?pieza=' + encodeURIComponent(family.key) + '" aria-label="Ver reparaciones de ' + escape(family.name) + '">' + visual + '<span class="family-arrow" aria-hidden="true">↗</span><h3>' + escape(family.name) + '</h3><p>' + escape(family.description) + '</p></a>';
-      }).join('');
-      const moreHtml = other.length ? '<div class="family-more"><h3>También reparamos otras piezas</h3><div class="family-more-list">' + other.map(family => '<a class="family-more-link" href="/servicios/?pieza=' + encodeURIComponent(family.key) + '"><span>' + escape(family.name) + '</span><span aria-hidden="true">↗</span></a>').join('') + '</div></div>' : '';
-      grid.innerHTML = featuredHtml ? '<div class="family-featured">' + featuredHtml + '</div>' + moreHtml : '<div class="notice">Puedes <a href="/solicitud.html?tipo=consulta">consultar tu pieza con el equipo</a>.</div>';
-    });
-  }
-
-  function setupGuidedSearch() {
-    const form = document.getElementById('guided-search-form');
-    if (!form) return;
-    const brand = document.getElementById('guide-brand');
-    const model = document.getElementById('guide-model');
-    const component = document.getElementById('guide-component');
-    const stageElements = [...form.querySelectorAll('[data-guide-stage]')];
-    const indicators = [...document.querySelectorAll('[data-guide-indicator]')];
-    const summary = document.getElementById('guide-summary');
-    const back = form.querySelector('[data-guide-back]');
-    const skip = form.querySelector('[data-guide-skip]');
-    const next = form.querySelector('[data-guide-next]');
-    const submit = form.querySelector('[data-guide-submit]');
-    let currentStep = 0;
-    options(brand, brands, 'Selecciona una marca');
-    const refreshModels = () => options(model, modelsFor(brand.value), 'Selecciona un modelo', model.value);
-    const refreshComponents = () => options(component, familiesForBrand(brand.value), 'Selecciona una pieza', component.value);
-    refreshModels();
-    refreshComponents();
-    const fields = [brand, model, component];
-    const lastStep = Math.min(fields.length, stageElements.length) - 1;
-    const render = (focus = false) => {
-      stageElements.forEach((stage, index) => { stage.hidden = index !== currentStep; });
-      indicators.forEach((indicator, index) => {
-        indicator.classList.toggle('is-complete', index < currentStep);
-        if (index === currentStep) indicator.setAttribute('aria-current', 'step');
-        else indicator.removeAttribute('aria-current');
-      });
-      back.hidden = currentStep === 0;
-      next.hidden = currentStep === lastStep;
-      skip.hidden = false;
-      submit.hidden = currentStep !== lastStep;
-      skip.textContent = currentStep === lastStep ? 'No sé qué pieza es' : currentStep === 1 ? 'No aparece, continuar' : 'No lo sé, continuar';
-      const selected = [brand.value, model.value, familyByKey.get(component.value)?.name].filter(Boolean);
-      summary.innerHTML = selected.map(value => '<span>' + escape(value) + '</span>').join('');
-      document.querySelectorAll('[data-guide-help]').forEach(link => { link.href = consultUrl({brand:brand.value, model:model.value, component:component.value}); });
-      if (focus) fields[currentStep].focus();
-    };
-    const openResults = () => location.assign('/servicios/?' + newSearchParams({q:'', brand:brand.value, model:model.value, component:component.value, page:1}) + '#resultados');
-    const advance = () => { currentStep = Math.min(lastStep, currentStep + 1); render(true); };
-    next.addEventListener('click', advance);
-    skip.addEventListener('click', () => {
-      fields[currentStep].value = '';
-      if (currentStep === lastStep) { render(); openResults(); return; }
-      if (currentStep === 0) { model.value = ''; component.value = ''; refreshModels(); refreshComponents(); }
-      if (currentStep === 1) { component.value = ''; refreshComponents(); }
-      advance();
-    });
-    back.addEventListener('click', () => { currentStep = Math.max(0, currentStep - 1); render(true); });
-    brand.addEventListener('change', () => { model.value = ''; component.value = ''; refreshModels(); refreshComponents(); render(); });
-    model.addEventListener('change', () => { component.value = ''; refreshComponents(); render(); });
-    component.addEventListener('change', () => render());
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      if (currentStep !== lastStep) { advance(); return; }
-      openResults();
-    });
-    const tabs = [...document.querySelectorAll('[data-search-tab]')];
-    function activateTab(tab, focus = false) {
-      tabs.forEach(item => { item.setAttribute('aria-selected', String(item === tab)); item.tabIndex = item === tab ? 0 : -1; });
-      document.querySelectorAll('[data-search-panel]').forEach(panel => { panel.hidden = panel.dataset.searchPanel !== tab.dataset.searchTab; });
-      if (focus) tab.focus();
-    }
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => activateTab(tab));
-      tab.addEventListener('keydown', event => {
-        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        const index = tabs.indexOf(tab);
-        const target = event.key === 'Home' ? tabs[0] : event.key === 'End' ? tabs[tabs.length - 1] : tabs[(index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length];
-        activateTab(target, true);
-      });
-    });
-    render();
-  }
-
   // Build once; preserve the complete source values and rank before pagination.
   let prepared = null;
   const useCatalogue = () => {
@@ -716,8 +620,6 @@
 
   setupNavigation();
   setupEmbeds();
-  setupFamilies();
-  setupGuidedSearch();
   setupCatalogue();
   setupDetailContext();
 })();

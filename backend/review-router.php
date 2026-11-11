@@ -18,7 +18,7 @@ try {
         if ($path === '/api/review.php') { http_response_code(404); return; }
         require $publicRoot . '/api/index.php'; return;
     }
-    $files = ['index.html','solicitud.html','resumen.html','opciones-hero.html','laboratorio.html','laboratorio.js','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','garantia.css','servicios.css','paginas.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','data/catalogo-v2.js','data/home-index.js','data/family-media.js','favicon.ico','apple-touch-icon.png'];
+    $files = ['index.html','solicitud.html','resumen.html','style.css','solicitud.css','hyundai.css','bmw.css','reparaciones.css','garantia.css','servicios.css','paginas.css','app.js','solicitud.js','resumen.js','receipt.js','robots.txt','sitemap.xml','data/catalogo-v2.js','favicon.ico','apple-touch-icon.png'];
     // Pages served from a folder at their WordPress address (scripts/site_paths.py): the general pages and every ficha.
     $pageFolders = ['servicios/','envios/','garantias/','preguntas-frecuentes/','sobre-nosotros/','politica-de-privacidad/','politica-de-cookies/','avisos-legales/'];
     $isPage = static fn(string $folder): bool => in_array($folder, $pageFolders, true)

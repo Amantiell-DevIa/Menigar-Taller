@@ -18,11 +18,11 @@ DEFAULT_OUTPUT = Path('/Users/kaykostar/Documents/MENIGAR/nueva-web-revision-202
 ROOT_FILES = ['index.html', 'solicitud.html',
               'style.css', 'solicitud.css', 'hyundai.css', 'bmw.css', 'reparaciones.css', 'garantia.css', 'servicios.css', 'paginas.css',
               'app.js', 'solicitud.js', 'resumen.js', 'robots.txt', 'sitemap.xml']
-ROOT_FILES += ['resumen.html', 'receipt.js', 'opciones-hero.html', 'laboratorio.html', 'laboratorio.js', 'favicon.ico', 'apple-touch-icon.png']
+ROOT_FILES += ['resumen.html', 'receipt.js', 'favicon.ico', 'apple-touch-icon.png']
 # Pages served from a folder at their WordPress address (scripts/site_paths.py): these general pages and every ficha.
 PAGE_FOLDERS = ['servicios/', 'envios/', 'garantias/', 'preguntas-frecuentes/', 'sobre-nosotros/',
                 'politica-de-privacidad/', 'politica-de-cookies/', 'avisos-legales/']
-DATA_FILES = ['catalogo-v2.js', 'home-index.js', 'family-media.js']
+DATA_FILES = ['catalogo-v2.js']
 
 
 def build(destination, with_backend=False, review_gate=False):

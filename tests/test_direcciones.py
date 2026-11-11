@@ -91,7 +91,7 @@ class UrlParityTests(unittest.TestCase):
         self.assertTrue(all(served(item['destination']) for item in items.values()))
 
     def test_internal_links_use_the_new_addresses_and_reach_a_page(self):
-        documents = [ROOT / name for name in ['index.html', 'solicitud.html', 'opciones-hero.html', 'laboratorio.html']]
+        documents = [ROOT / name for name in ['index.html', 'solicitud.html']]
         documents += [served(path) for path in sorted(self.pages - {'/'})]
         ids = {}
         problems = []
@@ -103,9 +103,8 @@ class UrlParityTests(unittest.TestCase):
                     problems.append((document.relative_to(ROOT).as_posix(), href, 'prototype name'))
                 elif not served(parts.path):
                     problems.append((document.relative_to(ROOT).as_posix(), href, 'no page'))
-                elif parts.fragment and parts.path in {page['path'] for page in GENERAL_PAGES} | {'/'} and document.name != 'opciones-hero.html':
-                    # A link to a section of a general page needs that section. The hero designs of
-                    # opciones-hero.html point at old homepage sections; laboratorio.js re-points them.
+                elif parts.fragment and parts.path in {page['path'] for page in GENERAL_PAGES} | {'/'}:
+                    # A link to a section of a general page needs that section.
                     if parts.path not in ids:
                         ids[parts.path] = set(re.findall(r'\bid="([^"]+)"', served(parts.path).read_text()))
                     if parts.fragment not in ids[parts.path]:
