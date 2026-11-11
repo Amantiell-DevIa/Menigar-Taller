@@ -281,7 +281,12 @@
     }).then(() => {
       useCatalogue();
       if (pending) history.replaceState(null, '', location.pathname + (pending.toString() ? '?' + pending : '') + '#resultados');
+      // Typing fires no change event, so words typed while the catalogue arrives are not in
+      // `pending`, and startCatalogue fills the box from the address. Keep what the visitor wrote.
+      const query = document.getElementById('catalog-query');
+      const typed = query ? query.value : '';
       startCatalogue(form);
+      if (query && typed && query.value !== typed) query.value = typed;
     }).catch(() => {
       const count = document.getElementById('results-count');
       const area = document.getElementById('resultados');

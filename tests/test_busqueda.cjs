@@ -643,4 +643,96 @@ test('El índice genera un destino coherente para cada variante aunque se entre 
   assert.equal(next.sections.find(section => section.classes.has('is-context-match')).dataset.modelGroup,'3 BK');
 });
 
-console.log('\n' + passed + ' pruebas de búsqueda y recorrido superadas · ' + catalog.length + ' fichas reales.');
+// The services page asks for the catalogue only when the visitor touches the search. This page
+// fixture runs the real app.js and lets the test decide when the catalogue file arrives.
+function catalogueFixture() {
+  const ids = ['catalog-filter-form', 'catalog-query', 'catalog-brand', 'catalog-model', 'catalog-component',
+    'catalog-advanced', 'catalog-related-brand', 'catalog-results', 'catalog-selection', 'catalog-selection-text',
+    'catalog-showcase', 'catalog-filter-panel', 'catalogo', 'family-brands', 'resultados', 'results-count',
+    'results-guidance', 'results-pagination', 'results-title', 'active-filters'];
+  class Field {
+    constructor(id) {
+      this.id = id; this.value = ''; this.hidden = false; this.open = false; this.dataset = {};
+      this.textContent = ''; this.innerHTML = ''; this.events = {}; this.items = [];
+    }
+    addEventListener(type, callback) { (this.events[type] ||= []).push(callback); }
+    emit(type) { for (const callback of this.events[type] || []) callback({ type, target: this, preventDefault() {} }); }
+    replaceChildren(...items) { this.items = items; }
+    add(item) { this.items.push(item); if (item.selected) this.value = item.value; }
+    get options() { return this.items; }
+    querySelector() { return null; }
+    querySelectorAll() { return []; }
+    closest() { return null; }
+    setAttribute() {}
+    focus() {}
+    scrollIntoView() {}
+  }
+  const page = new Map(ids.map(id => [id, new Field(id)]));
+  page.get('catalog-filter-form').dataset.catalogSrc = '/data/catalogo-v2.js';
+  page.get('resultados').hidden = true;
+  const scripts = [];
+  const address = { pathname: '/servicios/', search: '', hash: '', hostname: 'tests.example' };
+  const go = url => {
+    const next = new URL(url, 'https://tests.example' + address.pathname);
+    Object.assign(address, { pathname: next.pathname, search: next.search, hash: next.hash });
+  };
+  const page_context = {
+    window: { addEventListener() {} },
+    document: {
+      getElementById: id => page.get(id) || null,
+      querySelector() { return null; },
+      querySelectorAll() { return []; },
+      addEventListener() {},
+      createElement: () => ({}),
+      head: { appendChild: script => scripts.push(script) }
+    },
+    location: address,
+    history: { replaceState: (_state, _title, url) => go(url), pushState: (_state, _title, url) => go(url) },
+    matchMedia: () => ({ matches: false }),
+    console, Intl, URLSearchParams, Map, Set, Date,
+    Option: function Option(label, value, _defaultSelected, selected) { Object.assign(this, { label, value, selected }); }
+  };
+  vm.createContext(page_context);
+  vm.runInContext(fs.readFileSync(path.join(root, 'app.js'), 'utf8'), page_context, { filename: 'app.js' });
+  const arrive = async () => {
+    vm.runInContext(fs.readFileSync(path.join(root, 'data/catalogo-v2.js'), 'utf8'), page_context, { filename: 'data/catalogo-v2.js' });
+    scripts[0].onload();
+    for (let turn = 0; turn < 5; turn += 1) await new Promise(resolve => setImmediate(resolve));
+  };
+  return { page, scripts, address, arrive };
+}
+
+async function testAsync(name, run) {
+  await run();
+  passed += 1;
+  console.log('✓ ' + name);
+}
+
+(async () => {
+  await testAsync('Lo que el cliente escribe mientras llega el catálogo no se borra (11-11-2026).', async () => {
+    const view = catalogueFixture();
+    const query = view.page.get('catalog-query');
+    query.emit('focusin');
+    assert.equal(view.scripts.length, 1, 'Tocar el buscador pide el catálogo una sola vez.');
+    query.value = 'ABS'; // Typing fires input events only, never change.
+    await view.arrive();
+    assert.equal(query.value, 'ABS');
+    assert.equal(view.address.search, '', 'No busca por su cuenta: espera a que el cliente pulse buscar.');
+    assert.equal(view.page.get('resultados').hidden, true);
+  });
+
+  await testAsync('Si pulsa buscar mientras llega el catálogo, ve los resultados de lo que escribió.', async () => {
+    const view = catalogueFixture();
+    const query = view.page.get('catalog-query');
+    query.emit('focusin');
+    query.value = 'MK60';
+    view.page.get('catalog-filter-form').emit('submit');
+    await view.arrive();
+    assert.equal(query.value, 'MK60');
+    assert.equal(new URLSearchParams(view.address.search).get('q'), 'MK60');
+    assert.equal(view.page.get('resultados').hidden, false);
+    assert.match(view.page.get('results-count').textContent, /^\d+ opciones/);
+  });
+
+  console.log('\n' + passed + ' pruebas de búsqueda y recorrido superadas · ' + catalog.length + ' fichas reales.');
+})().catch(error => { console.error(error); process.exitCode = 1; });
