@@ -51,7 +51,7 @@ def build(destination, with_backend=False, review_gate=False):
                          'sha256': hashlib.sha256(target.read_bytes()).hexdigest()})
     backend_files = []
     if with_backend:
-        private_sources = ['Intake.php','Http.php','Views.php','Notifications.php','Backup.php','README.md',
+        private_sources = ['Intake.php','Http.php','Views.php','Notifications.php','OdooConnector.php','Backup.php','README.md',
                            'bin/common.php','bin/check.php','bin/notify.php','bin/backup.php','bin/restore.php']
         if review_gate:
             private_sources += ['ReviewGate.php', 'review-router.php', 'review.htaccess.example']

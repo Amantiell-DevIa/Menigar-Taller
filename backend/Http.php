@@ -10,7 +10,7 @@ final class Http
     public static function headers(): void
     {
         header('Cache-Control: no-store, private'); header('X-Content-Type-Options: nosniff');
-        header('Referrer-Policy: no-referrer'); header('X-Robots-Tag: noindex, nofollow');
+        header('Referrer-Policy: same-origin'); header('X-Robots-Tag: noindex, nofollow');
         header("Content-Security-Policy: default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; frame-src https://www.youtube-nocookie.com https://www.google.com; frame-ancestors 'none'; form-action 'self'; base-uri 'none'");
     }
     public static function json(array $data, int $status = 200): void
@@ -28,10 +28,19 @@ final class Http
         if (!isset($_SESSION['csrf'])) $_SESSION['csrf'] = bin2hex(random_bytes(32));
     }
     private function csrf(): string { $this->session(); return $_SESSION['csrf']; }
+    private function allowedOrigins(): array
+    {
+        $list = $this->intake->config['allowedOrigins'] ?? [$this->intake->config['baseUrl']];
+        return is_array($list) && $list ? $list : [$this->intake->config['baseUrl']];
+    }
     private function checkPost(bool $form = false): void
     {
         $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
-        if ($origin !== $this->intake->config['baseUrl']) throw new HttpError(403, 'El origen del envío no está permitido. Recarga la página de MENIGAR.');
+        // A form posted from our own page can arrive with «Origin: null» (strict referrer
+        // policies, older browsers). Accept it only when the browser itself states that
+        // the request comes from this same site; the form token below is still required.
+        $sameSite = ($_SERVER['HTTP_SEC_FETCH_SITE'] ?? '') === 'same-origin';
+        if (!in_array($origin, $this->allowedOrigins(), true) && !(in_array($origin, ['null', ''], true) && $sameSite)) throw new HttpError(403, 'El origen del envío no está permitido. Recarga la página de MENIGAR.');
         $this->session();
         $token = $form ? ($_POST['csrf'] ?? '') : ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
         if (!is_string($token) || !hash_equals($_SESSION['csrf'], $token)) throw new HttpError(419, 'La sesión ha caducado. Recarga el formulario; conserva los datos antes de hacerlo.');
@@ -46,8 +55,14 @@ final class Http
     private function bearerRow(): array
     {
         $header = $_SERVER['HTTP_AUTHORIZATION'] ?? $_SERVER['REDIRECT_HTTP_AUTHORIZATION'] ?? '';
-        if (!preg_match('/^Bearer ([A-Za-z0-9_-]{43})$/D', $header, $match)) throw new HttpError(404, 'Solicitud no encontrada.');
-        return $this->intake->byToken($match[1]);
+        if (preg_match('/^Bearer ([A-Za-z0-9_-]{43})$/D', $header, $match)) {
+            return $this->intake->byToken($match[1]);
+        }
+        $xToken = $_SERVER['HTTP_X_RECEIPT_TOKEN'] ?? '';
+        if (preg_match('/^[A-Za-z0-9_-]{43}$/D', $xToken)) {
+            return $this->intake->byToken($xToken);
+        }
+        throw new HttpError(404, 'Solicitud no encontrada.');
     }
     private function staff(): string
     {
@@ -99,15 +114,19 @@ final class Http
         self::headers();
         try {
             $host = strtolower($_SERVER['HTTP_HOST'] ?? '');
-            $expected = strtolower((string) parse_url($this->intake->config['baseUrl'], PHP_URL_HOST)) . (parse_url($this->intake->config['baseUrl'], PHP_URL_PORT) ? ':' . parse_url($this->intake->config['baseUrl'], PHP_URL_PORT) : '');
-            if ($host !== $expected) throw new HttpError(403, 'Dominio de solicitud no permitido.');
+            $validHosts = array_map(static fn($u) => strtolower((string) parse_url($u, PHP_URL_HOST)) . (parse_url($u, PHP_URL_PORT) ? ':' . parse_url($u, PHP_URL_PORT) : ''), $this->allowedOrigins());
+            if (!in_array($host, $validHosts, true)) throw new HttpError(403, 'Dominio de solicitud no permitido.');
             if ($this->intake->config['mode'] === 'production' && !in_array(strtolower($_SERVER['HTTPS'] ?? ''), ['on','1'], true) && (int) ($_SERVER['SERVER_PORT'] ?? 0) !== 443) throw new HttpError(403, 'Utiliza la dirección HTTPS de MENIGAR.');
-            $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH); $method = $_SERVER['REQUEST_METHOD'];
+            $rawPath = (string) parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+            $basePath = rtrim((string) ($this->intake->config['basePath'] ?? ''), '/');
+            $path = ($basePath !== '' && str_starts_with($rawPath, $basePath . '/')) ? substr($rawPath, strlen($basePath)) : $rawPath;
+            $method = $_SERVER['REQUEST_METHOD'];
             if ($path === '/api/config' && $method === 'GET') {
                 self::json(['mode' => $this->intake->config['mode'], 'submissions' => $this->intake->enabled(),
                     'transport' => 'multipart', 'receiptTransport' => 'bearer_fragment', 'recovery' => true,
                     'csrfToken' => $this->csrf(), 'emailConfigured' => ($this->intake->config['notifications']['transport'] ?? '') === 'sendmail',
-                    'workshopIntegrationConfigured' => false, 'termsVersion' => $this->intake->config['termsVersion'] ?? 'draft',
+                    'workshopIntegrationConfigured' => false,
+                    'termsVersion' => $this->intake->config['termsVersion'] ?? 'draft',
                     ...$this->intake->limits]); return;
             }
             if ($path === '/api/solicitudes' && $method === 'POST') {
@@ -132,30 +151,81 @@ final class Http
             if (preg_match('~^/api/archivos/([a-f0-9]{48})$~D', $path, $m) && in_array($method, ['GET', 'HEAD'], true)) {
                 $this->file($this->bearerRow(), $m[1]); return;
             }
-            if (str_starts_with($path, '/equipo/')) {
+            if (str_starts_with($path, '/equipo')) {
                 $actor = $this->staff(); $csrf = $this->csrf();
+                $test = $this->intake->config['mode'] !== 'production';
+                if (($path === '/equipo' || $path === '/equipo/' || $path === '/equipo/solicitudes/') && in_array($method, ['GET', 'HEAD'], true)) {
+                    header('Location: ' . $basePath . '/equipo/solicitudes', true, 302); return;
+                }
                 if ($path === '/equipo/solicitudes' && $method === 'GET') {
                     $page = max(1, min(10000, (int) ($_GET['pagina'] ?? 1))); $offset = ($page - 1) * 100;
                     $rows = $this->intake->db->query('SELECT r.*,n.state notification_state FROM requests r LEFT JOIN notifications n ON n.request_reference=r.reference ORDER BY created_at DESC,reference DESC LIMIT 100 OFFSET ' . $offset)->fetchAll();
                     $total = (int) $this->intake->db->query('SELECT count(*) FROM requests')->fetchColumn();
-                    header('Content-Type: text/html; charset=utf-8'); echo Views::inbox($rows, $page, $total); return;
+                    header('Content-Type: text/html; charset=utf-8'); echo Views::inbox($rows, $page, $total, $basePath, $test); return;
                 }
-                if (preg_match('~^/equipo/solicitudes/(SOL-\d{8}-[A-F0-9]{8})(?:/(revisada|archivo/([a-f0-9]{48})))?$~D', $path, $m)) {
+                if (preg_match('~^/equipo/solicitudes/(SOL-\d{8}-[A-F0-9]{8})(?:/(revisada|correo|hoja-tecnica|datos\.csv|unidad/(\d+)|archivo/([a-f0-9]{48})))?/?$~D', $path, $m)) {
                     $row = $this->intake->byReference($m[1]); $action = $m[2] ?? '';
-                    if ($action === '' && $method === 'GET') { header('Content-Type: text/html; charset=utf-8'); echo Views::staffRequest($row, $csrf, $this->intake->config['mode']); return; }
-                    if (str_starts_with($action, 'archivo/') && in_array($method, ['GET', 'HEAD'], true)) { $this->file($row, $m[3]); return; }
-                    if ($action === 'revisada' && $method === 'POST') {
-                        $this->checkPost(true); $now = $this->intake->now();
-                        $this->intake->db->exec('BEGIN IMMEDIATE');
-                        try {
-                            $previous = $this->intake->byReference($m[1]);
-                            if (!$previous['reviewed_at']) {
-                                $this->intake->execute('UPDATE requests SET reviewed_at=? WHERE reference=?', [$now, $m[1]]);
-                                $this->intake->execute('INSERT INTO events(request_reference,kind,actor,created_at) VALUES (?,?,?,?)', [$m[1], 'reviewed', $actor, $now]);
-                            }
-                            $this->intake->db->exec('COMMIT');
-                        } catch (Throwable $e) { $this->intake->db->exec('ROLLBACK'); throw $e; }
-                        header('Location: /equipo/solicitudes/' . $m[1], true, 303); return;
+                    $odoo = class_exists(OdooConnector::class) ? new OdooConnector($this->intake) : null;
+                    if ($action === '' && $method === 'GET') {
+                        $odooPayload = $odoo ? $odoo->buildOdooPayload($row) : [];
+                        header('Content-Type: text/html; charset=utf-8');
+                        echo Views::staffRequest($row, $csrf, $this->intake->config['mode'], $odooPayload, $basePath, isset($_GET['guardado']));
+                        return;
+                    }
+                    if ($action === 'correo' && $method === 'GET') {
+                        require_once __DIR__ . '/Notifications.php';
+                        $notifier = new Notifications($this->intake);
+                        $notif = $this->intake->one('SELECT * FROM notifications WHERE request_reference=? ORDER BY id DESC LIMIT 1', [$m[1]]);
+                        header('Content-Type: text/html; charset=utf-8');
+                        echo Views::emailPreview($row, $notifier->previewEmail($m[1]), $notif, $basePath, $test);
+                        return;
+                    }
+                    if ($action === 'hoja-tecnica' && $method === 'GET' && $odoo) {
+                        header('Content-Type: text/html; charset=utf-8');
+                        echo Views::workSheet($row, $odoo->buildOdooPayload($row), $basePath, $test);
+                        return;
+                    }
+                    if ($action === 'datos.csv' && $method === 'GET' && $odoo) {
+                        $csv = $odoo->buildCsvExport($row);
+                        header('Content-Type: text/csv; charset=utf-8');
+                        header('Content-Length: ' . strlen($csv));
+                        header('Content-Disposition: attachment; filename="' . $m[1] . '-datos.csv"');
+                        echo $csv;
+                        return;
+                    }
+                    if (str_starts_with($action, 'unidad/') && $odoo) {
+                        $unitNum = (int) $m[3];
+                        if (in_array($method, ['GET', 'HEAD'], true)) {
+                            header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1] . '#unidad-' . $unitNum, true, 302);
+                            return;
+                        }
+                        if ($method === 'POST') {
+                            $this->checkPost(true);
+                            $odoo->updateUnit($m[1], $unitNum, $_POST, $actor);
+                            header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1] . '?guardado=1#unidad-' . $unitNum, true, 303);
+                            return;
+                        }
+                    }
+                    if (str_starts_with($action, 'archivo/') && in_array($method, ['GET', 'HEAD'], true)) { $this->file($row, $m[4]); return; }
+                    if ($action === 'revisada') {
+                        if (in_array($method, ['GET', 'HEAD'], true)) {
+                            header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1], true, 302);
+                            return;
+                        }
+                        if ($method === 'POST') {
+                            $this->checkPost(true);
+                            $now = $this->intake->now();
+                            $this->intake->db->exec('BEGIN IMMEDIATE');
+                            try {
+                                $previous = $this->intake->byReference($m[1]);
+                                if (!$previous['reviewed_at']) {
+                                    $this->intake->execute('UPDATE requests SET reviewed_at=? WHERE reference=?', [$now, $m[1]]);
+                                    $this->intake->execute('INSERT INTO events(request_reference,kind,actor,created_at) VALUES (?,?,?,?)', [$m[1], 'reviewed', $actor, $now]);
+                                }
+                                $this->intake->db->exec('COMMIT');
+                            } catch (Throwable $e) { $this->intake->db->exec('ROLLBACK'); throw $e; }
+                            header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1], true, 303); return;
+                        }
                     }
                 }
             }

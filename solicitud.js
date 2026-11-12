@@ -9,10 +9,14 @@
   const families = window.MENIGAR_FAMILIES || [];
   const catalogue = window.MENIGAR_CATALOG || [];
   const params = new URLSearchParams(location.search);
+  // Folder this script is served from ('' at the site root, '/pruebas' in the test install),
+  // so the same file works wherever it is installed.
+  const apiBase = (() => { try { const src = document.currentScript && document.currentScript.src; return src ? new URL('.', src).pathname.replace(/\/$/, '') : ''; } catch (_) { return ''; } })();
+  const testMode = () => !!config && config.mode !== 'production';
   // Each entry keeps its own draft so another service cannot replace its context.
   const draftKey = 'menigar-request-v2:' + params.toString();
   const receiptKey = draftKey + ':receipt';
-  const customerFields = ['clientType','customerName','customerContact','customerEmail','customerPhone','taxId','address','city','province','postalCode','country','returnAddress','returnCity','returnPostalCode','returnCountry'];
+  const customerFields = ['clientType','customerName','customerContact','customerEmail','customerPhone','deliveryMethod','returnMethod','taxId','address','city','province','postalCode','country','returnAddress','returnCity','returnPostalCode','returnCountry'];
   const vehicleFields = ['vehicleBrand','vehicleModel','vehiclePlate','vehicleVin','vehicleYear','vehicleKm'];
   let state = {key:uuid(),step:0,units:[],contextQuery:params.get('q') || params.get('consulta') || ''};
   let config = null;
@@ -21,7 +25,7 @@
   const limits = () => ({maxFileBytes:config?.maxFileBytes || 5*1024*1024,maxFilesPerUnit:config?.maxFilesPerUnit || 5,maxTotalBytes:config?.maxTotalBytes || 15*1024*1024,maxTotalFiles:config?.maxTotalFiles || 50});
   const mb = bytes => Number((bytes/1024/1024).toFixed(2)).toLocaleString('es-ES');
   const vehicleLabel = vehicle => [vehicle.brand, vehicle.modelUnknown ? 'Modelo desconocido' : vehicle.model].filter(Boolean).join(' · ');
-  const submitLabel = () => config?.mode === 'production' ? 'Enviar solicitud →' : 'Guardar solicitud de prueba →';
+  const submitLabel = () => form.elements.intent.value === 'repair' ? 'Enviar y obtener la hoja de envío →' : 'Enviar consulta al laboratorio →';
   const attachmentNotice = () => {
     const value=limits(),count=state.units.reduce((sum,item)=>sum+item.files.length,0);
     $('attachmentNotice').textContent=(count ? `${count} archivo(s) preparado(s). ` : '') + `Hasta ${value.maxFilesPerUnit} archivos por pieza, ${mb(value.maxFileBytes)} MB por archivo y ${mb(value.maxTotalBytes)} MB en total; máximo ${value.maxTotalFiles} archivos. JPG, PNG, WebP y PDF.`;
@@ -96,12 +100,13 @@
     $('requestEyebrow').textContent = shipping ? 'Prepara tu envío' : 'Consulta tu pieza';
     $('requestTitle').textContent = shipping ? 'Prepara la solicitud de envío.' : 'Consulta tu pieza.';
     $('requestIntro').textContent = shipping
-      ? 'Reúne el contacto, los datos del vehículo y las piezas que quieres enviar. Podrás revisar e imprimir el resumen; espera las instrucciones del laboratorio antes de enviarlas.'
+      ? 'Al terminar obtendrás la hoja para meter en la caja y la etiqueta para pegar por fuera. Tú nos haces llegar la pieza (te recomendamos MRW, o en mano en Alcobendas) y MENIGAR te la devuelve por MRW cuando esté reparada.'
       : 'Cuéntanos qué ocurre para que podamos orientarte. Puedes aportar fotos si no conoces la referencia o el modelo.';
     $('intentHelp').textContent = shipping
-      ? 'Preparar esta solicitud no reserva una recogida ni autoriza una reparación. Espera la confirmación del laboratorio.'
-      : 'Una consulta no autoriza una reparación ni prepara una recogida.';
+      ? 'El registro web no reserva una recogida inicial (el envío hacia MENIGAR corre por tu cuenta; recomendamos MRW o entrega en mano). MENIGAR gestiona el envío final de vuelta por MRW.'
+      : 'Una consulta previa sirve para confirmar viabilidad antes de desmontar o enviar la pieza (no autoriza una reparación ni prepara una recogida).';
     document.title = (shipping ? 'Preparar solicitud de envío' : 'Consultar mi pieza') + ' · MENIGAR';
+    $('submitRequest').textContent = submitLabel();
     $('shippingFields').hidden = !shipping;
     ['taxId','address','city','postalCode','country'].forEach(id => $(id).required = shipping);
     const different = shipping && $('returnDifferent').checked;
@@ -141,12 +146,12 @@
       ${unit.catalogUid?'<p class="unit-origin">Servicio seleccionado en el catálogo. Puedes revisar y corregir sus datos.</p>':''}
       <div class="form-grid"><div class="field"><label for="family-${unit.id}">Tipo de pieza *</label><select id="family-${unit.id}" data-unit-field="componentKey"><option value="">Selecciona una pieza</option>${options}<option value="otro" ${unit.componentKey==='otro'?'selected':''}>Otra pieza / por identificar</option></select></div><div class="field"><label for="manufacturer-${unit.id}">Fabricante de la pieza, si lo conoces</label><input id="manufacturer-${unit.id}" data-unit-field="manufacturer" maxlength="120" value="${escape(unit.manufacturer)}" placeholder="Puede ser distinto de la marca del coche"></div></div>
       <div class="field custom-component" ${unit.componentKey==='otro'?'':'hidden'}><label for="custom-${unit.id}">¿De qué pieza se trata? *</label><input id="custom-${unit.id}" data-unit-field="customComponent" maxlength="180" value="${escape(unit.customComponent || '')}"></div>
-      <div class="field"><label for="reference-${unit.id}">Referencia de la pieza *</label><input id="reference-${unit.id}" data-unit-field="reference" maxlength="180" value="${escape(unit.reference)}" ${unit.unknownReference?'disabled':''} placeholder="Tal como aparece en su etiqueta"><label class="checkbox-field"><input type="checkbox" data-unit-field="unknownReference" ${unit.unknownReference?'checked':''}>No sé identificar la referencia</label></div>
-      <details class="reference-help"><summary>¿Dónde encuentro la referencia?</summary><figure class="reference-illustration"><img src="/assets/ayuda-referencia.svg" alt="Ejemplo ilustrativo: la referencia está en la etiqueta de la pieza; el código de avería se obtiene de un informe de diagnosis. Son datos diferentes." width="680" height="830" loading="lazy"><figcaption>Ejemplo ilustrativo. El aspecto y la posición de las etiquetas varían. <a href="/assets/ayuda-referencia.svg" target="_blank" rel="noopener">Ampliar esquema ↗</a></figcaption></figure><p>Busca la etiqueta o el grabado del propio componente. Puede incluir letras, números, puntos y guiones. Cópialo tal como aparece o adjunta una foto nítida de toda la etiqueta.</p><p>El código de avería procede del equipo o informe de diagnosis; se introduce en el siguiente campo. No es la matrícula ni el número de bastidor.</p></details>
+      <div class="field"><label for="reference-${unit.id}">Referencia de la pieza *</label><input id="reference-${unit.id}" data-unit-field="reference" maxlength="180" value="${escape(unit.reference)}" ${unit.unknownReference?'disabled':''} placeholder="Tal como aparece en su etiqueta"><label class="checkbox-field"><input type="checkbox" data-unit-field="unknownReference" ${unit.unknownReference?'checked':''}>No sé identificar la referencia (si subes foto de la etiqueta abajo, la identificamos nosotros)</label></div>
+      <details class="reference-help"><summary>¿Dónde encuentro la referencia?</summary><figure class="reference-illustration"><img src="${apiBase}/assets/ayuda-referencia.svg" alt="Ejemplo ilustrativo: la referencia está en la etiqueta de la pieza; el código de avería se obtiene de un informe de diagnosis. Son datos diferentes." width="680" height="830" loading="lazy"><figcaption>Ejemplo ilustrativo. El aspecto y la posición de las etiquetas varían. <a href="${apiBase}/assets/ayuda-referencia.svg" target="_blank" rel="noopener">Ampliar esquema ↗</a></figcaption></figure><p>Busca la etiqueta o el grabado del propio componente. Puede incluir letras, números, puntos y guiones. Cópialo tal como aparece o adjunta una foto nítida de toda la etiqueta.</p><p>El código de avería procede del equipo o informe de diagnosis; se introduce en el siguiente campo. No es la matrícula ni el número de bastidor.</p></details>
       <div class="field"><label for="dtc-${unit.id}">Código de avería, si lo tienes</label><input id="dtc-${unit.id}" data-unit-field="dtc" maxlength="180" value="${escape(unit.dtc)}" placeholder="Código que aparece en la diagnosis"></div>
       <div class="field"><label for="symptoms-${unit.id}">¿Qué ocurre y cuándo? *</label><textarea id="symptoms-${unit.id}" data-unit-field="symptoms" rows="4" maxlength="2000" placeholder="Describe el fallo y si sucede siempre o de forma intermitente"${unit.symptomFromCatalog ? ` aria-describedby="symptom-help-${unit.id}"` : ''}>${escape(unit.symptoms)}</textarea>${unit.symptomFromCatalog ? `<p class="input-help" id="symptom-help-${unit.id}">Has elegido un fallo del catálogo. Ajusta esta descripción a lo que le ocurre a tu pieza.</p>` : ''}</div>
       <div class="field"><label for="accessories-${unit.id}">Accesorios que acompañan a esta pieza</label><textarea id="accessories-${unit.id}" data-unit-field="accessories" rows="2" maxlength="2000" placeholder="Llaves, cables, carcasas u otros elementos; indica cantidad si procede">${escape(unit.accessories)}</textarea></div>
-      <details class="optional-details"><summary>Esta pieza corresponde a otro vehículo</summary><div class="form-grid"><div class="field"><label for="ubrand-${unit.id}">Marca de ese vehículo</label><input id="ubrand-${unit.id}" data-unit-field="vehicleBrand" maxlength="120" value="${escape(unit.vehicleBrand)}"></div><div class="field"><label for="umodel-${unit.id}">Modelo de ese vehículo</label><input id="umodel-${unit.id}" data-unit-field="vehicleModel" maxlength="120" value="${escape(unit.vehicleModel)}"></div></div></details>
+      <details class="optional-details" ${state.units.length>1||unit.vehicleBrand||unit.vehicleModel?'':'hidden'}><summary>¿Esta pieza pertenece a otro vehículo distinto al principal?</summary><div class="form-grid"><div class="field"><label for="ubrand-${unit.id}">Marca de ese vehículo</label><input id="ubrand-${unit.id}" data-unit-field="vehicleBrand" maxlength="120" value="${escape(unit.vehicleBrand)}"></div><div class="field"><label for="umodel-${unit.id}">Modelo de ese vehículo</label><input id="umodel-${unit.id}" data-unit-field="vehicleModel" maxlength="120" value="${escape(unit.vehicleModel)}"></div></div></details>
       <div class="upload-zone"><label for="files-${unit.id}">Fotos e informes de esta pieza</label><p class="input-help">Etiqueta, pieza e informe de diagnosis. Solo archivos relacionados con este caso.</p><input id="files-${unit.id}" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" multiple data-unit-files="${unit.id}"><ul class="file-list" id="files-list-${unit.id}">${unit.files.map((file,i)=>`<li><span>${escape(file.name)} · ${(file.size/1024/1024).toFixed(2)} MB</span><button type="button" class="file-remove" data-remove-file="${unit.id}" data-file-index="${i}" aria-label="Quitar ${escape(file.name)}">Quitar</button></li>`).join('')}</ul>${missingFilesMarkup(unit,index)}</div>
       </div></article>`;
     }).join('');
@@ -213,6 +218,9 @@
     if (step===1) {
       captureUnits();
       state.units.forEach((unit,index)=>{
+        if (!unit.reference.trim() && !unit.unknownReference && unit.files.length > 0) {
+          unit.unknownReference = true;
+        }
         if (!unit.componentKey) errors.push({id:'family-'+unit.id,message:`Selecciona el tipo de la pieza ${index+1}.`});
         if (unit.componentKey==='otro' && !unit.customComponent?.trim()) errors.push({id:'custom-'+unit.id,message:`Describe qué es la pieza ${index+1}.`});
         if (!unit.reference.trim() && !unit.unknownReference) errors.push({id:'reference-'+unit.id,message:`Indica la referencia de la pieza ${index+1} o marca que no la conoces.`});
@@ -231,11 +239,14 @@
     return !errors.length;
   }
 
+  const deliveryLabel = value => value === 'entrega_mano' ? 'Entrega en mano en mostrador de Alcobendas' : 'Envío por mensajería del cliente (recomendado MRW)';
+  const returnLabel = value => value === 'recogida_mano' ? 'Recogida en mano en mostrador de Alcobendas' : 'Envío gestionado por MENIGAR (vía MRW) a dirección indicada';
+
   function getData() {
     captureUnits();
     return {
       idempotencyKey:state.key,intent:form.elements.intent.value,contextQuery:state.contextQuery,website:$('requestWebsite')?.value || '',
-      customer:{type:$('clientType').value,name:$('customerName').value,contact:$('customerContact').value,email:$('customerEmail').value,phone:$('customerPhone').value,taxId:$('taxId').value,address:$('address').value,city:$('city').value,province:$('province').value,postalCode:$('postalCode').value,country:$('country').value,returnDifferent:$('returnDifferent').checked,returnAddress:$('returnAddress').value,returnCity:$('returnCity').value,returnPostalCode:$('returnPostalCode').value,returnCountry:$('returnCountry').value},
+      customer:{type:$('clientType').value,name:$('customerName').value,contact:$('customerContact').value,email:$('customerEmail').value,phone:$('customerPhone').value,deliveryMethod:$('deliveryMethod')?.value||'agencia_cliente',returnMethod:$('returnMethod')?.value||'mrw_menigar',taxId:$('taxId').value,address:$('address').value,city:$('city').value,province:$('province').value,postalCode:$('postalCode').value,country:$('country').value,returnDifferent:$('returnDifferent').checked,returnAddress:$('returnAddress').value,returnCity:$('returnCity').value,returnPostalCode:$('returnPostalCode').value,returnCountry:$('returnCountry').value},
       vehicle:{brand:$('vehicleBrand').value,model:$('vehicleModelUnknown').checked?'':$('vehicleModel').value,modelUnknown:$('vehicleModelUnknown').checked,plate:$('vehiclePlate').value,vin:$('vehicleVin').value,year:$('vehicleYear').value,km:$('vehicleKm').value},
       units:state.units.map(({id,files,missingFiles,customComponent,...unit})=>({...unit,reference:unit.unknownReference?'':unit.reference,attachments:[]})),
       acceptance:{privacyRead:$('privacyRead').checked,conditionsRead:$('conditionsRead').checked,version:config?.termsVersion || 'review-2026-10-13'}
@@ -245,11 +256,15 @@
   function renderReview() {
     const data=getData();
     const block=(title,rows,step)=>`<section class="review-block"><h3>${escape(title)}</h3><dl>${rows.map(([key,value])=>`<dt>${escape(key)}</dt><dd>${escape(value||'No indicado')}</dd>`).join('')}</dl><button type="button" class="review-edit" data-edit-step="${step}">Editar ${escape(title.toLowerCase())} →</button></section>`;
-    let markup=block('Contacto',[['Solicitante',data.customer.name],['Contacto',data.customer.contact||data.customer.name],['Email',data.customer.email],['Teléfono',data.customer.phone],['Tipo',data.intent==='repair'?'Preparar solicitud de envío':'Consultar mi pieza']],0);
+    let markup='';
+    if(data.intent==='repair'){
+      markup+=`<div class="review-box-preview"><strong>Al enviar obtendrás la hoja para meter en la caja y la etiqueta para pegar por fuera.</strong><p>Destino del envío inicial (por tu cuenta, recomendamos MRW o entrega en mano): <strong>MENIGAR · C/ José Echegaray 16, Edificio A1, Planta 2.ª, Nave 4 · 28100 Alcobendas (Madrid)</strong> · Devolución final: <strong>${escape(returnLabel(data.customer.returnMethod))}</strong>.</p></div>`;
+    }
+    markup+='<div class="review-grid">'+block('Contacto',[['Solicitante',data.customer.name],['Contacto',data.customer.contact||data.customer.name],['Email',data.customer.email],['Teléfono',data.customer.phone],['Tipo',data.intent==='repair'?'Preparar solicitud de envío':'Consultar mi pieza']],0);
+    markup+=block('Vehículo',[['Marca',data.vehicle.brand],['Modelo',data.vehicle.modelUnknown?'Desconocido · necesitas ayuda para identificarlo':data.vehicle.model],['Matrícula',data.vehicle.plate],['Bastidor',data.vehicle.vin],['Año',data.vehicle.year],['Kilómetros',data.vehicle.km]],0)+'</div>';
     if(data.contextQuery)markup+=`<section class="review-block"><h3>Tu búsqueda</h3><p>${escape(data.contextQuery)}</p><p class="input-help">Es el texto que escribiste al buscar. Comprueba los datos de la pieza antes de enviar.</p></section>`;
-    markup+=block('Vehículo',[['Marca',data.vehicle.brand],['Modelo',data.vehicle.modelUnknown?'Desconocido · necesitas ayuda para identificarlo':data.vehicle.model],['Matrícula',data.vehicle.plate],['Bastidor',data.vehicle.vin],['Año',data.vehicle.year],['Kilómetros',data.vehicle.km]],0);
-    if(data.intent==='repair')markup+=block('Datos de devolución',[['Identificación fiscal',data.customer.taxId],['Dirección',[data.customer.address,data.customer.postalCode,data.customer.city,data.customer.province,data.customer.country].filter(Boolean).join(', ')],...(data.customer.returnDifferent?[['Devolución a',[data.customer.returnAddress,data.customer.returnPostalCode,data.customer.returnCity,data.customer.returnCountry].filter(Boolean).join(', ')]]:[])],0);
-    data.units.forEach((unit,index)=>markup+=block('Pieza '+(index+1),[['Componente',unit.componentName],['Fabricante',unit.manufacturer],['Referencia que indicas',unit.reference||'No identificada'],['Vehículo de esta pieza',(unit.vehicleBrand+' '+unit.vehicleModel).trim()||vehicleLabel(data.vehicle)],['Código de avería que indicas',unit.dtc],['Qué ocurre',unit.symptoms],['Accesorios',unit.accessories],['Archivos adjuntos',state.units[index].files.map(file=>file.name).join(', ')||'Sin archivos']],1)+missingFilesMarkup(state.units[index],index,true));
+    if(data.intent==='repair')markup+=block('Modalidad de envío y devolución final',[['Llegada inicial a MENIGAR',deliveryLabel(data.customer.deliveryMethod)],['Devolución pieza reparada',returnLabel(data.customer.returnMethod)],['Identificación fiscal',data.customer.taxId],['Dirección',[data.customer.address,data.customer.postalCode,data.customer.city,data.customer.province,data.customer.country].filter(Boolean).join(', ')],...(data.customer.returnDifferent?[['Devolución a',[data.customer.returnAddress,data.customer.returnPostalCode,data.customer.returnCity,data.customer.returnCountry].filter(Boolean).join(', ')]]:[])],0);
+    data.units.forEach((unit,index)=>markup+=block('Pieza '+(index+1),[['Componente',unit.componentName],['Fabricante',unit.manufacturer],['Referencia que indicas',unit.reference||'No identificada (se revisará por etiqueta/foto)'],['Vehículo de esta pieza',(unit.vehicleBrand+' '+unit.vehicleModel).trim()||vehicleLabel(data.vehicle)],['Código de avería que indicas',unit.dtc],['Qué ocurre',unit.symptoms],['Accesorios',unit.accessories],['Archivos adjuntos',state.units[index].files.map(file=>file.name).join(', ')||'Sin archivos']],1)+missingFilesMarkup(state.units[index],index,true));
     $('reviewContent').innerHTML=markup;
     $('reviewContent').querySelectorAll('[data-edit-step]').forEach(button=>button.addEventListener('click',()=>goStep(Number(button.dataset.editStep))));
     bindMissingFileActions($('reviewContent'));
@@ -277,16 +292,27 @@
     const reader=new FileReader();reader.onload=()=>resolve(String(reader.result).split(',')[1]);reader.onerror=()=>reject(new Error('No se ha podido leer '+file.name));reader.readAsDataURL(file);
   });
 
-  function showConfirmation(result, units, focus = true) {
+  // The wording follows what was sent, not what the form shows after a reload.
+  function showConfirmation(result, units, focus = true, intent = form.elements.intent.value) {
     $('confirmationReference').textContent=result.reference;
     $('confirmationUnits').innerHTML='<ul>'+units.map((unit,i)=>`<li>Pieza ${i+1}: ${escape(unit.componentName)} · ${escape(unit.reference||'por identificar')}</li>`).join('')+'</ul>';
-    $('summaryLink').href=result.summaryUrl;$('downloadLink').href=result.downloadUrl;
-    if(result.downloadUrl.startsWith('/resumen.html#')){$('downloadLink').removeAttribute('download');$('downloadLink').target='_blank';$('downloadLink').rel='noopener';}
-    else{$('downloadLink').download=result.reference+'.json';$('downloadLink').removeAttribute('target');}
-    const production=result.mode==='production';
-    $('confirmationKicker').textContent=production?'Solicitud registrada':'Solicitud guardada en esta vista previa';
-    $('confirmationMessage').textContent=production?'Tus datos y archivos se han registrado para que el equipo de MENIGAR revise la solicitud.':'Los datos y archivos se han guardado en el entorno de pruebas. No se ha enviado un correo ni una orden al laboratorio.';
-    $('confirmationNext').textContent=production?'Esta referencia identifica tu solicitud; no es una orden de reparación. Espera la confirmación y las instrucciones del laboratorio antes de enviar material.':'Esta referencia identifica la solicitud de prueba. Espera la confirmación y las instrucciones del laboratorio antes de enviar material.';
+    const shipping=intent==='repair';
+    // The saved result says whether it was a test, even before the configuration loads again.
+    const test=result.mode ? result.mode!=='production' : testMode();
+    $('summaryLink').href=result.summaryUrl;
+    $('downloadLink').href=result.summaryUrl.includes('#') ? (result.summaryUrl + '&imprimir=1') : result.summaryUrl;
+    $('downloadLink').removeAttribute('download');$('downloadLink').target='_blank';$('downloadLink').rel='noopener';
+    $('downloadLink').textContent=shipping?'Imprimir o guardar en PDF':'Guardar el resguardo en PDF';
+    $('confirmationKicker').textContent=(test?'Prueba · ':'')+(shipping?'Solicitud de envío registrada':'Consulta registrada');
+    $('confirmationTitle').textContent=shipping?'Tu hoja de envío ya está lista.':'Tu consulta ha quedado registrada.';
+    $('confirmationMessage').textContent=(test?'Esto es una prueba: no envíes ninguna pieza ni uses datos reales de clientes. ':'')+(shipping
+      ?'Imprime la hoja, métela en la caja con la pieza y envíanosla; no hace falta esperar a que te escribamos.'
+      :'Hemos recibido los datos y las fotos de tu pieza. El laboratorio revisará el caso y te responderá por correo o por teléfono.');
+    if($('confirmationNoticeTitle'))$('confirmationNoticeTitle').textContent=shipping?'Cómo hacer llegar tu paquete a MENIGAR':'Próximo paso de tu consulta';
+    $('confirmationNext').textContent=shipping
+      ?'Abre la hoja de envío: trae la hoja para meter en la caja y la etiqueta para pegar por fuera. Envíanos el paquete por tu cuenta (te recomendamos MRW) o tráelo a MENIGAR · C/ José Echegaray 16, Edificio A1 · Planta 2.ª · Nave 4, 28100 Alcobendas (Madrid). Cuando la pieza esté reparada, MENIGAR te la devuelve por MRW.'
+      :'El laboratorio revisará los datos y las fotos y te dirá si tiene reparación y un precio orientativo antes de que desmontes o envíes la pieza.';
+    $('summaryLink').textContent=shipping?'Abrir la hoja de envío y la etiqueta':'Ver el resguardo de la consulta';
     $('requestWorkspace').hidden=true;$('confirmation').hidden=false;
     if(focus)$('confirmation').focus();
   }
@@ -309,16 +335,16 @@
         for(let i=0;i<data.units.length;i++)data.units[i].attachments=await Promise.all(state.units[i].files.map(async file=>({name:file.name,mime:file.type,size:file.size,data:await readFile(file)})));
         body=JSON.stringify(data);headers['Content-Type']='application/json';
       }
-      let response=await fetch('/api/solicitudes',{method:'POST',headers,body});
+      let response=await fetch(apiBase+'/api/solicitudes',{method:'POST',headers,body});
       if(response.status===419&&config.transport==='multipart'){
-        const refresh=await fetch('/api/config',{cache:'no-store'});if(refresh.ok){config=await refresh.json();headers['X-CSRF-Token']=config.csrfToken;response=await fetch('/api/solicitudes',{method:'POST',headers,body});}
+        const refresh=await fetch(apiBase+'/api/config',{cache:'no-store'});if(refresh.ok){config=await refresh.json();headers['X-CSRF-Token']=config.csrfToken;response=await fetch(apiBase+'/api/solicitudes',{method:'POST',headers,body});}
       }
       let result;try{result=await response.json();}catch(_){throw new Error('No se pudo completar el envío. Conserva los datos y vuelve a intentarlo.');}
       if(!response.ok)throw new Error(result.error||'No se pudo guardar la solicitud.');
       showConfirmation(result,data.units);
       try{
         sessionStorage.removeItem(draftKey);
-        sessionStorage.setItem(receiptKey,JSON.stringify({result,units:data.units.map(unit=>({componentName:unit.componentName,reference:unit.reference}))}));
+        sessionStorage.setItem(receiptKey,JSON.stringify({result,intent:data.intent,units:data.units.map(unit=>({componentName:unit.componentName,reference:unit.reference}))}));
       }catch(_){}
     }catch(error){showErrors([{message:error.message||'No se pudo guardar. Conserva los datos y vuelve a intentarlo.'}]);}
     finally{submitting=false;$('submitRequest').disabled=!config?.submissions;$('submitRequest').textContent=submitLabel();}
@@ -358,24 +384,30 @@
   updateConditionalFields();renderUnits();goStep(Math.min(Number(state.step)||0,2),false);
   try{
     const receipt=JSON.parse(sessionStorage.getItem(receiptKey)||'null');
+    const local = url => typeof url === 'string' && apiBase && url.startsWith(apiBase + '/') ? url.slice(apiBase.length) : url;
     if(receipt?.result?.reference&&Array.isArray(receipt.units)&&
-       (/^\/api\/solicitudes\/[A-Za-z0-9_-]+\/resumen$/.test(receipt.result.summaryUrl)||/^\/resumen\.html#[A-Za-z0-9_-]{43}$/.test(receipt.result.summaryUrl))&&
-       (/^\/api\/solicitudes\/[A-Za-z0-9_-]+\/datos$/.test(receipt.result.downloadUrl)||/^\/resumen\.html#[A-Za-z0-9_-]{43}&descargar=datos$/.test(receipt.result.downloadUrl))){
-      showConfirmation(receipt.result,receipt.units,false);sessionStorage.removeItem(draftKey);
+       (/^\/api\/solicitudes\/[A-Za-z0-9_-]+\/resumen$/.test(local(receipt.result.summaryUrl))||/^\/resumen\.html#[A-Za-z0-9_-]{43}$/.test(local(receipt.result.summaryUrl)))&&
+       (/^\/api\/solicitudes\/[A-Za-z0-9_-]+\/datos$/.test(local(receipt.result.downloadUrl))||/^\/resumen\.html#[A-Za-z0-9_-]{43}&descargar=datos$/.test(local(receipt.result.downloadUrl)))){
+      showConfirmation(receipt.result,receipt.units,false,receipt.intent);sessionStorage.removeItem(draftKey);
     }
   }catch(_){}
-  fetch('/api/config').then(response=>{if(!response.ok)throw new Error();return response.json();}).then(value=>{
+  fetch(apiBase+'/api/config').then(response=>{if(!response.ok)throw new Error();return response.json();}).then(value=>{
     config=value;
-    const production=value.mode==='production';
-    $('reviewNotice').textContent=production?'Tu solicitud se enviará al equipo de MENIGAR para su revisión.':'Vista previa · Las solicitudes se guardan en el entorno de pruebas. No se envían al laboratorio.';
-    $('saveNote').textContent=production?'Al enviar se registrarán tus datos y archivos para que el equipo revise el caso.':'La solicitud de esta vista previa se guardará únicamente en el entorno de pruebas.';
-    if(!value.submissions)$('saveNote').textContent='El envío no está disponible. Conserva los datos y contacta con el laboratorio.';
+    $('reviewNotice').hidden=!!value.submissions&&value.mode==='production';
+    if(value.submissions&&value.mode!=='production')$('reviewNotice').textContent='Formulario de prueba: no envíes piezas ni datos reales de clientes.';
+    if(!value.submissions){
+      $('reviewNotice').textContent='El registro digital no está disponible temporalmente. Puedes contactar con el laboratorio en el 91 662 27 81.';
+      $('saveNote').textContent='El envío no está disponible. Conserva los datos y contacta con el laboratorio.';
+    }else{
+      $('saveNote').textContent='Al enviar verás tu referencia (SOL-…) y la hoja en PDF, lista para imprimir o guardar.';
+    }
     $('submitRequest').disabled=!value.submissions;$('submitRequest').textContent=submitLabel();attachmentNotice();
     if(restored&&state.pending&&value.recovery){
-      fetch('/api/recuperar',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':value.csrfToken},body:JSON.stringify({idempotencyKey:state.key})}).then(async response=>{if(!response.ok)return;const result=await response.json();showConfirmation(result,result.units||[]);try{sessionStorage.setItem(receiptKey,JSON.stringify({result,units:result.units||[]}));sessionStorage.removeItem(draftKey);}catch(_){} }).catch(()=>{});
+      fetch(apiBase+'/api/recuperar',{method:'POST',headers:{'Content-Type':'application/json','X-CSRF-Token':value.csrfToken},body:JSON.stringify({idempotencyKey:state.key})}).then(async response=>{if(!response.ok)return;const result=await response.json();showConfirmation(result,result.units||[]);try{sessionStorage.setItem(receiptKey,JSON.stringify({result,units:result.units||[]}));sessionStorage.removeItem(draftKey);}catch(_){} }).catch(()=>{});
     }
   }).catch(()=>{
-    $('reviewNotice').textContent='Vista previa de diseño · El guardado no está disponible. Puedes completar y revisar los datos.';
+    $('reviewNotice').hidden=false;
+    $('reviewNotice').textContent='Vista previa de diseño · El envío no está disponible en esta versión. Puedes completar y revisar los datos, o llamarnos al 91 662 27 81.';
     $('saveNote').textContent='Esta vista permite revisar el formulario, pero no enviar solicitudes.';$('submitRequest').disabled=true;
   });
 })();

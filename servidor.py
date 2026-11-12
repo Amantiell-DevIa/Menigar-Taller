@@ -83,10 +83,14 @@ def validate(payload):
     if not isinstance(raw_customer, dict):
         raise ValidationError('Completa los datos de contacto.')
     customer = {k: text(raw_customer.get(k), 300) for k in (
-        'type', 'name', 'contact', 'email', 'phone', 'taxId', 'address', 'city',
-        'province', 'postalCode', 'country', 'returnAddress', 'returnCity',
-        'returnPostalCode', 'returnCountry',
+        'type', 'name', 'contact', 'email', 'phone', 'deliveryMethod', 'returnMethod',
+        'taxId', 'address', 'city', 'province', 'postalCode', 'country',
+        'returnAddress', 'returnCity', 'returnPostalCode', 'returnCountry',
     )}
+    if customer['deliveryMethod'] not in ('agencia_cliente', 'entrega_mano'):
+        customer['deliveryMethod'] = 'agencia_cliente'
+    if customer['returnMethod'] not in ('mrw_menigar', 'recogida_mano'):
+        customer['returnMethod'] = 'mrw_menigar'
     customer['returnDifferent'] = bool(raw_customer.get('returnDifferent'))
     if len(customer['name']) < 2:
         raise ValidationError('Indica tu nombre o razón social.')

@@ -515,3 +515,145 @@ class PhpIntakeTests(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+
+@unittest.skipUnless(Path(PHP).is_file(), 'Set MENIGAR_PHP to a PHP 8.3 runtime')
+class TestFormForTheTeamTests(unittest.TestCase):
+    """The test form shown to Ricardo and José Luis (12-11-2026): team area behind a login,
+    honest wording, and a notice email without the customer's contact data."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.temp = tempfile.TemporaryDirectory(prefix='menigar-php-team-')
+        cls.service = Service(cls.temp.name)
+        # An old configuration flag must never open the team area.
+        cls.service.config.update({'publicStaffAccess': True, 'notifications': {
+            'transport': 'spool', 'immediate': True, 'richEmail': True, 'to': ['informacion@example.invalid', 'copia@example.invalid'], 'from': 'informacion@example.invalid'}})
+        cls.service.write_config()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.service.stop()
+        cls.temp.cleanup()
+
+    def setUp(self):
+        self.client = Client(self.service)
+
+    def staff(self):
+        return {'Authorization': 'Basic ' + base64.b64encode(('test-staff:' + self.service.password).encode()).decode()}
+
+    def shipping(self):
+        payload = {'idempotencyKey': uuid.uuid4().hex, 'intent': 'repair',
+            'customer': {'type': 'taller', 'name': 'Taller Ficticio Uno', 'contact': 'Persona Ficticia', 'email': 'cliente@example.invalid',
+                'phone': '600111222', 'deliveryMethod': 'otra-cosa', 'returnMethod': 'recogida_mano', 'taxId': 'B00000000',
+                'address': 'Calle Ficticia 9', 'city': 'Madrid', 'postalCode': '28001', 'country': 'España'},
+            'vehicle': {'brand': 'Honda', 'model': 'Civic', 'plate': '0000ZZZ', 'vin': 'VINFICTICIO000001'},
+            'units': [{'componentKey': 'abs', 'componentName': 'ABS / ESP', 'reference': 'REF-1', 'symptoms': 'Testigo encendido', 'attachments': []},
+                      {'componentKey': 'cuadros', 'componentName': 'Cuadro', 'reference': '', 'unknownReference': True, 'symptoms': 'Sin luz en el display', 'attachments': []}],
+            'acceptance': {'privacyRead': True, 'conditionsRead': True, 'version': 'test-v1'}}
+        status, saved, _ = self.client.submit(payload)
+        self.assertEqual(status, 201, saved)
+        return saved
+
+    def test_team_area_needs_a_personal_login_even_with_the_old_public_flag(self):
+        saved = self.shipping()
+        for path in ['/equipo/solicitudes', '/equipo/solicitudes/' + saved['reference'], '/equipo/solicitudes/' + saved['reference'] + '/datos.csv',
+                     '/equipo/solicitudes/' + saved['reference'] + '/hoja-tecnica', '/equipo/solicitudes/' + saved['reference'] + '/correo']:
+            status, _, headers = self.client.request(path)
+            self.assertEqual(status, 401, path)
+            self.assertIn('Basic', headers.get('WWW-Authenticate', ''))
+        self.assertEqual(self.client.request('/equipo/solicitudes', headers=self.staff())[0], 200)
+
+    def test_team_changes_need_the_page_origin_and_form_token(self):
+        saved = self.shipping()
+        target = '/equipo/solicitudes/' + saved['reference']
+        _, page, _ = self.client.request(target, headers=self.staff())
+        csrf = page.decode().split('name="csrf" value="')[1].split('"')[0]
+        form = urllib.parse.urlencode({'reception_state': 'recibido_ok', 'csrf': csrf}).encode()
+        kind = {'Content-Type': 'application/x-www-form-urlencoded'}
+        self.assertEqual(self.client.request(target + '/unidad/1', form, {**self.staff(), **kind}, 'POST')[0], 403)
+        foreign = urllib.parse.urlencode({'reception_state': 'recibido_ok', 'csrf': 'x' * 64}).encode()
+        self.assertEqual(self.client.request(target + '/unidad/1', foreign, {**self.staff(), **kind, 'Origin': self.service.base}, 'POST')[0], 419)
+        self.assertEqual(self.client.request(target + '/revisada', None, {**self.staff(), 'Origin': 'https://elsewhere.invalid'}, 'POST')[0], 403)
+        # A valid change from the team page is accepted.
+        status, _, _ = self.client.request(target + '/unidad/1', form, {**self.staff(), **kind, 'Origin': self.service.base}, 'POST')
+        self.assertIn(status, (200, 303))
+        _, page, _ = self.client.request(target, headers=self.staff())
+        self.assertIn('Paquete recibido · Embalaje correcto</span>'.encode(), page)
+
+    def test_a_form_posted_from_the_team_page_is_accepted_even_with_a_null_origin(self):
+        # Browsers send «Origin: null» for form posts under strict referrer policies (12-11-2026).
+        saved = self.shipping()
+        target = '/equipo/solicitudes/' + saved['reference']
+        _, page, headers = self.client.request(target, headers=self.staff())
+        self.assertEqual(headers['Referrer-Policy'], 'same-origin')
+        self.assertIn(b'<meta name="referrer" content="same-origin">', page)
+        csrf = page.decode().split('name="csrf" value="')[1].split('"')[0]
+        form = urllib.parse.urlencode({'reception_state': 'recibido_ok', 'csrf': csrf}).encode()
+        kind = {**self.staff(), 'Content-Type': 'application/x-www-form-urlencoded', 'Origin': 'null'}
+        self.assertEqual(self.client.request(target + '/unidad/1', form, kind, 'POST')[0], 403)
+        self.assertEqual(self.client.request(target + '/unidad/1', form, {**kind, 'Sec-Fetch-Site': 'cross-site'}, 'POST')[0], 403)
+        self.assertIn(self.client.request(target + '/unidad/1', form, {**kind, 'Sec-Fetch-Site': 'same-origin'}, 'POST')[0], (200, 303))
+        stolen = urllib.parse.urlencode({'reception_state': 'recibido_ok', 'csrf': 'y' * 64}).encode()
+        self.assertEqual(self.client.request(target + '/unidad/1', stolen, {**kind, 'Sec-Fetch-Site': 'same-origin'}, 'POST')[0], 419)
+
+    def test_customer_summary_never_links_to_the_team_area(self):
+        saved = self.shipping()
+        self.assertNotIn('staffUrl', saved)
+        self.assertNotIn('/equipo', json.dumps(saved))
+        _, stored, _ = self.client.request('/api/resumen', headers={'Authorization': 'Bearer ' + saved['requestId']})
+        self.assertNotIn('/equipo', json.dumps(stored))
+        self.assertFalse(self.client.config['workshopIntegrationConfigured'])
+
+    def test_notice_email_says_prueba_and_carries_no_contact_data(self):
+        saved = self.shipping()
+        spool = Path(self.service.config['dataDir']) / 'spool' / (saved['reference'] + '.json')
+        message = json.loads(spool.read_text())
+        self.assertTrue(message['subject'].startswith('PRUEBA · MENIGAR · Envío de pieza ' + saved['reference']))
+        self.assertIn('2 piezas', message['subject'])
+        for text in [message['subject'], message['body'], message['html']]:
+            for private in ['Taller Ficticio Uno', 'Persona Ficticia', 'cliente@example.invalid', '600111222', 'B00000000', 'Calle Ficticia', '0000ZZZ', 'VINFICTICIO']:
+                self.assertNotIn(private, text)
+            for claim in ['Odoo', 'res.partner', 'repair.order', 'SIN CONTRASE', 'teclear']:
+                self.assertNotIn(claim, text)
+        self.assertIn('/equipo/solicitudes/' + saved['reference'], message['body'])
+        self.assertIn('Testigo encendido', message['body'])
+        self.assertIn('Nuevo envío de pieza desde la web', message['body'])
+        self.assertIn('Referencia que indica el cliente: Sin identificar', message['body'])
+        self.assertIn('Devolución: La recoge en mano en Alcobendas', message['body'])
+        self.assertIn('Llegada de la pieza: La envía por mensajería por su cuenta', message['body'])
+
+    def test_delivery_and_return_choices_only_keep_known_values(self):
+        saved = self.shipping()
+        _, stored, _ = self.client.request('/api/resumen', headers={'Authorization': 'Bearer ' + saved['requestId']})
+        self.assertEqual(stored['customer']['deliveryMethod'], 'agencia_cliente')
+        self.assertEqual(stored['customer']['returnMethod'], 'recogida_mano')
+
+    def test_csv_has_one_row_per_piece_and_the_odoo_payload_route_is_gone(self):
+        saved = self.shipping()
+        base = '/equipo/solicitudes/' + saved['reference']
+        status, body, headers = self.client.request(base + '/datos.csv', headers=self.staff())
+        self.assertEqual(status, 200)
+        self.assertIn('text/csv', headers['Content-Type'])
+        self.assertIn(saved['reference'] + '-datos.csv', headers['Content-Disposition'])
+        rows = body.decode('utf-8-sig').strip().split('\r\n')
+        self.assertEqual(len(rows), 3)
+        self.assertTrue(rows[0].startswith('"Codigo_Pieza"'))
+        self.assertIn('"' + saved['reference'] + '-P2"', rows[2])
+        for gone in ['/odoo.json', '/odoo.csv']:
+            self.assertEqual(self.client.request(base + gone, headers=self.staff())[0], 404)
+
+    def test_team_pages_speak_plainly_and_claim_no_connection(self):
+        saved = self.shipping()
+        base = '/equipo/solicitudes/' + saved['reference']
+        for path in ['/equipo/solicitudes', base, base + '/hoja-tecnica', base + '/correo']:
+            status, page, _ = self.client.request(path, headers=self.staff())
+            self.assertEqual(status, 200, path)
+            text = page.decode()
+            self.assertIn('Prueba', text)
+            for claim in ['Odoo 19', 'ACTIVO', 'Sincronización', 'res.partner', 'repair.order', 'JSON-RPC', 'Simular', 'MTA', '0 campos', 'MENIGAR Taller', 'de taller', 'Ficha de Taller']:
+                self.assertNotIn(claim, text, path)
+        _, page, _ = self.client.request(base, headers=self.staff())
+        self.assertIn('Taller o empresa', page.decode())
+        self.assertIn('no está conectada a ningún programa', page.decode())
+

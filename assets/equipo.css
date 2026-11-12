@@ -1,1 +1,167 @@
-.receipt .pre{white-space:pre-wrap;overflow-wrap:anywhere}.staff-table-wrap{max-width:100%;overflow-x:auto}.staff-table{border-collapse:collapse;width:100%;font-size:.9rem}.staff-table th,.staff-table td{padding:14px 12px;border-bottom:1px solid #d8e0e6;text-align:left;vertical-align:top}.staff-table th{background:#eaf0f3}.staff-table small{display:block;color:#506577;margin-top:5px}.staff-table a{font-weight:650;color:#07536d}.staff-files{padding-left:20px}.staff-files li{margin:8px 0}.staff-pagination{display:flex;gap:24px;margin-top:24px}.receipt-note form button{padding:12px 16px;cursor:pointer;border:1px solid #285a6d;border-radius:8px;background:#123b50;color:#fff}.receipt-note form button:focus-visible{outline:3px solid #d98822;outline-offset:3px}.receipt .piece{break-inside:avoid}@media print{.staff-pagination,.receipt-note form{display:none}.staff-table-wrap{overflow:visible}}
+.receipt .pre{white-space:pre-wrap;overflow-wrap:anywhere}
+.staff-app-body{background:#edf2f7;color:#0f2130;margin:0;min-height:100vh}
+.staff-topbar{background:#0b1924;color:#fff;border-bottom:1px solid #1e3547;position:sticky;top:0;z-index:40;box-shadow:0 4px 16px rgba(6,16,24,.18)}
+.staff-topbar-inner{max-width:1220px;margin:0 auto;padding:12px 24px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px}
+.staff-brand-group{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.staff-brand-logo{display:inline-flex;align-items:center}
+.staff-brand-divider{width:1px;height:22px;background:#2a475e}
+.staff-brand-title{font-size:.9rem;font-weight:650;color:#c8dce9;letter-spacing:.01em}
+.staff-topnav{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.staff-topnav a{color:#d5e4ef;text-decoration:none;font-size:.86rem;font-weight:600;padding:7px 12px;border-radius:7px;transition:background .15s}
+.staff-topnav a:hover{background:#183145;color:#fff}
+.staff-topnav .staff-topnav-cta{background:#e07c1f;color:#0b1924;font-weight:750}
+.staff-topnav .staff-topnav-cta:hover{background:#f08c2e;color:#08131c}
+
+.receipt.staff-workspace{max-width:1220px;margin:26px auto 64px;padding:0 24px;background:transparent;border:none;box-shadow:none}
+.receipt-tools{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:18px}
+.receipt-tools-group{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.receipt-note form button,.staff-btn{padding:10px 16px;cursor:pointer;border:1px solid #0d3b54;border-radius:8px;background:#0d3b54;color:#fff;font-weight:650;font-size:.87rem;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:all .15s;box-shadow:0 1px 2px rgba(9,25,38,.08)}
+.staff-btn:hover,.receipt-note form button:hover{background:#144d6b;border-color:#144d6b;color:#fff}
+.staff-btn-secondary{background:#fff;color:#0f2e42;border-color:#b8c9d6}
+.staff-btn-secondary:hover{background:#f2f7fa;color:#0a2232;border-color:#8fa8bc}
+.staff-btn-sm{padding:6px 11px;font-size:.8rem;border-radius:6px}
+.receipt-note form button:focus-visible,.staff-btn:focus-visible{outline:3px solid #e07c1f;outline-offset:2px}
+
+.staff-hero-card{background:linear-gradient(135deg,#0c2132 0%,#133750 100%);color:#fff;padding:24px 28px;border-radius:14px;margin-bottom:20px;box-shadow:0 10px 26px rgba(11,29,44,.14);border:1px solid #1f4966}
+.staff-hero-card h1{color:#fff;margin:8px 0 8px;font-size:clamp(1.45rem,2.4vw,1.95rem);letter-spacing:-.02em}
+.staff-hero-sub{color:#c9dde9;margin:0;font-size:.94rem;line-height:1.55}
+.staff-hero-sub strong,.staff-hero-sub code{color:#fff}
+.staff-pill-row{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px}
+.staff-pill{display:inline-flex;align-items:center;padding:4px 10px;border-radius:999px;font-size:.73rem;font-weight:750;letter-spacing:.04em;text-transform:uppercase}
+.staff-pill-shipping{background:#107c4f;color:#fff}
+.staff-pill-consult{background:#c25e0e;color:#fff}
+.staff-pill-erp{background:#1b4f72;color:#d6eefc;border:1px solid #3c7ca6}
+.staff-pill-neutral{background:rgba(255,255,255,.13);color:#e4eff7}
+.staff-pill-ok{background:#146c43;color:#e3f9ed}
+.staff-pill-warn{background:#eab308;color:#1c1917}
+
+.staff-kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:22px}
+.staff-kpi-card{background:#fff;border:1px solid #cfdbe4;border-radius:12px;padding:18px 20px;box-shadow:0 2px 8px rgba(15,35,50,.04)}
+.staff-kpi-card span{display:block;font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:#4a6375}
+.staff-kpi-card strong{display:block;font-size:1.85rem;font-weight:800;color:#0c2638;margin:4px 0}
+.staff-kpi-card small{display:block;font-size:.8rem;color:#5a7182}
+
+.staff-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:16px;margin-bottom:22px}
+.staff-summary-card{background:#fff;border:1px solid #cfdbe4;border-radius:12px;padding:18px 20px;box-shadow:0 2px 8px rgba(15,35,50,.04)}
+.staff-summary-card h2,.staff-summary-card h3{margin:0 0 12px;padding-bottom:8px;border-bottom:1px solid #e3ebf0;font-size:.96rem;color:#0d3147}
+.staff-summary-card dl{margin:0;display:grid;grid-template-columns:minmax(115px,38%) 1fr;gap:7px 12px;font-size:.88rem}
+.staff-summary-card dt{color:#52697a;font-weight:600;margin:0}
+.staff-summary-card dd{color:#102534;font-weight:550;margin:0}
+
+.staff-alert-ok{margin:0 0 18px;padding:15px 18px;border-radius:10px;background:#e6f6ec;border:1px solid #2b8a57;color:#114829;font-size:.92rem}
+
+.erp-flow-banner{margin:0 0 22px;padding:18px 20px;border-radius:12px;background:#fff;border:1px solid #c5d6e3;box-shadow:0 2px 8px rgba(15,35,50,.04)}
+.erp-flow-banner h2{margin:0 0 12px;font-size:.96rem;color:#0f3549;text-transform:uppercase;letter-spacing:.03em}
+.erp-flow-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.erp-flow-step{background:#f5f9fc;padding:13px 14px;border-radius:9px;border:1px solid #d5e2ec;font-size:.85rem}
+.erp-flow-step strong{display:block;color:#084c66;margin-bottom:4px;font-size:.88rem}
+.erp-flow-step span{color:#354a59;line-height:1.45}
+
+.staff-unit-card{background:#fff;border:1px solid #c4d3df;border-radius:14px;padding:22px 24px;margin-bottom:22px;box-shadow:0 4px 14px rgba(12,30,45,.05)}
+.staff-unit-kicker{display:block;font-size:.73rem;font-weight:750;letter-spacing:.07em;text-transform:uppercase;color:#0b5673;margin-bottom:3px}
+.piece-header-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid #e3ebf0}
+.piece-header-row h2{margin:0;font-size:1.25rem;color:#0c2333}
+.piece-badges{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.erp-order-pill{background:#0f3852;color:#fff;padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:700}
+.erp-status-badge{background:#e6f5ec;color:#145934;border:1px solid #8bd0a8;padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:700}
+
+.dual-ref-banner{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin:0 0 16px;padding:14px 16px;background:#f4f8fb;border:1px solid #cddbe6;border-radius:10px}
+.dual-ref-box{background:#fff;border:1px solid #d4e0e9;border-radius:8px;padding:10px 14px}
+.dual-ref-box-updated{border-color:#1e7e4f;background:#f2fbf6}
+.dual-ref-label{display:block;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:#4f6677;font-weight:700;margin-bottom:3px}
+.dual-ref-value{display:block;font-size:1.05rem;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;color:#0c2333}
+.dual-ref-box small{display:block;margin-top:3px;font-size:.76rem;color:#18643e;font-weight:600}
+.dual-ref-arrow{font-size:1.3rem;font-weight:800;color:#4d6a7e}
+
+.staff-files-box{margin:14px 0;padding:12px 16px;background:#f8fafc;border:1px solid #d6e1ea;border-radius:8px}
+.staff-files-title{margin:0 0 6px;font-size:.88rem}
+.staff-files{padding-left:20px;margin:0}
+.staff-files li{margin:6px 0;font-size:.88rem}
+
+.workshop-unit-panel{margin-top:18px;padding:18px 20px;border-radius:12px;background:#f3f7fa;border:1px solid #bdd0de}
+.workshop-panel-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:14px}
+.workshop-unit-panel h3{margin:0;font-size:1rem;color:#0c2d40}
+.workshop-panel-sub{font-size:.8rem;color:#486173}
+.workshop-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}
+.workshop-grid-wide{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:14px}
+.workshop-field{display:flex;flex-direction:column;gap:5px;font-size:.85rem}
+.workshop-field span{font-weight:650;color:#153243}
+.workshop-field input,.workshop-field select,.workshop-field textarea{padding:9px 11px;border:1px solid #9bb0bf;border-radius:7px;font:inherit;background:#fff;color:#0f2433}
+.workshop-field input:focus,.workshop-field select:focus,.workshop-field textarea:focus{outline:2px solid #0d3b54;border-color:#0d3b54}
+.workshop-field small{color:#496070;font-size:.77rem}
+.workshop-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px;padding-top:14px;border-top:1px solid #d4e1eb}
+
+.staff-table-card{background:#fff;border:1px solid #cfdbe4;border-radius:14px;overflow:hidden;box-shadow:0 4px 14px rgba(12,30,45,.05)}
+.staff-table-wrap{max-width:100%;overflow-x:auto}
+.staff-table{border-collapse:collapse;width:100%;font-size:.88rem}
+.staff-table th,.staff-table td{padding:14px 14px;border-bottom:1px solid #e1e9ef;text-align:left;vertical-align:middle}
+.staff-table th{background:#f1f6f9;color:#233d4f;font-size:.77rem;text-transform:uppercase;letter-spacing:.04em;font-weight:750}
+.staff-table tr:hover td{background:#f9fbfd}
+.staff-table small{display:block;color:#546a7b;margin-top:4px;font-size:.79rem}
+.table-ref-link{font-weight:750;color:#094b66;font-size:.94rem;text-decoration:none}
+.table-ref-link:hover{text-decoration:underline}
+.table-state-pill{display:inline-block;padding:3px 9px;border-radius:6px;background:#eef4f8;border:1px solid #cbd9e4;color:#1d3b4f;font-size:.79rem;font-weight:650}
+.table-mail-status{font-size:.82rem;color:#175937;font-weight:600}
+.table-actions-cell{white-space:nowrap}
+.staff-pagination{display:flex;gap:24px;margin-top:20px}
+
+.odoo-bridge-card{margin:24px 0;padding:22px 24px;border-radius:14px;background:#fff;border:2px solid #123b50;box-shadow:0 6px 18px rgba(12,35,52,.07)}
+.odoo-bridge-footer{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;padding-top:14px;border-top:1px solid #dce6ee}
+.odoo-bridge-meta{margin:0;font-size:.88rem;color:#2c4353}
+
+.mail-window{background:#fff;border:1px solid #c2d1de;border-radius:14px;overflow:hidden;box-shadow:0 8px 24px rgba(12,30,45,.08);margin-bottom:20px}
+.mail-window-header{background:#f2f6fa;padding:16px 22px;border-bottom:1px solid #d5e0ea;display:grid;gap:6px;font-size:.88rem}
+.mail-header-row{display:grid;grid-template-columns:80px 1fr;gap:8px;align-items:baseline}
+.mail-header-row span{color:#566d7e;font-weight:650}
+.mail-header-row strong{color:#0f2433}
+.mail-window-body{padding:24px;background:#e9eff5}
+.mail-card{max-width:740px;margin:0 auto;background:#fff;border:1px solid #cbd8e3;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(10,25,38,.06)}
+.mail-card-banner{background:#0b1e2d;color:#fff;padding:22px 26px}
+.mail-card-kicker{display:block;font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:#8bb4d0;margin-bottom:4px}
+.mail-card-banner h2{color:#fff;margin:0 0 10px;font-size:1.45rem}
+.mail-card-content{padding:24px 26px}
+.mail-cta-bar{display:flex;flex-wrap:wrap;gap:10px;margin:16px 0 22px;padding:14px;background:#f2f7fb;border:1px solid #c6d9e8;border-radius:10px}
+.mail-unit-box{margin-top:14px;padding:16px 18px;border:1px solid #d3dfe9;border-radius:10px;background:#f9fbfd}
+.mail-raw-toggle{background:#fff;border:1px solid #cfdbe4;border-radius:10px;padding:12px 16px}
+.mail-raw-toggle summary{cursor:pointer;font-weight:650;color:#0f3549;font-size:.88rem}
+
+.erp-json-box{padding:14px 16px;border-radius:8px;background:#f4f7f9;border:1px solid #cbd6df;overflow-x:auto;font-size:.84rem;line-height:1.55}
+.erp-email-box{background:#fff;color:#16181d;border:1px solid #d5dbe3;white-space:pre-wrap;font-size:.84rem;line-height:1.55;margin-top:12px}
+
+.work-order-sheet{margin:20px 0 32px;padding:24px;border:2px solid #102a3a;border-radius:12px;background:#fff;break-after:page}
+.work-order-header{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;border-bottom:2px solid #102a3a;padding-bottom:14px;margin-bottom:16px}
+.work-order-box-code{border:2px solid #102a3a;border-radius:8px;padding:8px 14px;text-align:center;min-width:120px;background:#f4f8fb}
+.work-order-box-code span{display:block;font-size:.72rem;letter-spacing:.08em;color:#475d6d}
+.work-order-box-code strong{display:block;font-size:1.35rem;color:#102a3a}
+.work-order-box-code small{display:block;font-size:.72rem;font-weight:700;color:#07536d}
+.work-order-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+.work-order-block{margin-bottom:14px;padding:12px 14px;border:1px solid #cbd6df;border-radius:8px}
+.work-order-block h2{margin:0 0 8px;font-size:.95rem;color:#0d354a;border-bottom:1px solid #e2e9ef;padding-bottom:5px}
+.receipt .piece{break-inside:avoid}
+
+@media (max-width:720px){
+  .dual-ref-banner{grid-template-columns:1fr}
+  .dual-ref-arrow{display:none}
+}
+@media print{
+  .staff-topbar,.staff-pagination,.receipt-note form,.workshop-unit-panel,.erp-flow-banner,.receipt-tools,.staff-kpi-grid{display:none!important}
+  .staff-app-body{background:#fff}
+  .receipt.staff-workspace{margin:0;padding:0;max-width:100%}
+  .staff-table-wrap{overflow:visible}
+  .work-order-sheet{border:1px solid #000;margin:0 0 16px;padding:12px}
+}
+
+/* Test notice: shown on every team page while the form runs in review mode. */
+.staff-test-banner {
+  margin: 0;
+  padding: 10px 20px;
+  background: #fff4d6;
+  color: #6b4200;
+  border-bottom: 1px solid #f0d58c;
+  font-size: 14px;
+  text-align: center;
+}
+.mail-card .staff-test-banner { border-radius: 8px 8px 0 0; text-align: left; }
+.mail-footnote { margin: 12px 0 0; font-size: 13px; color: #586f82; }
+@media print { .staff-test-banner { background: none; border: 1px solid #999; color: #000; } }

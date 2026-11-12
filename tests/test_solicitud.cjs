@@ -325,5 +325,27 @@ async function test(name, run) { await run();passed++;console.log('✓ '+name); 
     assert.equal(shipping.includes('<dd class="pre">España</dd>'),false);
   });
 
+  await test('Al recargar tras enviar, la confirmación de un envío sigue diciendo envío (12-11-2026).', async()=>{
+    const receiptKey=draftKey('')+':receipt';
+    const result={reference:'SOL-20261112-FAKE0002',mode:'review',summaryUrl:'/resumen.html#'+'b'.repeat(43),downloadUrl:'/resumen.html#'+'b'.repeat(43)+'&descargar=datos'};
+    const view=fixture('',new Map([[receiptKey,JSON.stringify({result,intent:'repair',units:[{componentName:'ABS y ESP',reference:'R-1'}]})]]));
+    await view.ready();
+    assert.equal(view.element('confirmation').hidden,false);
+    assert.match(view.element('confirmationTitle').textContent,/hoja de envío/);
+    assert.match(view.element('confirmationKicker').textContent,/^Prueba · Solicitud de envío/);
+    assert.equal(view.element('confirmationUnits').innerHTML.includes('equipo'),false);
+  });
+
+  await test('El resguardo de prueba lo dice en pantalla y en papel, y no enlaza a la zona del equipo.', async()=>{
+    const data={reference:'SOL-TEST',mode:'review',intent:'repair',customer:{name:'Prueba',email:'test@example.invalid',phone:'600000000'},vehicle:{brand:'Honda',model:'Civic'},units:[],staffUrl:'/equipo/solicitudes/SOL-TEST'};
+    const markup=await receiptMarkup(data);
+    assert.match(markup,/class="doc-test-banner"/);
+    assert.match(markup,/PRUEBA · REFERENCIA/);
+    assert.equal(markup.includes('/equipo/'),false);
+    assert.equal(/taller esta orden|Odoo/.test(markup),false);
+    data.mode='production';
+    assert.equal((await receiptMarkup(data)).includes('doc-test-banner'),false);
+  });
+
   console.log('\n'+passed+' pruebas del controlador real de solicitud superadas.');
 })().catch(error=>{console.error(error);process.exitCode=1;});

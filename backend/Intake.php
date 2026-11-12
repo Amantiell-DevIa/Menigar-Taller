@@ -151,7 +151,13 @@ SQL);
         if (!in_array($intent, ['consultation', 'repair'], true)) throw new HttpError(422, 'Selecciona el tipo de solicitud.');
         if (!is_array($raw['customer'] ?? null) || !is_array($raw['vehicle'] ?? null)) throw new HttpError(422, 'Completa los datos de contacto y del vehículo.');
         $customer = [];
-        foreach (['type', 'name', 'contact', 'email', 'phone', 'taxId', 'address', 'city', 'province', 'postalCode', 'country', 'returnAddress', 'returnCity', 'returnPostalCode', 'returnCountry'] as $field) $customer[$field] = $this->text($raw['customer'][$field] ?? null);
+        foreach (['type', 'name', 'contact', 'email', 'phone', 'deliveryMethod', 'returnMethod', 'taxId', 'address', 'city', 'province', 'postalCode', 'country', 'returnAddress', 'returnCity', 'returnPostalCode', 'returnCountry'] as $field) $customer[$field] = $this->text($raw['customer'][$field] ?? null);
+        if (!in_array($customer['deliveryMethod'], ['agencia_cliente', 'entrega_mano'], true)) {
+            $customer['deliveryMethod'] = 'agencia_cliente';
+        }
+        if (!in_array($customer['returnMethod'], ['mrw_menigar', 'recogida_mano'], true)) {
+            $customer['returnMethod'] = 'mrw_menigar';
+        }
         $customer['returnDifferent'] = ($raw['customer']['returnDifferent'] ?? false) === true;
         if (!in_array($customer['type'], ['particular', 'taller'], true) || mb_strlen($customer['name']) < 2 || !filter_var($customer['email'], FILTER_VALIDATE_EMAIL) || strlen(preg_replace('/\D/', '', $customer['phone'])) < 7) throw new HttpError(422, 'Revisa tu nombre, correo y teléfono de contacto.');
         if ($customer['type'] === 'taller' && !$customer['contact']) throw new HttpError(422, 'Indica la persona de contacto del taller.');
@@ -254,7 +260,25 @@ SQL);
             $this->execute('INSERT INTO notifications(request_reference) VALUES (?)', [$reference]);
             $this->execute('INSERT INTO events(request_reference,kind,actor,created_at) VALUES (?,?,?,?)', [$reference, 'submitted', 'customer', $created]);
             $this->db->exec('COMMIT');
-            return [201, $this->receipt(['reference' => $reference, 'payload' => $encoded, 'created_at' => $created], $this->token($key))];
+            $savedRow = ['reference' => $reference, 'payload' => $encoded, 'created_at' => $created];
+            if (($this->config['notifications']['immediate'] ?? false) === true) {
+                try {
+                    if (class_exists(OdooConnector::class)) {
+                        (new OdooConnector($this))->ensureUnitsForRequest($savedRow);
+                    }
+                    if (!class_exists(Notifications::class) && is_file(__DIR__ . '/Notifications.php')) {
+                        require_once __DIR__ . '/Notifications.php';
+                    }
+                    if (class_exists(Notifications::class)) {
+                        (new Notifications($this))->run(5);
+                    }
+                } catch (Throwable $error) {
+                    // The request is already saved; the notice stays queued or marked for retry.
+                    // Leave a trace so a silent mail failure can be found in the server log.
+                    error_log('MENIGAR aviso inmediato: ' . get_class($error) . ' en ' . $reference);
+                }
+            }
+            return [201, $this->receipt($savedRow, $this->token($key))];
         } catch (Throwable $e) {
             $this->db->exec('ROLLBACK');
             foreach ($savedFiles as $file) if (is_file($file)) unlink($file);
@@ -267,11 +291,13 @@ SQL);
     {
         $payload = json_decode($row['payload'], true, 512, JSON_THROW_ON_ERROR);
         $notification = $this->one('SELECT state FROM notifications WHERE request_reference=?', [$row['reference']]);
-        return ['reference' => $row['reference'], 'requestId' => $token, 'mode' => $this->config['mode'],
+        $basePath = rtrim((string) ($this->config['basePath'] ?? ''), '/');
+        $out = ['reference' => $row['reference'], 'requestId' => $token, 'mode' => $this->config['mode'],
             'unitReferences' => array_map(fn($n) => $row['reference'] . '-P' . $n, range(1, count($payload['units']))),
             'units' => array_map(fn($u) => ['componentName' => $u['componentName'], 'reference' => $u['reference']], $payload['units']),
-            'summaryUrl' => '/resumen.html#' . $token, 'downloadUrl' => '/resumen.html#' . $token . '&descargar=datos',
+            'summaryUrl' => $basePath . '/resumen.html#' . $token, 'downloadUrl' => $basePath . '/resumen.html#' . $token . '&descargar=datos',
             'status' => 'saved_for_review', 'emailSent' => ($notification['state'] ?? '') === 'sent', 'notificationState' => $notification['state'] ?? 'queued', 'workshopIntegration' => 'not_configured'];
+        return $out;
     }
 
     public function recover(string $key): array

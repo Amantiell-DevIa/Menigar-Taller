@@ -4,6 +4,9 @@ declare(strict_types=1);
 // Public front controller. The application/configuration live outside public/.
 $applicationRoot = defined('MENIGAR_APP_ROOT') ? MENIGAR_APP_ROOT : dirname(__DIR__, 2);
 require $applicationRoot . '/backend/Intake.php';
+if (is_file($applicationRoot . '/backend/OdooConnector.php')) {
+    require_once $applicationRoot . '/backend/OdooConnector.php';
+}
 require $applicationRoot . '/backend/Views.php';
 require $applicationRoot . '/backend/Http.php';
 \Menigar\Http::headers();
