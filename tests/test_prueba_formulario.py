@@ -50,6 +50,13 @@ class TestFormPackageTests(unittest.TestCase):
         self.assertIn('E=HTTP_AUTHORIZATION:%{HTTP:Authorization}', rules)
         self.assertIn('RewriteRule ^(?:api|equipo)(?:/|$) api/index.php', rules)
         self.assertIn('DirectoryIndex solicitud.html', rules)
+        self.assertIn('<FilesMatch "\\.(html|css|js)$">', rules)
+        self.assertIn('Cache-Control "no-cache"', rules)
+
+    def test_styles_and_scripts_carry_a_version_so_old_copies_are_not_reused(self):
+        html = (self.public / 'solicitud.html').read_text()
+        for name in ['style.css', 'solicitud.css', 'solicitud.js', 'app.js', 'data/catalogo-v2.js']:
+            self.assertRegex(html, r'"/pruebas/' + re.escape(name) + r'\?v=[0-9a-f]{10}"', name)
         self.assertEqual((self.public / 'robots.txt').read_text(), 'User-agent: *\nDisallow: /\n')
 
     def test_api_entry_reads_code_and_settings_from_outside_the_public_folder(self):

@@ -109,9 +109,16 @@ final class Views
         return '<svg class="eq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . ($paths[$name] ?? '') . '</svg>';
     }
 
+    /** Changes with every upload (all files are rewritten), so browsers never keep an old stylesheet. */
+    private static function assetVersion(): string
+    {
+        return substr(md5((string) @filemtime(__FILE__) . ':' . (string) @filesize(__FILE__)), 0, 10);
+    }
+
     public static function shell(string $title, string $body, string $basePath = '', bool $test = false, string $actor = '', string $active = ''): string
     {
         $bp = self::e(rtrim($basePath, '/'));
+        $v = '?v=' . self::assetVersion();
         $current = static fn(string $key): string => $active === $key ? ' aria-current="page"' : '';
         $topbar = '<header class="eq-topbar"><div class="eq-topbar-inner">'
             . '<a class="eq-brand" href="' . $bp . '/equipo/solicitudes"><img src="' . $bp . '/assets/marca/menigar-logo-1x.webp" srcset="' . $bp . '/assets/marca/menigar-logo-2x.webp 2x" width="148" height="22" alt="MENIGAR"><span>Equipo</span></a>'
@@ -123,7 +130,7 @@ final class Views
             . '</div></header>';
         $banner = $test ? '<p class="staff-test-banner" role="note"><strong>Prueba.</strong> Estas solicitudes vienen del formulario de prueba. No son clientes reales.</p>' : '';
 
-        return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="same-origin"><title>' . self::e($title) . ' · Equipo MENIGAR</title><link rel="icon" href="' . $bp . '/favicon.ico"><link rel="stylesheet" href="' . $bp . '/style.css"><link rel="stylesheet" href="' . $bp . '/assets/equipo.css"><script src="' . $bp . '/assets/equipo.js" defer></script></head>'
+        return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="referrer" content="same-origin"><title>' . self::e($title) . ' · Equipo MENIGAR</title><link rel="icon" href="' . $bp . '/favicon.ico"><link rel="stylesheet" href="' . $bp . '/style.css' . $v . '"><link rel="stylesheet" href="' . $bp . '/assets/equipo.css' . $v . '"><script src="' . $bp . '/assets/equipo.js' . $v . '" defer></script></head>'
             . '<body class="eq-body"><a class="eq-skip" href="#contenido">Saltar al contenido</a>' . $topbar . $banner
             . '<main class="eq-main" id="contenido" tabindex="-1">' . $body . '</main><p class="eq-sr" aria-live="polite" data-live></p></body></html>';
     }

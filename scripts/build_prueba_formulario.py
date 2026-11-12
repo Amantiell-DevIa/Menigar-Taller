@@ -61,6 +61,10 @@ class Rewriter:
             return value
         path, rest = split_url(value)
         if path in self.packaged:
+            # Stylesheets and scripts carry their own fingerprint: a browser that kept an
+            # older copy asks for the new one as soon as it changes.
+            if path.endswith(('.css', '.js')) and not rest:
+                rest = '?v=' + hashlib.sha256((ROOT / path).read_bytes()).hexdigest()[:10]
             return self.base + '/' + path + rest
         if page_allowed and (path == '' or path.endswith('/')):
             return self.website + '/' + path + rest
@@ -94,6 +98,9 @@ DirectoryIndex solicitud.html
   Header always set X-Robots-Tag "noindex, nofollow"
   <FilesMatch "\\.html$">
     Header always set Content-Security-Policy "{CSP}"
+  </FilesMatch>
+  # Pages, styles and scripts: the browser always checks for a newer version (cheap 304 if unchanged).
+  <FilesMatch "\\.(html|css|js)$">
     Header always set Cache-Control "no-cache"
   </FilesMatch>
 </IfModule>
