@@ -28,7 +28,7 @@ ROOT = Path(__file__).resolve().parents[1]
 PUBLIC_FILES = [
     'solicitud.html', 'resumen.html', 'style.css', 'solicitud.css', 'app.js', 'solicitud.js',
     'receipt.js', 'resumen.js', 'data/catalogo-v2.js', 'favicon.ico', 'apple-touch-icon.png',
-    'assets/equipo.css', 'assets/ayuda-referencia.svg',
+    'assets/equipo.css', 'assets/equipo.js', 'assets/ayuda-referencia.svg',
     'assets/marca/menigar-logo-1x.webp', 'assets/marca/menigar-logo-2x.webp', 'assets/marca/menigar-logo-3x.webp',
     'assets/fonts/inter/InterVariable.woff2',
 ]

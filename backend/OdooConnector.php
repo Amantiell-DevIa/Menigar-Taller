@@ -85,7 +85,7 @@ SQL);
             $num = $idx + 1;
             $unitRef = $reference . '-P' . $num;
             $declared = ($unit['unknownReference'] ?? false)
-                ? 'No identificada por cliente'
+                ? 'Sin identificar'
                 : (string) ($unit['reference'] ?: 'No indicada');
 
             $existing = $this->intake->one('SELECT unit_reference FROM workshop_units WHERE unit_reference=?', [$unitRef]);
@@ -157,6 +157,10 @@ SQL);
         $techNotes = mb_substr(trim((string) ($input['technician_notes'] ?? $current['technician_notes'])), 0, 1000);
 
         $this->intake->execute(
+            'INSERT INTO events(request_reference,kind,actor,created_at) VALUES (?,?,?,?)',
+            [$requestReference, 'unit_updated_P' . $unitNumber, $actor, $now]
+        );
+        $this->intake->execute(
             'UPDATE workshop_units SET confirmed_reference=?, reference_updated_by=?, reference_updated_at=?, reception_state=?, reception_notes=?, received_at=?, technical_state=?, commercial_state=?, estimated_eur=?, bench_ticket=?, technician_notes=?, odoo_synced_at=?, updated_at=? WHERE unit_reference=?',
             [$confirmedRef, $refBy, $refAt, $receptionState, $receptionNotes, $receivedAt, $technicalState, $commercialState, $estimatedEur, $benchTicket, $techNotes, $now, $now, $unitRef]
         );
@@ -215,7 +219,7 @@ SQL);
             $w = $workshopUnits[$num] ?? [];
             $unitRef = $row['reference'] . '-P' . $num;
             $declaredRef = ($u['unknownReference'] ?? false)
-                ? 'No identificada por cliente'
+                ? 'Sin identificar'
                 : (string) ($u['reference'] ?: 'No indicada');
             $confirmedRef = (string) ($w['confirmed_reference'] ?? $declaredRef);
 

@@ -9,6 +9,7 @@ import copy
 import hashlib
 import http.cookiejar
 import json
+import re
 import os
 from pathlib import Path
 import shutil
@@ -642,6 +643,90 @@ class TestFormForTheTeamTests(unittest.TestCase):
         self.assertIn('"' + saved['reference'] + '-P2"', rows[2])
         for gone in ['/odoo.json', '/odoo.csv']:
             self.assertEqual(self.client.request(base + gone, headers=self.staff())[0], 404)
+
+    @staticmethod
+    def tiny_png():
+        import struct, zlib
+        chunk = lambda kind, data: struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind + data) & 0xffffffff)
+        return b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 1, 1, 8, 2, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(b'\x00\xff\x00\x00')) + chunk(b'IEND', b'')
+
+    def test_inbox_filters_by_type_and_finds_words_without_accents(self):
+        shipping = self.shipping()
+        payload = {'idempotencyKey': uuid.uuid4().hex, 'intent': 'consultation',
+            'customer': {'type': 'particular', 'name': 'Señora Ficticia Álvarez', 'email': 'otra@example.invalid', 'phone': '611 000 000'},
+            'vehicle': {'brand': 'Peugeot', 'model': '308', 'plate': '1234 ABC'},
+            'units': [{'componentKey': 'cuadros', 'componentName': 'Cuadro de instrumentos', 'reference': 'X-1', 'symptoms': 'Se apaga en frío', 'attachments': []}],
+            'acceptance': {'privacyRead': True, 'conditionsRead': True, 'version': 'test-v1'}}
+        status, consult, _ = self.client.submit(payload)
+        self.assertEqual(status, 201, consult)
+        page = lambda query: self.client.request('/equipo/solicitudes' + query, headers=self.staff())[1].decode()
+        envios = page('?vista=envios')
+        self.assertIn(shipping['reference'], envios)
+        self.assertNotIn(consult['reference'], envios)
+        self.assertIn('aria-current="true">Envíos', envios)
+        for query in ['?q=senora+alvarez', '?q=1234abc', '?q=peugeot+cuadro', '?q=' + consult['reference'][-8:].lower()]:
+            found = page(query)
+            self.assertIn(consult['reference'], found, query)
+            self.assertNotIn(shipping['reference'], found, query)
+        self.assertIn('Nada coincide con «nada-asi».', page('?q=nada-asi'))
+        self.assertIn('Sin revisar <span>', page(''))
+
+    def test_photos_open_inside_the_page_and_other_files_still_download(self):
+        png, pdf = self.tiny_png(), b'%PDF-1.4\n% prueba\n%%EOF'
+        payload = {'idempotencyKey': uuid.uuid4().hex, 'intent': 'consultation',
+            'customer': {'type': 'particular', 'name': 'Con Fotos', 'email': 'fotos@example.invalid', 'phone': '600000000'},
+            'vehicle': {'brand': 'Honda', 'model': 'Civic'},
+            'units': [{'componentKey': 'abs', 'componentName': 'ABS / ESP', 'reference': 'R-9', 'symptoms': 'Testigo encendido',
+                'attachments': [{'uploadKey': 'u0a0', 'name': 'etiqueta.png', 'mime': 'image/png', 'size': len(png)},
+                                {'uploadKey': 'u0a1', 'name': 'diagnosis.pdf', 'mime': 'application/pdf', 'size': len(pdf)}]}],
+            'acceptance': {'privacyRead': True, 'conditionsRead': True, 'version': 'test-v1'}}
+        status, saved, _ = self.client.submit(payload, [('u0a0', 'etiqueta.png', 'image/png', png), ('u0a1', 'diagnosis.pdf', 'application/pdf', pdf)])
+        self.assertEqual(status, 201, saved)
+        page = self.client.request('/equipo/solicitudes/' + saved['reference'], headers=self.staff())[1].decode()
+        image = re.search(r'<img src="([^"]+/archivo/[a-f0-9]{48})\?ver=1" alt="Foto 1 de P1: etiqueta.png"', page)
+        self.assertTrue(image, 'la foto se ve como miniatura')
+        status, body, headers = self.client.request(image.group(1) + '?ver=1', headers=self.staff())
+        self.assertEqual((status, body), (200, png))
+        self.assertTrue(headers['Content-Disposition'].startswith('inline;'))
+        document = re.search(r'<a class="eq-filechip" href="([^"]+)">', page).group(1)
+        status, _, headers = self.client.request(document + '?ver=1', headers=self.staff())
+        self.assertTrue(headers['Content-Disposition'].startswith('attachment;'), 'un PDF siempre se descarga')
+        self.assertEqual(self.client.request(image.group(1) + '?ver=1')[0], 401)
+
+    def test_request_shows_who_did_what_and_one_tap_contact(self):
+        saved = self.shipping()
+        target = '/equipo/solicitudes/' + saved['reference']
+        _, page, _ = self.client.request(target, headers=self.staff())
+        page = page.decode()
+        self.assertIn('href="tel:+34600111222"', page)
+        self.assertIn('href="https://wa.me/34600111222"', page)
+        self.assertIn('href="mailto:cliente@example.invalid?subject=MENIGAR%20%C2%B7%20' + saved['reference'] + '"', page)
+        self.assertIn('Marcar como revisada', page)
+        csrf = page.split('name="csrf" value="')[1].split('"')[0]
+        headers = {**self.staff(), 'Content-Type': 'application/x-www-form-urlencoded', 'Origin': self.service.base}
+        self.client.request(target + '/unidad/2', urllib.parse.urlencode({'reception_state': 'recibido_ok', 'csrf': csrf}).encode(), headers, 'POST')
+        self.client.request(target + '/revisada', urllib.parse.urlencode({'csrf': csrf}).encode(), headers, 'POST')
+        page = self.client.request(target + '?guardado=2', headers=self.staff())[1].decode()
+        self.assertIn('P2 actualizada · test-staff', page)
+        self.assertIn('Último cambio: test-staff', page)
+        self.assertIn('Revisada por test-staff', page)
+        self.assertNotIn('Marcar como revisada', page)
+        self.assertIn('id="unidad-2-guardar"', page)
+        self.assertEqual(page.count('Guardado. Lo que escribió el cliente no cambia.'), 1)
+        inbox = self.client.request('/equipo/solicitudes', headers=self.staff())[1].decode()
+        self.assertIn('Revisada · test-staff', inbox)
+
+    def test_team_pages_keep_the_strict_policy_and_load_their_own_script(self):
+        saved = self.shipping()
+        base = '/equipo/solicitudes/' + saved['reference']
+        for path in ['/equipo/solicitudes', base, base + '/hoja-tecnica', base + '/correo']:
+            text = self.client.request(path, headers=self.staff())[1].decode()
+            self.assertNotIn(' style="', text, path)
+            self.assertEqual(re.findall(r'<script(?![^>]*\ssrc=)', text), [], path)
+            self.assertIn('/assets/equipo.js" defer></script>', text)
+        status, body, headers = self.client.request('/assets/equipo.js')
+        self.assertEqual(status, 200)
+        self.assertIn('data-copy', body.decode() if isinstance(body, bytes) else body)
 
     def test_team_pages_speak_plainly_and_claim_no_connection(self):
         saved = self.shipping()

@@ -30,6 +30,7 @@ try {
         header('Location: /' . $relative . '/' . ($query !== '' ? '?' . $query : ''), true, 301); return;
     }
     $allowed = $path === '/' || in_array($relative, $files, true)
+        || $relative === 'assets/equipo.js'
         || (str_starts_with($path, '/assets/') && preg_match('~\.(?:jpg|jpeg|png|gif|webp|svg|ico|pdf|css|woff2|mp4)$~iD', $path))
         || $isPage(preg_replace('~index\.html$~D', '', $relative));
     $target = realpath($publicRoot . ($path === '/' ? '/index.html' : $path));

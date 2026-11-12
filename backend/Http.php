@@ -95,7 +95,7 @@ final class Http
         }
         return $out;
     }
-    private function file(array $row, string $id): void
+    private function file(array $row, string $id, bool $inline = false): void
     {
         if (!preg_match('/^[a-f0-9]{48}$/D', $id)) throw new HttpError(404, 'Archivo no encontrado.');
         $file = $this->intake->one('SELECT * FROM files WHERE id=? AND request_reference=?', [$id, $row['reference']]);
@@ -106,7 +106,8 @@ final class Http
         $suffix = ['image/jpeg' => '.jpg', 'image/png' => '.png', 'image/webp' => '.webp', 'application/pdf' => '.pdf'][$file['mime']];
         header('Content-Type: ' . $file['mime']); header('Content-Length: ' . $file['bytes']);
         $downloadName = (pathinfo($file['name'], PATHINFO_FILENAME) ?: 'archivo') . $suffix;
-        header('Content-Disposition: attachment; filename="archivo' . $suffix . '"; filename*=UTF-8\'\'' . rawurlencode($downloadName));
+        $disposition = $inline && str_starts_with($file['mime'], 'image/') ? 'inline' : 'attachment';
+        header('Content-Disposition: ' . $disposition . '; filename="archivo' . $suffix . '"; filename*=UTF-8\'\'' . rawurlencode($downloadName));
         if ($_SERVER['REQUEST_METHOD'] !== 'HEAD') readfile($path);
     }
     public function run(): void
@@ -158,10 +159,21 @@ final class Http
                     header('Location: ' . $basePath . '/equipo/solicitudes', true, 302); return;
                 }
                 if ($path === '/equipo/solicitudes' && $method === 'GET') {
-                    $page = max(1, min(10000, (int) ($_GET['pagina'] ?? 1))); $offset = ($page - 1) * 100;
-                    $rows = $this->intake->db->query('SELECT r.*,n.state notification_state FROM requests r LEFT JOIN notifications n ON n.request_reference=r.reference ORDER BY created_at DESC,reference DESC LIMIT 100 OFFSET ' . $offset)->fetchAll();
-                    $total = (int) $this->intake->db->query('SELECT count(*) FROM requests')->fetchColumn();
-                    header('Content-Type: text/html; charset=utf-8'); echo Views::inbox($rows, $page, $total, $basePath, $test); return;
+                    $views = ['todas' => '1=1', 'sin-revisar' => 'r.reviewed_at IS NULL',
+                        'envios' => "r.payload LIKE '%\"intent\":\"repair\"%'", 'consultas' => "r.payload LIKE '%\"intent\":\"consultation\"%'"];
+                    $view = is_string($_GET['vista'] ?? null) && isset($views[$_GET['vista']]) ? $_GET['vista'] : 'todas';
+                    $query = is_string($_GET['q'] ?? null) ? mb_substr(trim($_GET['q']), 0, 80) : '';
+                    $counts = [];
+                    foreach ($views as $key => $where) $counts[$key] = (int) $this->intake->db->query('SELECT count(*) FROM requests r WHERE ' . $where)->fetchColumn();
+                    // Small volumes: filter the text in PHP, so accents and capitals match as people type them.
+                    $rows = $this->intake->db->query('SELECT r.*,n.state notification_state,(SELECT actor FROM events e WHERE e.request_reference=r.reference AND e.kind=\'reviewed\' ORDER BY e.id DESC LIMIT 1) reviewed_by FROM requests r LEFT JOIN notifications n ON n.request_reference=r.reference WHERE ' . $views[$view] . ' ORDER BY r.created_at DESC,r.reference DESC LIMIT 2000')->fetchAll();
+                    if ($query !== '') $rows = array_values(array_filter($rows, static fn(array $row): bool => Views::matches($row, $query)));
+                    $page = max(1, min(10000, (int) ($_GET['pagina'] ?? 1)));
+                    $found = count($rows);
+                    $rows = array_slice($rows, ($page - 1) * 50, 50);
+                    header('Content-Type: text/html; charset=utf-8');
+                    echo Views::inbox($rows, $page, $found, $basePath, $test, ['view' => $view, 'query' => $query, 'counts' => $counts, 'actor' => $actor]);
+                    return;
                 }
                 if (preg_match('~^/equipo/solicitudes/(SOL-\d{8}-[A-F0-9]{8})(?:/(revisada|correo|hoja-tecnica|datos\.csv|unidad/(\d+)|archivo/([a-f0-9]{48})))?/?$~D', $path, $m)) {
                     $row = $this->intake->byReference($m[1]); $action = $m[2] ?? '';
@@ -169,7 +181,9 @@ final class Http
                     if ($action === '' && $method === 'GET') {
                         $odooPayload = $odoo ? $odoo->buildOdooPayload($row) : [];
                         header('Content-Type: text/html; charset=utf-8');
-                        echo Views::staffRequest($row, $csrf, $this->intake->config['mode'], $odooPayload, $basePath, isset($_GET['guardado']));
+                        $events = $this->intake->db->prepare('SELECT kind,actor,created_at FROM events WHERE request_reference=? ORDER BY id');
+                        $events->execute([$m[1]]);
+                        echo Views::staffRequest($row, $csrf, $this->intake->config['mode'], $odooPayload, $basePath, isset($_GET['guardado']) ? (int) $_GET['guardado'] : 0, $events->fetchAll(), $actor);
                         return;
                     }
                     if ($action === 'correo' && $method === 'GET') {
@@ -177,12 +191,12 @@ final class Http
                         $notifier = new Notifications($this->intake);
                         $notif = $this->intake->one('SELECT * FROM notifications WHERE request_reference=? ORDER BY id DESC LIMIT 1', [$m[1]]);
                         header('Content-Type: text/html; charset=utf-8');
-                        echo Views::emailPreview($row, $notifier->previewEmail($m[1]), $notif, $basePath, $test);
+                        echo Views::emailPreview($row, $notifier->previewEmail($m[1]), $notif, $basePath, $test, $actor);
                         return;
                     }
                     if ($action === 'hoja-tecnica' && $method === 'GET' && $odoo) {
                         header('Content-Type: text/html; charset=utf-8');
-                        echo Views::workSheet($row, $odoo->buildOdooPayload($row), $basePath, $test);
+                        echo Views::workSheet($row, $odoo->buildOdooPayload($row), $basePath, $test, $actor);
                         return;
                     }
                     if ($action === 'datos.csv' && $method === 'GET' && $odoo) {
@@ -202,11 +216,11 @@ final class Http
                         if ($method === 'POST') {
                             $this->checkPost(true);
                             $odoo->updateUnit($m[1], $unitNum, $_POST, $actor);
-                            header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1] . '?guardado=1#unidad-' . $unitNum, true, 303);
+                            header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1] . '?guardado=' . $unitNum . '#unidad-' . $unitNum . '-guardar', true, 303);
                             return;
                         }
                     }
-                    if (str_starts_with($action, 'archivo/') && in_array($method, ['GET', 'HEAD'], true)) { $this->file($row, $m[4]); return; }
+                    if (str_starts_with($action, 'archivo/') && in_array($method, ['GET', 'HEAD'], true)) { $this->file($row, $m[4], isset($_GET['ver'])); return; }
                     if ($action === 'revisada') {
                         if (in_array($method, ['GET', 'HEAD'], true)) {
                             header('Location: ' . $basePath . '/equipo/solicitudes/' . $m[1], true, 302);
