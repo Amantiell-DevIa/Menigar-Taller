@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 import re
 from urllib.parse import unquote, urlsplit, urlencode
-from public_copy import public_text, photo_caption, REVIEWED_INDEX_GROUPS, YOUTUBE_VIDEOS
+from public_copy import public_text, photo_caption, REVIEWED_INDEX_GROUPS, YOUTUBE_VIDEOS, fix_fault_codes
 from site_paths import ABS_RESULTS, CONTACT, PAGE
 
 RUN = '2026-10-13-publico'
@@ -38,6 +38,7 @@ def scoped_blocks(page):
             return {**super().context(), 'insideTable': any(frame['tag'] == 'table' for frame in self.stack)}
 
     body, _ = public_body(page['content']['rendered'])
+    body = fix_fault_codes(body)
     parser = ContextBlocks(page['link'])
     parser.feed(body)
     return parser.finish()

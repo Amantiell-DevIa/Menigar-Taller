@@ -18,7 +18,7 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 from build_redirects import write_redirects
-from public_copy import public_text
+from public_copy import public_text, fix_fault_codes, SPLIT_CODES, CODE_FIXES
 from site_paths import FICHA_PATH, PAGE
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -166,6 +166,8 @@ class Tables(HTMLParser):
 DTC_TOKEN = re.compile(r'(?<![A-Z0-9.\-])(?:[CPBU][0-9A-F]{4,6}|DF[0-9]{3,4}|5[DE][0-9A-F]{2,3}|0[0-9]{4}|163(?:49|50|52|55)|0[0-9A-F]{3}|3FE[03])(?![A-Z0-9.\-])', re.I)
 DTC_CONTEXT = re.compile(r'(?:c[oó]digos?\s+(?:de\s+)?(?:error|aver[ií]a|fallo)|\bdtc\b|\berror\b|\bfallo\b|\bdefect)', re.I)
 DIAGNOSTIC_WORDS = re.compile(r'bomba|sensor|presi[oó]n|unidad|centralita|comunicaci[oó]n|alimentaci[oó]n|bloque|rel[eé]|v[aá]lvula|fren|circuito|tensi[oó]n|motor|interrupci[oó]n', re.I)
+# VAG codes as the diagnosis tool prints them, with the fault type in brackets: «B103E1B [008]».
+VAG_FAULT = re.compile(r'(?<![A-Z0-9])[CPBU][0-9A-F]{6}\s*\[[0-9]{3}\]')
 CODE_AT_START = re.compile(r'^\s*[-•]?\s*([CPBU][0-9A-F]{4,6}|DF[0-9]{3,4}|5[DE][0-9A-F]{2,3}|0[0-9]{4}|163(?:49|50|52|55)|0[0-9A-F]{3}|3FE[03])(?:\s|\s*-\s*|:)', re.I)
 REF_TOKEN = re.compile(r'(?<![A-Za-z0-9])(?:[0-9]{1,2}\.[0-9]{3,5}-[0-9]{3,5}\.[0-9]|[A-Za-z0-9]{2,8}(?:-[A-Za-z0-9]{2,12}){1,4}|[A-Z0-9]{5,24})(?![A-Za-z0-9])')
 SPACED_REF = re.compile(r'(?<![A-Z0-9])(?:[0-9]\s+[0-9]{3}\s+[0-9]{3}\s+[0-9]{3}|[0-9A-Z]{3}\s+[0-9]{3}\s+[0-9]{3}(?:\s+[A-Z]{1,3})?)(?![A-Z0-9])')
@@ -176,7 +178,7 @@ def dtcs(lines, tables):
     details = []
     for line in lines:
         # Explicit fault labels, or code at the start of a diagnostic statement.
-        if DTC_CONTEXT.search(line) or (CODE_AT_START.match(line) and DIAGNOSTIC_WORDS.search(line)):
+        if DTC_CONTEXT.search(line) or VAG_FAULT.search(line) or (CODE_AT_START.match(line) and DIAGNOSTIC_WORDS.search(line)):
             for match in DTC_TOKEN.finditer(line):
                 code = match.group(0).upper()
                 codes.append(code)
@@ -340,7 +342,7 @@ def build():
         if not component:
             excluded.append({'source': source, 'sourceId': page['id'], 'url': url, 'reason': 'Sin familia de servicio identificable en la URL de origen.'})
             continue
-        raw = main_html(page.get('content', {}).get('rendered', ''))
+        raw = fix_fault_codes(main_html(page.get('content', {}).get('rendered', '')))
         lines = clean_lines(raw)
         if not lines:
             excluded.append({'source': source, 'sourceId': page['id'], 'url': url, 'reason': 'Sin contenido de servicio en la captura.'})
@@ -431,6 +433,10 @@ def build():
     assert '06.2109-6664.3' in honda['references'], 'Reference punctuation/leading zero was lost'
     assert all(isinstance(code, str) for r in catalogue for code in r['dtcCodes'])
     assert not any('07010' == code for r in catalogue for code in r['dtcCodes']), 'False fragment DTC'
+    assert not any(split in json.dumps(r, ensure_ascii=False) for r in catalogue for split in SPLIT_CODES), 'Fault code split by a space'
+    assert not any(wrong in json.dumps(r, ensure_ascii=False) for r in catalogue for wrong in CODE_FIXES), 'Fault code the owner corrected'
+    audi_a4 = next(r for r in catalogue if r['url'].endswith('/reparacion-abs/audi/audi-a4-2015-2024/'))
+    assert {'C123EF0', 'B200000'} <= set(audi_a4['dtcCodes']), 'Joined fault codes not found'
     assert instruction_uid and len(next(r for r in catalogue if r['uid'] == instruction_uid)['instructionGroups']) == 6
     # Source snapshots are never rewritten by this builder.
     assert all(hashlib.sha256((ROOT / file).read_bytes()).hexdigest() == digest for file, digest in fingerprints.items())

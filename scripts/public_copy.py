@@ -2,7 +2,9 @@
 
 Only the phrases listed below are changed. Model names, references, fault codes,
 source blocks, media membership and the catalogue remain untouched. The build
-records every public replacement so an editor can review or revert it.
+records every public replacement so an editor can review or revert it. The one
+exception for fault codes is SPLIT_CODES and CODE_FIXES: the owner's corrections
+of codes written with a space inside or with a wrong suffix.
 """
 from __future__ import annotations
 
@@ -26,6 +28,31 @@ RULES = [
     ('legacy-typo', r'\bgarantiar su reparación\b', 'trabajar en su reparación'),
     ('menigar-laboratorio', r'\b(n)uestro taller\b', r'\1uestro laboratorio'),
 ]
+
+# Fault codes copied as the diagnosis tool prints them, with a space before the last two
+# characters («C123E F0»), so a search for the real code («C123EF0») found nothing. The owner asked
+# for them joined; the same 12 pages were corrected on menigar.com on 24 Nov 2026 (7 Audi ABS, and
+# the Seat Ateca/Ibiza/León and VW Multivan/T6 instrument clusters). The snapshots stay as captured;
+# build_catalog.py and source_sections.py join them when they read a page.
+SPLIT_CODES = {
+    'C123E F0': 'C123EF0', 'B2000 00': 'B200000', 'B2000 41': 'B200041',
+    'B103E 1B': 'B103E1B', 'B103F 1B': 'B103F1B', 'B1059 1B': 'B10591B',
+}
+SPLIT_CODE = re.compile(r'(?<![0-9A-Za-z])([CPBU][0-9A-F]{4})(?:\s|&nbsp;|&#160;|\xa0)+([0-9A-F]{2})(?![0-9A-Za-z])')
+
+
+# Other codes the owner corrected on 24 Nov 2026, also fixed on menigar.com that day. The Chevrolet
+# Cruze ABS page said «C056D:00»; the code (Chevrolet and Opel) is «C056D», as the Opel pages write it.
+# Not here on purpose: «P0607-00» on the DSG pages, a different fault (VAG 10660) from «P0607» (VAG 10658).
+CODE_FIXES = {'C056D:00': 'C056D'}
+
+
+def fix_fault_codes(raw):
+    """Apply the owner's code corrections; part numbers such as «58900-B4800 06.2102» keep their space."""
+    raw = SPLIT_CODE.sub(lambda m: SPLIT_CODES.get(f'{m[1]} {m[2]}', m[0]), raw)
+    for wrong, right in CODE_FIXES.items():
+        raw = raw.replace(wrong, right)
+    return raw
 
 OVERRIDES = {
     ('main-3915', 'title'): {
